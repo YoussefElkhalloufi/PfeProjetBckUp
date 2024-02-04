@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="790.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.ControllerFstWindow">
+    <children>
+        <Text fill="#61c1bc" layoutX="204.0" layoutY="68.0" stroke="BLACK" strokeType="OUTSIDE" text="FacturEase">
+            <font>
+                <Font name="Segoe UI Black" size="25.0" />
+            </font>
+         <effect>
+            <DropShadow />
+         </effect>
+        </Text>
+        <AnchorPane layoutX="535.0" prefHeight="446.0" prefWidth="262.0" style="-fx-background-color: #59A8A4;">
+            <children>
+                <Text fill="WHITE" layoutX="9.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau ici ?" wrappingWidth="242.0000000000001">
+                    <font>
+                        <Font name="Algerian" size="36.0" />
+                    </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+                </Text>
+                <Text fill="#f6f6f6" layoutX="14.0" layoutY="217.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscrivez-vous et découvrez notre logiciel de facturation automatique" textAlignment="CENTER" wrappingWidth="242.0">
+                    <font>
+                        <Font name="Bell MT" size="18.0" />
+                    </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+                </Text>
+                <Button fx:id="SignUpButton" layoutX="60.0" layoutY="290.0" mnemonicParsing="false" onAction="#switchToSignUp" onMouseEntered="#onMouseEntered2" onMouseExited="#onMouseExited2" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: #FFFFFF;" text="S'inscrire">
+                    <font>
+                        <Font name="Algerian" size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+               <effect>
+                  <DropShadow />
+               </effect>
+                </Button>
+            </children></AnchorPane>
+        <Text layoutX="54.0" layoutY="105.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simplifiez votre gestion financière avec FacturEase. Gestion des Clients, produits, Factures et plus, le tout en un seul endroit. Bienvenue dans une gestion de facturation simplifiée et efficace." textAlignment="CENTER" wrappingWidth="430.5130386352539">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Text>
+        <Text layoutX="87.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez vous">
+            <font>
+                <Font name="Algerian" size="45.0" />
+            </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+         </effect>
+        </Text>
+        <Button fx:id="LoginButton" layoutX="198.0" layoutY="371.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: #59A8A4;" text="Se connecter" textFill="WHITE">
+            <font>
+                <Font name="Algerian" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+         <effect>
+            <DropShadow />
+         </effect></Button>
+        <TextField layoutX="126.0" layoutY="257.0" prefHeight="34.0" prefWidth="287.0" promptText="Identifiant " style="-fx-background-radius: 5em;" />
+        <PasswordField layoutX="126.0" layoutY="312.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
+    </children>
+</AnchorPane>

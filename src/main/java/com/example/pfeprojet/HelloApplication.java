@@ -19,6 +19,7 @@ public class HelloApplication extends Application {
 
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png")));
         //System.out.println("logo.png is called successfully");
+        //Test test git
 
 
 

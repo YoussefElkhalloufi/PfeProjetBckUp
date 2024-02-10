@@ -1,6 +1,7 @@
 package com.example.pfeprojet;
 
 import java.sql.* ;
+import java.util.ArrayList;
 
 public class Connexion {
 
@@ -21,6 +22,27 @@ public class Connexion {
 
         }catch(ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean createDatabase(String dbName) {
+        try {
+            s = con.createStatement();
+            String query = "CREATE DATABASE " + dbName;
+            return s.executeUpdate(query) > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false ;
+        } finally {
+            // Close the statement in the final block to ensure proper cleanup
+            try {
+                if (s != null) {
+                    s.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -55,6 +77,13 @@ public class Connexion {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public ArrayList<CompanyInfos> toArray(CompanyInfos c){
+       ArrayList<CompanyInfos> companies = new ArrayList<>();
+       companies.add(c);
+       return companies;
     }
 
 

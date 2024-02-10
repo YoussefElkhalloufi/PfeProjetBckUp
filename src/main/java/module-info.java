@@ -14,4 +14,6 @@ module com.example.pfeprojet {
 
     opens com.example.pfeprojet to javafx.fxml;
     exports com.example.pfeprojet;
+    exports com.example.pfeprojet.Controllers;
+    opens com.example.pfeprojet.Controllers to javafx.fxml;
 }

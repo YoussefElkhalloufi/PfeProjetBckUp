@@ -1,22 +1,15 @@
-package com.example.pfeprojet;
+package com.example.pfeprojet.Controllers;
 
 
+import com.example.pfeprojet.ChangingWindows;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.scene.control.Button ;
 import javafx.util.Duration;
 
-
 import java.io.IOException;
-import java.util.Objects;
 
 public class ControllerFstWindow {
 
@@ -32,27 +25,8 @@ public class ControllerFstWindow {
 
    //Switching to SignUp window
    public void switchToSignUp(ActionEvent event) throws IOException {
-      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SingUp.fxml")));
-
-      // Create a new stage for scene1
-      Stage newStage = new Stage();
-
-      Scene newScene = new Scene(root);
-      // Load the icon for scene1
-      Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png")));
-      newStage.getIcons().add(icon);
-
-      // Set the title for scene1
-      newStage.setResizable(false);
-      newStage.setTitle("Sign Up");
-
-      // Set the scene and show the stage
-      newStage.setScene(newScene);
-      newStage.show();
-
-      // Close the current (scene2) stage
-      Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      currentStage.close();
+      ChangingWindows ch = new ChangingWindows();
+      ch.switchWindow(event,"SingUp.fxml");
    }
 
 

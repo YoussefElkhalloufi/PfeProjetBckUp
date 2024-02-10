@@ -1,26 +1,25 @@
-package com.example.pfeprojet;
+package com.example.pfeprojet.Controllers;
 
+import com.example.pfeprojet.ChangingWindows;
+import com.example.pfeprojet.Connexion;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerSignUp {
+
+
 
     @FXML
     private Button ExitButton;
@@ -29,8 +28,10 @@ public class ControllerSignUp {
     private static final double ENLARGE_FACTOR = 1.1;
 
 
-
-
+    private static String cmp;
+    public static String getCmp(){
+        return cmp;
+    }
 
     @FXML
     private TextField activityTextField;
@@ -98,10 +99,11 @@ public class ControllerSignUp {
 
     //The code for Button "Suivant" : it creates a NEW Company in the database
     @FXML
-    private void addCompany()  {
+    private void addCompany(ActionEvent event) throws IOException {
         String mail = emailTextField.getText();
         String pwd = pwdTextField.getText();
-        String companyName = companyNameTextField.getText();
+        String companyName =  companyNameTextField.getText();
+        cmp = companyNameTextField.getText();
         String location = locationTextField.getText();
         String phoneNumber = phonenumberTextfield.getText();
         String faxNumber = faxnumberTextfield.getText();
@@ -112,6 +114,8 @@ public class ControllerSignUp {
         if(mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || phoneNumber.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()){
             showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
+
+
             String insertQuery = "INSERT INTO `companyinfos`(`CompanyName`, `mailAdress`, " +
                     "`password`, `location`, `phoneNumber`, `faxNumber`, `activity`, `taxId`)" +
                     " VALUES ('"+companyName+"','"+mail+"','"+pwd+"','"+location+"','"+phoneNumber+"'," +
@@ -120,11 +124,15 @@ public class ControllerSignUp {
             Connexion c = new Connexion("jdbc:mysql://localhost:3306/Companies?user=root","com.mysql.cj.jdbc.Driver");
 
 
-            if(c.miseAjour(insertQuery)){
-                showAlert("Company added", "Succès ! Votre entreprise a maintenant un compte actif.","/images/checkSuccess.png");
+
+            if(c.miseAjour(insertQuery) && c.createDatabase(cmp)){
+                showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" +cmp+"'" , "/images/checkSuccess.png");
             }else{
-                showAlert("Échec de la création du compte.","Assurez-vous que toutes les informations sont correctes","/images/checkFailed.png");
+                showAlert("Échec de la création du compte.","Assurez-vous que toutes les informations sont correctes", "/images/checkFailed.png");
             }
+
+            ChangingWindows ch = new ChangingWindows();
+            ch.switchWindow(event, "DbCreation.fxml");
         }
 
 
@@ -133,8 +141,9 @@ public class ControllerSignUp {
     //MessageWindow when the user doesnt Enter all the necessary informations
     private void showAlert2(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
+
         alert.setTitle(title);
-        alert.setHeaderText(null);
+        alert.setHeaderText("test");
         alert.setContentText(content);
 
         // Create a Font object with the desired font family and size
@@ -143,6 +152,7 @@ public class ControllerSignUp {
         // Access the Label within the Alert's content area and apply the custom font
         Label contentLabel = (Label) alert.getDialogPane().lookup(".content.label");
         contentLabel.setFont(customFont);
+        contentLabel.setStyle("-fx-text-fill: red;");
 
         alert.showAndWait();
     }
@@ -257,26 +267,7 @@ public class ControllerSignUp {
 
     //Going back to Login Window
     public void switchToLogin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("FstWindow.fxml")));
-
-        // Create a new stage for scene1
-        Stage newStage = new Stage();
-        Scene newScene = new Scene(root);
-
-        // Load the icon for scene1
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png")));
-        newStage.getIcons().add(icon);
-
-        // Set the title for scene1
-        newStage.setResizable(false);
-        newStage.setTitle("FacturEase");
-
-        // Set the scene and show the stage
-        newStage.setScene(newScene);
-        newStage.show();
-
-        // Close the current (scene2) stage
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+        ChangingWindows ch = new ChangingWindows();
+        ch.switchWindow(event, "FstWindow.fxml");
     }
 }

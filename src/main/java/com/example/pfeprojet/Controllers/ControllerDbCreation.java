@@ -1,24 +1,24 @@
 package com.example.pfeprojet.Controllers;
 
-import com.almasb.fxgl.entity.action.Action;
+import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
-import javafx.animation.ScaleTransition;
+import com.example.pfeprojet.Connexion;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class ControllerDbCreation {
+
+    //ControllerSignUp c = new ControllerSignUp();
+    //String dbName = ControllerSignUp.getCmp();
+    String dbName = "testTables";
+
+
 
     @FXML
     private Button ExitButton;
@@ -36,6 +36,10 @@ public class ControllerDbCreation {
     private CheckBox prixUnitaire;
     @FXML
     private CheckBox categorie;
+    @FXML
+    private CheckBox dateEnregistrement;
+    @FXML
+    private CheckBox description;
 
 
 
@@ -50,20 +54,30 @@ public class ControllerDbCreation {
     private CheckBox cout_heure;
     @FXML
     private CheckBox personnel;
+    @FXML
+    private CheckBox libelleService;
+    @FXML
+    private CheckBox descriptionService;
 
 
     public void initialize() {
 
+        //TODO : add a checkbox 'Check all'
         tableProduit.setOnAction(event -> {
             if (tableProduit.isSelected()) {
                 idProduit.setOpacity(1.0);
-                idProduit.setDisable(false);
+                idProduit.setDisable(true);
+                idProduit.setSelected(true);
                 libelleProduit.setOpacity(1.0);
                 libelleProduit.setDisable(false);
                 prixUnitaire.setOpacity(1.0);
                 prixUnitaire.setDisable(false);
                 categorie.setOpacity(1.0);
                 categorie.setDisable(false);
+                dateEnregistrement.setOpacity(1.0);
+                dateEnregistrement.setDisable(false);
+                description.setOpacity(1.0);
+                description.setDisable(false);
             } else {
                 idProduit.setOpacity(0.5);
                 idProduit.setSelected(false);
@@ -77,19 +91,30 @@ public class ControllerDbCreation {
                 categorie.setOpacity(0.5);
                 categorie.setSelected(false);
                 categorie.setDisable(true);
+                dateEnregistrement.setOpacity(0.5);
+                dateEnregistrement.setSelected(false);
+                dateEnregistrement.setDisable(true);
+                description.setOpacity(0.5);
+                description.setSelected(false);
+                description.setDisable(true);
             }
         });
 
         tableService.setOnAction(event -> {
             if (tableService.isSelected()) {
                 idService.setOpacity(1.0);
-                idService.setDisable(false);
+                idService.setDisable(true);
+                idService.setSelected(true);
                 typeService.setOpacity(1.0);
                 typeService.setDisable(false);
                 cout_heure.setOpacity(1.0);
                 cout_heure.setDisable(false);
                 personnel.setOpacity(1.0);
                 personnel.setDisable(false);
+                libelleService.setOpacity(1.0);
+                libelleService.setDisable(false);
+                descriptionService.setOpacity(1.0);
+                descriptionService.setDisable(false);
             } else {
                 idService.setOpacity(0.5);
                 idService.setSelected(false);
@@ -103,75 +128,183 @@ public class ControllerDbCreation {
                 personnel.setOpacity(0.5);
                 personnel.setSelected(false);
                 personnel.setDisable(true);
+                libelleService.setOpacity(0.5);
+                libelleService.setSelected(false);
+                libelleService.setDisable(true);
+                descriptionService.setOpacity(0.5);
+                descriptionService.setSelected(false);
+                descriptionService.setDisable(true);
             }
         });
     }
 
+    public void AnnulerBtn() {
+        Alerts sa = new Alerts();
+
+        boolean confirmed = sa.showConfirmationAlert("Confirmation", "Êtes-vous sûr de vouloir quitter l'application et supprimer votre base de données '"+dbName+"' ?");
+        if (confirmed) {
+            System.out.println("User clicked 'Yes'");
+            Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
+            if(c.dropDatabase(dbName)){
+                sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
+                Platform.exit();
+            }else{
+                sa.showAlert("Échec","Échec de la suppression de votre base de donnée '"+dbName+"'.","/images/checkFailed.png");
+            }
+        } else {
+            // User clicked "Cancel", cancel the operation
+            System.out.println("User clicked 'No'");
+        }
+    }
+    private void createTable(String dbName, String tableName, ArrayList<String> columns) {
+        // Create a Connexion object with the URL to the database
+        Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
+
+        // Call the createTable method with the selected columns
+        boolean success = cn.createTable(dbName, tableName, columns);
+
+        Alerts sa = new Alerts();
+        // Check if the table creation was successful
+        if (success) {
+//            System.out.println("Table '" + tableName + "' created successfully with columns: " + String.join(", ", columns));
+            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
+        } else {
+//            System.out.println("Failed to create table '" + tableName + "'.");
+            sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
+        }
+    }
+
+    public void createTablePersonnelService(){
+            ArrayList<String> personnelColumns = new ArrayList<>();
+            personnelColumns.add("idPersonnel INT PRIMARY KEY");
+            personnelColumns.add("nomPersonnel VARCHAR(50)");
+            personnelColumns.add("prenomPersonnel VARCHAR(50)");
+            createTable(dbName,"Personnel",personnelColumns);
+            ArrayList<String> personnelServiceColumns = new ArrayList<>();
+            personnelServiceColumns.add("idPersonnel INT");
+            personnelServiceColumns.add("idService INT");
+            personnelServiceColumns.add("Constraint fk_personnelService_personnel foreign key (idPersonnel) references Personnel (idPersonnel)");
+            personnelServiceColumns.add("Constraint fk_personnelService_Service foreign key (idService) references Service (idService)");
+            personnelServiceColumns.add("Constraint Pk_Personnel_Service primary key (idPersonnel, idService)");
+            createTable(dbName,"Personnel_Service",personnelServiceColumns);
+
+    }
 
 
-    public void tablesCreation(ActionEvent event){
-        String req = null ;
-        if (tableProduit.isSelected() && !tableService.isSelected()){
-            req = "produit";
-            //TODO : checking the children checkboxes of PRODUIT
-        }else if (!tableProduit.isSelected() && tableService.isSelected()){
-            req = "service";
-            //TODO: checking the children checkboxes of SERVICE
-        }else if (tableProduit.isSelected() && tableService.isSelected()){
-            req = "Produit + service ";
-            //TODO: checking the children checkboxes of PRODUIT+SERVICE
-        }else {
-            req = "nothingggg";
-            System.out.println("vous devez coché au minimum une table !!!");
-            //TODO : ShowAlert !!!
+    public void tablesCreation(ActionEvent event) throws IOException {
+        if (tableProduit.isSelected() && tableService.isSelected()){
+            createTable(dbName, "produit", getSelectedColumnsProduit());
+            createTable(dbName, "service", getSelectedColumnsService());
+            if (personnel.isSelected()) createTablePersonnelService();
+
+            ChangingWindows cw = new ChangingWindows();
+            cw.switchWindow(event, "DbCreation1.fxml");
+        }else if (tableProduit.isSelected()){
+            createTable(dbName, "produit", getSelectedColumnsProduit());
+
+            ChangingWindows cw = new ChangingWindows();
+            cw.switchWindow(event, "DbCreation1.fxml");
+        }else if (tableService.isSelected()){
+            createTable(dbName, "service", getSelectedColumnsService());
+            if (personnel.isSelected()) createTablePersonnelService();
+
+            ChangingWindows cw = new ChangingWindows();
+            cw.switchWindow(event, "DbCreation1.fxml");
+        }else{
+            Alerts sa = new Alerts();
+            sa.showAlert2("ATTENTION","vous devez coché au minimum une table");
         }
 
-        System.out.println(req);
     }
 
 
+    private ArrayList<String> getSelectedColumnsProduit() {
+        // Check which checkboxes are selected and add their corresponding column names to the list
+        ArrayList<String> selectedColumns = new ArrayList<>();
+
+        if (idProduit.isSelected()) {
+            selectedColumns.add("idProduit INT AUTO_INCREMENT PRIMARY KEY");
+        }
+        if (libelleProduit.isSelected()) {
+            selectedColumns.add("libelleProduit VARCHAR(80)");
+        }
+        if (prixUnitaire.isSelected()) {
+            selectedColumns.add("prixUnitaire DECIMAL(10, 2)");
+        }
+        if (categorie.isSelected()) {
+            ArrayList<String> categorieColumns = new ArrayList<>();
+            categorieColumns.add("idCategorie INT AUTO_INCREMENT PRIMARY KEY");
+            categorieColumns.add("libelleCategorie VARCHAR(255)");
+            categorieColumns.add("Description VARCHAR(255)");
+            createTable(dbName,"categorie",categorieColumns);
+            selectedColumns.add("idCategorie INT");
+            selectedColumns.add("Constraint fk_categorie_produit foreign key (idCategorie) references categorie (idCategorie) ");
+        }
+        if(dateEnregistrement.isSelected()){
+            selectedColumns.add("date_enregistrement DATE");
+        }
+        if(description.isSelected()){
+            selectedColumns.add("description VARCHAR(255)");
+        }
+
+        return selectedColumns;
+    }
+
+
+    private ArrayList<String> getSelectedColumnsService() {
+        // Check which checkboxes are selected and add their corresponding column names to the list
+        ArrayList<String> selectedColumns = new ArrayList<>();
+
+        if (idService.isSelected()) {
+            selectedColumns.add("idService INT AUTO_INCREMENT PRIMARY KEY");
+        }
+        if(libelleService.isSelected()){
+            selectedColumns.add("LibelleService VARCHAR(100)");
+        }
+        if (typeService.isSelected()) {
+            ArrayList<String> serviceColumns = new ArrayList<>();
+            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
+            serviceColumns.add("libelleTypeService VARCHAR(255)");
+            serviceColumns.add("Description VARCHAR(255)");
+            createTable(dbName,"TypeService",serviceColumns);
+            selectedColumns.add("idTypeService INT");
+            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
+        }
+        if (cout_heure.isSelected()) {
+            selectedColumns.add("Cout_heure DECIMAL(10, 2)");
+        }
+        if(descriptionService.isSelected()){
+            selectedColumns.add("Description VARCHAR(255)");
+        }
+
+        // Add other columns as needed
+        return selectedColumns;
+    }
 
     private static final double ENLARGE_FACTOR = 1.1;
-    public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
-        ExitButton.setStyle("-fx-background-color: #FF4545; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(ExitButton);
-//        ControllerSignUp c = new ControllerSignUp();
-//        System.out.println(ControllerSignUp.getCmp());
+
+    mouseEvents ms = new mouseEvents();
+
+    public void onMouseEntered(javafx.scene.input.MouseEvent event) {
+        ms.onMouseEntered(event, ExitButton);
+
     }
 
-    public void onMouseExited(javafx.scene.input.MouseEvent mouseEvent) {
-        ExitButton.setStyle("-fx-background-color:  white; -fx-background-radius: 5em;");
-        restoreButtonSize(ExitButton);
-    }
-
-
-    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {
-        NextButton.setStyle("-fx-background-color:  #59A8A4; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(NextButton);
-    }
-
-    public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
-        NextButton.setStyle("-fx-background-color:  white; -fx-background-radius: 5em;");
-        restoreButtonSize(NextButton);
+    public void onMouseExited(javafx.scene.input.MouseEvent event) {
+        ms.onMouseExited(event, ExitButton);
     }
 
 
-    private void enlargeButton(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
-        scaleTransition.setToX(ENLARGE_FACTOR);
-        scaleTransition.setToY(ENLARGE_FACTOR);
-        scaleTransition.play();
+    public void onMouseEntered2(javafx.scene.input.MouseEvent event) {
+        ms.onMouseEntered2(event, NextButton);
     }
 
-    private void restoreButtonSize(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
-        scaleTransition.setToX(1.0);
-        scaleTransition.setToY(1.0);
-        scaleTransition.play();
+    public void onMouseExited2(javafx.scene.input.MouseEvent event) {
+        ms.onMouseExited2(event, NextButton);
     }
 
-    public void switchToLogin(ActionEvent event) throws IOException {
+    /*public void switchToLogin(ActionEvent event) throws IOException {
         ChangingWindows ch = new ChangingWindows();
         ch.switchWindow(event, "FstWindow.fxml");
-    }
+    }*/
 }

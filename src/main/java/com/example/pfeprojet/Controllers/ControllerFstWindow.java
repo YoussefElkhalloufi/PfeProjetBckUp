@@ -14,6 +14,8 @@ import java.io.IOException;
 public class ControllerFstWindow {
 
 
+   mouseEvents ms = new mouseEvents();
+
    private static final double ENLARGE_FACTOR = 1.1;
 
 
@@ -34,7 +36,6 @@ public class ControllerFstWindow {
    public void onMouseEntered(MouseEvent event) {
       LoginButton.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 5em;");
       enlargeButton(LoginButton);
-
    }
 
    @FXML
@@ -47,14 +48,12 @@ public class ControllerFstWindow {
 
    @FXML
    public void onMouseEntered2(MouseEvent event) {
-      SignUpButton.setStyle("-fx-background-color: #59A8A4; -fx-text-fill: white; -fx-background-radius: 5em;");
-      enlargeButton(SignUpButton);
+      ms.onMouseEntered2(event, SignUpButton);
    }
 
    @FXML
    public void onMouseExited2(MouseEvent event) {
-      SignUpButton.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 5em;");
-      restoreButtonSize(SignUpButton);
+      ms.onMouseExited2(event, SignUpButton);
 
    }
 

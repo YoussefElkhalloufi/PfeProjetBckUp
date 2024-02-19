@@ -1,5 +1,6 @@
 package com.example.pfeprojet.Controllers;
 
+import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
 import javafx.animation.PauseTransition;
@@ -15,6 +16,8 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class ControllerSignUp {
@@ -25,13 +28,10 @@ public class ControllerSignUp {
     private Button ExitButton;
     @FXML
     private Button NextButton;
-    private static final double ENLARGE_FACTOR = 1.1;
 
 
     private static String cmp;
-    public static String getCmp(){
-        return cmp;
-    }
+    public static String getCmp(){return cmp;}
 
     @FXML
     private TextField activityTextField;
@@ -60,128 +60,79 @@ public class ControllerSignUp {
     @FXML
     private TextField taxIdTextField;
 
+    mouseEvents me = new mouseEvents();
+
+
+
+
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
-        ExitButton.setStyle("-fx-background-color: #FF4545; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(ExitButton);
+        me.onMouseEntered(mouseEvent, ExitButton);
     }
 
     public void onMouseExited(javafx.scene.input.MouseEvent mouseEvent) {
-        ExitButton.setStyle("-fx-background-color:  white; -fx-background-radius: 5em;");
-        restoreButtonSize(ExitButton);
+        me.onMouseExited(mouseEvent, ExitButton);
     }
 
 
     public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {
-        NextButton.setStyle("-fx-background-color:  #59A8A4; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(NextButton);
+        me.onMouseEntered2(mouseEvent, NextButton);
     }
 
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
-        NextButton.setStyle("-fx-background-color:  white; -fx-background-radius: 5em;");
-        restoreButtonSize(NextButton);
+        me.onMouseExited2(mouseEvent, NextButton);
     }
 
-
-    private void enlargeButton(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
-        scaleTransition.setToX(ENLARGE_FACTOR);
-        scaleTransition.setToY(ENLARGE_FACTOR);
-        scaleTransition.play();
-    }
-
-    private void restoreButtonSize(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
-        scaleTransition.setToX(1.0);
-        scaleTransition.setToY(1.0);
-        scaleTransition.play();
-    }
 
 
     //The code for Button "Suivant" : it creates a NEW Company in the database
     @FXML
-    private void addCompany(ActionEvent event) throws IOException {
+    private void addCompany(ActionEvent event) throws IOException, SQLException {
+
         String mail = emailTextField.getText();
         String pwd = pwdTextField.getText();
         String companyName =  companyNameTextField.getText();
-        cmp = companyNameTextField.getText();
+        cmp = companyName.replaceAll("\\s+", "_");
         String location = locationTextField.getText();
         String phoneNumber = phonenumberTextfield.getText();
         String faxNumber = faxnumberTextfield.getText();
         String activity = activityTextField.getText();
         String taxId = taxIdTextField.getText();
 
+        Alerts sa = new Alerts();
+        if (mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || phoneNumber.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()) {
+            sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+        } else {
+            if (!pwdTextField.getText().equals(pwdConfirmationTextField.getText())) {
+                sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
+            } else {
+                Connexion c = new Connexion("jdbc:mysql://localhost:3306/Companies?user=root");
+                ResultSet rs = c.lire("SELECT * FROM companyinfos WHERE mailAdress = ?", mail);
+                ResultSet rs1 = c.lire("SELECT * FROM companyinfos WHERE CompanyName = ?", companyName);
+                if (rs.next()) {
+                    sa.showAlert2("Attention", "L'email de l'entreprise fournit existe déjà dans notre application.");
+                    rs.close();
+                } else if(rs1.next()){
+                    sa.showAlert2("Attention", "Le nom de l'entreprise fournit existe déjà dans notre application.");
+                    rs1.close();
+                }else{
+                    String insertQuery = "INSERT INTO `companyinfos`(`CompanyName`, `mailAdress`, `password`, `location`, `phoneNumber`, `faxNumber`, `activity`, `taxId`)" +
+                            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        if(mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || phoneNumber.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()){
-            showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
-        }else{
-
-
-            String insertQuery = "INSERT INTO `companyinfos`(`CompanyName`, `mailAdress`, " +
-                    "`password`, `location`, `phoneNumber`, `faxNumber`, `activity`, `taxId`)" +
-                    " VALUES ('"+companyName+"','"+mail+"','"+pwd+"','"+location+"','"+phoneNumber+"'," +
-                    "'"+faxNumber+"','"+activity+"','"+taxId+"')";
-
-            Connexion c = new Connexion("jdbc:mysql://localhost:3306/Companies?user=root","com.mysql.cj.jdbc.Driver");
-
-
-
-            if(c.miseAjour(insertQuery) && c.createDatabase(cmp)){
-                showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" +cmp+"'" , "/images/checkSuccess.png");
-            }else{
-                showAlert("Échec de la création du compte.","Assurez-vous que toutes les informations sont correctes", "/images/checkFailed.png");
+                    if (c.miseAjour(insertQuery, companyName, mail, pwd, location, phoneNumber, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
+                        sa.showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" + cmp + "'", "/images/checked.png");
+                        ChangingWindows ch = new ChangingWindows();
+                        ch.switchWindow(event, "DbCreation.fxml");
+                    } else {
+                        sa.showAlert("Échec de la création du compte.", "Assurez-vous que toutes les informations sont correctes", "/images/checkFailed.png");
+                    }
+                }
+                c.closeResources();
             }
-
-            ChangingWindows ch = new ChangingWindows();
-            ch.switchWindow(event, "DbCreation.fxml");
         }
-
-
-    }
-
-    //MessageWindow when the user doesnt Enter all the necessary informations
-    private void showAlert2(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-
-        alert.setTitle(title);
-        alert.setHeaderText("test");
-        alert.setContentText(content);
-
-        // Create a Font object with the desired font family and size
-        Font customFont = Font.font("Gill Sans MT Condensed", 18); // Replace "Your Font Name" with the desired font name
-
-        // Access the Label within the Alert's content area and apply the custom font
-        Label contentLabel = (Label) alert.getDialogPane().lookup(".content.label");
-        contentLabel.setFont(customFont);
-        contentLabel.setStyle("-fx-text-fill: red;");
-
-        alert.showAndWait();
     }
 
 
 
-    //MessageWindow when the Company is added succcesfully or when an error is occured during the insert
-    private void showAlert(String title, String content, String icon) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-
-        // Create a Font object with the desired font family and size
-        Font customFont = Font.font("Gill Sans MT Condensed", 20); // Replace "Your Font Name" with the desired font name
-
-        // Access the Label within the Alert's content area and apply the custom font
-        Label contentLabel = (Label) alert.getDialogPane().lookup(".content.label");
-        contentLabel.setFont(customFont);
-
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(icon)));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(55); // Adjust the height as needed
-        imageView.setFitWidth(55);  // Adjust the width as needed
-
-        alert.setGraphic(imageView);
-
-        alert.showAndWait();
-    }
 
     //Initialize method is being called when the fxml file is loaded, it adds listeners to the text field we are checking
     public void initialize() {
@@ -223,7 +174,7 @@ public class ControllerSignUp {
     //it verifies if the PhoneNumber typed is correct ( its form )
         //if the method "isValidPhoneNumber" returns false the program will execute the code between ELSE IF brackets
     private void validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber.trim().isEmpty()) { //TRIM RETURN : a string whose value is this string, with all leading and trailing space removed
+        if (phoneNumber.trim().isEmpty()) { //TRIM RETURN : a string whose value is this string, with all leading and trailing spaces removed
             phonenumberTextfield.clear();
         } else if (!isValidPhoneNumber(phoneNumber)) {
             phonenumberTextfield.setStyle("-fx-prompt-text-fill: red;");

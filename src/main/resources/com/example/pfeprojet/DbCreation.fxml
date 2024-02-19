@@ -32,7 +32,7 @@
                 <DropShadow />
             </effect>
         </Button>
-        <Button fx:id="ExitButton" layoutX="394.0" layoutY="435.0" mnemonicParsing="false" onAction="#switchToLogin" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: WHITE;" text="Annuler">
+        <Button fx:id="ExitButton" layoutX="394.0" layoutY="435.0" mnemonicParsing="false" onAction="#AnnulerBtn" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: WHITE;" text="Annuler">
             <font>
                 <Font name="Algerian" size="16.0" />
             </font>
@@ -50,7 +50,7 @@
       </Text>
       <Line endX="396.0" layoutX="395.0" layoutY="98.0" opacity="0.5" startX="-236.0" strokeWidth="1.5" />
       <Line endX="-20.0" endY="308.4444580078125" layoutX="495.0" layoutY="92.0" opacity="0.5" startX="-20.0" startY="6.75" strokeWidth="1.5" />
-      <Text layoutX="257.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produit" wrappingWidth="85.50079345703125">
+      <Text layoutX="181.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produit" wrappingWidth="85.50079345703125">
          <font>
             <Font name="Algerian" size="20.0" />
          </font>
@@ -58,7 +58,7 @@
             <DropShadow height="5.0" radius="2.0" width="5.0" />
          </effect>
       </Text>
-      <Text layoutX="568.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="85.50079345703125">
+      <Text layoutX="277.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="85.50079345703125">
          <font>
             <Font name="Algerian" size="20.0" />
          </font>
@@ -66,42 +66,42 @@
             <DropShadow height="5.0" radius="2.0" width="5.0" />
          </effect>
       </Text>
-      <CheckBox fx:id="idProduit" layoutX="247.0" layoutY="160.0" mnemonicParsing="false" opacity="0.5" text="id_Produit">
+      <CheckBox fx:id="idProduit" disable="true" layoutX="247.0" layoutY="160.0" mnemonicParsing="false" opacity="0.5" selected="false" text="id Produit">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="libelleProduit" layoutX="247.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" text="libellé_Produit">
+      <CheckBox fx:id="libelleProduit" disable="true" layoutX="247.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Libellé Produit">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="prixUnitaire" layoutX="247.0" layoutY="246.0" mnemonicParsing="false" opacity="0.5" text="prix_Unitaire">
+      <CheckBox fx:id="prixUnitaire" disable="true" layoutX="247.0" layoutY="246.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Prix Unitaire">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="categorie" layoutX="247.0" layoutY="289.0" mnemonicParsing="false" opacity="0.5" text="Catégorie">
+      <CheckBox fx:id="categorie" disable="true" layoutX="247.0" layoutY="289.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Catégorie">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="idService" layoutX="564.0" layoutY="160.0" mnemonicParsing="false" opacity="0.5" text="id_Service">
+      <CheckBox fx:id="idService" disable="true" layoutX="564.0" layoutY="160.0" mnemonicParsing="false" opacity="0.5" selected="false" text="id Service">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="typeService" layoutX="564.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" text="type_Service">
+      <CheckBox fx:id="typeService" disable="true" layoutX="564.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Type Service">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="cout_heure" layoutX="566.0" layoutY="246.0" mnemonicParsing="false" opacity="0.5" text="coût/heure">
+      <CheckBox fx:id="cout_heure" disable="true" layoutX="564.0" layoutY="246.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Coût par heure">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="personnel" layoutX="566.0" layoutY="289.0" mnemonicParsing="false" opacity="0.5" text="Personnel">
+      <CheckBox fx:id="personnel" disable="true" layoutX="564.0" layoutY="289.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Personnel">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
@@ -111,9 +111,29 @@
             <Font name="Algerian" size="20.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="tableService" layoutX="557.0" layoutY="109.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="115.0" text="Service">
+      <CheckBox fx:id="tableService" layoutX="557.0" layoutY="109.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="133.0" text="Service">
          <font>
             <Font name="Algerian" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="dateEnregistrement" disable="true" layoutX="247.0" layoutY="332.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Date enregistrement ">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="description" disable="true" layoutX="247.0" layoutY="375.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Description">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="libelleService" disable="true" layoutX="564.0" layoutY="332.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Libellé service">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="descriptionService" disable="true" layoutX="564.0" layoutY="375.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Description">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
       </CheckBox>
     </children>

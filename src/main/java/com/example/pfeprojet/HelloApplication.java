@@ -13,7 +13,7 @@ import java.util.Objects;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DbCreation.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("DbCreation1.fxml")));
         Scene scene = new Scene(root);
 
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png")));

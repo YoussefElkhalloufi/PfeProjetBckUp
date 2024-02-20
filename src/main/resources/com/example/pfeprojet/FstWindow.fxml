@@ -54,7 +54,7 @@
                 <Font size="13.0" />
             </font>
         </Text>
-        <Text layoutX="87.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez vous">
+        <Text fill="#61c1bc" layoutX="87.0" layoutY="226.0" stroke="#020202" strokeType="OUTSIDE" strokeWidth="0.4" text="Connectez vous">
             <font>
                 <Font name="Algerian" size="45.0" />
             </font>

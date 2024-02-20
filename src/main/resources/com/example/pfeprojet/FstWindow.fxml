@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="790.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerFstWindow">
-    <children>
         <Text fill="#61c1bc" layoutX="204.0" layoutY="68.0" stroke="BLACK" strokeType="OUTSIDE" text="FacturEase">
             <font>
                 <Font name="Segoe UI Black" size="25.0" />
@@ -20,7 +19,6 @@
          </effect>
         </Text>
         <AnchorPane layoutX="535.0" prefHeight="446.0" prefWidth="262.0" style="-fx-background-color: #59A8A4;">
-            <children>
                 <Text fill="WHITE" layoutX="9.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nouveau ici ?" wrappingWidth="242.0000000000001">
                     <font>
                         <Font name="Algerian" size="36.0" />
@@ -48,7 +46,7 @@
                   <DropShadow />
                </effect>
                 </Button>
-            </children></AnchorPane>
+            </AnchorPane>
         <Text layoutX="54.0" layoutY="105.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simplifiez votre gestion financière avec FacturEase. Gestion des Clients, produits, Factures et plus, le tout en un seul endroit. Bienvenue dans une gestion de facturation simplifiée et efficace." textAlignment="CENTER" wrappingWidth="430.5130386352539">
             <font>
                 <Font size="13.0" />
@@ -74,5 +72,4 @@
          </effect></Button>
         <TextField layoutX="126.0" layoutY="257.0" prefHeight="34.0" prefWidth="287.0" promptText="Identifiant " style="-fx-background-radius: 5em;" />
         <PasswordField layoutX="126.0" layoutY="312.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
-    </children>
 </AnchorPane>

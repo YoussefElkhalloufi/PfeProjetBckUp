@@ -14,9 +14,10 @@ import java.util.ArrayList;
 
 public class ControllerDbCreation {
 
+    //TODO : typeService should be an attribute in table Services !!! 
     //ControllerSignUp c = new ControllerSignUp();
-    //String dbName = ControllerSignUp.getCmp();
-    String dbName = "testTables";
+    String dbName = ControllerSignUp.getCmp();
+    //String dbName = "testyoussef";
 
 
 
@@ -145,7 +146,8 @@ public class ControllerDbCreation {
         if (confirmed) {
             System.out.println("User clicked 'Yes'");
             Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-            if(c.dropDatabase(dbName)){
+            Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+            if(c.dropDatabase(dbName) && c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
                 sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
                 Platform.exit();
             }else{

@@ -78,11 +78,11 @@ public class Connexion {
     public ResultSet lire(String query, String... params) {
 
         try {
-            PreparedStatement pstmt = con.prepareStatement(query);
+             ps = con.prepareStatement(query);
             for (int i = 0; i < params.length; i++) {
-                pstmt.setString(i + 1, params[i]);
+                ps.setString(i + 1, params[i]);
             }
-            rs = pstmt.executeQuery();
+            rs = ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,11 +91,12 @@ public class Connexion {
 
     public boolean miseAjour(String query, String... params) {
         try {
-            PreparedStatement pstmt = con.prepareStatement(query);
+            ps = con.prepareStatement(query);
             for (int i = 0; i < params.length; i++) {
-                pstmt.setString(i + 1, params[i]);
+                ps.setString(i + 1, params[i]);
             }
-            return pstmt.executeUpdate() > 0;
+            System.out.println(ps);
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

@@ -28,7 +28,7 @@ public class ControllerFstWindow {
    //Switching to SignUp window
    public void switchToSignUp(ActionEvent event) throws IOException {
       ChangingWindows ch = new ChangingWindows();
-      ch.switchWindow(event,"SingUp.fxml");
+      ch.switchWindow(event,"SignUp.fxml");
    }
 
 

@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 public class ControllerDbCreation1 {
 
 
-    //String dbName = ControllerSignUp.getCmp();
-    String dbName = "testTables";
+    String dbName = ControllerSignUp.getCmp();
+    //String dbName = "testTables";
     mouseEvents me = new mouseEvents();
 
     @FXML
@@ -60,7 +59,6 @@ public class ControllerDbCreation1 {
 
     public void initialize() {
 
-        //TODO : possible de faire 2 tables facture -> une pour les produit et une pour les services
         //TODO : add a checkbox 'Check all'
         tableClient.setOnAction(event -> {
             if (tableClient.isSelected()) {
@@ -130,7 +128,9 @@ public class ControllerDbCreation1 {
         if (confirmed) {
             System.out.println("User clicked 'Yes'");
             Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-            if(c.dropDatabase(dbName)){
+            Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+
+            if(c.dropDatabase(dbName)&& c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
                 sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
                 Platform.exit();
             }else{
@@ -164,6 +164,8 @@ public class ControllerDbCreation1 {
         if (tableClient.isSelected() && tableFacture.isSelected()){
             createTable(dbName, "Client", getSelectedColumnsClient());
             createTable(dbName, "Facture", getSelectedColumnsFacture());
+            ChangingWindows cw = new ChangingWindows();
+            cw.switchWindow(event, "DbCreation2.fxml");
 
 //            ChangingWindows cw = new ChangingWindows();
 //            cw.switchWindow(event, "DbCreation1.fxml");

@@ -4,21 +4,18 @@ import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
 import javafx.animation.PauseTransition;
-import javafx.animation.ScaleTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class ControllerSignUp {
 
@@ -47,9 +44,6 @@ public class ControllerSignUp {
 
     @FXML
     private TextField locationTextField;
-
-    @FXML
-    private TextField phonenumberTextfield;
 
     @FXML
     private PasswordField pwdConfirmationTextField;
@@ -90,24 +84,24 @@ public class ControllerSignUp {
 
         String mail = emailTextField.getText();
         String pwd = pwdTextField.getText();
+        String hashpwd = PassworManager.hashPassword(pwd);
         String companyName =  companyNameTextField.getText();
         cmp = companyName.replaceAll("\\s+", "_");
         String location = locationTextField.getText();
-        String phoneNumber = phonenumberTextfield.getText();
         String faxNumber = faxnumberTextfield.getText();
         String activity = activityTextField.getText();
         String taxId = taxIdTextField.getText();
 
         Alerts sa = new Alerts();
-        if (mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || phoneNumber.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()) {
+        if (mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()) {
             sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         } else {
             if (!pwdTextField.getText().equals(pwdConfirmationTextField.getText())) {
                 sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
             } else {
-                Connexion c = new Connexion("jdbc:mysql://localhost:3306/Companies?user=root");
-                ResultSet rs = c.lire("SELECT * FROM companyinfos WHERE mailAdress = ?", mail);
-                ResultSet rs1 = c.lire("SELECT * FROM companyinfos WHERE CompanyName = ?", companyName);
+                Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+                ResultSet rs = c.lire("SELECT * FROM infosEntreprises WHERE AdresseMail = ?", mail);
+                ResultSet rs1 = c.lire("SELECT * FROM infosEntreprises WHERE nomEntreprise = ?", companyName);
                 if (rs.next()) {
                     sa.showAlert2("Attention", "L'email de l'entreprise fournit existe déjà dans notre application.");
                     rs.close();
@@ -115,10 +109,10 @@ public class ControllerSignUp {
                     sa.showAlert2("Attention", "Le nom de l'entreprise fournit existe déjà dans notre application.");
                     rs1.close();
                 }else{
-                    String insertQuery = "INSERT INTO `companyinfos`(`CompanyName`, `mailAdress`, `password`, `location`, `phoneNumber`, `faxNumber`, `activity`, `taxId`)" +
-                            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    String insertQuery = "INSERT INTO `infosEntreprises`(`nomEntreprise`, `AdresseMail`, `MotdePasse`, `Localisation`, `NumeroDeFax`, `SecteurDactivite`, `IdentificationFiscale`)" +
+                            " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-                    if (c.miseAjour(insertQuery, companyName, mail, pwd, location, phoneNumber, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
+                    if (c.miseAjour(insertQuery, companyName, mail, hashpwd, location, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
                         sa.showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" + cmp + "'", "/images/checked.png");
                         ChangingWindows ch = new ChangingWindows();
                         ch.switchWindow(event, "DbCreation.fxml");
@@ -143,8 +137,6 @@ public class ControllerSignUp {
         DelayedTextChangeListener faxListener = new DelayedTextChangeListener();
         faxnumberTextfield.textProperty().addListener(faxListener);
 
-        DelayedTextChangeListener phoneListener = new DelayedTextChangeListener();
-        phonenumberTextfield.textProperty().addListener(phoneListener);
     }
 
 
@@ -165,27 +157,17 @@ public class ControllerSignUp {
         //calls "validateEmail" with the EmailAddress typed in the text field
         private void validate() {
             validateEmail(emailTextField.getText());
-            validatePhoneNumber(phonenumberTextfield.getText());
             validateFaxNumber(faxnumberTextfield.getText());
         }
     }
 
 
     //it verifies if the PhoneNumber typed is correct ( its form )
-        //if the method "isValidPhoneNumber" returns false the program will execute the code between ELSE IF brackets
-    private void validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber.trim().isEmpty()) { //TRIM RETURN : a string whose value is this string, with all leading and trailing spaces removed
-            phonenumberTextfield.clear();
-        } else if (!isValidPhoneNumber(phoneNumber)) {
-            phonenumberTextfield.setStyle("-fx-prompt-text-fill: red;");
-            phonenumberTextfield.setPromptText("Numéro de telephone non valid !!!");
-            phonenumberTextfield.clear();
-        }
-    }
+    //if the method "isValidPhoneNumber" returns false the program will execute the code between ELSE IF brackets
     private void validateFaxNumber(String faxNumber) {
-        if (faxNumber.trim().isEmpty()) {
+        if (faxNumber.trim().isEmpty()) { //TRIM RETURN : a string whose value is this string, with all leading and trailing spaces removed
             faxnumberTextfield.clear();
-        } else if (!isValidPhoneNumber(faxNumber)) {
+        } else if (!isValidFaxNumber(faxNumber)) {
             faxnumberTextfield.setStyle("-fx-prompt-text-fill: red;");
             faxnumberTextfield.setPromptText("Numéro de fax non valid !!!");
             faxnumberTextfield.clear();
@@ -193,7 +175,7 @@ public class ControllerSignUp {
     }
 
     //returns true if the phoneNumber passed as an argument matches the phoneRegex ( 10 digits )
-    private boolean isValidPhoneNumber(String phoneNumber) {
+    private boolean isValidFaxNumber(String phoneNumber) {
         // Basic validation: 10 digits
         return phoneNumber.matches("^\\d{10}$");
     }

@@ -68,7 +68,7 @@
          </effect>
       </Text>
       <TextField fx:id="locationTextField" layoutX="387.0" layoutY="246.0" opacity="0.6" prefHeight="34.0" prefWidth="380.0" promptText="Localisation" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
-      <Text fill="WHITE" layoutX="593.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Numero de fax ">
+      <Text fill="WHITE" layoutX="394.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Numero de fax ">
          <font>
             <Font name="Gill Sans MT Condensed" size="16.0" />
          </font>
@@ -76,7 +76,7 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
       </Text>
-      <TextField fx:id="faxnumberTextfield" layoutX="585.0" layoutY="316.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Numero de fax" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="faxnumberTextfield" layoutX="387.0" layoutY="316.0" opacity="0.6" prefHeight="34.0" prefWidth="380.0" promptText="Numero de fax" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
       <Text fill="WHITE" layoutX="593.0" layoutY="373.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Identification fiscale ">
          <font>
             <Font name="Gill Sans MT Condensed" size="16.0" />
@@ -240,7 +240,7 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
       </Text>
-      <Text fill="RED" layoutX="670.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+      <Text fill="RED" layoutX="471.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
          <font>
             <Font name="Gill Sans MT Condensed" size="18.0" />
          </font>
@@ -248,7 +248,7 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
       </Text>
-      <Text fill="WHITE" layoutX="681.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+      <Text fill="WHITE" layoutX="482.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
          <font>
             <Font name="Gill Sans MT Condensed" size="16.0" />
          </font>

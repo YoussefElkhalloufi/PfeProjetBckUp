@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
@@ -30,7 +31,7 @@ public class ControllerDbCreation2 {
     private TextField cinTextfield;
 
     @FXML
-    private TextField cnfPwdTextfield;
+    private PasswordField cnfPwdTextfield;
 
     @FXML
     private TextField emailTextfield;
@@ -42,7 +43,7 @@ public class ControllerDbCreation2 {
     private TextField prenomTextfield;
 
     @FXML
-    private TextField pwdTextfield;
+    private PasswordField  pwdTextfield;
 
     public void initialize() {
         // Add listeners to the textProperty of the respective TextFields with a slight delay
@@ -162,7 +163,7 @@ public class ControllerDbCreation2 {
             if(!adrTextfield.getText().isEmpty()) { adr = adrTextfield.getText();}
 
             if(nom.isEmpty() || prenom.isEmpty() || adrMail.isEmpty() || pwd.isEmpty() || cnfPwd.isEmpty()){
-                sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+                sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Veuillez remplir les champs marqués d'une étoile rouge.");
             }else{
                 if(!pwd.equals(cnfPwd)){
                     sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
@@ -185,7 +186,7 @@ public class ControllerDbCreation2 {
                             "WHERE `nomEntreprise` = '" +dbName+ "';\n";
 
                     if(c.miseAjour(insert, nom, prenom,adrMail,cin, hashedPassword, numTel, adr)){
-                        sa.showAlert("Creation avec succes", "Succès ! Le directeur " +prenom+" "+nom +" a maintenant un compte actif lié a son entreprise " +dbName, "/images/checked.png");
+                        sa.showAlert("Creation avec succes", "Succès ! Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
                     }
                     c.closeResources();
                 }

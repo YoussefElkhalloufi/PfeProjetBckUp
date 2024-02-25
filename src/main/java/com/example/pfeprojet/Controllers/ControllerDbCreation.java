@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class ControllerDbCreation {
 
-    //TODO : typeService should be an attribute in table Services !!! 
     //ControllerSignUp c = new ControllerSignUp();
     String dbName = ControllerSignUp.getCmp();
     //String dbName = "testyoussef";
@@ -63,7 +62,9 @@ public class ControllerDbCreation {
 
     public void initialize() {
 
+        //TODO : disable exiting
         //TODO : add a checkbox 'Check all'
+
         tableProduit.setOnAction(event -> {
             if (tableProduit.isSelected()) {
                 idProduit.setOpacity(1.0);
@@ -249,6 +250,7 @@ public class ControllerDbCreation {
             selectedColumns.add("description VARCHAR(255)");
         }
 
+
         return selectedColumns;
     }
 
@@ -264,13 +266,14 @@ public class ControllerDbCreation {
             selectedColumns.add("LibelleService VARCHAR(100)");
         }
         if (typeService.isSelected()) {
-            ArrayList<String> serviceColumns = new ArrayList<>();
-            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
-            serviceColumns.add("libelleTypeService VARCHAR(255)");
-            serviceColumns.add("Description VARCHAR(255)");
-            createTable(dbName,"TypeService",serviceColumns);
-            selectedColumns.add("idTypeService INT");
-            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
+//            ArrayList<String> serviceColumns = new ArrayList<>();
+//            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
+//            serviceColumns.add("libelleTypeService VARCHAR(255)");
+//            serviceColumns.add("Description VARCHAR(255)");
+//            createTable(dbName,"TypeService",serviceColumns);
+//            selectedColumns.add("idTypeService INT");
+//            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
+            selectedColumns.add("TypeService VARCHAR(255)");
         }
         if (cout_heure.isSelected()) {
             selectedColumns.add("Cout_heure DECIMAL(10, 2)");

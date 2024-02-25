@@ -59,6 +59,7 @@ public class ControllerDbCreation1 {
 
     public void initialize() {
 
+        //TODO : quantité dans la table facture, + prix total
         //TODO : add a checkbox 'Check all'
         tableClient.setOnAction(event -> {
             if (tableClient.isSelected()) {

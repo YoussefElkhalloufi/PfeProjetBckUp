@@ -1,5 +1,6 @@
 package com.example.pfeprojet;
 
+import java.net.ServerSocket;
 import java.sql.* ;
 import java.util.ArrayList;
 
@@ -65,6 +66,7 @@ public class Connexion {
             query.append(")");
 
             ps = con.prepareStatement(query.toString());
+            System.out.println(query.toString());
             ps.executeUpdate() ;
             return true ;
         } catch (SQLException e) {
@@ -76,7 +78,6 @@ public class Connexion {
     }
 
     public ResultSet lire(String query, String... params) {
-
         try {
              ps = con.prepareStatement(query);
             for (int i = 0; i < params.length; i++) {
@@ -87,6 +88,31 @@ public class Connexion {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public int verificationTables(){
+        try{
+            ps = con.prepareStatement("SHOW TABLES");
+            rs = ps.executeQuery();
+            StringBuilder tablesValue = new StringBuilder("");
+            while(rs.next()){
+                if(rs.getString(1).equalsIgnoreCase("produit")) tablesValue.append("produit ") ;
+                else if(rs.getString(1).equalsIgnoreCase("service")) tablesValue.append("service");
+            }
+            String values = tablesValue.toString();
+            if(values.contains("produit") && values.contains("service")) {
+                return 0;
+            }else if(values.contains("produit")) {
+                return 1 ;
+            }else if(values.contains("service")) {
+                return 2;
+            }else {
+                return -1 ;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            return -1 ;
+        }
     }
 
     public boolean miseAjour(String query, String... params) {

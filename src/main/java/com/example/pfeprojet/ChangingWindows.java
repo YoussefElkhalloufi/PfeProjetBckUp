@@ -32,6 +32,8 @@ public class ChangingWindows {
 
         // Set the scene and show the stage
         newStage.setScene(newScene);
+        // Disable closing the new window
+        newStage.setOnCloseRequest(event1 -> event1.consume());
         newStage.show();
 
         // Close the current (scene2) stage

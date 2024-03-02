@@ -85,7 +85,7 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
       </Text>
-      <TextField fx:id="taxIdTextField" layoutX="585.0" layoutY="385.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Identification fiscale" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="taxIdTextField" layoutX="585.0" layoutY="384.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Identification fiscale" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
       <Text fill="WHITE" layoutX="394.0" layoutY="373.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Secteur d'activite ">
          <font>
             <Font name="Gill Sans MT Condensed" size="16.0" />
@@ -95,7 +95,7 @@
          </effect>
       </Text>
       <TextField fx:id="activityTextField" layoutX="387.0" layoutY="384.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Secteur d'activite" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
-      <Button fx:id="NextButton" layoutX="593.0" layoutY="435.0" mnemonicParsing="false" onAction="#addCompany" onMouseEntered="#onMouseEntered2" onMouseExited="#onMouseExited2" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Suivant">
+      <Button fx:id="NextButton" layoutX="585.0" layoutY="435.0" mnemonicParsing="false" onAction="#addCompany" onMouseEntered="#onMouseEntered2" onMouseExited="#onMouseExited2" prefHeight="25.0" prefWidth="180.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Suivant">
          <font>
             <Font name="Algerian" size="16.0" />
          </font>
@@ -106,7 +106,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="ExitButton" layoutX="394.0" layoutY="435.0" mnemonicParsing="false" onAction="#switchToLogin" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: WHITE;" text="Annuler">
+      <Button fx:id="ExitButton" layoutX="387.0" layoutY="435.0" mnemonicParsing="false" onAction="#switchToLogin" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="25.0" prefWidth="180.0" style="-fx-background-radius: 5em; -fx-background-color: WHITE;" text="Annuler">
          <font>
             <Font name="Algerian" size="16.0" />
          </font>
@@ -119,13 +119,10 @@
       </Button>
       <Line endX="-21.999969482421875" endY="336.9999694824219" layoutX="394.0" layoutY="99.0" opacity="0.5" startX="-22.0" strokeWidth="1.5" />
       <Line endX="100.0" layoutX="249.0" layoutY="113.0" opacity="0.5" startX="-65.0" startY="-7.62939453125E-6" strokeWidth="1.5" />
-      <Text layoutX="186.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscrivez-vous " wrappingWidth="161.9453125">
+      <Text fill="#83efe6" layoutX="205.0" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" text="Inscrivez-vous ">
          <font>
-            <Font name="Algerian" size="20.0" />
+            <Font name="Impact" size="20.0" />
          </font>
-         <effect>
-            <DropShadow height="5.0" radius="2.0" width="5.0" />
-         </effect>
       </Text>
       <Circle fill="#81ccc8" layoutX="182.0" layoutY="186.0" opacity="0.6" radius="12.5" stroke="#81ccc8" strokeType="INSIDE" />
       <Text layoutX="176.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">

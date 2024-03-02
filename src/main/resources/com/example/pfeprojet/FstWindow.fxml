@@ -46,6 +46,17 @@
                   <DropShadow />
                </effect>
                 </Button>
+      <Button fx:id="aide" layoutX="211.0" layoutY="14.0" mnemonicParsing="false" onAction="#helpSection" onMouseEntered="#onMouseEntered3" onMouseExited="#onMouseExited3" prefHeight="33.0" prefWidth="40.0" style="-fx-background-radius: 5em; -fx-background-color: #FFFFFF;" text="?">
+         <font>
+            <Font name="Algerian" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
             </AnchorPane>
         <Text layoutX="54.0" layoutY="105.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simplifiez votre gestion financière avec FacturEase. Gestion des Clients, produits, Factures et plus, le tout en un seul endroit. Bienvenue dans une gestion de facturation simplifiée et efficace." textAlignment="CENTER" wrappingWidth="430.5130386352539">
             <font>

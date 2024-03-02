@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="956.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.testController">
+  <tabs>
+    <Tab text="Inscription ">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="436.0" prefWidth="956.0">
+                <children>
+                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#81ccc8" height="460.0" layoutX="144.0" layoutY="21.0" opacity="0.6" stroke="#81ccc8" strokeType="INSIDE" width="650.0" />
+                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaeaea" height="442.0" layoutX="153.0" layoutY="29.0" stroke="#eaeaea" strokeType="INSIDE" width="632.0" />
+
+                    <Button fx:id="NextButton1" layoutX="593.0" layoutY="430.0" mnemonicParsing="false" onAction="#addCompany" onMouseEntered="#onMouseEntered2" onMouseExited="#onMouseExited2" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Suivant">
+                        <font>
+                            <Font name="Algerian" size="16.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                        <effect>
+                            <DropShadow />
+                        </effect>
+                    </Button>
+
+                    <Button fx:id="ExitButton1" layoutX="394.0" layoutY="430.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: WHITE;" text="Annuler">
+                        <font>
+                            <Font name="Algerian" size="16.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                        <effect>
+                            <DropShadow />
+                        </effect>
+                    </Button>
+
+                    <TextField fx:id="emailTextField" layoutX="387.0" layoutY="96.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="nomEntreprise@exemple.exmp" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="394.0" layoutY="82.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Adresse email ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="593.0" layoutY="82.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Mot de passe ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <PasswordField fx:id="pwdTextField" layoutX="585.0" layoutY="97.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Mot de passe" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="593.0" layoutY="160.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Confirmation du mot de passe ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <PasswordField fx:id="pwdConfirmationTextField" layoutX="585.0" layoutY="173.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Confirmation du mot de passe" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="394.0" layoutY="160.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Nom de l'entreprise ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <TextField fx:id="companyNameTextField" layoutX="387.0" layoutY="172.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Nom de l'entreprise" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="394.0" layoutY="235.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Localisation ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <TextField fx:id="locationTextField" layoutX="387.0" layoutY="246.0" opacity="0.6" prefHeight="34.0" prefWidth="380.0" promptText="Localisation" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="394.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Numero de fax ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <TextField fx:id="faxnumberTextfield" layoutX="387.0" layoutY="316.0" opacity="0.6" prefHeight="34.0" prefWidth="380.0" promptText="Numero de fax" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="593.0" layoutY="373.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Identification fiscale ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <TextField fx:id="taxIdTextField" layoutX="585.0" layoutY="385.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Identification fiscale" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+                    <Text fill="WHITE" layoutX="394.0" layoutY="373.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text="Secteur d'activite ">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <TextField fx:id="activityTextField" layoutX="387.0" layoutY="384.0" opacity="0.6" prefHeight="34.0" prefWidth="180.0" promptText="Secteur d'activite" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+
+                    <Line endX="-21.999969482421875" endY="336.9999694824219" layoutX="394.0" layoutY="99.0" opacity="0.5" startX="-22.0" strokeWidth="1.5" />
+                    <Line endX="100.0" layoutX="249.0" layoutY="113.0" opacity="0.5" startX="-65.0" startY="-7.62939453125E-6" strokeWidth="1.5" />
+                    <Text layoutX="186.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscrivez-vous " wrappingWidth="161.9453125">
+                        <font>
+                            <Font name="Algerian" size="20.0" />
+                        </font>
+                        <effect>
+                            <DropShadow height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Circle fill="#81ccc8" layoutX="182.0" layoutY="186.0" opacity="0.6" radius="12.5" stroke="#81ccc8" strokeType="INSIDE" />
+                    <Text layoutX="176.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+                        <font>
+                            <Font name="Algerian" size="20.0" />
+                        </font>
+                    </Text>
+                    <Text layoutX="199.0" layoutY="169.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez renseigner l'adresse e-mail et le mot de passe qui seront utilisés pour accéder à l'application." wrappingWidth="165.0">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="15.0" />
+                        </font>
+                    </Text>
+                    <Circle fill="#81ccc8" layoutX="182.0" layoutY="291.0" opacity="0.6" radius="12.5" stroke="#81ccc8" strokeType="INSIDE" />
+                    <Text layoutX="176.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+                        <font>
+                            <Font name="Algerian" size="18.0" />
+                        </font>
+                    </Text>
+                    <Text layoutX="200.0" layoutY="274.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Fournissez les détails de votre entreprise nécessaires à la gestion automatisée des factures." wrappingWidth="165.0">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="15.0" />
+                        </font>
+                    </Text>
+                    <Circle fill="#81ccc8" layoutX="182.0" layoutY="396.0" opacity="0.6" radius="12.5" stroke="#81ccc8" strokeType="INSIDE" />
+                    <Text layoutX="176.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                        <font>
+                            <Font name="Algerian" size="18.0" />
+                        </font>
+                    </Text>
+                    <Text layoutX="199.0" layoutY="400.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Appuyer sur le bouton 'Suivant'" wrappingWidth="165.0">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="15.0" />
+                        </font>
+                    </Text>
+                    <Text fill="RED" layoutX="463.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="474.0" layoutY="82.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="659.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="670.0" layoutY="82.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="495.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="506.0" layoutY="160.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="740.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="751.0" layoutY="160.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="451.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="462.0" layoutY="235.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="471.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="482.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="478.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="489.0" layoutY="373.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="RED" layoutX="689.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="18.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+                    <Text fill="WHITE" layoutX="700.0" layoutY="373.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.8" text=":">
+                        <font>
+                            <Font name="Gill Sans MT Condensed" size="16.0" />
+                        </font>
+                        <effect>
+                            <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+                        </effect>
+                    </Text>
+
+                </children>
+        </AnchorPane>
+
+      </content>
+    </Tab>
+    <Tab text="Untitled Tab 2">
+      <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="436.0" prefWidth="956.0">
+              <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#81ccc8" height="445.0" layoutX="144.0" layoutY="21.0" opacity="0.6" stroke="#81ccc8" strokeType="INSIDE" width="650.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaeaea" height="427.0" layoutX="153.0" layoutY="29.0" stroke="#eaeaea" strokeType="INSIDE" width="632.0" />
+
+                  <Button fx:id="NextButton2" layoutX="593.0" layoutY="415.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered4" onMouseExited="#onMouseExited4" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Suivant">
+                      <font>
+                          <Font name="Algerian" size="16.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow />
+                      </effect>
+                  </Button>
+
+                  <Button fx:id="ExitButton2" layoutX="394.0" layoutY="415.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered3" onMouseExited="#onMouseExited3" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 5em; -fx-background-color: WHITE;" text="Annuler">
+                      <font>
+                          <Font name="Algerian" size="16.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <effect>
+                          <DropShadow />
+                      </effect>
+                  </Button>
+
+                  <Text layoutX="280.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation des tables Produit, Service" wrappingWidth="402.8342590332031">
+                      <font>
+                          <Font name="Algerian" size="20.0" />
+                      </font>
+                  </Text>
+                  <Line endX="396.0" layoutX="395.0" layoutY="88.0" opacity="0.5" startX="-236.0" strokeWidth="1.5" />
+                  <Line endX="-20.0" endY="308.4444580078125" layoutX="495.0" layoutY="82.0" opacity="0.5" startX="-20.0" startY="6.75" strokeWidth="1.5" />
+                  <Text layoutX="181.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produit" wrappingWidth="85.50079345703125">
+                      <font>
+                          <Font name="Algerian" size="20.0" />
+                      </font>
+                      <effect>
+                          <DropShadow height="5.0" radius="2.0" width="5.0" />
+                      </effect>
+                  </Text>
+                  <Text layoutX="277.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="85.50079345703125">
+                      <font>
+                          <Font name="Algerian" size="20.0" />
+                      </font>
+                      <effect>
+                          <DropShadow height="5.0" radius="2.0" width="5.0" />
+                      </effect>
+                  </Text>
+                  <CheckBox fx:id="idProduit" disable="true" layoutX="247.0" layoutY="150.0" mnemonicParsing="false" opacity="0.5" selected="false" text="id Produit">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="libelleProduit" disable="true" layoutX="247.0" layoutY="193.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Libellé Produit">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="prixUnitaire" disable="true" layoutX="247.0" layoutY="236.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Prix Unitaire">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="categorie" disable="true" layoutX="247.0" layoutY="279.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Catégorie">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="idService" disable="true" layoutX="564.0" layoutY="150.0" mnemonicParsing="false" opacity="0.5" selected="false" text="id Service">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="typeService" disable="true" layoutX="564.0" layoutY="193.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Type Service">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="cout_heure" disable="true" layoutX="564.0" layoutY="236.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Coût par heure">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="personnel" disable="true" layoutX="564.0" layoutY="279.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Personnel">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="tableProduit" layoutX="233.0" layoutY="99.0" mnemonicParsing="false" text="Produit">
+                      <font>
+                          <Font name="Algerian" size="20.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="tableService" layoutX="557.0" layoutY="99.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="133.0" text="Service">
+                      <font>
+                          <Font name="Algerian" size="20.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="dateEnregistrement" disable="true" layoutX="247.0" layoutY="322.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Date enregistrement ">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="description" disable="true" layoutX="247.0" layoutY="365.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Description">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="libelleService" disable="true" layoutX="564.0" layoutY="322.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Libellé service">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+                  <CheckBox fx:id="descriptionService" disable="true" layoutX="564.0" layoutY="365.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Description">
+                      <font>
+                          <Font name="Gill Sans MT Condensed" size="18.0" />
+                      </font>
+                  </CheckBox>
+              </children>
+          </AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Untitled Tab">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</TabPane>

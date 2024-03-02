@@ -1,19 +1,24 @@
 package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.Alerts;
+import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class ControllerDbCreation2 {
 
     String dbName = ControllerSignUp.getCmp();
+    //String dbName ="youssef";
     //String dbName = "Entreprises";
     @FXML
     private Button ExitButton;
@@ -30,7 +35,7 @@ public class ControllerDbCreation2 {
     private TextField cinTextfield;
 
     @FXML
-    private TextField cnfPwdTextfield;
+    private PasswordField cnfPwdTextfield;
 
     @FXML
     private TextField emailTextfield;
@@ -42,7 +47,7 @@ public class ControllerDbCreation2 {
     private TextField prenomTextfield;
 
     @FXML
-    private TextField pwdTextfield;
+    private PasswordField  pwdTextfield;
 
     public void initialize() {
         // Add listeners to the textProperty of the respective TextFields with a slight delay
@@ -56,9 +61,7 @@ public class ControllerDbCreation2 {
     private class DelayedTextChangeListener implements ChangeListener<String> {
         private final PauseTransition pause = new PauseTransition(Duration.seconds(3)); // 3 second delay after FINISHING TYPING
 
-        DelayedTextChangeListener() {
-            pause.setOnFinished(event -> validate());
-        }
+        DelayedTextChangeListener() { pause.setOnFinished(event -> validate());}
 
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             pause.playFromStart();
@@ -95,10 +98,7 @@ public class ControllerDbCreation2 {
             emailTextfield.clear();
         }
     }
-    private boolean isValidEmail(String email) {
-        return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$");
-    }
-
+    private boolean isValidEmail(String email) { return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$");}
     mouseEvents ms = new mouseEvents();
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
@@ -115,32 +115,31 @@ public class ControllerDbCreation2 {
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
         ms.onMouseExited2(mouseEvent, NextButton);
     }
+
     public void AnnulerBtn() {
-        Alerts sa = new Alerts();
-
-        boolean confirmed = sa.showConfirmationAlert("Confirmation", "Êtes-vous sûr de vouloir quitter l'application et supprimer votre base de données '"+dbName+"' ?");
-        if (confirmed) {
-            System.out.println("User clicked 'Yes'");
-            Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-            Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
-
-            if(c.dropDatabase(dbName)&& c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
-                sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
-                Platform.exit();
-            }else{
-                sa.showAlert("Échec","Échec de la suppression de votre base de donnée '"+dbName+"'.","/images/checkFailed.png");
-            }
-        } else {
-            // User clicked "Cancel", cancel the operation
-            System.out.println("User clicked 'No'");
-        }
+        ControllerDbCreation cdc = new ControllerDbCreation();
+        cdc.AnnulerBtn();
+//        Alerts sa = new Alerts();
+//
+//        boolean confirmed = sa.showConfirmationAlert("Confirmation", "Êtes-vous sûr de vouloir quitter l'application et supprimer votre base de données '"+dbName+"' ?");
+//        if (confirmed) {
+//            System.out.println("User clicked 'Yes'");
+//            Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
+//            Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+//
+//            if(c.dropDatabase(dbName)&& c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
+//                sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
+//                Platform.exit();
+//            }else{
+//                sa.showAlert("Échec","Échec de la suppression de votre base de donnée '"+dbName+"'.","/images/checkFailed.png");
+//            }
+//        } else {
+//            // User clicked "Cancel", cancel the operation
+//            System.out.println("User clicked 'No'");
+//        }
     }
 
-
-
-
-
-    public void addDirecteur()  {
+    public void addDirecteur(ActionEvent event) throws IOException {
         Alerts sa = new Alerts();
 
 
@@ -162,7 +161,7 @@ public class ControllerDbCreation2 {
             if(!adrTextfield.getText().isEmpty()) { adr = adrTextfield.getText();}
 
             if(nom.isEmpty() || prenom.isEmpty() || adrMail.isEmpty() || pwd.isEmpty() || cnfPwd.isEmpty()){
-                sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+                sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Veuillez remplir les champs marqués d'une étoile rouge.");
             }else{
                 if(!pwd.equals(cnfPwd)){
                     sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
@@ -185,7 +184,9 @@ public class ControllerDbCreation2 {
                             "WHERE `nomEntreprise` = '" +dbName+ "';\n";
 
                     if(c.miseAjour(insert, nom, prenom,adrMail,cin, hashedPassword, numTel, adr)){
-                        sa.showAlert("Creation avec succes", "Succès ! Le directeur " +prenom+" "+nom +" a maintenant un compte actif lié a son entreprise " +dbName, "/images/checked.png");
+                        sa.showAlert("Creation avec succes", "Succès ! Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
+                        ChangingWindows cw = new ChangingWindows();
+                        cw.switchWindow(event, "FstWindow.fxml");
                     }
                     c.closeResources();
                 }

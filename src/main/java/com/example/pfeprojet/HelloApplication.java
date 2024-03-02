@@ -24,6 +24,7 @@ public class HelloApplication extends Application {
 
         stage.setTitle("FacturEase");
         stage.setScene(scene);
+
         stage.show();
     }
 

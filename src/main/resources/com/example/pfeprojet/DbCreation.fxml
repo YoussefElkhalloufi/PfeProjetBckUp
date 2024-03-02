@@ -43,98 +43,152 @@
                 <DropShadow />
             </effect>
         </Button>
-      <Text layoutX="280.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creation des tables Produit, Service" wrappingWidth="402.8342590332031">
+      <Text fill="#83efe6" layoutX="313.0" layoutY="84.0" stroke="#0b0b0b" strokeType="OUTSIDE" text="Creation des tables Produit, Service">
          <font>
-            <Font name="Algerian" size="20.0" />
+            <Font name="Impact" size="22.0" />
          </font>
       </Text>
       <Line endX="396.0" layoutX="395.0" layoutY="98.0" opacity="0.5" startX="-236.0" strokeWidth="1.5" />
       <Line endX="-20.0" endY="308.4444580078125" layoutX="495.0" layoutY="92.0" opacity="0.5" startX="-20.0" startY="6.75" strokeWidth="1.5" />
-      <Text layoutX="181.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produit" wrappingWidth="85.50079345703125">
+      <CheckBox fx:id="idProduit" disable="true" layoutX="247.0" layoutY="161.0" mnemonicParsing="false" opacity="0.5" selected="false">
          <font>
-            <Font name="Algerian" size="20.0" />
+            <Font name="Gill Sans MT Condensed" size="15.0" />
          </font>
-         <effect>
-            <DropShadow height="5.0" radius="2.0" width="5.0" />
-         </effect>
+      </CheckBox>
+      <CheckBox fx:id="libelleProduit" disable="true" layoutX="247.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="prixUnitaire" disable="true" layoutX="247.0" layoutY="245.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="categorie" disable="true" layoutX="247.0" layoutY="287.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="idService" disable="true" layoutX="570.0" layoutY="161.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="typeService" disable="true" layoutX="570.0" layoutY="329.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="cout_heure" disable="true" layoutX="570.0" layoutY="245.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="personnel" disable="true" layoutX="570.0" layoutY="287.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="tableProduit" layoutX="199.0" layoutY="106.0" mnemonicParsing="false">
+         <font>
+            <Font name="Impact" size="25.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="tableService" layoutX="536.0" layoutY="106.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0">
+         <font>
+            <Font name="Algerian" size="25.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="dateEnregistrement" disable="true" layoutX="247.0" layoutY="329.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="description" disable="true" layoutX="247.0" layoutY="371.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="libelleService" disable="true" layoutX="570.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="descriptionService" disable="true" layoutX="570.0" layoutY="371.0" mnemonicParsing="false" opacity="0.5" selected="false">
+         <font>
+            <Font name="Gill Sans MT Condensed" size="15.0" />
+         </font>
+      </CheckBox>
+      <Text layoutX="276.0" layoutY="177.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="ID produit">
+         <font>
+            <Font name="Lucida Bright" size="16.0" />
+         </font>
       </Text>
-      <Text layoutX="277.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service" wrappingWidth="85.50079345703125">
+      <Text layoutX="276.0" layoutY="219.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Libellé produit">
          <font>
-            <Font name="Algerian" size="20.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-         <effect>
-            <DropShadow height="5.0" radius="2.0" width="5.0" />
-         </effect>
       </Text>
-      <CheckBox fx:id="idProduit" disable="true" layoutX="247.0" layoutY="160.0" mnemonicParsing="false" opacity="0.5" selected="false" text="id Produit">
+      <Text layoutX="276.0" layoutY="261.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix unitaire">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="libelleProduit" disable="true" layoutX="247.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Libellé Produit">
+      </Text>
+      <Text layoutX="276.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Catégorie">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="prixUnitaire" disable="true" layoutX="247.0" layoutY="246.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Prix Unitaire">
+      </Text>
+      <Text layoutX="276.0" layoutY="345.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Date d'enregistrement">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="categorie" disable="true" layoutX="247.0" layoutY="289.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Catégorie">
+      </Text>
+      <Text layoutX="276.0" layoutY="387.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="idService" disable="true" layoutX="564.0" layoutY="160.0" mnemonicParsing="false" opacity="0.5" selected="false" text="id Service">
+      </Text>
+      <Text fill="#86ddd6" layoutX="247.0" layoutY="131.0" stroke="BLACK" strokeType="OUTSIDE" text="Produit">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Impact" size="22.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="typeService" disable="true" layoutX="564.0" layoutY="203.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Type Service">
+      </Text>
+      <Text layoutX="604.0" layoutY="177.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Service">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="cout_heure" disable="true" layoutX="564.0" layoutY="246.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Coût par heure">
+      </Text>
+      <Text layoutX="604.0" layoutY="345.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Type service">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="personnel" disable="true" layoutX="564.0" layoutY="289.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Personnel">
+      </Text>
+      <Text layoutX="604.0" layoutY="261.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="coût par heure">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="tableProduit" layoutX="233.0" layoutY="109.0" mnemonicParsing="false" text="Produit">
+      </Text>
+      <Text layoutX="604.0" layoutY="303.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Personnel">
          <font>
-            <Font name="Algerian" size="20.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="tableService" layoutX="557.0" layoutY="109.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="133.0" text="Service">
+      </Text>
+      <Text layoutX="604.0" layoutY="219.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Libellé service">
          <font>
-            <Font name="Algerian" size="20.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="dateEnregistrement" disable="true" layoutX="247.0" layoutY="332.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Date enregistrement ">
+      </Text>
+      <Text layoutX="604.0" layoutY="387.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Lucida Bright" size="16.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="description" disable="true" layoutX="247.0" layoutY="375.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Description">
+      </Text>
+      <Text fill="#86ddd6" layoutX="585.0" layoutY="131.0" stroke="BLACK" strokeType="OUTSIDE" text="Service">
          <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
+            <Font name="Impact" size="22.0" />
          </font>
-      </CheckBox>
-      <CheckBox fx:id="libelleService" disable="true" layoutX="564.0" layoutY="332.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Libellé service">
-         <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="descriptionService" disable="true" layoutX="564.0" layoutY="375.0" mnemonicParsing="false" opacity="0.5" selected="false" text="Description">
-         <font>
-            <Font name="Gill Sans MT Condensed" size="18.0" />
-         </font>
-      </CheckBox>
+      </Text>
     </children>
 </AnchorPane>

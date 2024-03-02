@@ -17,8 +17,9 @@ import java.util.ArrayList;
 public class ControllerDbCreation1 {
 
 
+    ControllerDbCreation cdbc = new ControllerDbCreation();
     String dbName = ControllerSignUp.getCmp();
-    //String dbName = "testTables";
+    //String dbName = "bbbbbbb";
     mouseEvents me = new mouseEvents();
 
     @FXML
@@ -54,12 +55,13 @@ public class ControllerDbCreation1 {
     private CheckBox tva;
     @FXML
     private CheckBox remise;
+    @FXML
+    private CheckBox dateFacture;
 
 
 
     public void initialize() {
 
-        //TODO : add a checkbox 'Check all'
         tableClient.setOnAction(event -> {
             if (tableClient.isSelected()) {
                 cinClient.setOpacity(1.0);
@@ -106,6 +108,8 @@ public class ControllerDbCreation1 {
                 tva.setDisable(false);
                 remise.setOpacity(1.0);
                 remise.setDisable(false);
+                dateFacture.setOpacity(1.0);
+                dateFacture.setDisable(false);
             } else {
                 NumFacture.setOpacity(0.5);
                 NumFacture.setSelected(false);
@@ -116,56 +120,92 @@ public class ControllerDbCreation1 {
                 remise.setOpacity(0.5);
                 remise.setSelected(false);
                 remise.setDisable(true);
+                dateFacture.setOpacity(0.5);
+                dateFacture.setSelected(false);
+                dateFacture.setDisable(true);
             }
         });
     }
 
 
     public void AnnulerBtn() {
-        Alerts sa = new Alerts();
-
-        boolean confirmed = sa.showConfirmationAlert("Confirmation", "Êtes-vous sûr de vouloir quitter l'application et supprimer votre base de données '"+dbName+"' ?");
-        if (confirmed) {
-            System.out.println("User clicked 'Yes'");
-            Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-            Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
-
-            if(c.dropDatabase(dbName)&& c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
-                sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
-                Platform.exit();
-            }else{
-                sa.showAlert("Échec","Échec de la suppression de votre base de donnée '"+dbName+"'.","/images/checkFailed.png");
-            }
-        } else {
-            // User clicked "Cancel", cancel the operation
-            System.out.println("User clicked 'No'");
-        }
+        ControllerDbCreation cdbc = new ControllerDbCreation();
+        cdbc.AnnulerBtn();
     }
 
-    private void createTable(String dbName, String tableName, ArrayList<String> columns) {
-        // Create a Connexion object with the URL to the database
-        Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
+//    private void createTable(String dbName, String tableName, ArrayList<String> columns) {
+//        // Create a Connexion object with the URL to the database
+//        Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
+//
+//        // Call the createTable method with the selected columns
+//        boolean success = cn.createTable(dbName, tableName, columns);
+//
+//        Alerts sa = new Alerts();
+//        // Check if the table creation was successful
+//        if (success) {
+////            System.out.println("Table '" + tableName + "' created successfully with columns: " + String.join(", ", columns));
+//            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
+//        } else {
+////            System.out.println("Failed to create table '" + tableName + "'.");
+//            sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
+//        }
+//    }
 
-        // Call the createTable method with the selected columns
-        boolean success = cn.createTable(dbName, tableName, columns);
 
-        Alerts sa = new Alerts();
-        // Check if the table creation was successful
-        if (success) {
-//            System.out.println("Table '" + tableName + "' created successfully with columns: " + String.join(", ", columns));
-            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
-        } else {
-//            System.out.println("Failed to create table '" + tableName + "'.");
-            sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
-        }
+    private ArrayList<String> getColumnsFP(){
+
+        ArrayList<String> fpList = new ArrayList<>();
+        fpList.add("NumeroFacture INT");
+        fpList.add("IDProduit INT ");
+        fpList.add("Quantité INT");
+        fpList.add("Total_HT DECIMAL(10,2)");
+        fpList.add("CONSTRAINT facture_produit_PK PRIMARY KEY (NumeroFacture, IDProduit)");
+        fpList.add("CONSTRAINT fk_numero_facture FOREIGN KEY (NumeroFacture) REFERENCES Facture(NumeroFacture)");
+        fpList.add("CONSTRAINT fk_id_produit FOREIGN KEY (IDProduit) REFERENCES Produit(idProduit)");
+
+        return fpList;
+
+    }
+
+    private ArrayList<String> getColumnsFS(){
+        ArrayList<String> fsList = new ArrayList<>();
+        fsList.add("NumeroFacture INT");
+        fsList.add("idService INT");
+        fsList.add("NombreHeure DECIMAL(10.2)");
+        fsList.add("Total_Ht DECIMAL(10,2)");
+        fsList.add(" FOREIGN KEY (numerofacture) REFERENCES facture(numeroFacture)");
+        fsList.add("FOREIGN KEY (idService) REFERENCES service(idService)");
+        fsList.add("PRIMARY KEY (numerofacture, idService)");
+
+        return fsList ;
     }
 
     public void tablesCreation(ActionEvent event) throws IOException {
         if (tableClient.isSelected() && tableFacture.isSelected()){
-            createTable(dbName, "Client", getSelectedColumnsClient());
-            createTable(dbName, "Facture", getSelectedColumnsFacture());
-            ChangingWindows cw = new ChangingWindows();
-            cw.switchWindow(event, "DbCreation2.fxml");
+            Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
+            if(cn.verificationTables() != -1){
+                cdbc.creationSuccessful("Client",cdbc.createTable(dbName, "Client", getSelectedColumnsClient()));
+                cdbc.creationSuccessful("Facture", cdbc.createTable(dbName, "Facture", getSelectedColumnsFacture()));
+                if(cn.verificationTables() == 1){
+                    cdbc.createTable(dbName,"Facture_Produit", getColumnsFP());
+                    ChangingWindows cw = new ChangingWindows();
+                    cw.switchWindow(event, "DbCreation2.fxml");
+                }else if(cn.verificationTables() == 2){
+                    cdbc.createTable(dbName,"Facture_Service", getColumnsFS());
+                    ChangingWindows cw = new ChangingWindows();
+                    cw.switchWindow(event, "DbCreation2.fxml");
+                }else if(cn.verificationTables() == 0){
+                    cdbc.createTable(dbName,"Facture_Produit", getColumnsFP());
+                    cdbc.createTable(dbName,"Facture_Service", getColumnsFS());
+                    ChangingWindows cw = new ChangingWindows();
+                    cw.switchWindow(event, "DbCreation2.fxml");
+                }
+            }else{
+                Alerts sa = new Alerts();
+                sa.showAlert2("Erreur","Une erreur s'est produite lors de la creation des tables, réessayer plus tard ");
+            }
+
+
 
 //            ChangingWindows cw = new ChangingWindows();
 //            cw.switchWindow(event, "DbCreation1.fxml");
@@ -216,40 +256,18 @@ public class ControllerDbCreation1 {
         ArrayList<String> selectedColumns = new ArrayList<>();
 
 
-        if (NumFacture.isSelected()) {
-            selectedColumns.add("NumeroFacture INT PRIMARY KEY");
-        }
-        if (tva.isSelected()) {
-            selectedColumns.add("TauxDeTva DECIMAL(10,2)");
-        }
-        if (remise.isSelected()) {
-            selectedColumns.add("TauxDeRemise DECIMAL(10, 2)");
-        }
+        selectedColumns.add("NumeroFacture INT PRIMARY KEY");
 
+        if (tva.isSelected()) {selectedColumns.add("TauxDeTva DECIMAL(10,2)");}
+
+        if (remise.isSelected()) {selectedColumns.add("TauxDeRemise DECIMAL(10, 2)");}
+
+        if(dateFacture.isSelected()){selectedColumns.add("DateFacture Date");}
+
+        selectedColumns.add("Total_TTC DECIMAL(10, 2)");
         selectedColumns.add("CinClient VARCHAR(20)");
         selectedColumns.add("Constraint fk_Client_Facture foreign key (CinClient) references Client (CinClient)");
 
-        Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-
-        ResultSet rs = cn.lire("SHOW TABLES");
-        try {
-            while (rs.next()){
-                String tableName = rs.getString(1);
-                if(tableName.equalsIgnoreCase("produit")){
-                    selectedColumns.add("idProduit INT");
-                    selectedColumns.add("Constraint fk_Produit_Facture foreign key (idProduit) references Produit (idProduit)");
-
-                }if (tableName.equalsIgnoreCase("Service")){
-                    selectedColumns.add("idService INT");
-                    selectedColumns.add("Constraint fk_Service_Facture foreign key (idService) references Service (idService)");
-                }
-            }
-        }catch(SQLException e ){
-            e.printStackTrace();
-            System.out.println("erreur dans la verification de lexistence des tables ");
-        }finally{
-            cn.closeResources();
-        }
         // Add other columns as needed
         return selectedColumns;
     }
@@ -259,16 +277,10 @@ public class ControllerDbCreation1 {
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
         me.onMouseEntered(mouseEvent, ExitButton);
     }
-
     public void onMouseExited(javafx.scene.input.MouseEvent mouseEvent) {
         me.onMouseExited(mouseEvent, ExitButton);
     }
-
-
-    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {
-        me.onMouseEntered2(mouseEvent, NextButton);
-    }
-
+    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {me.onMouseEntered2(mouseEvent, NextButton);}
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
         me.onMouseExited2(mouseEvent, NextButton);
     }

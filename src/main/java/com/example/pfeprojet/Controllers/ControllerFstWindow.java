@@ -24,10 +24,12 @@ public class ControllerFstWindow {
 
    @FXML
    private Button SignUpButton;
-
+   @FXML
+   private Button aide;
+   ChangingWindows ch = new ChangingWindows();
    //Switching to SignUp window
    public void switchToSignUp(ActionEvent event) throws IOException {
-      ChangingWindows ch = new ChangingWindows();
+
       ch.switchWindow(event,"SignUp.fxml");
    }
 
@@ -50,12 +52,16 @@ public class ControllerFstWindow {
    public void onMouseEntered2(MouseEvent event) {
       ms.onMouseEntered2(event, SignUpButton);
    }
+   @FXML
+   public void onMouseExited2(MouseEvent event) {ms.onMouseExited2(event, SignUpButton);}
 
    @FXML
-   public void onMouseExited2(MouseEvent event) {
-      ms.onMouseExited2(event, SignUpButton);
-
+   public void onMouseEntered3(MouseEvent event) {
+      ms.onMouseEntered2(event, aide);
    }
+   @FXML
+   public void onMouseExited3(MouseEvent event) {ms.onMouseExited2(event, aide);}
+
 
    private void enlargeButton(Button button) {
       ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
@@ -71,6 +77,10 @@ public class ControllerFstWindow {
       scaleTransition.play();
    }
 
+
+   public void helpSection(ActionEvent event) throws IOException {
+      ch.switchWindow(event, "help.fxml");
+   }
 
 
 }

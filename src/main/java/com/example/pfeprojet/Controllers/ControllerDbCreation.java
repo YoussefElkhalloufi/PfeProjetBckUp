@@ -9,15 +9,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ControllerDbCreation {
 
-    //TODO : typeService should be an attribute in table Services !!! 
     //ControllerSignUp c = new ControllerSignUp();
     String dbName = ControllerSignUp.getCmp();
-    //String dbName = "testyoussef";
+    //String dbName = "bbbbbbb";
 
 
 
@@ -45,6 +45,10 @@ public class ControllerDbCreation {
 
 
 
+
+
+
+
     @FXML
     private CheckBox tableService;
     @FXML
@@ -61,9 +65,16 @@ public class ControllerDbCreation {
     private CheckBox descriptionService;
 
 
+
+
+
+
+
+
+
     public void initialize() {
 
-        //TODO : add a checkbox 'Check all'
+
         tableProduit.setOnAction(event -> {
             if (tableProduit.isSelected()) {
                 idProduit.setOpacity(1.0);
@@ -72,7 +83,8 @@ public class ControllerDbCreation {
                 libelleProduit.setOpacity(1.0);
                 libelleProduit.setDisable(false);
                 prixUnitaire.setOpacity(1.0);
-                prixUnitaire.setDisable(false);
+                prixUnitaire.setDisable(true);
+                prixUnitaire.setSelected(true);
                 categorie.setOpacity(1.0);
                 categorie.setDisable(false);
                 dateEnregistrement.setOpacity(1.0);
@@ -109,7 +121,8 @@ public class ControllerDbCreation {
                 typeService.setOpacity(1.0);
                 typeService.setDisable(false);
                 cout_heure.setOpacity(1.0);
-                cout_heure.setDisable(false);
+                cout_heure.setDisable(true);
+                cout_heure.setSelected(true);
                 personnel.setOpacity(1.0);
                 personnel.setDisable(false);
                 libelleService.setOpacity(1.0);
@@ -158,22 +171,15 @@ public class ControllerDbCreation {
             System.out.println("User clicked 'No'");
         }
     }
-    private void createTable(String dbName, String tableName, ArrayList<String> columns) {
+    public boolean createTable(String dbName, String tableName, ArrayList<String> columns) {
         // Create a Connexion object with the URL to the database
         Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
 
         // Call the createTable method with the selected columns
-        boolean success = cn.createTable(dbName, tableName, columns);
+        return cn.createTable(dbName, tableName, columns);
 
-        Alerts sa = new Alerts();
-        // Check if the table creation was successful
-        if (success) {
-//            System.out.println("Table '" + tableName + "' created successfully with columns: " + String.join(", ", columns));
-            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
-        } else {
-//            System.out.println("Failed to create table '" + tableName + "'.");
-            sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
-        }
+
+
     }
 
     public void createTablePersonnelService(){
@@ -192,22 +198,30 @@ public class ControllerDbCreation {
 
     }
 
+    public void creationSuccessful(String tableName, boolean creation) {
+        Alerts sa = new Alerts();
+        if (creation) {
+            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
+        } else {
+            sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
+        }
+    }
 
     public void tablesCreation(ActionEvent event) throws IOException {
         if (tableProduit.isSelected() && tableService.isSelected()){
-            createTable(dbName, "produit", getSelectedColumnsProduit());
-            createTable(dbName, "service", getSelectedColumnsService());
+            creationSuccessful("Produit", createTable(dbName, "produit", getSelectedColumnsProduit()));
+            creationSuccessful("Service", createTable(dbName, "service", getSelectedColumnsService()));
             if (personnel.isSelected()) createTablePersonnelService();
-
             ChangingWindows cw = new ChangingWindows();
             cw.switchWindow(event, "DbCreation1.fxml");
+
         }else if (tableProduit.isSelected()){
-            createTable(dbName, "produit", getSelectedColumnsProduit());
+            creationSuccessful("Produit", createTable(dbName, "produit", getSelectedColumnsProduit()));
 
             ChangingWindows cw = new ChangingWindows();
             cw.switchWindow(event, "DbCreation1.fxml");
         }else if (tableService.isSelected()){
-            createTable(dbName, "service", getSelectedColumnsService());
+            creationSuccessful("Service", createTable(dbName, "service", getSelectedColumnsService()));
             if (personnel.isSelected()) createTablePersonnelService();
 
             ChangingWindows cw = new ChangingWindows();
@@ -249,6 +263,7 @@ public class ControllerDbCreation {
             selectedColumns.add("description VARCHAR(255)");
         }
 
+
         return selectedColumns;
     }
 
@@ -264,13 +279,14 @@ public class ControllerDbCreation {
             selectedColumns.add("LibelleService VARCHAR(100)");
         }
         if (typeService.isSelected()) {
-            ArrayList<String> serviceColumns = new ArrayList<>();
-            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
-            serviceColumns.add("libelleTypeService VARCHAR(255)");
-            serviceColumns.add("Description VARCHAR(255)");
-            createTable(dbName,"TypeService",serviceColumns);
-            selectedColumns.add("idTypeService INT");
-            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
+//            ArrayList<String> serviceColumns = new ArrayList<>();
+//            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
+//            serviceColumns.add("libelleTypeService VARCHAR(255)");
+//            serviceColumns.add("Description VARCHAR(255)");
+//            createTable(dbName,"TypeService",serviceColumns);
+//            selectedColumns.add("idTypeService INT");
+//            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
+            selectedColumns.add("TypeService VARCHAR(255)");
         }
         if (cout_heure.isSelected()) {
             selectedColumns.add("Cout_heure DECIMAL(10, 2)");
@@ -283,14 +299,11 @@ public class ControllerDbCreation {
         return selectedColumns;
     }
 
-    private static final double ENLARGE_FACTOR = 1.1;
+
 
     mouseEvents ms = new mouseEvents();
 
-    public void onMouseEntered(javafx.scene.input.MouseEvent event) {
-        ms.onMouseEntered(event, ExitButton);
-
-    }
+    public void onMouseEntered(javafx.scene.input.MouseEvent event) { ms.onMouseEntered(event, ExitButton);}
 
     public void onMouseExited(javafx.scene.input.MouseEvent event) {
         ms.onMouseExited(event, ExitButton);

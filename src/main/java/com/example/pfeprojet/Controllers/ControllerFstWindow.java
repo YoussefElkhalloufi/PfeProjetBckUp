@@ -1,23 +1,39 @@
 package com.example.pfeprojet.Controllers;
 
 
+import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
+import com.example.pfeprojet.Connexion;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class ControllerFstWindow {
 
 
+   //TODO : communication en adresse mail
    mouseEvents ms = new mouseEvents();
 
    private static final double ENLARGE_FACTOR = 1.1;
 
+   private int i = 3;
+
+   @FXML
+   private PasswordField pwd;
+   @FXML
+   private TextField userName;
 
    @FXML
    private Button LoginButton;
@@ -26,10 +42,88 @@ public class ControllerFstWindow {
    private Button SignUpButton;
    @FXML
    private Button aide;
+
+   private String cmp ;
+
+   public String getCmp() {
+      return cmp;
+   }
+
+   public void initialize(){
+      Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+
+      c.miseAjour("update infosentreprises \n" +
+              "set STATUS = 'activé', dateHeureStatus = null\n" +
+              "where STATUS = 'désactivé' \n" +
+              "and dateHeureStatus <= DATE_SUB(NOW(), INTERVAL 24 HOUR);");
+      c.closeResources();
+   }
+
+   private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+   private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
+
+   public static boolean isValidEmail(String email) {
+      Matcher matcher = pattern.matcher(email);
+      return matcher.matches();
+   }
+
+   public void signUp(){
+      String mail = userName.getText();
+      String pass = pwd.getText();
+      Alerts a = new Alerts();
+      if(mail.isEmpty() || pass.isEmpty()){
+         a.showAlert2("Attention", "Assurez-vous de remplir l'Identifiant ET le mot de pass.");
+      }else{
+         if(isValidEmail(mail)){
+            Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+
+            ResultSet rs = c.lire("Select MotdePasse, nomEntreprise  from infosEntreprises where adresseMail = ?", mail);
+            ResultSet rs1 = c.lire("Select status, dateHeureStatus from infosEntreprises where adresseMail = ?", mail);
+
+             try {
+                if(rs1.next()){
+                   String status = rs1.getString(1);
+                   String dateHeureStatus = rs1.getString(2);
+
+                   if(status.equalsIgnoreCase("activé")){
+                      if(rs.next()){
+                         String DbPass = rs.getString(1);
+                         cmp = rs.getString(2);
+                         if(PassworManager.verifyPassword(pass, DbPass)){
+                            //TODO: change window to specificationROLE
+                            a.showAlert2("Mot de passe good","huwa hadaaaaak");
+                         }else{
+                            i--;
+                            a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essais");
+                         }
+                         if(i==0){
+                            a.showAlert2("ATTENTION","Vous avez depassé 3 essais");
+                            c.miseAjour("update infosentreprises set status = 'désactivé', dateHeureStatus = NOW()  where nomEntreprise = ?", cmp );
+                            a.showAlert2("Compte désactivé","Votre compte a été désactivé pendant 24 heures.\nSi vous estimez que cette désactivation est injustifiée, \nVeuillez nous contacter à l'adresse e-mail suivante : factureasePFE@gmail.com ");
+                         }
+                      }else{
+                         a.showAlert2("Compte introuvable","Votre compte n'existe pas dans l'application");
+                      }
+                   }else {
+                      a.showAlert2("Acces refusé","Votre compte a été desactivé pendant 24 Heures, à " +dateHeureStatus);
+                   }
+                }
+
+               c.closeResources();
+            } catch (SQLException e) {
+               e.printStackTrace();
+            }
+         }else {
+            a.showAlert("Format erroné","La forme d'identifiant entrer est erroné","/images/annuler.png");
+         }
+
+
+      }
+
+   }
    ChangingWindows ch = new ChangingWindows();
    //Switching to SignUp window
    public void switchToSignUp(ActionEvent event) throws IOException {
-
       ch.switchWindow(event,"SignUp.fxml");
    }
 

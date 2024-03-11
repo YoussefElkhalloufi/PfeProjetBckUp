@@ -14,40 +14,35 @@ import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControllerDbCreation2 {
 
-    String dbName = ControllerSignUp.getCmp();
-    //String dbName ="youssef";
+    //String dbName = ControllerSignUp.getCmp();
+    String dbName ="youssef";
     //String dbName = "Entreprises";
     @FXML
     private Button ExitButton;
     @FXML
     private Button NextButton;
-
     @FXML
     private TextField TelTextfield;
-
     @FXML
     private TextField adrTextfield;
-
     @FXML
     private TextField cinTextfield;
-
     @FXML
     private PasswordField cnfPwdTextfield;
-
     @FXML
     private TextField emailTextfield;
-
     @FXML
     private TextField nomTextfield;
-
     @FXML
     private TextField prenomTextfield;
-
     @FXML
     private PasswordField  pwdTextfield;
+
+
 
     public void initialize() {
         // Add listeners to the textProperty of the respective TextFields with a slight delay
@@ -60,9 +55,7 @@ public class ControllerDbCreation2 {
     }
     private class DelayedTextChangeListener implements ChangeListener<String> {
         private final PauseTransition pause = new PauseTransition(Duration.seconds(3)); // 3 second delay after FINISHING TYPING
-
         DelayedTextChangeListener() { pause.setOnFinished(event -> validate());}
-
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             pause.playFromStart();
         }
@@ -84,10 +77,7 @@ public class ControllerDbCreation2 {
             TelTextfield.clear();
         }
     }
-    private boolean isValidNumber(String phoneNumber) {
-        // Basic validation: 10 digits
-        return phoneNumber.matches("^\\d{10}$");
-    }
+    private boolean isValidNumber(String phoneNumber) {return phoneNumber.matches("^\\d{10}$");}
 
     private void validateEmail(String email) {
         if (email.trim().isEmpty()) {
@@ -119,24 +109,6 @@ public class ControllerDbCreation2 {
     public void AnnulerBtn() {
         ControllerDbCreation cdc = new ControllerDbCreation();
         cdc.AnnulerBtn();
-//        Alerts sa = new Alerts();
-//
-//        boolean confirmed = sa.showConfirmationAlert("Confirmation", "Êtes-vous sûr de vouloir quitter l'application et supprimer votre base de données '"+dbName+"' ?");
-//        if (confirmed) {
-//            System.out.println("User clicked 'Yes'");
-//            Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-//            Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
-//
-//            if(c.dropDatabase(dbName)&& c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
-//                sa.showAlert("Suppression de la base de donnée","La suppression de votre base de données '"+dbName+"' a été effectuée avec succès.","/images/checked.png");
-//                Platform.exit();
-//            }else{
-//                sa.showAlert("Échec","Échec de la suppression de votre base de donnée '"+dbName+"'.","/images/checkFailed.png");
-//            }
-//        } else {
-//            // User clicked "Cancel", cancel the operation
-//            System.out.println("User clicked 'No'");
-//        }
     }
 
     public void addDirecteur(ActionEvent event) throws IOException {
@@ -161,7 +133,8 @@ public class ControllerDbCreation2 {
             if(!adrTextfield.getText().isEmpty()) { adr = adrTextfield.getText();}
 
             if(nom.isEmpty() || prenom.isEmpty() || adrMail.isEmpty() || pwd.isEmpty() || cnfPwd.isEmpty()){
-                sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Veuillez remplir les champs marqués d'une étoile rouge.");
+                sa.showAlert2("Attention", "Certains champs obligatoires sont vides." +
+                        " Veuillez remplir les champs marqués d'une étoile rouge.");
             }else{
                 if(!pwd.equals(cnfPwd)){
                     sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
@@ -188,10 +161,25 @@ public class ControllerDbCreation2 {
                         ChangingWindows cw = new ChangingWindows();
                         cw.switchWindow(event, "FstWindow.fxml");
                     }
+
+                    c.createTable(dbName,"Responsables", getEmpColumns());
+                    c.createTable(dbName, "Gestionnaires", getEmpColumns());
+                    c.createTable(dbName, "Vendeurs", getEmpColumns());
+
                     c.closeResources();
                 }
             }
+    }
 
 
+    public ArrayList<String> getEmpColumns(){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("CIN VARCHAR(15) PRIMARY KEY ");
+        list.add("Nom VARCHAR(30)");
+        list.add("Prenom VARCHAR(30)");
+        list.add("AdresseMail VARCHAR(100)");
+        list.add("motdePasse Varchar(255)");
+
+        return  list ;
     }
 }

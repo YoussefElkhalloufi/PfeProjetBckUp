@@ -23,6 +23,8 @@ public class PassworManager {
 
     // to verify the password
     public static boolean verifyPassword(String inputPassword, String hashedPassword) {
+        System.out.println("inputPassword that is going to be hashed : " +inputPassword);
+        System.out.println("hashed password that is ");
         return hashPassword(inputPassword).equals(hashedPassword);
     }
 

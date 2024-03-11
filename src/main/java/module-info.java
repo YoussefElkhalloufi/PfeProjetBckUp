@@ -12,6 +12,8 @@ module com.example.pfeprojet {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires mysql.connector.j;
+    requires java.mail;
+
 
     opens com.example.pfeprojet to javafx.fxml;
     exports com.example.pfeprojet;

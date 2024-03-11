@@ -3,8 +3,8 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.ChangingWindows;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 

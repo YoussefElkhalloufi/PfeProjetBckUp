@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="422.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerRoleSpecification">
+   <children>
+      <Text layoutX="285.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue :">
+         <font>
+            <Font name="Impact" size="35.0" />
+         </font>
+      </Text>
+      <Text layoutX="324.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous êtes :">
+         <font>
+            <Font name="Bell MT" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="46.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Directeur">
+         <font>
+            <Font name="Bell MT" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="214.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Responsable">
+         <font>
+            <Font name="Bell MT" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="394.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestionnaire">
+         <font>
+            <Font name="Bell MT" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="598.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendeur">
+         <font>
+            <Font name="Bell MT" size="25.0" />
+         </font>
+      </Text>
+      <Button layoutX="14.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #3DC3BC; -fx-background-radius: 20;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="132.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/directeur.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="196.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #FF5D5D; -fx-background-radius: 20;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="132.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/resposable.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="378.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #9D51FF; -fx-background-radius: 20;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="157.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Gestionnaire.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="560.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #F1FF54; -fx-background-radius: 20;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="145.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/vendeur.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

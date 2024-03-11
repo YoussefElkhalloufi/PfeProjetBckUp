@@ -1,6 +1,6 @@
 package com.example.pfeprojet;
 
-import java.net.ServerSocket;
+
 import java.sql.* ;
 import java.util.ArrayList;
 
@@ -94,12 +94,12 @@ public class Connexion {
         try{
             ps = con.prepareStatement("SHOW TABLES");
             rs = ps.executeQuery();
-            StringBuilder tablesValue = new StringBuilder("");
+            StringBuilder tablesValues = new StringBuilder("");
             while(rs.next()){
-                if(rs.getString(1).equalsIgnoreCase("produit")) tablesValue.append("produit ") ;
-                else if(rs.getString(1).equalsIgnoreCase("service")) tablesValue.append("service");
+                if(rs.getString(1).equalsIgnoreCase("produit")) tablesValues.append("produit ") ;
+                else if(rs.getString(1).equalsIgnoreCase("service")) tablesValues.append("service");
             }
-            String values = tablesValue.toString();
+            String values = tablesValues.toString();
             if(values.contains("produit") && values.contains("service")) {
                 return 0;
             }else if(values.contains("produit")) {

@@ -143,8 +143,6 @@ public class ControllerDbCreation2 {
 
                     System.out.println("adresse mail : " + adrMail);
 
-                    //String nomEntreprise = ControllerSignUp.getCmp();
-                    //String nomEntreprise = "teeest teestt" ;
 
                     String insert = "UPDATE `infosentreprises`\n" +
                             "SET `nomDirecteur` = ?, \n" +
@@ -166,6 +164,8 @@ public class ControllerDbCreation2 {
                     c.createTable(dbName, "Gestionnaires", getEmpColumns());
                     c.createTable(dbName, "Vendeurs", getEmpColumns());
 
+                    ChangingWindows cw = new ChangingWindows();
+                    cw.switchWindow(event, "FstWindow.fxml");
                     c.closeResources();
                 }
             }

@@ -90,7 +90,6 @@ public class ControllerFstWindow {
                          String DbPass = rs.getString(1);
                          cmp = rs.getString(2);
                          if(PassworManager.verifyPassword(pass, DbPass)){
-                            //TODO: change window to specificationROLE
                             ChangingWindows cw = new ChangingWindows();
                             cw.switchWindow(event,"roleSpecification.fxml");
                          }else{
@@ -111,11 +110,10 @@ public class ControllerFstWindow {
                 }
 
                c.closeResources();
-            } catch (SQLException e) {
+            } catch (SQLException |IOException e) {
                e.printStackTrace();
-            } catch (IOException e) {
-                 e.printStackTrace();
-             }
+            }
+
          }else {
             a.showAlert("Format erroné","La forme d'identifiant entrer est erroné","/images/annuler.png");
          }

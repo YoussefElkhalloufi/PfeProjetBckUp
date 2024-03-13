@@ -43,9 +43,9 @@ public class ControllerFstWindow {
    @FXML
    private Button aide;
 
-   private String cmp ;
+   private static String cmp ;
 
-   public String getCmp() {
+   public static String getCmp() {
       return cmp;
    }
 
@@ -67,7 +67,7 @@ public class ControllerFstWindow {
       return matcher.matches();
    }
 
-   public void signUp(){
+   public void signUp(ActionEvent event){
       String mail = userName.getText();
       String pass = pwd.getText();
       Alerts a = new Alerts();
@@ -91,7 +91,8 @@ public class ControllerFstWindow {
                          cmp = rs.getString(2);
                          if(PassworManager.verifyPassword(pass, DbPass)){
                             //TODO: change window to specificationROLE
-                            a.showAlert2("Mot de passe good","huwa hadaaaaak");
+                            ChangingWindows cw = new ChangingWindows();
+                            cw.switchWindow(event,"roleSpecification.fxml");
                          }else{
                             i--;
                             a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essais");
@@ -112,7 +113,9 @@ public class ControllerFstWindow {
                c.closeResources();
             } catch (SQLException e) {
                e.printStackTrace();
-            }
+            } catch (IOException e) {
+                 e.printStackTrace();
+             }
          }else {
             a.showAlert("Format erroné","La forme d'identifiant entrer est erroné","/images/annuler.png");
          }

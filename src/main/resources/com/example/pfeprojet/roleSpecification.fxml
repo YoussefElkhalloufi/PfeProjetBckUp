@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="422.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerRoleSpecification">
+<AnchorPane fx:id="anchorPane" prefHeight="422.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerRoleSpecification">
    <children>
-      <Text layoutX="285.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue :">
+      <Text fx:id="label" layoutX="289.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue :" textAlignment="CENTER">
          <font>
             <Font name="Impact" size="35.0" />
          </font>
@@ -35,17 +35,17 @@
             <Font name="Bell MT" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="598.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendeur">
+      <Text layoutX="612.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendeur">
          <font>
             <Font name="Bell MT" size="25.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #3DC3BC; -fx-background-radius: 20;">
+      <Button fx:id="btnDirecteur" layoutX="14.0" layoutY="141.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #3DC3BC; -fx-background-radius: 20;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="132.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="picDirecteur" fitHeight="132.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/directeur.png" />
                </image>
@@ -55,12 +55,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="196.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #FF5D5D; -fx-background-radius: 20;">
+      <Button fx:id="btnResponsable" layoutX="196.0" layoutY="141.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered2" onMouseExited="#onMouseExited2" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #FF5D5D; -fx-background-radius: 20;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="132.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="picResponsable" fitHeight="132.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/resposable.png" />
                </image>
@@ -70,12 +70,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="378.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #9D51FF; -fx-background-radius: 20;">
+      <Button fx:id="btnGestionnaire" layoutX="378.0" layoutY="141.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered3" onMouseExited="#onMouseExited3" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #9D51FF; -fx-background-radius: 20;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="157.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="picGestionnaire" fitHeight="157.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/Gestionnaire.png" />
                </image>
@@ -85,12 +85,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="560.0" layoutY="141.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #F1FF54; -fx-background-radius: 20;">
+      <Button fx:id="btnVendeur" layoutX="573.0" layoutY="141.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered4" onMouseExited="#onMouseExited4" prefHeight="178.0" prefWidth="163.0" style="-fx-background-color: #F1FF54; -fx-background-radius: 20;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fitHeight="145.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="picVendeur" fitHeight="145.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/vendeur.png" />
                </image>

@@ -3,15 +3,12 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ControllerDbCreation1 {
@@ -205,6 +202,7 @@ public class ControllerDbCreation1 {
                 sa.showAlert2("Erreur","Une erreur s'est produite lors de la creation des tables, réessayer plus tard ");
             }
 
+            cn.closeResources();
 
 
 //            ChangingWindows cw = new ChangingWindows();

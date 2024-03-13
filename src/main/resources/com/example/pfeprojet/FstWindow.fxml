@@ -71,7 +71,7 @@
             <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
          </effect>
         </Text>
-        <Button fx:id="LoginButton" layoutX="198.0" layoutY="371.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: #59A8A4;" text="Se connecter" textFill="WHITE">
+        <Button fx:id="LoginButton" layoutX="198.0" layoutY="371.0" mnemonicParsing="false" onAction="#signUp" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: #59A8A4;" text="Se connecter" textFill="WHITE">
             <font>
                 <Font name="Algerian" size="16.0" />
             </font>
@@ -81,6 +81,6 @@
          <effect>
             <DropShadow />
          </effect></Button>
-        <TextField layoutX="126.0" layoutY="257.0" prefHeight="34.0" prefWidth="287.0" promptText="Identifiant " style="-fx-background-radius: 5em;" />
-        <PasswordField layoutX="126.0" layoutY="312.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
+        <TextField fx:id="userName" layoutX="126.0" layoutY="257.0" prefHeight="34.0" prefWidth="287.0" promptText="Identifiant " style="-fx-background-radius: 5em;" />
+        <PasswordField fx:id="pwd" layoutX="126.0" layoutY="312.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
 </AnchorPane>

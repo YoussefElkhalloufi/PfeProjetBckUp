@@ -130,25 +130,6 @@ public class ControllerDbCreation1 {
         cdbc.AnnulerBtn();
     }
 
-//    private void createTable(String dbName, String tableName, ArrayList<String> columns) {
-//        // Create a Connexion object with the URL to the database
-//        Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
-//
-//        // Call the createTable method with the selected columns
-//        boolean success = cn.createTable(dbName, tableName, columns);
-//
-//        Alerts sa = new Alerts();
-//        // Check if the table creation was successful
-//        if (success) {
-////            System.out.println("Table '" + tableName + "' created successfully with columns: " + String.join(", ", columns));
-//            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
-//        } else {
-////            System.out.println("Failed to create table '" + tableName + "'.");
-//            sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
-//        }
-//    }
-
-
     private ArrayList<String> getColumnsFP(){
 
         ArrayList<String> fpList = new ArrayList<>();
@@ -203,20 +184,6 @@ public class ControllerDbCreation1 {
             }
 
             cn.closeResources();
-
-
-//            ChangingWindows cw = new ChangingWindows();
-//            cw.switchWindow(event, "DbCreation1.fxml");
-//        }else if (tableClient.isSelected()){
-//            createTable(dbName, "Client", getSelectedColumnsClient());
-//
-//            ChangingWindows cw = new ChangingWindows();
-//            cw.switchWindow(event, "DbCreation1.fxml");
-//        }else if (tableFacture.isSelected()){
-//            createTable(dbName, "Facture", getSelectedColumnsFacture());
-
-//            ChangingWindows cw = new ChangingWindows();
-//            cw.switchWindow(event, "DbCreation1.fxml");
         }else{
             Alerts sa = new Alerts();
             sa.showAlert2("ATTENTION","vous devez coché les deux tables !!!");

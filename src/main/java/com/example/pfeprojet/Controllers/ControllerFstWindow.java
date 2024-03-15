@@ -94,7 +94,11 @@ public class ControllerFstWindow {
                             cw.switchWindow(event,"roleSpecification.fxml");
                          }else{
                             i--;
-                            a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essais");
+                            if(i==1 || i==0){
+                               a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essai");
+                            }else{
+                               a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essais");
+                            }
                          }
                          if(i==0){
                             a.showAlert2("ATTENTION","Vous avez depassé 3 essais");
@@ -122,12 +126,11 @@ public class ControllerFstWindow {
       }
 
    }
+
    ChangingWindows ch = new ChangingWindows();
-   //Switching to SignUp window
    public void switchToSignUp(ActionEvent event) throws IOException {
       ch.switchWindow(event,"SignUp.fxml");
    }
-
 
    @FXML
    public void onMouseEntered(MouseEvent event) {

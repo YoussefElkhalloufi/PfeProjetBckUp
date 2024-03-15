@@ -73,7 +73,7 @@ public class ControllerDbCreation2 {
             TelTextfield.clear();
         } else if (!isValidNumber(faxNumber)) {
             TelTextfield.setStyle("-fx-prompt-text-fill: red;");
-            TelTextfield.setPromptText("Numéro de fax non valid !!!");
+            TelTextfield.setPromptText("Numéro de telephone non valide !!!");
             TelTextfield.clear();
         }
     }
@@ -141,7 +141,6 @@ public class ControllerDbCreation2 {
                 }else{
                     Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
 
-                    System.out.println("adresse mail : " + adrMail);
 
 
                     String insert = "UPDATE `infosentreprises`\n" +
@@ -155,7 +154,7 @@ public class ControllerDbCreation2 {
                             "WHERE `nomEntreprise` = '" +dbName+ "';\n";
 
                     if(c.miseAjour(insert, nom, prenom,adrMail,cin, hashedPassword, numTel, adr)){
-                        sa.showAlert("Creation avec succes", "Succès ! Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
+                        sa.showAlert("Creation avec succès", "Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
                         ChangingWindows cw = new ChangingWindows();
                         cw.switchWindow(event, "FstWindow.fxml");
                     }

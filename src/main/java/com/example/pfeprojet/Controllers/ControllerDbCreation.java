@@ -200,7 +200,7 @@ public class ControllerDbCreation {
     public void creationSuccessful(String tableName, boolean creation) {
         Alerts sa = new Alerts();
         if (creation) {
-            sa.showAlert("Creation avec succes","la table '"+tableName+"' créée avec succès","/images/checked.png");
+            sa.showAlert("Creation avec succes","la table '"+tableName+"' crée avec succès","/images/checked.png");
         } else {
             sa.showAlert("Échec", "Échec de la création de la table '" +tableName+"'.", "/images/checkFailed.png");
         }

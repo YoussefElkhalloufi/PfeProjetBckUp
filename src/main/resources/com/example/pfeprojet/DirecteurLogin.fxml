@@ -56,7 +56,7 @@
       </Button>
       <TextField fx:id="userName" layoutX="358.0" layoutY="166.0" prefHeight="34.0" prefWidth="287.0" promptText="Email" style="-fx-background-radius: 5em;" />
       <PasswordField fx:id="pwd" layoutX="358.0" layoutY="221.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
-      <Text layoutX="419.0" layoutY="136.0" stroke="BLACK" strokeType="OUTSIDE" text="Directeur">
+      <Text fx:id="directeur" layoutX="358.0" layoutY="136.0" stroke="BLACK" strokeType="OUTSIDE" text="Directeur">
          <font>
             <Font name="Javanese Text" size="40.0" />
          </font>

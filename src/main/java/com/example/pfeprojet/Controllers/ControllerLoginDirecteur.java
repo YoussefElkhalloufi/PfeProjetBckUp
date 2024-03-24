@@ -1,5 +1,6 @@
 package com.example.pfeprojet.Controllers;
 
+import com.example.pfeprojet.Connexion;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,29 +10,51 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class ControllerLoginDirecteur {
     @FXML
     private Button LoginButton;
 
     @FXML
     private Text label;
-
+    @FXML
+    private Text directeur;
+    @FXML
+    private AnchorPane anchorPane;
     private static String cmp = ControllerFstWindow.getCmp();
 
     public static String getCmp(){
         return cmp;
     }
 
-    @FXML
-    private AnchorPane anchorPane;
-    public void initialize(){
+
+    public void initialize() throws SQLException {
         label.setText(cmp);
+        directeur.setText(getNomDirecteur());
+
 
         Platform.runLater(() -> {
             // Set initial X-coordinate to center the label
             double centerX = (anchorPane.getWidth() - label.getLayoutBounds().getWidth()) / 2;
             AnchorPane.setLeftAnchor(label, centerX);
         });
+    }
+
+
+    public String getNomDirecteur() throws SQLException {
+        Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+
+        ResultSet rs = c.lire("select nomDirecteur, prenomDirecteur from infosentreprises where nomEntreprise = ?", cmp);
+
+        if(rs.next()){
+            String nomDirecteur = rs.getString(1);
+            System.out.println(nomDirecteur);
+            c.closeResources();
+            return nomDirecteur;
+        }
+        return null ;
     }
 
 
@@ -46,6 +69,8 @@ public class ControllerLoginDirecteur {
         LoginButton.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");
         restoreButtonSize(LoginButton);
     }
+
+
 
     private static final double ENLARGE_FACTOR = 1.1;
     private void enlargeButton(Button button) {

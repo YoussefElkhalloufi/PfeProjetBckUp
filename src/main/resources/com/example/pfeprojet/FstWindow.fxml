@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="790.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerFstWindow">
-        <Text fill="#61c1bc" layoutX="204.0" layoutY="68.0" stroke="BLACK" strokeType="OUTSIDE" text="FacturEase">
+        <Text fill="#61c1bc" layoutX="196.0" layoutY="79.0" stroke="BLACK" strokeType="OUTSIDE" text="FacturEase">
             <font>
                 <Font name="Segoe UI Black" size="25.0" />
             </font>
@@ -83,4 +83,14 @@
          </effect></Button>
         <TextField fx:id="userName" layoutX="126.0" layoutY="257.0" prefHeight="34.0" prefWidth="287.0" promptText="Identifiant " style="-fx-background-radius: 5em;" />
         <PasswordField fx:id="pwd" layoutX="126.0" layoutY="312.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
+   <Text fill="WHITE" layoutX="36.0" layoutY="62.0" stroke="BLACK" strokeType="OUTSIDE" text="E">
+      <font>
+         <Font name="Javanese Text" size="34.0" />
+      </font>
+   </Text>
+   <Text layoutX="19.0" layoutY="68.0" stroke="BLACK" strokeType="OUTSIDE" text="F">
+      <font>
+         <Font name="Javanese Text" size="55.0" />
+      </font>
+   </Text>
 </AnchorPane>

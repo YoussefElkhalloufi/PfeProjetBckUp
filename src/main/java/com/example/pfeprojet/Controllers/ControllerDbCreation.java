@@ -175,10 +175,9 @@ public class ControllerDbCreation {
         Connexion cn = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
 
         // Call the createTable method with the selected columns
-        return cn.createTable(dbName, tableName, columns);
-
-
-
+        boolean result = cn.createTable(dbName, tableName, columns);
+        cn.closeResources();
+        return result;
     }
 
     public void createTablePersonnelService(){
@@ -230,6 +229,8 @@ public class ControllerDbCreation {
             sa.showAlert2("ATTENTION","vous devez coché au minimum une table");
         }
 
+
+
     }
 
 
@@ -261,8 +262,6 @@ public class ControllerDbCreation {
         if(description.isSelected()){
             selectedColumns.add("description VARCHAR(255)");
         }
-
-
         return selectedColumns;
     }
 
@@ -293,7 +292,6 @@ public class ControllerDbCreation {
         if(descriptionService.isSelected()){
             selectedColumns.add("Description VARCHAR(255)");
         }
-
         // Add other columns as needed
         return selectedColumns;
     }

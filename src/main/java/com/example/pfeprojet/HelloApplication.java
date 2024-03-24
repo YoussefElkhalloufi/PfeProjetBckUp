@@ -16,8 +16,7 @@ public class HelloApplication extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("FstWindow.fxml")));
         Scene scene = new Scene(root);
 
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png")));
-
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Group7.png")));
 
         stage.getIcons().add(icon);
         stage.setResizable(false);

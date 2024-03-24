@@ -43,7 +43,7 @@ public class ControllerFstWindow {
    @FXML
    private Button aide;
 
-   private static String cmp ;
+   private static String cmp = "" ;
 
    public static String getCmp() {
       return cmp;
@@ -144,8 +144,6 @@ public class ControllerFstWindow {
    public void onMouseExited(MouseEvent event) {
       LoginButton.setStyle("-fx-background-color: #59A8A4; -fx-background-radius: 5em;");
       restoreButtonSize(LoginButton);
-
-
    }
 
    @FXML

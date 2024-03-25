@@ -72,8 +72,6 @@ public class Connexion {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            closeResources();
         }
     }
 

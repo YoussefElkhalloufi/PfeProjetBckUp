@@ -174,7 +174,6 @@ public class ControllerDbCreation2 {
                         ChangingWindows cw = new ChangingWindows();
                         cw.switchWindow(event, "FstWindow.fxml");
                         c.closeResources();
-
                     }
 
 

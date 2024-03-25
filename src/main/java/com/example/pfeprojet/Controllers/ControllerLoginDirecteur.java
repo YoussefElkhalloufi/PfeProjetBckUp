@@ -1,10 +1,14 @@
 package com.example.pfeprojet.Controllers;
 
+import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.Connexion;
+import com.example.pfeprojet.Entreprise.Directeur;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -18,12 +22,20 @@ public class ControllerLoginDirecteur {
     private Button LoginButton;
 
     @FXML
+    private TextField emailTxt;
+    @FXML
+    private PasswordField pwdtxt;
+
+    @FXML
     private Text label;
     @FXML
     private Text directeur;
     @FXML
     private AnchorPane anchorPane;
     private static String cmp = ControllerFstWindow.getCmp();
+
+    public ControllerLoginDirecteur() throws SQLException {
+    }
 
     public static String getCmp(){
         return cmp;
@@ -32,7 +44,7 @@ public class ControllerLoginDirecteur {
 
     public void initialize() throws SQLException {
         label.setText(cmp);
-        directeur.setText(getNomDirecteur());
+        directeur.setText(dr.getNom());
 
 
         Platform.runLater(() -> {
@@ -42,17 +54,40 @@ public class ControllerLoginDirecteur {
         });
     }
 
+    Directeur dr = getDirecteur();
 
-    public String getNomDirecteur() throws SQLException {
+    public void login(){
+        Alerts a = new Alerts();
+        String inputEmail = emailTxt.getText();
+        String inputPwd = pwdtxt.getText();
+
+        String directeurEmail = dr.getMail();
+        String directeurPwd = dr.getMotDePasse();
+
+        if(ControllerFstWindow.isValidEmail(inputEmail)){
+            if(inputEmail.equalsIgnoreCase(directeurEmail)){
+                if(PassworManager.verifyPassword(inputPwd, directeurPwd)){
+                    //TODO : switch window
+                }else{
+                    a.showAlert("Mot de passe erroné","Le mot de passe que vous avez saisi est incorrect. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
+                }
+            }else{
+                a.showAlert("Email erroné","L'e-mail que vous avez saisi est incorrect. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
+            }
+        }else{
+            a.showAlert("Format erroné","La forme d'Email entrer est erroné","/images/annuler.png");
+        }
+    }
+
+    public Directeur getDirecteur() throws SQLException {
         Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
 
-        ResultSet rs = c.lire("select nomDirecteur, prenomDirecteur from infosentreprises where nomEntreprise = ?", cmp);
+        ResultSet rs = c.lire("select nomDirecteur, prenomDirecteur, adresseMailDirecteur, motdePasseDirecteur from infosentreprises where nomEntreprise = ?", cmp);
 
         if(rs.next()){
-            String nomDirecteur = rs.getString(1);
-            System.out.println(nomDirecteur);
+            Directeur dr1 = new Directeur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
             c.closeResources();
-            return nomDirecteur;
+            return dr1;
         }
         return null ;
     }
@@ -86,4 +121,7 @@ public class ControllerLoginDirecteur {
         scaleTransition.setToY(1.0);
         scaleTransition.play();
     }
+
+
+
 }

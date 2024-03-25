@@ -262,6 +262,8 @@ public class ControllerDbCreation {
         if(description.isSelected()){
             selectedColumns.add("description VARCHAR(255)");
         }
+
+        selectedColumns.add("stock INT");
         return selectedColumns;
     }
 

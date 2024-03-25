@@ -43,7 +43,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="LoginButton" layoutX="430.0" layoutY="280.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Se connecter">
+      <Button fx:id="LoginButton" layoutX="430.0" layoutY="280.0" mnemonicParsing="false" onAction="#login" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Se connecter">
          <font>
             <Font name="Algerian" size="16.0" />
          </font>
@@ -54,8 +54,8 @@
             <DropShadow />
          </effect>
       </Button>
-      <TextField fx:id="userName" layoutX="358.0" layoutY="166.0" prefHeight="34.0" prefWidth="287.0" promptText="Email" style="-fx-background-radius: 5em;" />
-      <PasswordField fx:id="pwd" layoutX="358.0" layoutY="221.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
+      <TextField fx:id="emailTxt" layoutX="358.0" layoutY="166.0" prefHeight="34.0" prefWidth="287.0" promptText="Email" style="-fx-background-radius: 5em;" />
+      <PasswordField fx:id="pwdtxt" layoutX="358.0" layoutY="221.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
       <Text fx:id="directeur" layoutX="358.0" layoutY="136.0" stroke="BLACK" strokeType="OUTSIDE" text="Directeur">
          <font>
             <Font name="Javanese Text" size="40.0" />

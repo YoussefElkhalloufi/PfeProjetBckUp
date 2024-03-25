@@ -72,8 +72,6 @@ public class Connexion {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            closeResources();
         }
     }
 
@@ -123,6 +121,7 @@ public class Connexion {
             }
             System.out.println(ps);
             return ps.executeUpdate() > 0;
+            //return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -137,14 +136,11 @@ public class Connexion {
             if (ps != null) {
                 ps.close();
             }
+            if(con != null){
+                con.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public ArrayList<CompanyInfos> toArray(CompanyInfos c){
-        ArrayList<CompanyInfos> companies = new ArrayList<>();
-        companies.add(c);
-        return companies;
     }
 }

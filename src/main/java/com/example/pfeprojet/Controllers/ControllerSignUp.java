@@ -112,7 +112,7 @@ public class ControllerSignUp {
                     String insertQuery = "INSERT INTO `infosEntreprises`(`nomEntreprise`, `AdresseMail`, `MotdePasse`, `Localisation`, `NumeroDeFax`, `SecteurDactivite`, `IdentificationFiscale`)" +
                             " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-                    if (c.miseAjour(insertQuery, companyName, mail, hashpwd, location, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
+                    if (c.miseAjour(insertQuery, cmp, mail, hashpwd, location, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
                         sa.showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" + cmp + "'", "/images/checked.png");
                         ChangingWindows ch = new ChangingWindows();
                         ch.switchWindow(event, "DbCreation.fxml");

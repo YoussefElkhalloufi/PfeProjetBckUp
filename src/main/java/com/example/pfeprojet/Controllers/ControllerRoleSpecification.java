@@ -1,7 +1,9 @@
 package com.example.pfeprojet.Controllers;
 
+import com.example.pfeprojet.ChangingWindows;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +15,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class ControllerRoleSpecification {
 
@@ -45,9 +49,14 @@ public class ControllerRoleSpecification {
 
     private static final double ENLARGE_FACTOR = 1.05;
 
+    private static String cmp = ControllerFstWindow.getCmp();
+
+    public static String getCmp(){
+        return cmp;
+    }
 
     public void initialize(){
-        label.setText("Bienvenue : "+ControllerFstWindow.getCmp());
+        label.setText("Bienvenue : "+cmp);
 
         Platform.runLater(() -> {
             // Set initial X-coordinate to center the label
@@ -56,6 +65,14 @@ public class ControllerRoleSpecification {
         });
     }
 
+    public void directeurLogin(ActionEvent event) throws IOException {
+        if(!cmp.equalsIgnoreCase("")){
+            ChangingWindows cw = new ChangingWindows();
+            cw.switchWindow(event, "DirecteurLogin.fxml");
+        }else{
+            System.out.println("cmp is null");
+        }
+    }
 
 
     public void onMouseEntered(){

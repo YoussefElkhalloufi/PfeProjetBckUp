@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class ControllerDbCreation2 {
 
-    //String dbName = ControllerSignUp.getCmp();
-    String dbName ="youssef";
+    String dbName = ControllerSignUp.getCmp();
+    //String dbName ="youssef";
     //String dbName = "Entreprises";
     @FXML
     private Button ExitButton;
@@ -41,8 +41,6 @@ public class ControllerDbCreation2 {
     private TextField prenomTextfield;
     @FXML
     private PasswordField  pwdTextfield;
-
-
 
     public void initialize() {
         // Add listeners to the textProperty of the respective TextFields with a slight delay
@@ -77,8 +75,8 @@ public class ControllerDbCreation2 {
             TelTextfield.clear();
         }
     }
-    private boolean isValidNumber(String phoneNumber) {return phoneNumber.matches("^\\d{10}$");}
 
+    private boolean isValidNumber(String phoneNumber) {return phoneNumber.matches("^\\d{10}$");}
     private void validateEmail(String email) {
         if (email.trim().isEmpty()) {
             emailTextfield.clear();
@@ -99,17 +97,13 @@ public class ControllerDbCreation2 {
         ms.onMouseExited(mouseEvent, ExitButton);
     }
 
-
     public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {ms.onMouseEntered2(mouseEvent, NextButton);}
 
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
         ms.onMouseExited2(mouseEvent, NextButton);
     }
 
-    public void AnnulerBtn() {
-        ControllerDbCreation cdc = new ControllerDbCreation();
-        cdc.AnnulerBtn();
-    }
+    public void AnnulerBtn() {ControllerDbCreation cdc = new ControllerDbCreation(); cdc.AnnulerBtn();}
 
     public void addDirecteur(ActionEvent event) throws IOException {
         Alerts sa = new Alerts();
@@ -155,17 +149,34 @@ public class ControllerDbCreation2 {
 
                     if(c.miseAjour(insert, nom, prenom,adrMail,cin, hashedPassword, numTel, adr)){
                         sa.showAlert("Creation avec succès", "Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
+                        c.createTable(dbName,"Responsables", getEmpColumns());
+                        c.createTable(dbName, "Gestionnaires", getEmpColumns());
+                        c.createTable(dbName, "Vendeurs", getEmpColumns());
+
+
+                        if(EmailSender.check()){
+                            String body = "Cher/Chère "+nom+" "+prenom+",\n\n" +
+                                    "Félicitations pour la création de votre compte! Vous êtes désormais" +
+                                    " prêt(e) à commencer à utiliser FacturEase pour simplifier et optimiser" +
+                                    " la gestion de votre entreprise.\n\n" +
+                                    "Pour commencer à explorer toutes les fonctionnalités que notre application" +
+                                    " offre, veuillez utiliser les informations d'identification que vous " +
+                                    "avez fournies lors de l'inscription.\n\n" +
+                                    "Si vous avez des questions ou avez besoin d'aide pour démarrer, n'hésitez pas " +
+                                    "à contacter notre équipe d'assistance à [FacturEasePFE@gmail.com].\n\n" +
+                                    "Nous vous remercions de faire confiance à FacturEase pour vos besoins de" +
+                                    " facturation. Nous sommes impatients de vous accompagner dans votre réussite.\n\n" +
+                                    "Cordialement,\n\n" +
+                                    "[L'équipe FacturEase]" ;
+                            EmailSender.sendEmail(adrMail,"Bienvenue sur FacturEase!",body);
+                            System.out.println("Email sent");
+                        }
                         ChangingWindows cw = new ChangingWindows();
                         cw.switchWindow(event, "FstWindow.fxml");
+                        c.closeResources();
                     }
 
-                    c.createTable(dbName,"Responsables", getEmpColumns());
-                    c.createTable(dbName, "Gestionnaires", getEmpColumns());
-                    c.createTable(dbName, "Vendeurs", getEmpColumns());
 
-                    ChangingWindows cw = new ChangingWindows();
-                    cw.switchWindow(event, "FstWindow.fxml");
-                    c.closeResources();
                 }
             }
     }

@@ -43,7 +43,7 @@ public class ControllerFstWindow {
    @FXML
    private Button aide;
 
-   private static String cmp ;
+   private static String cmp = "" ;
 
    public static String getCmp() {
       return cmp;
@@ -71,6 +71,7 @@ public class ControllerFstWindow {
       String mail = userName.getText();
       String pass = pwd.getText();
       Alerts a = new Alerts();
+
       if(mail.isEmpty() || pass.isEmpty()){
          a.showAlert2("Attention", "Assurez-vous de remplir l'Identifiant ET le mot de pass.");
       }else{
@@ -79,6 +80,7 @@ public class ControllerFstWindow {
 
             ResultSet rs = c.lire("Select MotdePasse, nomEntreprise  from infosEntreprises where adresseMail = ?", mail);
             ResultSet rs1 = c.lire("Select status, dateHeureStatus from infosEntreprises where adresseMail = ?", mail);
+
 
              try {
                 if(rs1.next()){
@@ -105,12 +107,12 @@ public class ControllerFstWindow {
                             c.miseAjour("update infosentreprises set status = 'désactivé', dateHeureStatus = NOW()  where nomEntreprise = ?", cmp );
                             a.showAlert2("Compte désactivé","Votre compte a été désactivé pendant 24 heures.\nSi vous estimez que cette désactivation est injustifiée, \nVeuillez nous contacter à l'adresse e-mail suivante : factureasePFE@gmail.com ");
                          }
-                      }else{
-                         a.showAlert2("Compte introuvable","Votre compte n'existe pas dans l'application");
                       }
                    }else {
                       a.showAlert2("Acces refusé","Votre compte a été desactivé pendant 24 Heures, à " +dateHeureStatus);
                    }
+                }else{
+                   a.showAlert2("Compte introuvable","Votre compte n'existe pas dans l'application");
                 }
 
                c.closeResources();
@@ -142,8 +144,6 @@ public class ControllerFstWindow {
    public void onMouseExited(MouseEvent event) {
       LoginButton.setStyle("-fx-background-color: #59A8A4; -fx-background-radius: 5em;");
       restoreButtonSize(LoginButton);
-
-
    }
 
    @FXML
@@ -179,6 +179,4 @@ public class ControllerFstWindow {
    public void helpSection(ActionEvent event) throws IOException {
       ch.switchWindow(event, "help.fxml");
    }
-
-
 }

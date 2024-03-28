@@ -1,10 +1,12 @@
 package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.Alerts;
+import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
 import com.example.pfeprojet.Entreprise.Directeur;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -14,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -54,9 +57,13 @@ public class ControllerLoginDirecteur {
         });
     }
 
-    Directeur dr = getDirecteur();
+    private static final Directeur dr = getDirecteur();
 
-    public void login(){
+    public static Directeur getDir(){
+        return dr ;
+    }
+
+    public void login(ActionEvent event) throws IOException {
         Alerts a = new Alerts();
         String inputEmail = emailTxt.getText();
         String inputPwd = pwdtxt.getText();
@@ -67,7 +74,8 @@ public class ControllerLoginDirecteur {
         if(ControllerFstWindow.isValidEmail(inputEmail)){
             if(inputEmail.equalsIgnoreCase(directeurEmail)){
                 if(PassworManager.verifyPassword(inputPwd, directeurPwd)){
-                    //TODO : switch window
+                    ChangingWindows cw = new ChangingWindows();
+                    cw.switchWindow(event,"DirecteurDashboard.fxml");
                 }else{
                     a.showAlert("Mot de passe erroné","Le mot de passe que vous avez saisi est incorrect. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
                 }
@@ -79,15 +87,19 @@ public class ControllerLoginDirecteur {
         }
     }
 
-    public Directeur getDirecteur() throws SQLException {
-        Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
+    public static Directeur getDirecteur() {
+        try{
+            Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
 
-        ResultSet rs = c.lire("select nomDirecteur, prenomDirecteur, adresseMailDirecteur, motdePasseDirecteur from infosentreprises where nomEntreprise = ?", cmp);
+            ResultSet rs = c.lire("select nomDirecteur, prenomDirecteur, adresseMailDirecteur, motdePasseDirecteur from infosentreprises where nomEntreprise = ?", cmp);
 
-        if(rs.next()){
-            Directeur dr1 = new Directeur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
-            c.closeResources();
-            return dr1;
+            if(rs.next()){
+                Directeur dr1 = new Directeur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                c.closeResources();
+                return dr1;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
         }
         return null ;
     }
@@ -95,7 +107,7 @@ public class ControllerLoginDirecteur {
 
     @FXML
     public void onMouseEntered(MouseEvent event) {
-        LoginButton.setStyle("-fx-background-color: #59A8A4; -fx-text-fill: white; -fx-background-radius: 5em;");
+        LoginButton.setStyle("-fx-background-color: #DFDFDF; -fx-text-fill: white; -fx-background-radius: 5em;");
         enlargeButton(LoginButton);
     }
 

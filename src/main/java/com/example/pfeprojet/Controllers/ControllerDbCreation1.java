@@ -106,7 +106,8 @@ public class ControllerDbCreation1 {
                 remise.setOpacity(1.0);
                 remise.setDisable(false);
                 dateFacture.setOpacity(1.0);
-                dateFacture.setDisable(false);
+                dateFacture.setDisable(true);
+                dateFacture.setSelected(true);
             } else {
                 NumFacture.setOpacity(0.5);
                 NumFacture.setSelected(false);
@@ -227,8 +228,7 @@ public class ControllerDbCreation1 {
 
         if (remise.isSelected()) {selectedColumns.add("TauxDeRemise DECIMAL(10, 2)");}
 
-        if(dateFacture.isSelected()){selectedColumns.add("DateFacture Date");}
-
+        selectedColumns.add("DateFacture Date");
         selectedColumns.add("Total_TTC DECIMAL(10, 2)");
         selectedColumns.add("CinClient VARCHAR(20)");
         selectedColumns.add("Constraint fk_Client_Facture foreign key (CinClient) references Client (CinClient)");

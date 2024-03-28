@@ -16,9 +16,4 @@ public class Directeur {
     public String getMotDePasse() {return motDePasse;}
     public String getMail() {return mail;}
 
-
-    public void setNom(String nom) {this.nom = nom;}
-    public void setPrenom(String prenom) {this.prenom = prenom;}
-    public void setMotDePasse(String motDePasse) {this.motDePasse = motDePasse;}
-    public void setMail(String mail) {this.mail = mail;}
 }

@@ -45,7 +45,7 @@
       </AnchorPane>
       <Button fx:id="LoginButton" layoutX="430.0" layoutY="280.0" mnemonicParsing="false" onAction="#login" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Se connecter">
          <font>
-            <Font name="Algerian" size="16.0" />
+            <Font name="Bernard MT Condensed" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

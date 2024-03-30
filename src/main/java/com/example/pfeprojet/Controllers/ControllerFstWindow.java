@@ -66,7 +66,6 @@ public class ControllerFstWindow {
       Matcher matcher = pattern.matcher(email);
       return matcher.matches();
    }
-
    public void signUp(ActionEvent event){
       String mail = userName.getText();
       String pass = pwd.getText();

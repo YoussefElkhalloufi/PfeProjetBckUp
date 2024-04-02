@@ -22,7 +22,7 @@ import java.sql.SQLException;
 
 public class ControllerDashboardDirecteur {
 
-    //TODO : creation des triggers en SQL qui se charge de la modification du stock (fact, produit, etc )
+    //TODO : modification de la fonction Creer en mysql ( pour qu'il s'adapte aux TVA et REMISE s'il existe )
 
     //TODO : try CODE WITH ME
     private static final double ENLARGE_FACTOR = 1.05;

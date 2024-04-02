@@ -279,13 +279,6 @@ public class ControllerDbCreation {
             selectedColumns.add("LibelleService VARCHAR(100)");
         }
         if (typeService.isSelected()) {
-//            ArrayList<String> serviceColumns = new ArrayList<>();
-//            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
-//            serviceColumns.add("libelleTypeService VARCHAR(255)");
-//            serviceColumns.add("Description VARCHAR(255)");
-//            createTable(dbName,"TypeService",serviceColumns);
-//            selectedColumns.add("idTypeService INT");
-//            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
             selectedColumns.add("TypeService VARCHAR(255)");
         }
         if (cout_heure.isSelected()) {

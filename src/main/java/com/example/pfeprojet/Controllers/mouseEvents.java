@@ -6,7 +6,7 @@ import javafx.util.Duration;
 
 public class mouseEvents {
 
-    private static final double ENLARGE_FACTOR = 1.1;
+    private static final double ENLARGE_FACTOR = 1.05;
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent, Button btn) {
         btn.setStyle("-fx-background-color: #FF4545; -fx-text-fill: white; -fx-background-radius: 5em;");
@@ -29,14 +29,14 @@ public class mouseEvents {
         restoreButtonSize(btn);
     }
 
-    private void enlargeButton(Button button) {
+    public void enlargeButton(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
         scaleTransition.setToX(ENLARGE_FACTOR);
         scaleTransition.setToY(ENLARGE_FACTOR);
         scaleTransition.play();
     }
 
-    private void restoreButtonSize(Button button) {
+    public void restoreButtonSize(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
         scaleTransition.setToX(1.0);
         scaleTransition.setToY(1.0);

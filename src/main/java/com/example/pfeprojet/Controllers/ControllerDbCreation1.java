@@ -41,6 +41,8 @@ public class ControllerDbCreation1 {
     private CheckBox adrClient;
     @FXML
     private CheckBox dateNaissClient;
+    @FXML
+    private CheckBox email;
 
 
 
@@ -74,6 +76,8 @@ public class ControllerDbCreation1 {
                 adrClient.setDisable(false);
                 dateNaissClient.setOpacity(1.0);
                 dateNaissClient.setDisable(false);
+                email.setOpacity(1.0);
+                email.setDisable(false);
             } else {
                 cinClient.setOpacity(0.5);
                 cinClient.setSelected(false);
@@ -93,6 +97,9 @@ public class ControllerDbCreation1 {
                 dateNaissClient.setOpacity(0.5);
                 dateNaissClient.setSelected(false);
                 dateNaissClient.setDisable(true);
+                email.setOpacity(0.5);
+                email.setSelected(false);
+                email.setDisable(true);
             }
         });
 
@@ -205,13 +212,16 @@ public class ControllerDbCreation1 {
             selectedColumns.add("PrenomClient VARCHAR(100)");
         }
         if (telClient.isSelected()) {
-            selectedColumns.add("TelephoneClient Varchar(12)");
+            selectedColumns.add("TelephoneClient VARCHAR(12)");
         }
         if(adrClient.isSelected()){
             selectedColumns.add("AdresseClient VARCHAR(255)");
         }
         if(dateNaissClient.isSelected()){
             selectedColumns.add("DateNaissanceClient Date");
+        }
+        if(email.isSelected()){
+            selectedColumns.add("EmailClient VARCHAR(255)");
         }
 
         return selectedColumns;
@@ -233,10 +243,8 @@ public class ControllerDbCreation1 {
         selectedColumns.add("CinClient VARCHAR(20)");
         selectedColumns.add("Constraint fk_Client_Facture foreign key (CinClient) references Client (CinClient)");
 
-        // Add other columns as needed
         return selectedColumns;
     }
-
 
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {

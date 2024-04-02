@@ -279,13 +279,6 @@ public class ControllerDbCreation {
             selectedColumns.add("LibelleService VARCHAR(100)");
         }
         if (typeService.isSelected()) {
-//            ArrayList<String> serviceColumns = new ArrayList<>();
-//            serviceColumns.add("idTypeService INT AUTO_INCREMENT PRIMARY KEY");
-//            serviceColumns.add("libelleTypeService VARCHAR(255)");
-//            serviceColumns.add("Description VARCHAR(255)");
-//            createTable(dbName,"TypeService",serviceColumns);
-//            selectedColumns.add("idTypeService INT");
-//            selectedColumns.add("Constraint fk_TypeService_Service foreign key (idTypeService) references TypeService (idTypeService)");
             selectedColumns.add("TypeService VARCHAR(255)");
         }
         if (cout_heure.isSelected()) {
@@ -303,7 +296,6 @@ public class ControllerDbCreation {
     mouseEvents ms = new mouseEvents();
 
     public void onMouseEntered(javafx.scene.input.MouseEvent event) { ms.onMouseEntered(event, ExitButton);}
-
     public void onMouseExited(javafx.scene.input.MouseEvent event) {
         ms.onMouseExited(event, ExitButton);
     }
@@ -312,13 +304,9 @@ public class ControllerDbCreation {
     public void onMouseEntered2(javafx.scene.input.MouseEvent event) {
         ms.onMouseEntered2(event, NextButton);
     }
-
     public void onMouseExited2(javafx.scene.input.MouseEvent event) {
         ms.onMouseExited2(event, NextButton);
     }
 
-    /*public void switchToLogin(ActionEvent event) throws IOException {
-        ChangingWindows ch = new ChangingWindows();
-        ch.switchWindow(event, "FstWindow.fxml");
-    }*/
+
 }

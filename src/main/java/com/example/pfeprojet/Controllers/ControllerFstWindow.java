@@ -53,7 +53,7 @@ public class ControllerFstWindow {
       Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
 
       c.miseAjour("update infosentreprises \n" +
-              "set STATUS = 'activé', dateHeureStatus = null\n" +
+              "set STATUS = 'Activé', dateHeureStatus = null\n" +
               "where STATUS = 'désactivé' \n" +
               "and dateHeureStatus <= DATE_SUB(NOW(), INTERVAL 24 HOUR);");
       c.closeResources();

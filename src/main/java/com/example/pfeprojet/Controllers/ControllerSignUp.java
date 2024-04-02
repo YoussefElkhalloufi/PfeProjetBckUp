@@ -54,7 +54,7 @@ public class ControllerSignUp {
     @FXML
     private TextField taxIdTextField;
 
-    mouseEvents me = new mouseEvents();
+    private mouseEvents me = new mouseEvents();
 
 
 

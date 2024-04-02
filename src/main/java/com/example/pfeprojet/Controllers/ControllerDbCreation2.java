@@ -188,7 +188,7 @@ public class ControllerDbCreation2 {
         list.add("Nom VARCHAR(30)");
         list.add("Prenom VARCHAR(30)");
         list.add("AdresseMail VARCHAR(100)");
-        list.add("motdePasse Varchar(255)");
+        list.add("motdePasse VARCHAR(255)");
 
         return  list ;
     }

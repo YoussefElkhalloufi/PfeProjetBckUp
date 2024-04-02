@@ -23,7 +23,7 @@ public class ChangingWindows {
         Scene newScene = new Scene(root);
 
         // Load the icon for scene1
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png")));
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Group7.png")));
         newStage.getIcons().add(icon);
 
         // Set the title for scene1

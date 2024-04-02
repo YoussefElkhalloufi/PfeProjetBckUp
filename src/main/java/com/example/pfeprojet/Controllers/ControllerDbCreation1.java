@@ -237,7 +237,7 @@ public class ControllerDbCreation1 {
         return selectedColumns;
     }
 
-
+//todo : email client
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
         me.onMouseEntered(mouseEvent, ExitButton);

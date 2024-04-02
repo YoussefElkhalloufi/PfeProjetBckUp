@@ -29,147 +29,8 @@
             <Font name="Javanese Text" size="45.0" />
          </font>
       </Text>
-      <Button fx:id="chiffreAffaireBtn" alignment="BOTTOM_CENTER" layoutX="29.0" layoutY="86.0" mnemonicParsing="false" prefHeight="329.0" prefWidth="315.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="193.0" fitWidth="289.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/DiagPhoto.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="61.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/Directeur/ChiffreAffaire.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="clientBtn" alignment="TOP_LEFT" layoutX="359.0" layoutY="86.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/equipe.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <Line endX="846.0" layoutX="108.0" layoutY="439.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
-      <Button fx:id="personnelBtn" alignment="TOP_LEFT" layoutX="662.0" layoutY="86.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/personnel.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="profilEntrepriseBtn" alignment="TOP_LEFT" layoutX="359.0" layoutY="209.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="270.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/entreprise.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="factureBtn" alignment="TOP_LEFT" layoutX="662.0" layoutY="209.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="270.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/facture.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="inventaireBtn" alignment="TOP_LEFT" layoutX="359.0" layoutY="322.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="270.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/inventaire.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="messagerieBtn" alignment="TOP_LEFT" layoutX="662.0" layoutY="322.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="270.0" style="-fx-background-color: EDEDED; -fx-background-radius: 25;">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/messagerie.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Text layoutX="61.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le chiffre d'affaires">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="chiffreAffaire" layoutX="61.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000,000 DH">
-         <font>
-            <Font name="Javanese Text" size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="372.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre total de clients">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="nbrClt" layoutX="372.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="21">
-         <font>
-            <Font name="Javanese Text" size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="675.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personnel de l’entreprise">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="nbPersonnel" layoutX="675.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="28">
-         <font>
-            <Font name="Javanese Text" size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="368.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil de l'entreprise">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="671.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Facturation">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="368.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventaire">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="671.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Messagerie">
-         <font>
-            <Font name="Javanese Text" size="18.0" />
-         </font>
-      </Text>
-      <Button alignment="CENTER_RIGHT" layoutX="32.0" layoutY="447.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="139.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Aide &amp; support">
+      <Button fx:id="aideBtn" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="447.0" mnemonicParsing="false" onAction="#helpAndSupport" onMouseEntered="#onMouseEnteredaide" onMouseExited="#onMouseExitedaide" prefHeight="35.0" prefWidth="149.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Aide &amp; support">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
@@ -179,13 +40,15 @@
          <effect>
             <DropShadow />
          </effect>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/Aide.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="42.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/Directeur/Aide.png" />
-         </image>
-      </ImageView>
-      <Button alignment="CENTER_RIGHT" layoutX="812.0" layoutY="447.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Déconnexion">
+      <Button fx:id="deconnexionBtn" alignment="CENTER_RIGHT" layoutX="812.0" layoutY="447.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Déconnexion">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
@@ -201,5 +64,144 @@
             <Image url="@../../../images/Directeur/Aide.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="messagerieAnchor" layoutX="662.0" layoutY="310.0" onMouseEntered="#onMouseEnteredMessagerie" onMouseExited="#onMouseExitedMessagerie" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="16.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/messagerie.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="16.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Messagerie">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="chiffreAffaireAnchorpane" layoutX="23.0" layoutY="82.0" onMouseEntered="#onMouseEnteredChiffreAffaire" onMouseExited="#onMouseExitedChiffreAffaire" prefHeight="329.0" prefWidth="315.0" style="-fx-background-radius: 25; -fx-background-color: ededed;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="20.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/ChiffreAffaire.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="20.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le chiffre d'affaires">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="chiffreAffaire" layoutX="20.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="25,000,000 DH">
+               <font>
+                  <Font name="Javanese Text" size="16.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="193.0" fitWidth="289.0" layoutX="8.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/DiagPhoto.png" />
+               </image>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="client" layoutX="358.0" layoutY="82.0" onMouseEntered="#onMouseEnteredClient" onMouseExited="#onMouseExitedClient" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/equipe.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre total de clients">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="nbrClt" layoutX="18.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="21">
+               <font>
+                  <Font name="Javanese Text" size="16.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="personnel" layoutX="358.0" layoutY="196.0" onMouseEntered="#onMouseEnteredPersonnel" onMouseExited="#onMouseExitedPersonnel" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/personnel.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personnel de l'entreprise">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="nbPersonnel" layoutX="18.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="28">
+               <font>
+                  <Font name="Javanese Text" size="16.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="entreprise" layoutX="662.0" layoutY="82.0" onMouseEntered="#onMouseEnteredEntreprise" onMouseExited="#onMouseExitedEntreprise" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/entreprise.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="18.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil de l'entreprise">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="facturation" layoutX="662.0" layoutY="196.0" onMouseEntered="#onMouseEnteredFacturation" onMouseExited="#onMouseExitedFacturation" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/facture.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="18.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Facturation">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="inventaire" layoutX="358.0" layoutY="310.0" onMouseEntered="#onMouseEnteredInventaire" onMouseExited="#onMouseExitedInventaire" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/inventaire.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="18.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventaire">
+               <font>
+                  <Font name="Javanese Text" size="18.0" />
+               </font>
+            </Text>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
    </children>
 </AnchorPane>

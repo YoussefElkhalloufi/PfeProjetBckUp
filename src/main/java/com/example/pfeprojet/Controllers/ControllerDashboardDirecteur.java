@@ -3,28 +3,31 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
 import com.example.pfeprojet.Entreprise.Directeur;
+import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.Objects;
 
 
 public class ControllerDashboardDirecteur {
 
-    //TODO : modification de la fonction Creer en mysql ( pour qu'il s'adapte aux TVA et REMISE s'il existe )
-
-    //TODO : try CODE WITH ME
+    private ChangingWindows cw = new ChangingWindows();
     private static final double ENLARGE_FACTOR = 1.05;
 
     @FXML
@@ -67,7 +70,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(messagerieAnchor);
     }
     public void onMouseEnteredMessagerie(){
-        messagerieAnchor.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        messagerieAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(messagerieAnchor);
     }
     public void onMouseExitedChiffreAffaire(){
@@ -75,7 +78,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(chiffreAffaireAnchorpane);
     }
     public void onMouseEnteredChiffreAffaire(){
-        chiffreAffaireAnchorpane.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        chiffreAffaireAnchorpane.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(chiffreAffaireAnchorpane);
     }
     public void onMouseExitedClient(){
@@ -83,7 +86,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(client);
     }
     public void onMouseEnteredClient(){
-        client.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        client.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(client);
     }
     public void onMouseExitedPersonnel(){
@@ -91,7 +94,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(personnel);
     }
     public void onMouseEnteredPersonnel(){
-        personnel.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        personnel.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(personnel);
     }
     public void onMouseExitedInventaire(){
@@ -99,7 +102,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(inventaire);
     }
     public void onMouseEnteredInventaire(){
-        inventaire.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        inventaire.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(inventaire);
     }
     public void onMouseExitedFacturation(){
@@ -107,7 +110,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(facturation);
     }
     public void onMouseEnteredFacturation(){
-        facturation.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        facturation.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(facturation);
     }
     public void onMouseExitedEntreprise(){
@@ -115,7 +118,7 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(entreprise);
     }
     public void onMouseEnteredEntreprise(){
-        entreprise.setStyle("-fx-background-color : #b7b7b7; -fx-background-radius: 25;");
+        entreprise.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(entreprise);
     }
 
@@ -133,33 +136,24 @@ public class ControllerDashboardDirecteur {
         scaleTransition.play();
     }
 
-
-
-    private final Connexion cn = new Connexion("jdbc:mysql://localhost:3306/"+ControllerLoginDirecteur.getCmp()+"?user=root");
+    private static final Entreprise e = new Entreprise(ControllerLoginDirecteur.getCmp());
+    public static Entreprise getEntreprise(){
+        return e;
+    }
     private Directeur dr = ControllerLoginDirecteur.getDirecteur();
     public void initialize(){
-        label.setText("Directeur '" +dr.getNom() +"' de l'entreprise  '" +ControllerLoginDirecteur.getCmp()+"'");
+        label.setText("Directeur '" +dr.getNom() +"' de l'entreprise  '" +e.getNomEntreprise()+"'");
 
-        BigDecimal chiffreAff = chiffreAffaire();
-        if(chiffreAff != null){
-            chiffreAffaire.setText(chiffreAff +" DH");
+
+        if(e.getChiffreAffaireTotal() != null){
+            chiffreAffaire.setText(e.getChiffreAffaireTotal() +" DH");
         }else{
             chiffreAffaire.setText("0");
         }
 
-        int nbrClients = nbrClient();
-        if(nbrClients != 0){
-            nbrClt.setText(String.valueOf(nbrClients));
-        }else{
-            nbrClt.setText("0");
-        }
+        nbrClt.setText(String.valueOf(e.getNbrClients()));
 
-        int nbrPerso = nbrPersonnel();
-        if(nbrPerso != 0){
-            nbPersonnel.setText(String.valueOf(nbrPerso));
-        }else{
-            nbPersonnel.setText("0");
-        }
+        nbPersonnel.setText(String.valueOf(e.getNbPersonnel()));
 
         Platform.runLater(() -> {
             double centerX = (anchorPane.getWidth() - label.getLayoutBounds().getWidth()) / 2;
@@ -167,51 +161,31 @@ public class ControllerDashboardDirecteur {
         });
     }
 
-    public BigDecimal chiffreAffaire(){
-        try{
-            ResultSet rs = cn.lire("select sum(Total_TTC) from facture");
-            if(rs.next()){
-                return rs.getBigDecimal(1);
-            }
-            return null;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public  int nbrClient(){
-        try{
-            ResultSet rs = cn.lire("Select count(*) from client");
-            if(rs.next()){
-                return rs.getInt(1);
-            }
-            return 0 ;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return 0;
-        }
-    }
-    public int nbrPersonnel(){
-        try{
-            int nbPersonnel ;
-            ResultSet rs, rs1, rs2 ;
-            rs = cn.lire("select count(*) from gestionnaires");
-            rs1 = cn.lire("select count(*) from vendeurs");
-            rs2 = cn.lire("select count(*) from responsables");
-            if(rs.next() && rs1.next() && rs2.next()){
-                nbPersonnel = rs.getInt(1) + rs1.getInt(1) + rs2.getInt(1);
-                return nbPersonnel;
-            }
-            return 0;
-        }catch(SQLException e){
-            e.printStackTrace();
-            return 0;
-        }
-    }
 
     public void helpAndSupport(ActionEvent event) throws IOException {
-        ChangingWindows cw = new ChangingWindows();
         cw.switchWindow(event, "helpAndSupport.fxml");
+    }
+
+
+
+    @FXML
+    void switchToCA(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pfeprojet/chiffreAffaire.fxml")));
+
+        // Create a new stage for scene1
+        Stage stage = new Stage();
+        Scene newScene = new Scene(root);
+
+        // Load the icon for scene1
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Group7.png")));
+        stage.getIcons().add(icon);
+
+        // Set the title for scene1
+        stage.setResizable(false);
+        stage.setTitle("FacturEase");
+
+        // Set the scene and show the stage
+        stage.setScene(newScene);
+        stage.show();
     }
 }

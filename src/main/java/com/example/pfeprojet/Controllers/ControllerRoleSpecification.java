@@ -25,23 +25,17 @@ public class ControllerRoleSpecification {
 
     @FXML
     private Button btnDirecteur;
-    @FXML
-    private ImageView picDirecteur;
+
 
     @FXML
     private Button btnGestionnaire;
-    @FXML
-    private ImageView picGestionnaire;
 
     @FXML
     private Button btnResponsable;
-    @FXML
-    private ImageView picResponsable;
 
     @FXML
     private Button btnVendeur;
-    @FXML
-    private ImageView picVendeur;
+
 
 
     @FXML
@@ -56,7 +50,7 @@ public class ControllerRoleSpecification {
     }
 
     public void initialize(){
-        label.setText("Bienvenue : "+cmp);
+        label.setText(cmp);
 
         Platform.runLater(() -> {
             // Set initial X-coordinate to center the label

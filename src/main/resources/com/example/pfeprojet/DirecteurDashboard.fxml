@@ -58,12 +58,14 @@
          <effect>
             <DropShadow />
          </effect>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Directeur/Aide.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="822.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/Directeur/Aide.png" />
-         </image>
-      </ImageView>
       <AnchorPane fx:id="messagerieAnchor" layoutX="662.0" layoutY="310.0" onMouseEntered="#onMouseEnteredMessagerie" onMouseExited="#onMouseExitedMessagerie" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="16.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -81,7 +83,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="chiffreAffaireAnchorpane" layoutX="23.0" layoutY="82.0" onMouseEntered="#onMouseEnteredChiffreAffaire" onMouseExited="#onMouseExitedChiffreAffaire" prefHeight="329.0" prefWidth="315.0" style="-fx-background-radius: 25; -fx-background-color: ededed;">
+      <AnchorPane fx:id="chiffreAffaireAnchorpane" layoutX="23.0" layoutY="82.0" onMouseClicked="#switchToCA" onMouseEntered="#onMouseEnteredChiffreAffaire" onMouseExited="#onMouseExitedChiffreAffaire" prefHeight="329.0" prefWidth="315.0" style="-fx-background-radius: 25; -fx-background-color: ededed;">
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="20.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>

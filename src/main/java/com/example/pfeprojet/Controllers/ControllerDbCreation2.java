@@ -152,6 +152,64 @@ public class ControllerDbCreation2 {
                         c.createTable(dbName,"Responsables", getEmpColumns());
                         c.createTable(dbName, "Gestionnaires", getEmpColumns());
                         c.createTable(dbName, "Vendeurs", getEmpColumns());
+                        c.miseAjour("DELIMITER $$\n" +
+                                "\n" +
+                                "CREATE FUNCTION somme_total_factures(mois INT)\n" +
+                                "RETURNS DECIMAL(10,2)\n" +
+                                "BEGIN\n" +
+                                "    DECLARE somme DECIMAL(10,2);\n" +
+                                "    \n" +
+                                "    SELECT SUM(Total_TTC) INTO somme\n" +
+                                "    FROM facture\n" +
+                                "    WHERE MONTH(date) = mois;\n" +
+                                "    \n" +
+                                "    RETURN somme;\n" +
+                                "END$$\n" +
+                                "\n" +
+                                "DELIMITER ;\n");
+                        c.miseAjour("DELIMITER $$\n" +
+                                "\n" +
+                                "CREATE FUNCTION somme_total_factures_par_annee(annee INT)\n" +
+                                "RETURNS DECIMAL(10,2)\n" +
+                                "BEGIN\n" +
+                                "    DECLARE somme DECIMAL(10,2);\n" +
+                                "    \n" +
+                                "    SELECT SUM(Total_TTC) INTO somme\n" +
+                                "    FROM facture\n" +
+                                "    WHERE YEAR(date) = annee;\n" +
+                                "    \n" +
+                                "    RETURN somme;\n" +
+                                "END$$\n" +
+                                "\n" +
+                                "DELIMITER ;\n");
+                        c.miseAjour("DELIMITER $$\n" +
+                                "CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT)\n" +
+                                "BEGIN\n" +
+                                "    DECLARE pu_p DECIMAL(10,2);\n" +
+                                "    DECLARE THT DECIMAL(10,2); \n" +
+                                "    DECLARE TTC DECIMAL(10,2); \n" +
+                                "    \n" +
+                                "    SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);\n" +
+                                "    \n" +
+                                "    IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN\n" +
+                                "        IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN\n" +
+                                "            INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);\n" +
+                                "        END IF;\n" +
+                                "        \n" +
+                                "        SET THT = pu_p * qt; -- Set THT here\n" +
+                                "        \n" +
+                                "        INSERT INTO facture_produit VALUES (nf, idpr, qt, THT);\n" +
+                                "        \n" +
+                                "        UPDATE produit SET stock = stock - qt WHERE idProduit = idpr;\n" +
+                                "        \n" +
+                                "        SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf); -- Set TTC here\n" +
+                                "        \n" +
+                                "        UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf;\n" +
+                                "    ELSE\n" +
+                                "        SELECT 'stock indisponible';\n" +
+                                "    END IF;\n" +
+                                "END$$\n" +
+                                "DELIMITER ;");
 
 
                         if(EmailSender.check()){

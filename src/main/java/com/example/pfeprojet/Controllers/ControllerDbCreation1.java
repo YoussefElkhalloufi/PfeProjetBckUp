@@ -234,9 +234,8 @@ public class ControllerDbCreation1 {
 
         selectedColumns.add("NumeroFacture INT PRIMARY KEY");
 
-        if (tva.isSelected()) {selectedColumns.add("TauxDeTva DECIMAL(10,2)");}
-
-        if (remise.isSelected()) {selectedColumns.add("TauxDeRemise DECIMAL(10, 2)");}
+        if (tva.isSelected()) selectedColumns.add("TauxDeTva DECIMAL(10,2)");
+       if(remise.isSelected()) selectedColumns.add("TauxDeRemise DECIMAL(10,2)");
 
         selectedColumns.add("DateFacture Date");
         selectedColumns.add("Total_TTC DECIMAL(10, 2)");

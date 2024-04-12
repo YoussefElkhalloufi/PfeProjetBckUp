@@ -228,9 +228,6 @@ public class ControllerDbCreation {
             Alerts sa = new Alerts();
             sa.showAlert2("ATTENTION","vous devez coché au minimum une table");
         }
-
-
-
     }
 
 

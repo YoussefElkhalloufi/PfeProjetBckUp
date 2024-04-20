@@ -226,7 +226,7 @@ public class ControllerDbCreation {
             cw.switchWindow(event, "DbCreation1.fxml");
         }else{
             Alerts sa = new Alerts();
-            sa.showAlert2("ATTENTION","vous devez coché au minimum une table");
+            sa.showWarning("ATTENTION","vous devez coché au minimum une table");
         }
     }
 

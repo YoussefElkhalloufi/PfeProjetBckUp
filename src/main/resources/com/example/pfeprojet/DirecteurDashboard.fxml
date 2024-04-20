@@ -30,7 +30,7 @@
          </font>
       </Text>
       <Line endX="846.0" layoutX="108.0" layoutY="439.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
-      <Button fx:id="aideBtn" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="447.0" mnemonicParsing="false" onAction="#helpAndSupport" onMouseEntered="#onMouseEnteredaide" onMouseExited="#onMouseExitedaide" prefHeight="35.0" prefWidth="149.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Aide &amp; support">
+      <Button fx:id="aideBtn" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="447.0" mnemonicParsing="false" onAction="#helpAndSupport" prefHeight="35.0" prefWidth="149.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Aide &amp; support">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
@@ -132,7 +132,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="personnel" layoutX="358.0" layoutY="196.0" onMouseEntered="#onMouseEnteredPersonnel" onMouseExited="#onMouseExitedPersonnel" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+      <AnchorPane fx:id="personnel" layoutX="358.0" layoutY="196.0" onMouseClicked="#switchToPersonnel" onMouseEntered="#onMouseEnteredPersonnel" onMouseExited="#onMouseExitedPersonnel" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>

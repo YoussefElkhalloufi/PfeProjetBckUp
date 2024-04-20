@@ -188,13 +188,13 @@ public class ControllerDbCreation1 {
                 }
             }else{
                 Alerts sa = new Alerts();
-                sa.showAlert2("Erreur","Une erreur s'est produite lors de la creation des tables, réessayer plus tard ");
+                sa.showWarning("Erreur","Une erreur s'est produite lors de la creation des tables, réessayer plus tard ");
             }
 
             cn.closeResources();
         }else{
             Alerts sa = new Alerts();
-            sa.showAlert2("ATTENTION","vous devez coché les deux tables !!!");
+            sa.showWarning("ATTENTION","vous devez coché les deux tables !!!");
         }
     }
 

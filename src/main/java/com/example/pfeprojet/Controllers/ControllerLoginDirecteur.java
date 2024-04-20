@@ -35,18 +35,14 @@ public class ControllerLoginDirecteur {
     private Text directeur;
     @FXML
     private AnchorPane anchorPane;
-    private static String cmp = ControllerFstWindow.getCmp();
+    private static String cmp = ControllerFstWindow.getEntreprise().getNomEntreprise();
+    private static Directeur dr ;
 
-    public ControllerLoginDirecteur() throws SQLException {
-    }
-
-    public static String getCmp(){
-        return cmp;
-    }
-
+    public static Directeur getDr() {return dr;}
 
     public void initialize() throws SQLException {
-        label.setText(cmp);
+        getDirecteur();
+        label.setText("Directeur de "+cmp);
         directeur.setText(dr.getNom());
 
 
@@ -57,11 +53,7 @@ public class ControllerLoginDirecteur {
         });
     }
 
-    private static final Directeur dr = getDirecteur();
 
-    public static Directeur getDir(){
-        return dr ;
-    }
 
     public void login(ActionEvent event) throws IOException {
         Alerts a = new Alerts();
@@ -87,21 +79,20 @@ public class ControllerLoginDirecteur {
         }
     }
 
-    public static Directeur getDirecteur() {
+    public static void getDirecteur() {
         try{
             Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
-
+            System.out.println("le nom de l'entreprise : " +cmp);
             ResultSet rs = c.lire("select nomDirecteur, prenomDirecteur, adresseMailDirecteur, motdePasseDirecteur from infosentreprises where nomEntreprise = ?", cmp);
 
             if(rs.next()){
-                Directeur dr1 = new Directeur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                dr = new Directeur(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 c.closeResources();
-                return dr1;
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return null ;
+
     }
 
 

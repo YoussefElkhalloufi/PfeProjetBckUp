@@ -43,11 +43,7 @@ public class ControllerRoleSpecification {
 
     private static final double ENLARGE_FACTOR = 1.05;
 
-    private static String cmp = ControllerFstWindow.getCmp();
-
-    public static String getCmp(){
-        return cmp;
-    }
+    private static String cmp = ControllerFstWindow.getEntreprise().getNomEntreprise();
 
     public void initialize(){
         label.setText(cmp);
@@ -67,6 +63,7 @@ public class ControllerRoleSpecification {
             System.out.println("cmp is null");
         }
     }
+
 
 
     public void onMouseEntered(){

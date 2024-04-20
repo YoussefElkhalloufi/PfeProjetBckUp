@@ -3,6 +3,7 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
+import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -127,14 +128,14 @@ public class ControllerDbCreation2 {
             if(!adrTextfield.getText().isEmpty()) { adr = adrTextfield.getText();}
 
             if(nom.isEmpty() || prenom.isEmpty() || adrMail.isEmpty() || pwd.isEmpty() || cnfPwd.isEmpty()){
-                sa.showAlert2("Attention", "Certains champs obligatoires sont vides." +
+                sa.showWarning("Attention", "Certains champs obligatoires sont vides." +
                         " Veuillez remplir les champs marqués d'une étoile rouge.");
             }else{
                 if(!pwd.equals(cnfPwd)){
-                    sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
+                    sa.showWarning("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
                 }else{
                     Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
-
+                    Connexion cEntreprise = new Connexion("jdbc:mysql://localhost:3306/"+dbName+"?user=root");
 
 
                     String insert = "UPDATE `infosentreprises`\n" +
@@ -149,69 +150,16 @@ public class ControllerDbCreation2 {
 
                     if(c.miseAjour(insert, nom, prenom,adrMail,cin, hashedPassword, numTel, adr)){
                         sa.showAlert("Creation avec succès", "Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
-                        c.createTable(dbName,"Responsables", getEmpColumns());
-                        c.createTable(dbName, "Gestionnaires", getEmpColumns());
-                        c.createTable(dbName, "Vendeurs", getEmpColumns());
-                        c.miseAjour("DELIMITER $$\n" +
-                                "\n" +
-                                "CREATE FUNCTION somme_total_factures(mois INT)\n" +
-                                "RETURNS DECIMAL(10,2)\n" +
-                                "BEGIN\n" +
-                                "    DECLARE somme DECIMAL(10,2);\n" +
-                                "    \n" +
-                                "    SELECT SUM(Total_TTC) INTO somme\n" +
-                                "    FROM facture\n" +
-                                "    WHERE MONTH(date) = mois;\n" +
-                                "    \n" +
-                                "    RETURN somme;\n" +
-                                "END$$\n" +
-                                "\n" +
-                                "DELIMITER ;\n");
-                        c.miseAjour("DELIMITER $$\n" +
-                                "\n" +
-                                "CREATE FUNCTION somme_total_factures_par_annee(annee INT)\n" +
-                                "RETURNS DECIMAL(10,2)\n" +
-                                "BEGIN\n" +
-                                "    DECLARE somme DECIMAL(10,2);\n" +
-                                "    \n" +
-                                "    SELECT SUM(Total_TTC) INTO somme\n" +
-                                "    FROM facture\n" +
-                                "    WHERE YEAR(date) = annee;\n" +
-                                "    \n" +
-                                "    RETURN somme;\n" +
-                                "END$$\n" +
-                                "\n" +
-                                "DELIMITER ;\n");
-                        c.miseAjour("DELIMITER $$\n" +
-                                "CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT)\n" +
-                                "BEGIN\n" +
-                                "    DECLARE pu_p DECIMAL(10,2);\n" +
-                                "    DECLARE THT DECIMAL(10,2); \n" +
-                                "    DECLARE TTC DECIMAL(10,2); \n" +
-                                "    \n" +
-                                "    SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);\n" +
-                                "    \n" +
-                                "    IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN\n" +
-                                "        IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN\n" +
-                                "            INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);\n" +
-                                "        END IF;\n" +
-                                "        \n" +
-                                "        SET THT = pu_p * qt; -- Set THT here\n" +
-                                "        \n" +
-                                "        INSERT INTO facture_produit VALUES (nf, idpr, qt, THT);\n" +
-                                "        \n" +
-                                "        UPDATE produit SET stock = stock - qt WHERE idProduit = idpr;\n" +
-                                "        \n" +
-                                "        SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf); -- Set TTC here\n" +
-                                "        \n" +
-                                "        UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf;\n" +
-                                "    ELSE\n" +
-                                "        SELECT 'stock indisponible';\n" +
-                                "    END IF;\n" +
-                                "END$$\n" +
-                                "DELIMITER ;");
+                        cEntreprise.createTable(dbName,"Responsables", getEmpColumns());
+                        cEntreprise.createTable(dbName, "Gestionnaires", getEmpColumns());
+                        cEntreprise.createTable(dbName, "Vendeurs", getEmpColumns());
 
+                        cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_mois(mois INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE MONTH(dateFacture) = mois;RETURN somme; END ;");
+                        cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_annee(annee INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE YEAR(datedateFacture) = annee; RETURN somme; END;");
+                        cEntreprise.miseAjour("CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT) BEGIN DECLARE pu_p DECIMAL(10,2); DECLARE THT DECIMAL(10,2); DECLARE TTC DECIMAL(10,2);  SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);END IF;SET THT = pu_p * qt; INSERT INTO facture_produit VALUES (nf, idpr, qt, THT); UPDATE produit SET stock = stock - qt WHERE idProduit = idpr; SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf); UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf; ELSE SELECT 'stock indisponible';END IF; END ;");
 
+                        Entreprise e = new Entreprise(dbName);
+                        e.setInfosEntreprise();
                         if(EmailSender.check()){
                             String body = "Cher/Chère "+nom+" "+prenom+",\n\n" +
                                     "Félicitations pour la création de votre compte! Vous êtes désormais" +
@@ -219,8 +167,13 @@ public class ControllerDbCreation2 {
                                     " la gestion de votre entreprise.\n\n" +
                                     "Pour commencer à explorer toutes les fonctionnalités que notre application" +
                                     " offre, veuillez utiliser les informations d'identification que vous " +
-                                    "avez fournies lors de l'inscription.\n\n" +
-                                    "Si vous avez des questions ou avez besoin d'aide pour démarrer, n'hésitez pas " +
+                                    "avez fournies lors de l'inscription.\n\nLes informations d'authentification du compte de l'entreprise :\n" +
+                                    "Login :"+ e.getAdresseMail() +
+                                    "\nMot de passe :" + e.getMotdepasse() +
+                                    "\n\nLes informations d'authentification du compte du directeur :"+
+                                    "\nLogin : "+adrMail+
+                                    "\nMot de passe :"+pwd+
+                                    "\n\nSi vous avez des questions ou avez besoin d'aide pour démarrer, n'hésitez pas " +
                                     "à contacter notre équipe d'assistance à [FacturEasePFE@gmail.com].\n\n" +
                                     "Nous vous remercions de faire confiance à FacturEase pour vos besoins de" +
                                     " facturation. Nous sommes impatients de vous accompagner dans votre réussite.\n\n" +
@@ -228,6 +181,8 @@ public class ControllerDbCreation2 {
                                     "[L'équipe FacturEase]" ;
                             EmailSender.sendEmail(adrMail,"Bienvenue sur FacturEase!",body);
                             System.out.println("Email sent");
+                        }else{
+                            sa.showWarning("Echec de l'envoi","Impossible d'envoyer l'e-mail au personnel. Veuillez vérifier votre connexion Internet et réessayer ultérieurement.");
                         }
                         ChangingWindows cw = new ChangingWindows();
                         cw.switchWindow(event, "FstWindow.fxml");

@@ -31,7 +31,7 @@ public class Alerts {
         return result.isPresent() && result.get() == ButtonType.OK;
     }
 
-    public void showAlert2(String title, String content) {
+    public void showWarning(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
 
         alert.setTitle(title);

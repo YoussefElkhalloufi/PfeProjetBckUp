@@ -58,13 +58,6 @@ public class ControllerDashboardDirecteur {
     @FXML
     private Button aideBtn;
     mouseEvents ms = new mouseEvents();
-    @FXML
-    public void onMouseEnteredaide(MouseEvent event) {
-        ms.onMouseEntered2(event, aideBtn);
-    }
-    @FXML
-    public void onMouseExitedaide(MouseEvent event) {ms.onMouseExited2(event, aideBtn);}
-
     public void onMouseExitedMessagerie(){
         messagerieAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
         restoreButtonSize(messagerieAnchor);
@@ -136,11 +129,11 @@ public class ControllerDashboardDirecteur {
         scaleTransition.play();
     }
 
-    private static final Entreprise e = new Entreprise(ControllerLoginDirecteur.getCmp());
+    private static final Entreprise e = ControllerFstWindow.getEntreprise();
     public static Entreprise getEntreprise(){
         return e;
     }
-    private Directeur dr = ControllerLoginDirecteur.getDirecteur();
+    private Directeur dr = ControllerLoginDirecteur.getDr();
     public void initialize(){
         label.setText("Directeur '" +dr.getNom() +"' de l'entreprise  '" +e.getNomEntreprise()+"'");
 
@@ -170,22 +163,11 @@ public class ControllerDashboardDirecteur {
 
     @FXML
     void switchToCA(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/pfeprojet/chiffreAffaire.fxml")));
+        cw.switchWindowPane(event,"/com/example/pfeprojet/chiffreAffaire.fxml");
+    }
 
-        // Create a new stage for scene1
-        Stage stage = new Stage();
-        Scene newScene = new Scene(root);
-
-        // Load the icon for scene1
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Group7.png")));
-        stage.getIcons().add(icon);
-
-        // Set the title for scene1
-        stage.setResizable(false);
-        stage.setTitle("FacturEase");
-
-        // Set the scene and show the stage
-        stage.setScene(newScene);
-        stage.show();
+    @FXML
+    void switchToPersonnel(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event,"/com/example/pfeprojet/personnel.fxml");
     }
 }

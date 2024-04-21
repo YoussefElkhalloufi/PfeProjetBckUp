@@ -1,12 +1,21 @@
 package com.example.pfeprojet.Entreprise;
 
 import com.example.pfeprojet.Connexion;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+
+import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Entreprise {
-    private String nomEntreprise, adresseMail, localisation, numeroDeFax, secteurDactivite, identificationFiscale;
+    private String nomEntreprise, adresseMail,motdepasse, localisation, numeroDeFax, secteurDactivite, identificationFiscale;
     private BigDecimal chiffreAffaireTotal = null  ;
     private int nbrClients = 0, nbPersonnel = 0;
     private Connexion cn, cn1;
@@ -17,14 +26,17 @@ public class Entreprise {
         cn1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
     }
 
-    public Entreprise(){
-    }
+    public Entreprise(){}
+
+    public void setMotdepasse(String motdepasse){this.motdepasse = motdepasse;}
 
     public Connexion getCn() {return cn;}
 
     public String getAdresseMail() {
         return adresseMail;
     }
+
+    public String getMotdepasse() {return motdepasse;}
 
     public String getLocalisation() {
         return localisation;
@@ -56,14 +68,15 @@ public class Entreprise {
 
     public void setInfosEntreprise(){
         try{
-            ResultSet rs = cn1.lire("Select nomEntreprise, AdresseMail, Localisation, NumeroDeFax, secteurDactivite, identificationFiscale from infosEntreprises where nomEntreprise = '" +nomEntreprise+"'");
+            ResultSet rs = cn1.lire("Select nomEntreprise, AdresseMail, motdepasse, Localisation, NumeroDeFax, secteurDactivite, identificationFiscale from infosEntreprises where nomEntreprise = '" +nomEntreprise+"'");
             if(rs.next()){
-                nomEntreprise = rs.getString(1).replaceAll("_", " ");
+                nomEntreprise = rs.getString(1);
                 adresseMail = rs.getString(2);
-                localisation = rs.getString(3);
-                numeroDeFax = rs.getString(4);
-                secteurDactivite = rs.getString(5);
-                identificationFiscale = rs.getString(6);
+                motdepasse = rs.getString(3);
+                localisation = rs.getString(4);
+                numeroDeFax = rs.getString(5);
+                secteurDactivite = rs.getString(6);
+                identificationFiscale = rs.getString(7);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,6 +100,27 @@ public class Entreprise {
     public int getNbPersonnel() {
         calculNbrPersonnel();
         return nbPersonnel;
+    }
+    public ResultSet getResponsables(){
+        return cn.lire("select * from responsables");
+    }
+    public boolean insererRespo(String cin, String nom, String prenom, String mail, String pwd){
+        String req = "insert into responsables values (?,?,?,?,?)";
+        return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
+    }
+    public boolean insererGestio(String cin, String nom, String prenom, String mail, String pwd){
+        String req = "insert into gestionnaires values (?,?,?,?,?)";
+        return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
+    }
+    public boolean insererVendeur(String cin, String nom, String prenom, String mail, String pwd){
+        String req = "insert into vendeurs values(?,?,?,?,?)";
+        return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
+    }
+    public ResultSet getGestionnaires(){
+        return cn.lire("select * from gestionnaires");
+    }
+    public ResultSet getVendeurs(){
+        return cn.lire("select * from vendeurs");
     }
 
     public void calculChiffreAffaire(){
@@ -169,5 +203,52 @@ public class Entreprise {
             }
         }
         return totalTTC;
+    }
+    public void populateTableViewWithSelectionHandler(ResultSet rs, TableView<Object[]> tableView, TextField cinTextField, TextField nomTextField, TextField prenomTextField, TextField mailTextField, TextField passwordTextField) {
+        try {
+            // Clear existing items in the TableView
+            tableView.getItems().clear();
+            tableView.setStyle("-fx-background-color: red");
+
+            // Get metadata about the ResultSet
+            ResultSetMetaData rsm = rs.getMetaData();
+            int columnCount = rsm.getColumnCount();
+
+            // Create TableColumn objects for each column in the ResultSet
+            tableView.getColumns().clear(); // Clear existing columns
+            for (int i = 1; i <= columnCount; i++) {
+                final int columnIndex = i;
+                TableColumn<Object[], Object> column = new TableColumn<>(rsm.getColumnName(i));
+                column.setCellValueFactory(cellData -> {
+                    Object[] row = cellData.getValue();
+                    return new SimpleObjectProperty<>(row[columnIndex - 1]); // Note: columnIndex is 1-based
+                });
+                tableView.getColumns().add(column);
+            }
+
+            // Add selection handler to populate text fields with selected row's data
+            tableView.setOnMouseClicked(event -> {
+                Object[] rowData = tableView.getSelectionModel().getSelectedItem();
+                if (rowData != null) {
+                    cinTextField.setText(rowData[0].toString()); // Assuming CIN is in the first column
+                    nomTextField.setText(rowData[1].toString()); // Assuming Nom is in the second column
+                    prenomTextField.setText(rowData[2].toString()); // Assuming Prenom is in the third column
+                    mailTextField.setText(rowData[3].toString()); // Assuming Mail is in the fourth column
+                    passwordTextField.setText(rowData[4].toString()); // Assuming Mot de Passe is in the fifth column
+                }
+            });
+
+            // Iterate through the ResultSet and add data to the TableView
+            while (rs.next()) {
+                Object[] rowData = new Object[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    rowData[i] = rs.getObject(i + 1); // Note: ResultSet index is 1-based
+                }
+                tableView.getItems().add(rowData);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

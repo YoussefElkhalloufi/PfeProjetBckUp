@@ -4,6 +4,7 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
+import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,11 +44,8 @@ public class ControllerFstWindow {
    @FXML
    private Button aide;
 
-   private static String cmp = "" ;
-
-   public static String getCmp() {
-      return cmp;
-   }
+   private static Entreprise e ;
+   public static Entreprise getEntreprise(){return e;}
 
    public void initialize(){
       Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
@@ -72,7 +70,7 @@ public class ControllerFstWindow {
       Alerts a = new Alerts();
 
       if(mail.isEmpty() || pass.isEmpty()){
-         a.showAlert2("Attention", "Assurez-vous de remplir l'Identifiant ET le mot de pass.");
+         a.showWarning("Attention", "Assurez-vous de remplir l'Identifiant ET le mot de pass.");
       }else{
          if(isValidEmail(mail)){
             Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
@@ -89,29 +87,32 @@ public class ControllerFstWindow {
                    if(status.equalsIgnoreCase("activé")){
                       if(rs.next()){
                          String DbPass = rs.getString(1);
-                         cmp = rs.getString(2);
+                         String cmp = rs.getString(2);
                          if(PassworManager.verifyPassword(pass, DbPass)){
+                            e = new Entreprise(cmp);
+                            e.setInfosEntreprise();
+                            e.setMotdepasse(pass);
                             ChangingWindows cw = new ChangingWindows();
                             cw.switchWindow(event,"roleSpecification.fxml");
                          }else{
                             i--;
                             if(i==1 || i==0){
-                               a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essai");
+                               a.showWarning("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essai");
                             }else{
-                               a.showAlert2("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essais");
+                               a.showWarning("Mot de passe erroné","Mot de passe erroné, il vous reste "+i+" Essais");
                             }
                          }
                          if(i==0){
-                            a.showAlert2("ATTENTION","Vous avez depassé 3 essais");
+                            a.showWarning("ATTENTION","Vous avez depassé 3 essais");
                             c.miseAjour("update infosentreprises set status = 'désactivé', dateHeureStatus = NOW()  where nomEntreprise = ?", cmp );
-                            a.showAlert2("Compte désactivé","Votre compte a été désactivé pendant 24 heures.\nSi vous estimez que cette désactivation est injustifiée, \nVeuillez nous contacter à l'adresse e-mail suivante : factureasePFE@gmail.com ");
+                            a.showWarning("Compte désactivé","Votre compte a été désactivé pendant 24 heures.\nSi vous estimez que cette désactivation est injustifiée, \nVeuillez nous contacter à l'adresse e-mail suivante : factureasePFE@gmail.com ");
                          }
                       }
                    }else {
-                      a.showAlert2("Acces refusé","Votre compte a été desactivé pendant 24 Heures, à " +dateHeureStatus);
+                      a.showWarning("Acces refusé","Votre compte a été desactivé pendant 24 Heures, à " +dateHeureStatus);
                    }
                 }else{
-                   a.showAlert2("Compte introuvable","Votre compte n'existe pas dans l'application");
+                   a.showWarning("Compte introuvable","Votre compte n'existe pas dans l'application");
                 }
 
                c.closeResources();

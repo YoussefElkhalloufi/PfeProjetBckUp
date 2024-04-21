@@ -1,8 +1,13 @@
 package com.example.pfeprojet;
 
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import java.sql.* ;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Connexion {
 
@@ -143,4 +148,6 @@ public class Connexion {
             e.printStackTrace();
         }
     }
+
+
 }

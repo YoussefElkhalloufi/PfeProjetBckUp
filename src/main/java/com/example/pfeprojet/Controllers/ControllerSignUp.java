@@ -57,6 +57,7 @@ public class ControllerSignUp {
     private mouseEvents me = new mouseEvents();
 
 
+    public static String pwdEntreprise ;
 
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
@@ -84,6 +85,7 @@ public class ControllerSignUp {
 
         String mail = emailTextField.getText();
         String pwd = pwdTextField.getText();
+        pwdEntreprise = pwd ;
         String hashpwd = PassworManager.hashPassword(pwd);
         String companyName =  companyNameTextField.getText();
         cmp = companyName.replaceAll("\\s+", "_");
@@ -94,19 +96,19 @@ public class ControllerSignUp {
 
         Alerts sa = new Alerts();
         if (mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()) {
-            sa.showAlert2("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         } else {
             if (!pwdTextField.getText().equals(pwdConfirmationTextField.getText())) {
-                sa.showAlert2("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
+                sa.showWarning("Attention", "Le mot de passe entré et sa confirmation ne correspondent pas. Veuillez réécrire le mot de passe.");
             } else {
                 Connexion c = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
                 ResultSet rs = c.lire("SELECT * FROM infosEntreprises WHERE AdresseMail = ?", mail);
                 ResultSet rs1 = c.lire("SELECT * FROM infosEntreprises WHERE nomEntreprise = ?", companyName);
                 if (rs.next()) {
-                    sa.showAlert2("Attention", "L'email de l'entreprise fournit existe déjà dans notre application.");
+                    sa.showWarning("Attention", "L'email de l'entreprise fournit existe déjà dans notre application.");
                     rs.close();
                 } else if(rs1.next()){
-                    sa.showAlert2("Attention", "Le nom de l'entreprise fournit existe déjà dans notre application.");
+                    sa.showWarning("Attention", "Le nom de l'entreprise fournit existe déjà dans notre application.");
                     rs1.close();
                 }else{
                     String insertQuery = "INSERT INTO `infosEntreprises`(`nomEntreprise`, `AdresseMail`, `MotdePasse`, `Localisation`, `NumeroDeFax`, `SecteurDactivite`, `IdentificationFiscale`)" +

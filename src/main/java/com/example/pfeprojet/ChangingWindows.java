@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,6 +38,29 @@ public class ChangingWindows {
         newStage.show();
 
         // Close the current (scene2) stage
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+    }
+
+    public void switchWindowPane(MouseEvent event, String window) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(window)));
+
+        // Create a new stage for scene1
+        Stage stage = new Stage();
+        Scene newScene = new Scene(root);
+
+        // Load the icon for scene1
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Group7.png")));
+        stage.getIcons().add(icon);
+
+        // Set the title for scene1
+        stage.setResizable(false);
+        stage.setTitle("FacturEase");
+
+        // Set the scene and show the stage
+        stage.setScene(newScene);
+        stage.show();
+
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }

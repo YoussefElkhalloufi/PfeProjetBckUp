@@ -2,6 +2,7 @@ package com.example.pfeprojet.Controllers;
 
 
 import com.example.pfeprojet.Alerts;
+import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tooltip;
 
+import java.io.IOException;
 
 
 public class ControllerChiffreAffaire {
@@ -48,11 +50,9 @@ public class ControllerChiffreAffaire {
     //private Entreprise e1 = new Entreprise("hennesy_liquor_store");
 
     public void initialize(){
-        //TODO : Finition du CA par année
         String[] mois = {"Janvier","Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"};
-        double[] chiffreAffaireMois = {15500,23000,45000,43000,35900,25900,39900,46900,55900,80900,64900,49900};
+        double[] chiffreAffaireMois = {e.getChiffreAffaireMois(1),e.getChiffreAffaireMois(2),e.getChiffreAffaireMois(3),e.getChiffreAffaireMois(4),e.getChiffreAffaireMois(5),e.getChiffreAffaireMois(6),e.getChiffreAffaireMois(7),e.getChiffreAffaireMois(8),e.getChiffreAffaireMois(9),e.getChiffreAffaireMois(10),e.getChiffreAffaireMois(11),e.getChiffreAffaireMois(12)};
 
-        //TODO : change two tables to the values from DATABASE
         chargementChartsMois(mois, chiffreAffaireMois);
 
         barChartMois.setVisible(true);
@@ -63,8 +63,8 @@ public class ControllerChiffreAffaire {
 
 
 
-        String[] annee ={"2020","2021","2022","2023","2024"};
-        double[] chiffreAffaireAnnee={480800.90,580300.70,330500.28,670400.49,855043.60};
+        String[] annee ={"2024","2025","2026","2027","2028"};
+        double[] chiffreAffaireAnnee={e.getChiffreAffaireAnnee(2024),e.getChiffreAffaireAnnee(2025),e.getChiffreAffaireAnnee(2026),e.getChiffreAffaireAnnee(2027),e.getChiffreAffaireAnnee(2028)};
 
         chargementChartsAnnee(annee, chiffreAffaireAnnee);
 
@@ -73,13 +73,11 @@ public class ControllerChiffreAffaire {
         lineChartAnnee.setVisible(false);
         pieChartAnnee.setVisible(false);
     }
-
     public void chargementChartsMois(String[] xValues, double[] yValues){
         addDataToChart(barChartMois, "Chiffre Affaire" ,xValues, yValues);
         addDataToChart(lineChartMois, "Chiffre Affaire", xValues, yValues);
         addDataToPieChart(pieChartMois, xValues, yValues);
     }
-
     public void chargementChartsAnnee(String[] xValues, double[] yValues){
         addDataToChart(barChartAnnee,"Chiffre Affaire", xValues, yValues);
         addDataToChart(lineChartAnnee, "Chiffre Affaire", xValues, yValues);
@@ -183,7 +181,7 @@ public class ControllerChiffreAffaire {
     }
 
     @FXML
-    void filtrerMois(ActionEvent event) {
+    void filtrerMois(ActionEvent event){
         String deMois = deCmbMois.getValue();
         String aMois = aCmbMois.getValue();
 
@@ -219,11 +217,16 @@ public class ControllerChiffreAffaire {
                         }
                 }else{
                     System.out.println("Le format des mois est invalide.");
-                    a.showAlert2("Erreur de format","Le format des mois est invalide.");
+                    a.showWarning("Erreur de format","Le format des mois est invalide.");
                 }
         }else{
             System.out.println("Veuillez sélectionner les mois dans les deux ComboBox.");
-            a.showAlert2("Sélection manquante","Veuillez sélectionner les mois dans les deux ComboBox.");
+            a.showWarning("Sélection manquante","Veuillez sélectionner les mois dans les deux ComboBox.");
         }
+    }
+    @FXML
+    void dashboardDirecteur(ActionEvent event) throws IOException {
+        ChangingWindows cw = new ChangingWindows();
+        cw.switchWindow(event,"DirecteurDashboard.fxml");
     }
 }

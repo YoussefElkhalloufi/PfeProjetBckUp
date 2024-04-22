@@ -1,11 +1,11 @@
 package com.example.pfeprojet.Controllers;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
-
-import javax.mail.*;
-import javax.mail.internet.*;
 
 public class EmailSender {
 
@@ -48,6 +48,10 @@ public class EmailSender {
         } catch (MessagingException e) {
             System.err.println("Failed to send email. Error message: " + e.getMessage());
         }
+    }
+    public static boolean isValidEmailAddress(String email) {
+        // Basic email validation
+        return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
     public static boolean check() {
         try {

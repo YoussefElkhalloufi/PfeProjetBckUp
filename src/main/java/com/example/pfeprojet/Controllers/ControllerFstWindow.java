@@ -21,11 +21,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class ControllerFstWindow {
+public class ControllerFstWindow extends mouseEvents{
 
 
    //TODO : communication en adresse mail
-   mouseEvents ms = new mouseEvents();
 
    private static final double ENLARGE_FACTOR = 1.1;
 
@@ -137,28 +136,28 @@ public class ControllerFstWindow {
    @FXML
    public void onMouseEntered(MouseEvent event) {
       LoginButton.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 5em;");
-      enlargeButton(LoginButton);
+      enlargeButtonMS(LoginButton);
    }
 
    @FXML
    public void onMouseExited(MouseEvent event) {
       LoginButton.setStyle("-fx-background-color: #59A8A4; -fx-background-radius: 5em;");
-      restoreButtonSize(LoginButton);
+      restoreButtonSizeMS(LoginButton);
    }
 
    @FXML
    public void onMouseEntered2(MouseEvent event) {
-      ms.onMouseEntered2(event, SignUpButton);
+       onMouseEntered2(event, SignUpButton);
    }
    @FXML
-   public void onMouseExited2(MouseEvent event) {ms.onMouseExited2(event, SignUpButton);}
+   public void onMouseExited2(MouseEvent event) { onMouseExited2(event, SignUpButton);}
 
    @FXML
    public void onMouseEntered3(MouseEvent event) {
-      ms.onMouseEntered2(event, aide);
+       onMouseEntered2(event, aide);
    }
    @FXML
-   public void onMouseExited3(MouseEvent event) {ms.onMouseExited2(event, aide);}
+   public void onMouseExited3(MouseEvent event) { onMouseExited2(event, aide);}
 
 
    private void enlargeButton(Button button) {

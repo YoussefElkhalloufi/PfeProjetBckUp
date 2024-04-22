@@ -6,13 +6,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Entreprise {
     private String nomEntreprise, adresseMail,motdepasse, localisation, numeroDeFax, secteurDactivite, identificationFiscale;
@@ -104,6 +101,12 @@ public class Entreprise {
     public ResultSet getResponsables(){
         return cn.lire("select * from responsables");
     }
+    public ResultSet getGestionnaires(){
+        return cn.lire("select * from gestionnaires");
+    }
+    public ResultSet getVendeurs(){
+        return cn.lire("select * from vendeurs");
+    }
     public boolean insererRespo(String cin, String nom, String prenom, String mail, String pwd){
         String req = "insert into responsables values (?,?,?,?,?)";
         return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
@@ -116,11 +119,18 @@ public class Entreprise {
         String req = "insert into vendeurs values(?,?,?,?,?)";
         return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
     }
-    public ResultSet getGestionnaires(){
-        return cn.lire("select * from gestionnaires");
+
+    public boolean supprimerResponsable(String cin){
+        String req = "delete from responsables where cin = ?";
+        return cn.miseAjour(req, cin);
     }
-    public ResultSet getVendeurs(){
-        return cn.lire("select * from vendeurs");
+    public boolean supprimerGestionnaire(String cin){
+        String req = "delete from gestionnaires where cin = ?";
+        return cn.miseAjour(req, cin);
+    }
+    public boolean supprimerVendeur(String cin){
+        String req = "delete from vendeurs where cin = ?";
+        return cn.miseAjour(req, cin);
     }
 
     public void calculChiffreAffaire(){
@@ -246,7 +256,6 @@ public class Entreprise {
                 }
                 tableView.getItems().add(rowData);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

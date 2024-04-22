@@ -10,33 +10,33 @@ public class mouseEvents {
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent, Button btn) {
         btn.setStyle("-fx-background-color: #FF4545; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(btn);
+        enlargeButtonMS(btn);
     }
 
     public void onMouseExited(javafx.scene.input.MouseEvent mouseEvent, Button btn) {
         btn.setStyle("-fx-background-color:  white; -fx-background-radius: 5em;");
-        restoreButtonSize(btn);
+        restoreButtonSizeMS(btn);
     }
 
 
     public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent, Button btn) {
         btn.setStyle("-fx-background-color:  #59A8A4; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(btn);
+        enlargeButtonMS(btn);
     }
 
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent, Button btn) {
         btn.setStyle("-fx-background-color:  white; -fx-background-radius: 5em;");
-        restoreButtonSize(btn);
+        restoreButtonSizeMS(btn);
     }
 
-    public void enlargeButton(Button button) {
+    public void enlargeButtonMS(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
         scaleTransition.setToX(ENLARGE_FACTOR);
         scaleTransition.setToY(ENLARGE_FACTOR);
         scaleTransition.play();
     }
 
-    public void restoreButtonSize(Button button) {
+    public void restoreButtonSizeMS(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
         scaleTransition.setToX(1.0);
         scaleTransition.setToY(1.0);

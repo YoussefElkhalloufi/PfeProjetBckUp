@@ -49,6 +49,10 @@ public class EmailSender {
             System.err.println("Failed to send email. Error message: " + e.getMessage());
         }
     }
+    public static boolean isValidEmailAddress(String email) {
+        // Basic email validation
+        return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+    }
     public static boolean check() {
         try {
             InetAddress address = InetAddress.getByName("www.google.com");

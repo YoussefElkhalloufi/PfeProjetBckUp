@@ -12,7 +12,7 @@ import javafx.scene.control.CheckBox;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerDbCreation {
+public class ControllerDbCreation extends mouseEvents{
 
     //ControllerSignUp c = new ControllerSignUp();
     String dbName = ControllerSignUp.getCmp();
@@ -70,6 +70,7 @@ public class ControllerDbCreation {
 
 
 
+    //mouseEvents ms = new mouseEvents();
 
     public void initialize() {
 
@@ -290,19 +291,18 @@ public class ControllerDbCreation {
 
 
 
-    mouseEvents ms = new mouseEvents();
 
-    public void onMouseEntered(javafx.scene.input.MouseEvent event) { ms.onMouseEntered(event, ExitButton);}
+    public void onMouseEntered(javafx.scene.input.MouseEvent event) {onMouseEntered(event, ExitButton);}
     public void onMouseExited(javafx.scene.input.MouseEvent event) {
-        ms.onMouseExited(event, ExitButton);
+        onMouseExited(event, ExitButton);
     }
 
 
     public void onMouseEntered2(javafx.scene.input.MouseEvent event) {
-        ms.onMouseEntered2(event, NextButton);
+        onMouseEntered2(event, NextButton);
     }
     public void onMouseExited2(javafx.scene.input.MouseEvent event) {
-        ms.onMouseExited2(event, NextButton);
+        onMouseExited2(event, NextButton);
     }
 
 

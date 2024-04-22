@@ -17,7 +17,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerDbCreation2 {
+public class ControllerDbCreation2 extends mouseEvents{
 
     String dbName = ControllerSignUp.getCmp();
     //String dbName ="youssef";
@@ -88,20 +88,17 @@ public class ControllerDbCreation2 {
         }
     }
     private boolean isValidEmail(String email) { return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$");}
-    mouseEvents ms = new mouseEvents();
 
-    public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
-        ms.onMouseEntered(mouseEvent, ExitButton);
-    }
+    public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {onMouseEntered(mouseEvent, ExitButton);}
 
     public void onMouseExited(javafx.scene.input.MouseEvent mouseEvent) {
-        ms.onMouseExited(mouseEvent, ExitButton);
+        onMouseExited(mouseEvent, ExitButton);
     }
 
-    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {ms.onMouseEntered2(mouseEvent, NextButton);}
+    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {onMouseEntered2(mouseEvent, NextButton);}
 
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
-        ms.onMouseExited2(mouseEvent, NextButton);
+        onMouseExited2(mouseEvent, NextButton);
     }
 
     public void AnnulerBtn() {ControllerDbCreation cdc = new ControllerDbCreation(); cdc.AnnulerBtn();}
@@ -149,7 +146,7 @@ public class ControllerDbCreation2 {
                             "WHERE `nomEntreprise` = '" +dbName+ "';\n";
 
                     if(c.miseAjour(insert, nom, prenom,adrMail,cin, hashedPassword, numTel, adr)){
-                        sa.showAlert("Creation avec succès", "Le directeur ' " +prenom+" "+nom +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
+                        sa.showAlert("Creation avec succès", "Le directeur ' " +prenom.trim()+" "+nom.trim() +" ' a maintenant un compte actif lié a son entreprise ' " +dbName+" '", "/images/checked.png");
                         cEntreprise.createTable(dbName,"Responsables", getEmpColumns());
                         cEntreprise.createTable(dbName, "Gestionnaires", getEmpColumns());
                         cEntreprise.createTable(dbName, "Vendeurs", getEmpColumns());
@@ -158,18 +155,19 @@ public class ControllerDbCreation2 {
                         cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_annee(annee INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE YEAR(datedateFacture) = annee; RETURN somme; END;");
                         cEntreprise.miseAjour("CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT) BEGIN DECLARE pu_p DECIMAL(10,2); DECLARE THT DECIMAL(10,2); DECLARE TTC DECIMAL(10,2);  SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);END IF;SET THT = pu_p * qt; INSERT INTO facture_produit VALUES (nf, idpr, qt, THT); UPDATE produit SET stock = stock - qt WHERE idProduit = idpr; SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf); UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf; ELSE SELECT 'stock indisponible';END IF; END ;");
 
-                        Entreprise e = new Entreprise(dbName);
+                        Entreprise e = new Entreprise(ControllerSignUp.getCmp());
                         e.setInfosEntreprise();
                         if(EmailSender.check()){
-                            String body = "Cher/Chère "+nom+" "+prenom+",\n\n" +
+                            String body = "Cher/Chère "+nom.trim()+" "+prenom.trim()+",\n\n" +
                                     "Félicitations pour la création de votre compte! Vous êtes désormais" +
                                     " prêt(e) à commencer à utiliser FacturEase pour simplifier et optimiser" +
                                     " la gestion de votre entreprise.\n\n" +
                                     "Pour commencer à explorer toutes les fonctionnalités que notre application" +
                                     " offre, veuillez utiliser les informations d'identification que vous " +
                                     "avez fournies lors de l'inscription.\n\nLes informations d'authentification du compte de l'entreprise :\n" +
-                                    "Login :"+ e.getAdresseMail() +
-                                    "\nMot de passe :" + e.getMotdepasse() +
+                                    "Login :"+ e.getAdresseMail()+
+                                    //TODO  : test this (lfu9)
+                                    "\nMot de passe :" + ControllerSignUp.pwdEntreprise +
                                     "\n\nLes informations d'authentification du compte du directeur :"+
                                     "\nLogin : "+adrMail+
                                     "\nMot de passe :"+pwd+

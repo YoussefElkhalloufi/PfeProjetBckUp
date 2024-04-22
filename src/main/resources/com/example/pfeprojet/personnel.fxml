@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
@@ -22,38 +24,50 @@
                <content>
                   <AnchorPane prefHeight="4.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button layoutX="75.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherRespo" layoutX="130.0" layoutY="310.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredAfficherRespo" onMouseExited="#onMouseExitedAfficherRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <TableView fx:id="responsableTableView" layoutX="308.0" layoutY="17.0" prefHeight="261.0" prefWidth="502.0" />
-                        <Button layoutX="255.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <Button layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
-                        <Button layoutX="445.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button layoutX="500.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
-                        <Button layoutX="625.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button layoutX="680.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <TextField fx:id="cinTextRespo" layoutX="130.0" layoutY="50.0" />
                         <Label layoutX="28.0" layoutY="53.0" text="Cin :">
@@ -85,16 +99,20 @@
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="326.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="32.0" prefWidth="47.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="&lt;-">
+                        <Button layoutX="26.0" layoutY="310.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
-                           <effect>
-                              <DropShadow />
-                           </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </AnchorPane>
@@ -104,38 +122,50 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button layoutX="70.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button layoutX="130.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <TableView fx:id="gestionnaireTableView" layoutX="308.0" layoutY="17.0" prefHeight="261.0" prefWidth="502.0" />
-                        <Button layoutX="250.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <Button layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
-                        <Button layoutX="440.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button layoutX="500.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
-                        <Button layoutX="620.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button layoutX="680.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <TextField fx:id="nomTextGestio" layoutX="130.0" layoutY="93.0" />
                         <Label layoutX="28.0" layoutY="53.0" text="Cin :">
@@ -167,16 +197,20 @@
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="20.0" layoutY="334.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="32.0" prefWidth="47.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="&lt;-">
+                        <Button layoutX="26.0" layoutY="310.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
-                           <effect>
-                              <DropShadow />
-                           </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </AnchorPane>
@@ -186,7 +220,7 @@
                <content>
                   <AnchorPane prefHeight="413.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button layoutX="75.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button layoutX="130.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -194,7 +228,7 @@
                               <DropShadow />
                            </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
                         <TableView fx:id="vendeurTableView" layoutX="308.0" layoutY="17.0" prefHeight="261.0" prefWidth="502.0" />
@@ -204,7 +238,7 @@
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="255.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <Button layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -212,10 +246,10 @@
                               <DropShadow />
                            </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="445.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button layoutX="500.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -223,10 +257,10 @@
                               <DropShadow />
                            </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="625.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button layoutX="680.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -234,7 +268,7 @@
                               <DropShadow />
                            </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
                         <TextField fx:id="nomTextVendeur" layoutX="130.0" layoutY="93.0" />
@@ -261,16 +295,20 @@
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="24.0" layoutY="334.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="32.0" prefWidth="47.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="&lt;-">
+                        <Button layoutX="26.0" layoutY="310.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
-                           <effect>
-                              <DropShadow />
-                           </effect>
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </AnchorPane>
@@ -278,13 +316,13 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="876.0" />
-      <Text layoutX="265.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personnel d'entreprise">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ededed" height="61.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="876.0" />
+      <Text layoutX="265.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personnels d'entreprise">
          <font>
             <Font name="Times New Roman" size="36.0" />
          </font>
       </Text>
-      <Line endX="-100.00001525878906" endY="48.999996185302734" layoutX="161.0" layoutY="11.0" startX="-100.00001525878906" startY="-10.99999713897705" />
+      <Line endX="-100.00001525878906" endY="47.49995803833008" layoutX="161.0" layoutY="11.0" startX="-100.00001525878906" startY="-10.99999713897705" />
       <Text fill="WHITE" layoutX="31.0" layoutY="41.0" stroke="BLACK" strokeType="OUTSIDE" text="E">
          <font>
             <Font name="Javanese Text" size="24.0" />

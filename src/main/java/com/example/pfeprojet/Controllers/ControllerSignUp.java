@@ -3,6 +3,7 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
+import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ControllerSignUp {
+public class ControllerSignUp extends mouseEvents{
 
 
 
@@ -29,7 +30,6 @@ public class ControllerSignUp {
 
     private static String cmp;
     public static String getCmp(){return cmp;}
-
     @FXML
     private TextField activityTextField;
 
@@ -54,27 +54,23 @@ public class ControllerSignUp {
     @FXML
     private TextField taxIdTextField;
 
-    private mouseEvents me = new mouseEvents();
-
 
     public static String pwdEntreprise ;
 
 
     public void onMouseEntered(javafx.scene.input.MouseEvent mouseEvent) {
-        me.onMouseEntered(mouseEvent, ExitButton);
+         onMouseEntered(mouseEvent, ExitButton);
     }
 
     public void onMouseExited(javafx.scene.input.MouseEvent mouseEvent) {
-        me.onMouseExited(mouseEvent, ExitButton);
+         onMouseExited(mouseEvent, ExitButton);
     }
 
 
-    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) {
-        me.onMouseEntered2(mouseEvent, NextButton);
-    }
+    public void onMouseEntered2(javafx.scene.input.MouseEvent mouseEvent) { onMouseEntered2(mouseEvent, NextButton);}
 
     public void onMouseExited2(javafx.scene.input.MouseEvent mouseEvent) {
-        me.onMouseExited2(mouseEvent, NextButton);
+         onMouseExited2(mouseEvent, NextButton);
     }
 
 
@@ -115,7 +111,7 @@ public class ControllerSignUp {
                             " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                     if (c.miseAjour(insertQuery, cmp, mail, hashpwd, location, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
-                        sa.showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" + cmp + "'", "/images/checked.png");
+                        sa.showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" + cmp.trim() + "'", "/images/checked.png");
                         ChangingWindows ch = new ChangingWindows();
                         ch.switchWindow(event, "DbCreation.fxml");
                     } else {

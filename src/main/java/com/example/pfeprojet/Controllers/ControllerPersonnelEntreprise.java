@@ -5,8 +5,10 @@ import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 
@@ -24,6 +26,8 @@ public class ControllerPersonnelEntreprise {
     private TextField mailTextRespo;
     @FXML
     private TextField pwdTextRespo;
+    @FXML
+    private Button afficherRespo;
 
 
 
@@ -58,7 +62,8 @@ public class ControllerPersonnelEntreprise {
     private TextField pwdTextVendeur;
 
 
-
+    Alerts sa = new Alerts();
+    mouseEvents me = new mouseEvents();
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
 
@@ -67,7 +72,13 @@ public class ControllerPersonnelEntreprise {
         e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
         e.populateTableViewWithSelectionHandler(e.getVendeurs(), vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
     }
-//TODO : Supprimer, modifier(avec mail), afficher
+    //TODO : modifier(avec mail), afficher
+    //TODO : finish onMouseEntered and exited
+    //TODO : see WTF is going on with VendeurTableView
+    @FXML
+    void onMouseEnteredAfficherRespo(javafx.scene.input.MouseEvent event) {afficherRespo.setStyle("-fx-background-color: #D3D3D3; -fx-text-fill: white; -fx-background-radius: 5em;");}
+    @FXML
+    void onMouseExitedAfficherRespo(javafx.scene.input.MouseEvent event) {afficherRespo.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");}
     @FXML
     void ajouterRespo(ActionEvent event) {
         String cin = cinTextRespo.getText();
@@ -76,11 +87,11 @@ public class ControllerPersonnelEntreprise {
         String mail = mailTextRespo.getText();
         String pwd = pwdTextRespo.getText();
 
-        Alerts sa = new Alerts();
+
         if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || pwd.isEmpty()){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
-            if(mail.endsWith("@gmail.com")){
+            if(EmailSender.isValidEmailAddress(mail)){
                 if(e.insererRespo(cin, nom, prenom, mail, pwd)){
                     sa.showAlert("Ajout avec succes", "Le compte du responsable est bien ajouté ! ", "/images/checked.png");
                     e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
@@ -89,10 +100,18 @@ public class ControllerPersonnelEntreprise {
                     sa.showAlert("Ajout Erroné", "Le compte du responsable existe deja ! ", "/images/annuler.png");
                 }
             }else{
-                sa.showWarning("Format Erroné", "Veuillez entrer une adresse e-mail valide se terminant par '@gmail.com'.");
+                if(sa.showConfirmationAlert("Confirmation","Voulez-vous quand même ajouter le compte du responsable avec cette adresse e-mail invalide ? \nNB : Sinon, veuillez entrer une adresse e-mail valide au format 'xyz@gmail.com'. Si vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
+                    if(e.insererRespo(cin, nom, prenom, mail, pwd)){
+                        sa.showAlert("Ajout avec succes", "Le compte du responsable est bien ajouté ! ", "/images/checked.png");
+                        e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                    }else{
+                        sa.showAlert("Ajout Erroné", "Le compte du responsable existe deja ! ", "/images/annuler.png");
+                    }
+                }
             }
         }
     }
+
 
     @FXML
     void ajouterGestio(ActionEvent event) {
@@ -102,11 +121,10 @@ public class ControllerPersonnelEntreprise {
         String mail = mailTextGestio.getText();
         String pwd = pwdTextGestio.getText();
 
-        Alerts sa = new Alerts();
         if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || pwd.isEmpty()){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
-            if(mail.endsWith("@gmail.com")){
+            if(EmailSender.isValidEmailAddress(mail)){
                 if(e.insererGestio(cin, nom, prenom, mail, pwd)){
                     sa.showAlert("Ajout avec succes", "Le compte du gestionnaire est bien ajouté ! ", "/images/checked.png");
                     e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
@@ -115,7 +133,14 @@ public class ControllerPersonnelEntreprise {
                     sa.showAlert("Ajout Erroné", "Le compte du gestionnaire existe deja ! ", "/images/annuler.png");
                 }
             }else{
-                sa.showWarning("Format Erroné", "Veuillez entrer une adresse e-mail valide se terminant par '@gmail.com'.");
+                if(sa.showConfirmationAlert("Confirmation","Voulez-vous quand même ajouter le compte du gestionnaire avec cette adresse e-mail invalide ? \nNB : Sinon, veuillez entrer une adresse e-mail valide au format 'xyz@gmail.com'. Si vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
+                    if(e.insererGestio(cin, nom, prenom, mail, pwd)){
+                        sa.showAlert("Ajout avec succes", "Le compte du gestionnaire est bien ajouté ! ", "/images/checked.png");
+                        e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+                    }else{
+                        sa.showAlert("Ajout Erroné", "Le compte du gestionnaire existe deja ! ", "/images/annuler.png");
+                    }
+                }
             }
         }
     }
@@ -128,11 +153,11 @@ public class ControllerPersonnelEntreprise {
         String mail = mailTextVendeur.getText();
         String pwd = pwdTextVendeur.getText();
 
-        Alerts sa = new Alerts();
+
         if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || pwd.isEmpty()){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
-            if(mail.endsWith("@gmail.com")){
+            if(EmailSender.isValidEmailAddress(mail)){
                 if(e.insererVendeur(cin, nom, prenom, mail, pwd)){
                     sa.showAlert("Ajout avec succes", "Le compte du Vendeur est bien ajouté ! ", "/images/checked.png");
                     e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
@@ -141,14 +166,71 @@ public class ControllerPersonnelEntreprise {
                     sa.showAlert("Ajout Erroné", "Le compte du Vendeur existe deja ! ", "/images/annuler.png");
                 }
             }else{
-                sa.showWarning("Format Erroné", "Veuillez entrer une adresse e-mail valide se terminant par '@gmail.com'.");
+                if(sa.showConfirmationAlert("Confirmation","Voulez-vous quand même ajouter le compte du vendeur avec cette adresse e-mail invalide ? \nNB : Sinon, veuillez entrer une adresse e-mail valide au format 'xyz@gmail.com'. Si vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
+                    if(e.insererVendeur(cin, nom, prenom, mail, pwd)){
+                        sa.showAlert("Ajout avec succes", "Le compte du Vendeur est bien ajouté ! ", "/images/checked.png");
+                        e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+                    }else{
+                        sa.showAlert("Ajout Erroné", "Le compte du Vendeur existe deja ! ", "/images/annuler.png");
+                    }
+                }
             }
         }
     }
 
+    @FXML
+    void supprimerRespo(ActionEvent event) {
+        String cin = cinTextRespo.getText();
+        if(!cin.isEmpty()){
+            if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du responsable ?")){
+                if(e.supprimerResponsable(cin)){
+                    sa.showAlert("Suppression réussie","Le compte du responsable a été supprimé avec succès.","/images/checked.png");
+                    e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                }else{
+                    sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un responsable valide dans le tableau avant de procéder à la suppression.");
+                }
+            }
+        }else{
+            sa.showWarning("Suppression échouée","Veuillez sélectionner un responsable avant de procéder.");
+        }
+    }
+    @FXML
+    void supprimerGestio(ActionEvent event) {
+        String cin = cinTextGestio.getText();
+        if(!cin.isEmpty()){
+            if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du Gestionnaire ?")){
+                if(e.supprimerGestionnaire(cin)){
+                    sa.showAlert("Suppression réussie","Le compte du Gestionnaire a été supprimé avec succès.","/images/checked.png");
+                    e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+                }else{
+                    sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Gestionnaire valide dans le tableau avant de procéder à la suppression.");
+                }
+            }
+        }else{
+            sa.showWarning("Suppression échouée","Veuillez sélectionner un Gestionnaire avant de procéder.");
+        }
+    }
+
+    @FXML
+    void supprimerVendeur(ActionEvent event) {
+        String cin = cinTextVendeur.getText();
+        if(!cin.isEmpty()){
+            if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du Vendeur ?")){
+                if(e.supprimerVendeur(cin)){
+                    sa.showAlert("Suppression réussie","Le compte du Vendeur a été supprimé avec succès.","/images/checked.png");
+                    e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+                }else{
+                    sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Vendeur valide dans le tableau avant de procéder à la suppression.");
+                }
+            }
+        }else{
+            sa.showWarning("Suppression échouée","Veuillez sélectionner un Vendeur avant de procéder.");
+        }
+    }
+
+
     public void sendMail(String personnel, String nom, String prenom, String mailPersonnel, String pwdPersonnel){
-        Alerts sa = new Alerts();
-            if(sa.showConfirmationAlert("Confirmation","Souhaitez-vous envoyer un e-mail au personnel contenant leurs informations d'authentification ?")){
+            if(sa.showConfirmationAlert("Confirmation","Souhaitez-vous envoyer un e-mail au personnel contenant leurs informations d'authentification ?\nSi vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
                 if(EmailSender.check()){
                     String objet = "Informations d'Authentification pour votre Compte sur l'application FacturEase";
                     String message = "Bonjour "+ nom+" "+prenom+",\n" +

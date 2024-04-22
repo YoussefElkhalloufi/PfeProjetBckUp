@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ControllerLoginDirecteur {
+public class ControllerLoginDirecteur extends mouseEvents{
     @FXML
     private Button LoginButton;
 
@@ -99,31 +99,19 @@ public class ControllerLoginDirecteur {
     @FXML
     public void onMouseEntered(MouseEvent event) {
         LoginButton.setStyle("-fx-background-color: #DFDFDF; -fx-text-fill: white; -fx-background-radius: 5em;");
-        enlargeButton(LoginButton);
+        enlargeButtonMS(LoginButton);
     }
 
     @FXML
     public void onMouseExited(MouseEvent event) {
         LoginButton.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");
-        restoreButtonSize(LoginButton);
+        restoreButtonSizeMS(LoginButton);
     }
 
 
 
-    private static final double ENLARGE_FACTOR = 1.1;
-    private void enlargeButton(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
-        scaleTransition.setToX(ENLARGE_FACTOR);
-        scaleTransition.setToY(ENLARGE_FACTOR);
-        scaleTransition.play();
-    }
 
-    private void restoreButtonSize(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), button);
-        scaleTransition.setToX(1.0);
-        scaleTransition.setToY(1.0);
-        scaleTransition.play();
-    }
+
 
 
 

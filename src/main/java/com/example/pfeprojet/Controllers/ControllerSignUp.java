@@ -3,7 +3,6 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Connexion;
-import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

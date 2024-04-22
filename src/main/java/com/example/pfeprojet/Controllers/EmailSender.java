@@ -1,11 +1,11 @@
 package com.example.pfeprojet.Controllers;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
-
-import javax.mail.*;
-import javax.mail.internet.*;
 
 public class EmailSender {
 

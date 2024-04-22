@@ -6,13 +6,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Entreprise {
     private String nomEntreprise, adresseMail,motdepasse, localisation, numeroDeFax, secteurDactivite, identificationFiscale;

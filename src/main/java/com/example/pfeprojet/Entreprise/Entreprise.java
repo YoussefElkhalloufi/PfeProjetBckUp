@@ -107,32 +107,23 @@ public class Entreprise {
     public ResultSet getVendeurs(){
         return cn.lire("select * from vendeurs");
     }
-    public boolean insererRespo(String cin, String nom, String prenom, String mail, String pwd){
-        String req = "insert into responsables values (?,?,?,?,?)";
+    public boolean insererPersonnel(String typePerso,String cin, String nom, String prenom, String mail, String pwd){
+        String req = "insert into "+typePerso+" values(?,?,?,?,?)";
         return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
     }
-    public boolean insererGestio(String cin, String nom, String prenom, String mail, String pwd){
-        String req = "insert into gestionnaires values (?,?,?,?,?)";
-        return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
+    public boolean supprimerPersonnel(String typePerso, String cin){
+        String req = "delete from "+typePerso+" where cin = ?";
+        return cn.miseAjour(req,cin);
     }
-    public boolean insererVendeur(String cin, String nom, String prenom, String mail, String pwd){
-        String req = "insert into vendeurs values(?,?,?,?,?)";
-        return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
+    public boolean modifierPersonnel(String typePerso,String cinNv, String nom, String prenom, String mail, String pwd,String cinAncien){
+        String req = "UPDATE `"+typePerso+"` SET `CIN`=?,`Nom`=?,`Prenom`=?," +
+                "`AdresseMail`=?,`motdePasse`=? WHERE cin = ?";
+        return cn.miseAjour(req, cinNv, nom, prenom, mail, pwd, cinAncien);
     }
-
-    public boolean supprimerResponsable(String cin){
-        String req = "delete from responsables where cin = ?";
-        return cn.miseAjour(req, cin);
+    public ResultSet afficherPersonnel(String typePerso, String cin ){
+        String req = "select * from " + typePerso +" where cin = ?";
+        return cn.lire(req, cin);
     }
-    public boolean supprimerGestionnaire(String cin){
-        String req = "delete from gestionnaires where cin = ?";
-        return cn.miseAjour(req, cin);
-    }
-    public boolean supprimerVendeur(String cin){
-        String req = "delete from vendeurs where cin = ?";
-        return cn.miseAjour(req, cin);
-    }
-
     public void calculChiffreAffaire(){
         try{
             ResultSet rs =cn.lire("select sum(Total_TTC) from facture");
@@ -193,8 +184,6 @@ public class Entreprise {
         }
     }
 
-
-
     public double CalculTotalTTC(double totalHT, double remise, double tva){
         double totalTTC = 0;
         if(totalHT <= 0 || remise <0 || tva < 0){
@@ -218,7 +207,7 @@ public class Entreprise {
         try {
             // Clear existing items in the TableView
             tableView.getItems().clear();
-            tableView.setStyle("-fx-background-color: red");
+            tableView.setStyle("-fx-border-color: black");
 
             // Get metadata about the ResultSet
             ResultSetMetaData rsm = rs.getMetaData();

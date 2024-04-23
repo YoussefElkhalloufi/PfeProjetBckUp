@@ -100,4 +100,32 @@ class EntrepriseTest {
             assertEquals(0,e.getChiffreAffaireAnnee(3));
         }
 
+
+        //
+    //TestInsertPersonnel
+        @Test
+        void testInsertPerso(){
+            Entreprise e = new Entreprise("hennesy_liquor_store");
+            e.insererPersonnel("Vendeurs","lll","lll","lll","lll","lll");
+            e.insererPersonnel("Responsables","lll","lll","lll","lll","lll");
+            e.insererPersonnel("Gestionnaires","lll","lll","lll","lll","lll");
+
+        }
+    //TestSupprPersonnel
+        @Test
+        void testSupprimerPerso(){
+            Entreprise e = new Entreprise("hennesy_liquor_store");
+            e.supprimerPersonnel("Responsables","lll");
+            e.supprimerPersonnel("Gestionnaires","lll");
+            e.supprimerPersonnel("Vendeurs","lll");
+        }
+    //TestModifierPersonnel
+        @Test
+        void testModifierPerso(){
+            Entreprise e = new Entreprise("hennesy_liquor_store");
+            e.modifierPersonnel("Responsables","kkk","kkk","kkk","kkk","kkk","lll");
+            e.modifierPersonnel("Gestionnaires","kkk","kkk","kkk","kkk","kkk","lll");
+            e.modifierPersonnel("Vendeurs","kkk","kkk","kkk","kkk","kkk","lll");
+
+        }
 }

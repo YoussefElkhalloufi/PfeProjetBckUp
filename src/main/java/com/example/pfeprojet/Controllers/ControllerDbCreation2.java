@@ -166,7 +166,6 @@ public class ControllerDbCreation2 extends mouseEvents{
                                     " offre, veuillez utiliser les informations d'identification que vous " +
                                     "avez fournies lors de l'inscription.\n\nLes informations d'authentification du compte de l'entreprise :\n" +
                                     "Login :"+ e.getAdresseMail()+
-                                    //TODO  : test this (lfu9)
                                     "\nMot de passe :" + ControllerSignUp.pwdEntreprise +
                                     "\n\nLes informations d'authentification du compte du directeur :"+
                                     "\nLogin : "+adrMail+

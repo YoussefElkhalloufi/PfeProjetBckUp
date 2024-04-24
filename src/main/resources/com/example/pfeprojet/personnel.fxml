@@ -48,7 +48,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="modifierRespoBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierRespoBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#modifierRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -162,7 +162,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="modifierGestioBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierGestioBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#modifierGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -282,7 +282,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="modifierVendeurBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierVendeurBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#modifierVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>

@@ -151,11 +151,11 @@ public class ControllerPersonnelEntreprise {
     //TODO : modifier(avec mail)
     @FXML
     void ajouterRespo(ActionEvent event) {
-        String cin = cinTextRespo.getText();
-        String nom = nomTextRespo.getText();
-        String prenom = prenomTextRespo.getText();
-        String mail = mailTextRespo.getText();
-        String pwd = pwdTextRespo.getText();
+        String cin = cinTextRespo.getText().trim();
+        String nom = nomTextRespo.getText().trim();
+        String prenom = prenomTextRespo.getText().trim();
+        String mail = mailTextRespo.getText().trim();
+        String pwd = pwdTextRespo.getText().trim();
 
 
         if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || pwd.isEmpty()){
@@ -185,11 +185,11 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void ajouterGestio(ActionEvent event) {
-        String cin = cinTextGestio.getText();
-        String nom = nomTextGestio.getText();
-        String prenom = prenomTextGestio.getText();
-        String mail = mailTextGestio.getText();
-        String pwd = pwdTextGestio.getText();
+        String cin = cinTextGestio.getText().trim();
+        String nom = nomTextGestio.getText().trim();
+        String prenom = prenomTextGestio.getText().trim();
+        String mail = mailTextGestio.getText().trim();
+        String pwd = pwdTextGestio.getText().trim();
 
         if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || pwd.isEmpty()){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
@@ -217,11 +217,11 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void ajouterVendeur(ActionEvent event) {
-        String cin = cinTextVendeur.getText();
-        String nom = nomTextVendeur.getText();
-        String prenom = prenomTextVendeur.getText();
-        String mail = mailTextVendeur.getText();
-        String pwd = pwdTextVendeur.getText();
+        String cin = cinTextVendeur.getText().trim();
+        String nom = nomTextVendeur.getText().trim();
+        String prenom = prenomTextVendeur.getText().trim();
+        String mail = mailTextVendeur.getText().trim();
+        String pwd = pwdTextVendeur.getText().trim();
 
 
         if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || pwd.isEmpty()){
@@ -264,7 +264,7 @@ public class ControllerPersonnelEntreprise {
     }
     @FXML
     void supprimerRespo(ActionEvent event) {
-        String cin = cinTextRespo.getText();
+        String cin = cinTextRespo.getText().trim();
         if(!cin.isEmpty()){
             if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du responsable ?")){
                 if(e.supprimerPersonnel("Responsables",cin)){
@@ -281,7 +281,7 @@ public class ControllerPersonnelEntreprise {
     }
     @FXML
     void supprimerGestio(ActionEvent event) {
-        String cin = cinTextGestio.getText();
+        String cin = cinTextGestio.getText().trim();
         if(!cin.isEmpty()){
             if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du Gestionnaire ?")){
                 if(e.supprimerPersonnel("Gestionnaires",cin)){
@@ -299,7 +299,7 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void supprimerVendeur(ActionEvent event) {
-        String cin = cinTextVendeur.getText();
+        String cin = cinTextVendeur.getText().trim();
         if(!cin.isEmpty()){
             if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du Vendeur ?")){
                 if(e.supprimerPersonnel("Vendeurs",cin)){
@@ -317,7 +317,7 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void afficherRespo(ActionEvent event) {
-        String cin = cinTextRespo.getText();
+        String cin = cinTextRespo.getText().trim();
         if(!cin.isEmpty()){
             ResultSet rs = e.afficherPersonnel("Responsables",cin);
             if(rs != null){
@@ -331,7 +331,7 @@ public class ControllerPersonnelEntreprise {
     }
     @FXML
     void afficherGestio(ActionEvent event) {
-        String cin = cinTextGestio.getText();
+        String cin = cinTextGestio.getText().trim();
         if(!cin.isEmpty()){
             ResultSet rs = e.afficherPersonnel("Gestionnaires", cin);
             if(rs != null){
@@ -346,7 +346,7 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void afficherVendeur(ActionEvent event) {
-        String cin = cinTextVendeur.getText();
+        String cin = cinTextVendeur.getText().trim();
         if (!cin.isEmpty()){
             ResultSet rs = e.afficherPersonnel("Vendeurs", cin);
             if(rs!= null){
@@ -358,7 +358,61 @@ public class ControllerPersonnelEntreprise {
             sa.showWarning("Affichage échouée","Veuillez taper un cin avant de procéder.");
         }
     }
+    @FXML
+    void modifierRespo(ActionEvent event) {
+            String cin = cinTextRespo.getText().trim();
+            String nom = nomTextRespo.getText().trim();
+            String prenom = prenomTextRespo.getText().trim();
+            String mail = mailTextRespo.getText().trim();
+            String pwd = pwdTextRespo.getText().trim();
+            if(!cin.isEmpty()){
+                if(e.modifierPersonnel("Responsables",nom,prenom,mail,pwd,cin)){
+                    sa.showAlert("Modification réussie","Le compte du Responsable a été mis à jour avec succès.","/images/checked.png");
+                    e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                }else{
+                    sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Responsable.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Responsable. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
+                }
+            }else{
+                sa.showWarning("Modification échouée","Veuillez sélectionner un responsable et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
+            }
+    }
+    @FXML
+    void modifierGestio(ActionEvent event) {
+        String cin = cinTextGestio.getText().trim();
+        String nom = nomTextGestio.getText().trim();
+        String prenom = prenomTextGestio.getText().trim();
+        String mail = mailTextGestio.getText().trim();
+        String pwd = pwdTextGestio.getText().trim();
+        if(!cin.isEmpty()){
+            if(e.modifierPersonnel("Gestionnaires",nom,prenom,mail,pwd,cin)){
+                sa.showAlert("Modification réussie","Le compte du Gestionnaire a été mis à jour avec succès.","/images/checked.png");
+                e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+            }else{
+                sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Gestionnaire.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Gestionnaire. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
+            }
+        }else{
+            sa.showWarning("Modification échouée","Veuillez sélectionner un gestionnaire et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
+        }
+    }
+    @FXML
+    void modifierVendeur(ActionEvent event) {
+        String cin = cinTextVendeur.getText().trim();
+        String nom = nomTextVendeur.getText().trim();
+        String prenom = prenomTextVendeur.getText().trim();
+        String mail = mailTextVendeur.getText().trim();
+        String pwd = pwdTextVendeur.getText().trim();
 
+        if(!cin.isEmpty()){
+            if(e.modifierPersonnel("Vendeurs",nom,prenom,mail,pwd,cin)){
+                sa.showAlert("Modification réussie","Le compte du Vendeur a été mis à jour avec succès.","/images/checked.png");
+                e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+            }else{
+                sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Vendeur.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Vendeur. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
+            }
+        }else{
+            sa.showWarning("Modification échouée","Veuillez sélectionner un Vendeur et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
+        }
+    }
     public void sendMail(String personnel, String nom, String prenom, String mailPersonnel, String pwdPersonnel){
             if(sa.showConfirmationAlert("Confirmation","Souhaitez-vous envoyer un e-mail au personnel contenant leurs informations d'authentification ?\nSi vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
                 if(EmailSender.check()){

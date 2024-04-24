@@ -115,10 +115,10 @@ public class Entreprise {
         String req = "delete from "+typePerso+" where cin = ?";
         return cn.miseAjour(req,cin);
     }
-    public boolean modifierPersonnel(String typePerso,String cinNv, String nom, String prenom, String mail, String pwd,String cinAncien){
-        String req = "UPDATE `"+typePerso+"` SET `CIN`=?,`Nom`=?,`Prenom`=?," +
+    public boolean modifierPersonnel(String typePerso, String nom, String prenom, String mail, String pwd,String cin){
+        String req = "UPDATE `"+typePerso+"` SET `Nom`=?,`Prenom`=?," +
                 "`AdresseMail`=?,`motdePasse`=? WHERE cin = ?";
-        return cn.miseAjour(req, cinNv, nom, prenom, mail, pwd, cinAncien);
+        return cn.miseAjour(req, nom, prenom, mail, pwd, cin);
     }
     public ResultSet afficherPersonnel(String typePerso, String cin ){
         String req = "select * from " + typePerso +" where cin = ?";

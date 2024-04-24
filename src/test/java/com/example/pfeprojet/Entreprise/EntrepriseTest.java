@@ -122,10 +122,10 @@ class EntrepriseTest {
     //TestModifierPersonnel
         @Test
         void testModifierPerso(){
-            Entreprise e = new Entreprise("hennesy_liquor_store");
-            e.modifierPersonnel("Responsables","kkk","kkk","kkk","kkk","kkk","lll");
-            e.modifierPersonnel("Gestionnaires","kkk","kkk","kkk","kkk","kkk","lll");
-            e.modifierPersonnel("Vendeurs","kkk","kkk","kkk","kkk","kkk","lll");
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.modifierPersonnel("Responsables","kkk","kkk","kkk","kkk","fc9090");
+            e.modifierPersonnel("Gestionnaires","kkk","kkk","kkk","kkk","12ZS");
+            e.modifierPersonnel("Vendeurs","kkk","kkk","kkk","kkk","sdfd");
 
         }
 }

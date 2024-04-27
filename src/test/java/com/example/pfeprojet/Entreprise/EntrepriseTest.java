@@ -165,4 +165,18 @@ class EntrepriseTest {
         e.ajouterService(1,230.50,"Testeur","","testeur");
     }
 
+    //TestModifierProduit
+    @Test
+    void testModifierProduit(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.modifierProduit(4,200.90,15,"","2024-08-29","","");
+    }
+
+    //TestModifierService
+    @Test
+    void testModifierService(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        e.modifierService(1,150," ","","testeurModifier");
+    }
+
 }

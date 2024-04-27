@@ -148,7 +148,6 @@ public class ControllerPersonnelEntreprise {
     private void applyButtonStyleOnMouseExited(Button button){
         button.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");
     }
-    //TODO : envoyer mail lors de la modification
     @FXML
     void ajouterRespo(ActionEvent event) {
         String cin = cinTextRespo.getText().trim();
@@ -245,21 +244,6 @@ public class ControllerPersonnelEntreprise {
                     }
                 }
             }
-        }
-    }
-
-    public void emailSuppression(String nom, String prenom, String mail){
-        String objet = "Notification de suppression de compte dans FacturEase";
-        String message = "Cher " +prenom+" "+nom+",\n\n"
-                +"Nous vous informons que votre compte dans l'application FacturEase " +
-                "a été supprimé. Si vous avez des questions ou si vous pensez que cela" +
-                " est une erreur, veuillez contacter votre directeur immédiatement pour" +
-                " obtenir de l'aide.\n\n"
-                +"Nous vous remercions de votre compréhension.\n\n"
-                +"Cordialement,\n"+
-                "[L'équipe FacturEase]";
-        if(EmailSender.check()){
-            EmailSender.sendEmail(mail,objet,message);
         }
     }
     @FXML
@@ -411,6 +395,20 @@ public class ControllerPersonnelEntreprise {
             }
         }else{
             sa.showWarning("Modification échouée","Veuillez sélectionner un Vendeur et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
+        }
+    }
+    public void emailSuppression(String nom, String prenom, String mail){
+        String objet = "Notification de suppression de compte dans FacturEase";
+        String message = "Cher " +prenom+" "+nom+",\n\n"
+                +"Nous vous informons que votre compte dans l'application FacturEase " +
+                "a été supprimé. Si vous avez des questions ou si vous pensez que cela" +
+                " est une erreur, veuillez contacter votre directeur immédiatement pour" +
+                " obtenir de l'aide.\n\n"
+                +"Nous vous remercions de votre compréhension.\n\n"
+                +"Cordialement,\n"+
+                "[L'équipe FacturEase]";
+        if(EmailSender.check()){
+            EmailSender.sendEmail(mail,objet,message);
         }
     }
     public void sendMail(String personnel, String nom, String prenom, String mailPersonnel, String pwdPersonnel){

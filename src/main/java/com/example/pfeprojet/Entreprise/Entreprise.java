@@ -170,6 +170,77 @@ public class Entreprise {
         // Execute the query
         return cn.miseAjour(req.toString());
     }
+    public boolean modifierService(int idService, double cout_heure, String libelleService, String typeService, String description) {
+        // Create lists to store column names and values
+        List<String> updates = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (!libelleService.equalsIgnoreCase("")) {
+            updates.add("libelleService = '" + libelleService + "'");
+        }
+        if (!typeService.equalsIgnoreCase("")) {
+            updates.add("typeService = '" + typeService + "'");
+        }
+        if (!description.equalsIgnoreCase("")) {
+            updates.add("description = '" + description + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (updates.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("UPDATE service SET cout_heure = " + cout_heure + ", ");
+        for (int i = 0; i < updates.size(); i++) {
+            req.append(updates.get(i));
+            if (i < updates.size() - 1) {
+                req.append(", ");
+            }
+        }
+        req.append(" WHERE idService = ").append(idService);
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
+    public boolean modifierProduit(int idProduit, double prixUnitaire, int stock, String libelleProduit, String dateEnregistrement, String description, String categorie) {
+        // Create lists to store column names and values
+        List<String> updates = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (!libelleProduit.equalsIgnoreCase("")) {
+            updates.add("libelleProduit = '" + libelleProduit + "'");
+        }
+        if (!dateEnregistrement.equalsIgnoreCase("")) {
+            updates.add("dateEnregistrement = '" + dateEnregistrement + "'");
+        }
+        if (!description.equalsIgnoreCase("")) {
+            updates.add("description = '" + description + "'");
+        }
+        if (!categorie.equalsIgnoreCase("")) {
+            updates.add("categorie = '" + categorie + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (updates.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("UPDATE produit SET prixUnitaire = " + prixUnitaire + ", stock = " +stock+", ");
+        for (int i = 0; i < updates.size(); i++) {
+            req.append(updates.get(i));
+            if (i < updates.size() - 1) {
+                req.append(", ");
+            }
+        }
+        req.append(" WHERE idProduit = ").append(idProduit);
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
 
     public boolean ajouterProduit(int idProduit, double prixUnitaire, int stock, String libelleProduit, String dateEnregistrement, String description, String categorie) {
         // Create lists to store column names and values

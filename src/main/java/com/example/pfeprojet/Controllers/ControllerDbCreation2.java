@@ -152,7 +152,7 @@ public class ControllerDbCreation2 extends mouseEvents{
                         cEntreprise.createTable(dbName, "Vendeurs", getEmpColumns());
 
                         cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_mois(mois INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE MONTH(dateFacture) = mois;RETURN somme; END ;");
-                        cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_annee(annee INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE YEAR(datedateFacture) = annee; RETURN somme; END;");
+                        cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_annee(annee INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE YEAR(dateFacture) = annee; RETURN somme; END;");
                         cEntreprise.miseAjour("CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT) BEGIN DECLARE pu_p DECIMAL(10,2); DECLARE THT DECIMAL(10,2); DECLARE TTC DECIMAL(10,2);  SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);END IF;SET THT = pu_p * qt; INSERT INTO facture_produit VALUES (nf, idpr, qt, THT); UPDATE produit SET stock = stock - qt WHERE idProduit = idpr; SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf); UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf; ELSE SELECT 'stock indisponible';END IF; END ;");
 
                         Entreprise e = new Entreprise(ControllerSignUp.getCmp());
@@ -166,7 +166,6 @@ public class ControllerDbCreation2 extends mouseEvents{
                                     " offre, veuillez utiliser les informations d'identification que vous " +
                                     "avez fournies lors de l'inscription.\n\nLes informations d'authentification du compte de l'entreprise :\n" +
                                     "Login :"+ e.getAdresseMail()+
-                                    //TODO  : test this (lfu9)
                                     "\nMot de passe :" + ControllerSignUp.pwdEntreprise +
                                     "\n\nLes informations d'authentification du compte du directeur :"+
                                     "\nLogin : "+adrMail+

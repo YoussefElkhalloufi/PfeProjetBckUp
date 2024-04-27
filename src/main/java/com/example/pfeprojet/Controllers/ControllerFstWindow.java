@@ -104,7 +104,7 @@ public class ControllerFstWindow extends mouseEvents{
                          if(i==0){
                             a.showWarning("ATTENTION","Vous avez depassé 3 essais");
                             c.miseAjour("update infosentreprises set status = 'désactivé', dateHeureStatus = NOW()  where nomEntreprise = ?", cmp );
-                            a.showWarning("Compte désactivé","Votre compte a été désactivé pendant 24 heures.\nSi vous estimez que cette désactivation est injustifiée, \nVeuillez nous contacter à l'adresse e-mail suivante : factureasePFE@gmail.com ");
+                            a.showWarning("Compte désactivé","Votre compte a été désactivé pendant 24 heures.\nSi vous estimez que cette désactivation est injustifiée, Veuillez nous contacter à l'adresse e-mail suivante : [factureasePFE@gmail.com] ");
                          }
                       }
                    }else {

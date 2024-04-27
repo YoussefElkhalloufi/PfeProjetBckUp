@@ -2,6 +2,10 @@ package com.example.pfeprojet.Entreprise;
 
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
+
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EntrepriseTest {
@@ -99,5 +103,66 @@ class EntrepriseTest {
             Entreprise e = new Entreprise("hennesy_liquor_store");
             assertEquals(0,e.getChiffreAffaireAnnee(3));
         }
+
+
+        //
+    //TestInsertPersonnel
+        @Test
+        void testInsertPerso(){
+            Entreprise e = new Entreprise("hennesy_liquor_store");
+            e.insererPersonnel("Vendeurs","lll","lll","lll","lll","lll");
+            e.insererPersonnel("Responsables","lll","lll","lll","lll","lll");
+            e.insererPersonnel("Gestionnaires","lll","lll","lll","lll","lll");
+
+        }
+    //TestSupprPersonnel
+        @Test
+        void testSupprimerPerso(){
+            Entreprise e = new Entreprise("hennesy_liquor_store");
+            e.supprimerPersonnel("Responsables","lll");
+            e.supprimerPersonnel("Gestionnaires","lll");
+            e.supprimerPersonnel("Vendeurs","lll");
+        }
+    //TestModifierPersonnel
+        @Test
+        void testModifierPerso(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.modifierPersonnel("Responsables","kkk","kkk","kkk","kkk","fc9090");
+            e.modifierPersonnel("Gestionnaires","kkk","kkk","kkk","kkk","12ZS");
+            e.modifierPersonnel("Vendeurs","kkk","kkk","kkk","kkk","sdfd");
+
+        }
+
+
+    //TestAjouterProduit
+        @Test
+        void testAjouterProduit(){
+            Entreprise e = new Entreprise("dolce");
+            e.ajouterProduit(16,230.50,150,"chageur","2015-01-01","TEst","Electronique");
+        }
+        @Test
+        void testAjouterProduit1(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.ajouterProduit(56,100,180,"Changeur","2024-08-29","","");
+        }
+        @Test
+        void testAjouterProduit2(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        e.ajouterProduit(4,100,180,"Changeur","","","");
+    }
+
+    //TestSupprimerProduit
+        @Test
+        void testSupprimerProduit(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.supprimerProduit(1);
+        }
+
+    //TestAjouterService
+    @Test
+    void testAjouterService(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        e.ajouterService(1,230.50,"Testeur","","testeur");
+    }
 
 }

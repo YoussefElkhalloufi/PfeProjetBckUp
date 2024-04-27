@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerPersonnelEntreprise">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerPersonnelEntreprise">
    <children>
       <TabPane layoutX="-3.0" layoutY="60.0" prefHeight="479.0" prefWidth="869.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab style="-fx-background-color: #ededed;" text="Responsable">
                <content>
-                  <AnchorPane prefHeight="4.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
+                  <AnchorPane prefHeight="358.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button fx:id="afficherRespo" layoutX="130.0" layoutY="310.0" mnemonicParsing="false" onMouseEntered="#onMouseEnteredAfficherRespo" onMouseExited="#onMouseExitedAfficherRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherRespoBtn" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" onAction="#afficherRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -27,8 +35,9 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TableView fx:id="responsableTableView" layoutX="308.0" layoutY="17.0" prefHeight="261.0" prefWidth="502.0" />
-                        <Button layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <TableView fx:id="responsableTableView" layoutX="350.0" layoutY="50.0" prefHeight="261.0" prefWidth="502.0" />
+                        <AnchorPane layoutX="16.0" layoutY="50.0" prefHeight="263.0" prefWidth="307.0" style="-fx-background-color: #D5D5D5; -fx-background-radius: 30;" />
+                        <Button fx:id="ajouterRespoBtn" layoutX="310.0" layoutY="350.0" mnemonicParsing="false" onAction="#ajouterRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -39,7 +48,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="500.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierRespoBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#modifierRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -50,7 +59,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="680.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button fx:id="supprimerRespoBtn" layoutX="680.0" layoutY="350.0" mnemonicParsing="false" onAction="#supprimerRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -61,37 +70,37 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TextField fx:id="cinTextRespo" layoutX="130.0" layoutY="50.0" />
-                        <Label layoutX="28.0" layoutY="53.0" text="Cin :">
+                        <TextField fx:id="cinTextRespo" layoutX="140.0" layoutY="83.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="86.0" text="Cin :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="prenomTextRespo" layoutX="130.0" layoutY="136.0" />
-                        <Label layoutX="28.0" layoutY="96.0" text="Nom :">
+                        <TextField fx:id="prenomTextRespo" layoutX="140.0" layoutY="169.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="129.0" text="Nom :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="pwdTextRespo" layoutX="130.0" layoutY="222.0" />
-                        <Label layoutX="28.0" layoutY="139.0" text="Prénom :">
+                        <TextField fx:id="pwdTextRespo" layoutX="140.0" layoutY="255.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="172.0" text="Prénom :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="mailTextRespo" layoutX="130.0" layoutY="179.0" promptText="Adresse G-Mail existante" />
-                        <Label layoutX="28.0" layoutY="182.0" text="Mail :">
+                        <TextField fx:id="mailTextRespo" layoutX="140.0" layoutY="212.0" promptText="Adresse G-Mail existante" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="215.0" text="Mail :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nomTextRespo" layoutX="130.0" layoutY="93.0" />
-                        <Label layoutX="28.0" layoutY="225.0" text="Mot de passe :">
+                        <TextField fx:id="nomTextRespo" layoutX="140.0" layoutY="126.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="258.0" text="Mot de passe :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="26.0" layoutY="310.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                        <Button layoutX="26.0" layoutY="350.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -102,6 +111,21 @@
                               <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiser" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/actualiser.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -114,7 +138,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button layoutX="130.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherGestioBtn" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" onAction="#afficherGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -125,8 +149,9 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TableView fx:id="gestionnaireTableView" layoutX="308.0" layoutY="17.0" prefHeight="261.0" prefWidth="502.0" />
-                        <Button layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <TableView fx:id="gestionnaireTableView" layoutX="350.0" layoutY="50.0" prefHeight="261.0" prefWidth="502.0" />
+                        <AnchorPane layoutX="16.0" layoutY="50.0" prefHeight="263.0" prefWidth="307.0" style="-fx-background-color: #D5D5D5; -fx-background-radius: 30;" />
+                        <Button fx:id="ajouterGestioBtn" layoutX="310.0" layoutY="350.0" mnemonicParsing="false" onAction="#ajouterGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -137,7 +162,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="500.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierGestioBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#modifierGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -148,7 +173,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="680.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button fx:id="supprimerGestioBtn" layoutX="680.0" layoutY="350.0" mnemonicParsing="false" onAction="#supprimerGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -159,37 +184,37 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TextField fx:id="nomTextGestio" layoutX="130.0" layoutY="93.0" />
-                        <Label layoutX="28.0" layoutY="53.0" text="Cin :">
+                        <TextField fx:id="nomTextGestio" layoutX="140.0" layoutY="126.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="86.0" text="Cin :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="pwdTextGestio" layoutX="130.0" layoutY="222.0" />
-                        <Label layoutX="28.0" layoutY="96.0" text="Nom :">
+                        <TextField fx:id="pwdTextGestio" layoutX="140.0" layoutY="255.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="129.0" text="Nom :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="prenomTextGestio" layoutX="130.0" layoutY="136.0" />
-                        <Label layoutX="28.0" layoutY="139.0" text="Prénom :">
+                        <TextField fx:id="prenomTextGestio" layoutX="140.0" layoutY="169.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="172.0" text="Prénom :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="mailTextGestio" layoutX="130.0" layoutY="179.0" promptText="Adresse G-Mail existante" />
-                        <Label layoutX="28.0" layoutY="182.0" text="Mail :">
+                        <TextField fx:id="mailTextGestio" layoutX="140.0" layoutY="212.0" promptText="Adresse G-Mail existante" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="215.0" text="Mail :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cinTextGestio" layoutX="130.0" layoutY="50.0" />
-                        <Label layoutX="28.0" layoutY="225.0" text="Mot de passe :">
+                        <TextField fx:id="cinTextGestio" layoutX="140.0" layoutY="83.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="258.0" text="Mot de passe :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="26.0" layoutY="310.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                        <Button layoutX="26.0" layoutY="350.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -204,6 +229,21 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiser" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/actualiser.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </content>
@@ -212,7 +252,7 @@
                <content>
                   <AnchorPane prefHeight="413.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button layoutX="130.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherVendeurBtn" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" onAction="#afficherVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -223,14 +263,15 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TableView fx:id="vendeurTableView" layoutX="308.0" layoutY="17.0" prefHeight="261.0" prefWidth="502.0" />
-                        <TextField fx:id="cinTextVendeur" layoutX="130.0" layoutY="50.0" />
-                        <Label layoutX="28.0" layoutY="53.0" text="Cin :">
+                        <AnchorPane layoutX="16.0" layoutY="50.0" prefHeight="263.0" prefWidth="307.0" style="-fx-background-color: #D5D5D5; -fx-background-radius: 30;" />
+                        <TableView fx:id="vendeurTableView" layoutX="350.0" layoutY="50.0" prefHeight="261.0" prefWidth="502.0" />
+                        <TextField fx:id="cinTextVendeur" layoutX="140.0" layoutY="83.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="86.0" text="Cin :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="310.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <Button fx:id="ajouterVendeurBtn" layoutX="310.0" layoutY="350.0" mnemonicParsing="false" onAction="#ajouterVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -241,7 +282,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="500.0" layoutY="310.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierVendeurBtn" layoutX="500.0" layoutY="350.0" mnemonicParsing="false" onAction="#modifierVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -252,7 +293,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="680.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button fx:id="supprimerVendeurBtn" layoutX="680.0" layoutY="350.0" mnemonicParsing="false" onAction="#supprimerVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -263,31 +304,31 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TextField fx:id="nomTextVendeur" layoutX="130.0" layoutY="93.0" />
-                        <Label layoutX="28.0" layoutY="96.0" text="Nom :">
+                        <TextField fx:id="nomTextVendeur" layoutX="140.0" layoutY="126.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="129.0" text="Nom :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="prenomTextVendeur" layoutX="130.0" layoutY="136.0" />
-                        <Label layoutX="28.0" layoutY="139.0" text="Prénom :">
+                        <TextField fx:id="prenomTextVendeur" layoutX="140.0" layoutY="169.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="172.0" text="Prénom :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="mailTextVendeur" layoutX="130.0" layoutY="179.0" promptText="Adresse G-Mail existante" />
-                        <Label layoutX="28.0" layoutY="182.0" text="Mail :">
+                        <TextField fx:id="mailTextVendeur" layoutX="140.0" layoutY="212.0" promptText="Adresse G-Mail existante" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="215.0" text="Mail :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="pwdTextVendeur" layoutX="130.0" layoutY="222.0" />
-                        <Label layoutX="28.0" layoutY="225.0" text="Mot de passe :">
+                        <TextField fx:id="pwdTextVendeur" layoutX="140.0" layoutY="255.0" style="-fx-background-radius: 5;" />
+                        <Label layoutX="38.0" layoutY="258.0" text="Mot de passe :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="26.0" layoutY="310.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                        <Button layoutX="26.0" layoutY="350.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -298,6 +339,21 @@
                               <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiser" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/actualiser.png" />
                                  </image>
                               </ImageView>
                            </graphic>

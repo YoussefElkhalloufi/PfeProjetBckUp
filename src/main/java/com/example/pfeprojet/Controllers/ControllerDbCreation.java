@@ -14,9 +14,7 @@ import java.util.ArrayList;
 
 public class ControllerDbCreation extends mouseEvents{
 
-    //ControllerSignUp c = new ControllerSignUp();
     String dbName = ControllerSignUp.getCmp();
-    //String dbName = "bbbbbbb";
 
 
 
@@ -239,48 +237,41 @@ public class ControllerDbCreation extends mouseEvents{
         if (idProduit.isSelected()) {
             selectedColumns.add("idProduit INT AUTO_INCREMENT PRIMARY KEY");
         }
-        if (libelleProduit.isSelected()) {
-            selectedColumns.add("libelleProduit VARCHAR(80)");
-        }
         if (prixUnitaire.isSelected()) {
             selectedColumns.add("prixUnitaire DECIMAL(10, 2)");
         }
-        if (categorie.isSelected()) {
-            ArrayList<String> categorieColumns = new ArrayList<>();
-            categorieColumns.add("idCategorie INT AUTO_INCREMENT PRIMARY KEY");
-            categorieColumns.add("libelleCategorie VARCHAR(255)");
-            categorieColumns.add("Description VARCHAR(255)");
-            createTable(dbName,"categorie",categorieColumns);
-            selectedColumns.add("idCategorie INT");
-            selectedColumns.add("Constraint fk_categorie_produit foreign key (idCategorie) references categorie (idCategorie) ");
+        selectedColumns.add("stock INT");
+        if (libelleProduit.isSelected()) {
+            selectedColumns.add("libelleProduit VARCHAR(80)");
         }
         if(dateEnregistrement.isSelected()){
-            selectedColumns.add("date_enregistrement DATE");
+            selectedColumns.add("dateenregistrement DATE");
         }
         if(description.isSelected()){
             selectedColumns.add("description VARCHAR(255)");
         }
+        if (categorie.isSelected()) {
+            selectedColumns.add("Categorie Varchar(255)");
+        }
 
-        selectedColumns.add("stock INT");
         return selectedColumns;
     }
 
 
     private ArrayList<String> getSelectedColumnsService() {
-        // Check which checkboxes are selected and add their corresponding column names to the list
         ArrayList<String> selectedColumns = new ArrayList<>();
 
         if (idService.isSelected()) {
             selectedColumns.add("idService INT AUTO_INCREMENT PRIMARY KEY");
+        }
+        if (cout_heure.isSelected()) {
+            selectedColumns.add("Cout_heure DECIMAL(10, 2)");
         }
         if(libelleService.isSelected()){
             selectedColumns.add("LibelleService VARCHAR(100)");
         }
         if (typeService.isSelected()) {
             selectedColumns.add("TypeService VARCHAR(255)");
-        }
-        if (cout_heure.isSelected()) {
-            selectedColumns.add("Cout_heure DECIMAL(10, 2)");
         }
         if(descriptionService.isSelected()){
             selectedColumns.add("Description VARCHAR(255)");

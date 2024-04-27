@@ -114,7 +114,7 @@ public class ControllerSignUp extends mouseEvents{
                         ChangingWindows ch = new ChangingWindows();
                         ch.switchWindow(event, "DbCreation.fxml");
                     } else {
-                        sa.showAlert("Échec de la création du compte.", "Assurez-vous que toutes les informations sont correctes", "/images/checkFailed.png");
+                        sa.showAlert("Échec de la création du compte.", "Assurez-vous que toutes les informations sont correctes", "/images/annuler.png");
                     }
                 }
                 c.closeResources();

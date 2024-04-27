@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1014.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerInventaire">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1025.0" />
+      <Text layoutX="438.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventaire">
+         <font>
+            <Font name="Times New Roman" size="36.0" />
+         </font>
+      </Text>
+      <TabPane layoutX="-5.0" layoutY="63.0" prefHeight="555.0" prefWidth="1022.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="produitPane" text="Produits">
+               <content>
+                  <AnchorPane prefHeight="552.0" prefWidth="1012.0">
+                     <children>
+                        <TableView fx:id="produitTableView" layoutX="367.0" layoutY="100.0" prefHeight="313.0" prefWidth="632.0">
+                          <columns>
+                            <TableColumn prefWidth="90.0" text="Référence" />
+                            <TableColumn prefWidth="90.0" text="Libellé" />
+                              <TableColumn prefWidth="90.0" text="Prix unitaire" />
+                              <TableColumn prefWidth="90.0" text="Catégorie" />
+                              <TableColumn prefWidth="90.0" text="Date enregistrement" />
+                              <TableColumn prefWidth="90.0" text="Stock" />
+                              <TableColumn prefWidth="90.0" text="Description" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="idPrAfficher" layoutX="688.0" layoutY="52.0" prefHeight="25.0" prefWidth="158.0" />
+                        <Text layoutX="511.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechercher le produit">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="prixUnitaireProduit" layoutX="279.0" layoutY="163.0" prefHeight="25.0" prefWidth="80.0" />
+                        <TextField fx:id="libelleTextbox" layoutX="257.0" layoutY="221.0" prefHeight="25.0" prefWidth="101.0" />
+                        <TextField fx:id="stockProduit" layoutX="95.0" layoutY="221.0" prefHeight="25.0" prefWidth="80.0" />
+                        <Label fx:id="libelleText" layoutX="199.0" layoutY="224.0" text="Libelle">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="categorieText" layoutX="91.0" layoutY="390.0" text="Catégorie">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="190.0" layoutY="166.0" text="Prix unitaire">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="descriptionTextBox" layoutX="163.0" layoutY="335.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label fx:id="descriptionText" layoutX="80.0" layoutY="339.0" text="Description">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="categorieTextBox" layoutX="163.0" layoutY="387.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label layoutX="50.0" layoutY="224.0" text="Stock">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="dateEnregistrementText" layoutX="10.0" layoutY="286.0" text="Date d'enregistrement">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="166.0" text="Id produit">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="-192.0" layoutY="234.0" prefHeight="25.0" prefWidth="169.0" />
+                        <TextField fx:id="idProduit" layoutX="97.0" layoutY="163.0" prefHeight="25.0" prefWidth="80.0" />
+                        <Button fx:id="afficherProduit" layoutX="870.0" layoutY="49.0" mnemonicParsing="false" onAction="#afficherProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="ajouterProduit" layoutX="448.0" layoutY="455.0" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="modifierProduit" layoutX="638.0" layoutY="455.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="supprimerProduit" layoutX="818.0" layoutY="455.0" mnemonicParsing="false" onAction="#supprimerProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <DatePicker fx:id="dateEnregistrementTextBox" layoutX="161.0" layoutY="283.0" />
+                        <Button layoutX="44.0" layoutY="448.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiserPr" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/actualiser.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab fx:id="servicePane" text="Services">
+               <content>
+                  <AnchorPane prefHeight="525.0" prefWidth="1024.0">
+                     <children>
+                        <TableView fx:id="serviceTableView" layoutX="350.0" layoutY="106.0" prefHeight="313.0" prefWidth="649.0">
+                           <columns>
+                              <TableColumn prefWidth="130.0" text="Id_service" />
+                              <TableColumn prefWidth="130.0" text="Libellé" />
+                              <TableColumn prefWidth="130.0" text="Type" />
+                              <TableColumn prefWidth="130.0" text="Cout par heure" />
+                              <TableColumn prefWidth="130.0" text="Description" />
+                           </columns>
+                        </TableView>
+                        <TextField fx:id="idSerAfficher" layoutX="688.0" layoutY="52.0" prefHeight="25.0" prefWidth="158.0" />
+                        <Text layoutX="511.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechercher le service">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="coutPheure" layoutX="161.0" layoutY="214.0" prefHeight="25.0" prefWidth="169.0" />
+                        <TextField fx:id="libelleServiceTextBox" layoutX="161.0" layoutY="266.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label fx:id="libelleServiceText" layoutX="103.0" layoutY="269.0" text="Libelle">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="typeServiceText" layoutX="112.0" layoutY="321.0" text="Type ">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="81.0" layoutY="163.0" text="Id_service">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="idService" layoutX="161.0" layoutY="160.0" prefHeight="25.0" prefWidth="169.0" />
+                        <TextField fx:id="descriptionServiceTextBox" layoutX="159.0" layoutY="370.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label fx:id="descriptionServiceText" layoutX="76.0" layoutY="374.0" text="Description">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="typeServiceTextBox" layoutX="159.0" layoutY="318.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label layoutX="55.0" layoutY="217.0" text="Cout par heure">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="afficherService" layoutX="870.0" layoutY="48.0" mnemonicParsing="false" onAction="#afficherService" prefHeight="33.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="ajouterService" layoutX="470.0" layoutY="454.0" mnemonicParsing="false" onAction="#ajouterService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="modifierService" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="supprimerService" layoutX="840.0" layoutY="454.0" mnemonicParsing="false" onAction="#supprimerService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="33.0" layoutY="454.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/en-arriere.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiserSer" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/actualiser.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

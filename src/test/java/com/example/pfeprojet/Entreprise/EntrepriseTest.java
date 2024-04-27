@@ -2,6 +2,10 @@ package com.example.pfeprojet.Entreprise;
 
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
+
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EntrepriseTest {
@@ -128,4 +132,37 @@ class EntrepriseTest {
             e.modifierPersonnel("Vendeurs","kkk","kkk","kkk","kkk","sdfd");
 
         }
+
+
+    //TestAjouterProduit
+        @Test
+        void testAjouterProduit(){
+            Entreprise e = new Entreprise("dolce");
+            e.ajouterProduit(16,230.50,150,"chageur","2015-01-01","TEst","Electronique");
+        }
+        @Test
+        void testAjouterProduit1(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.ajouterProduit(56,100,180,"Changeur","2024-08-29","","");
+        }
+        @Test
+        void testAjouterProduit2(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        e.ajouterProduit(4,100,180,"Changeur","","","");
+    }
+
+    //TestSupprimerProduit
+        @Test
+        void testSupprimerProduit(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.supprimerProduit(1);
+        }
+
+    //TestAjouterService
+    @Test
+    void testAjouterService(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        e.ajouterService(1,230.50,"Testeur","","testeur");
+    }
+
 }

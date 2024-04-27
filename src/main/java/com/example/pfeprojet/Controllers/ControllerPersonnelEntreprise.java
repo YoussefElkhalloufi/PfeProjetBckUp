@@ -88,9 +88,9 @@ public class ControllerPersonnelEntreprise {
 
 
     public void initialize(){
-        e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
-        e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
-        e.populateTableViewWithSelectionHandler(e.getVendeurs(), vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+        e.populateTableViewWithSelectionHandler(e.getPersonnel("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+        e.populateTableViewWithSelectionHandler(e.getPersonnel("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+        e.populateTableViewWithSelectionHandler(e.getPersonnel("Vendeurs"), vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
         buttonsStyle();
     }
     @FXML
@@ -148,7 +148,7 @@ public class ControllerPersonnelEntreprise {
     private void applyButtonStyleOnMouseExited(Button button){
         button.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");
     }
-    //TODO : modifier(avec mail)
+    //TODO : envoyer mail lors de la modification
     @FXML
     void ajouterRespo(ActionEvent event) {
         String cin = cinTextRespo.getText().trim();
@@ -164,7 +164,7 @@ public class ControllerPersonnelEntreprise {
             if(EmailSender.isValidEmailAddress(mail)){
                 if(e.insererPersonnel("Responsables",cin, nom, prenom, mail, pwd)){
                     sa.showAlert("Ajout avec succes", "Le compte du responsable est bien ajouté ! ", "/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
                     sendMail("Responsable",nom.trim(),prenom.trim(),mail.trim(),pwd);
                 }else{
                     sa.showAlert("Ajout Erroné", "Le compte du responsable existe deja ! ", "/images/annuler.png");
@@ -173,7 +173,7 @@ public class ControllerPersonnelEntreprise {
                 if(sa.showConfirmationAlert("Confirmation","Voulez-vous quand même ajouter le compte du responsable avec cette adresse e-mail invalide ? \nNB : Sinon, veuillez entrer une adresse e-mail valide au format 'xyz@gmail.com'. Si vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
                     if(e.insererPersonnel("Responsables",cin, nom, prenom, mail, pwd)){
                         sa.showAlert("Ajout avec succes", "Le compte du responsable est bien ajouté ! ", "/images/checked.png");
-                        e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                        e.populateTableViewWithSelectionHandler(e.getPersonnel("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
                     }else{
                         sa.showAlert("Ajout Erroné", "Le compte du responsable existe deja ! ", "/images/annuler.png");
                     }
@@ -197,7 +197,7 @@ public class ControllerPersonnelEntreprise {
             if(EmailSender.isValidEmailAddress(mail)){
                 if(e.insererPersonnel("Gestionnaires",cin, nom, prenom, mail, pwd)){
                     sa.showAlert("Ajout avec succes", "Le compte du gestionnaire est bien ajouté ! ", "/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
                     sendMail("Gestionnaire",nom.trim(),prenom.trim(),mail.trim(),pwd);
                 }else{
                     sa.showAlert("Ajout Erroné", "Le compte du gestionnaire existe deja ! ", "/images/annuler.png");
@@ -206,7 +206,7 @@ public class ControllerPersonnelEntreprise {
                 if(sa.showConfirmationAlert("Confirmation","Voulez-vous quand même ajouter le compte du gestionnaire avec cette adresse e-mail invalide ? \nNB : Sinon, veuillez entrer une adresse e-mail valide au format 'xyz@gmail.com'. Si vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
                     if(e.insererPersonnel("Gestionnaires",cin, nom, prenom, mail, pwd)){
                         sa.showAlert("Ajout avec succes", "Le compte du gestionnaire est bien ajouté ! ", "/images/checked.png");
-                        e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+                        e.populateTableViewWithSelectionHandler(e.getPersonnel("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
                     }else{
                         sa.showAlert("Ajout Erroné", "Le compte du gestionnaire existe deja ! ", "/images/annuler.png");
                     }
@@ -230,7 +230,7 @@ public class ControllerPersonnelEntreprise {
             if(EmailSender.isValidEmailAddress(mail)){
                 if(e.insererPersonnel("Vendeurs",cin, nom, prenom, mail, pwd)){
                     sa.showAlert("Ajout avec succes", "Le compte du Vendeur est bien ajouté ! ", "/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Vendeurs"),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
                     sendMail("Vendeur",nom.trim(),prenom.trim(),mail.trim(),pwd);
                 }else{
                     sa.showAlert("Ajout Erroné", "Le compte du Vendeur existe deja ! ", "/images/annuler.png");
@@ -239,7 +239,7 @@ public class ControllerPersonnelEntreprise {
                 if(sa.showConfirmationAlert("Confirmation","Voulez-vous quand même ajouter le compte du vendeur avec cette adresse e-mail invalide ? \nNB : Sinon, veuillez entrer une adresse e-mail valide au format 'xyz@gmail.com'. Si vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
                     if(e.insererPersonnel("Vendeurs",cin, nom, prenom, mail, pwd)){
                         sa.showAlert("Ajout avec succes", "Le compte du Vendeur est bien ajouté ! ", "/images/checked.png");
-                        e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+                        e.populateTableViewWithSelectionHandler(e.getPersonnel("Vendeurs"),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
                     }else{
                         sa.showAlert("Ajout Erroné", "Le compte du Vendeur existe deja ! ", "/images/annuler.png");
                     }
@@ -269,7 +269,7 @@ public class ControllerPersonnelEntreprise {
             if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du responsable ?")){
                 if(e.supprimerPersonnel("Responsables",cin)){
                     sa.showAlert("Suppression réussie","Le compte du responsable a été supprimé avec succès.","/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
                     emailSuppression(nomTextRespo.getText().trim(),prenomTextRespo.getText().trim(),mailTextRespo.getText().trim());
                 }else{
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un responsable valide dans le tableau avant de procéder à la suppression.");
@@ -286,7 +286,7 @@ public class ControllerPersonnelEntreprise {
             if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du Gestionnaire ?")){
                 if(e.supprimerPersonnel("Gestionnaires",cin)){
                     sa.showAlert("Suppression réussie","Le compte du Gestionnaire a été supprimé avec succès.","/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
                     emailSuppression(nomTextGestio.getText().trim(),prenomTextGestio.getText().trim(), mailTextGestio.getText().trim());
                 }else{
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Gestionnaire valide dans le tableau avant de procéder à la suppression.");
@@ -304,7 +304,7 @@ public class ControllerPersonnelEntreprise {
             if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du Vendeur ?")){
                 if(e.supprimerPersonnel("Vendeurs",cin)){
                     sa.showAlert("Suppression réussie","Le compte du Vendeur a été supprimé avec succès.","/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Vendeurs"),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
                     emailSuppression(nomTextVendeur.getText().trim(), prenomTextVendeur.getText().trim(), mailTextVendeur.getText().trim());
                 }else{
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Vendeur valide dans le tableau avant de procéder à la suppression.");
@@ -368,7 +368,7 @@ public class ControllerPersonnelEntreprise {
             if(!cin.isEmpty()){
                 if(e.modifierPersonnel("Responsables",nom,prenom,mail,pwd,cin)){
                     sa.showAlert("Modification réussie","Le compte du Responsable a été mis à jour avec succès.","/images/checked.png");
-                    e.populateTableViewWithSelectionHandler(e.getResponsables(),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
+                    e.populateTableViewWithSelectionHandler(e.getPersonnel("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
                 }else{
                     sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Responsable.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Responsable. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
                 }
@@ -386,7 +386,7 @@ public class ControllerPersonnelEntreprise {
         if(!cin.isEmpty()){
             if(e.modifierPersonnel("Gestionnaires",nom,prenom,mail,pwd,cin)){
                 sa.showAlert("Modification réussie","Le compte du Gestionnaire a été mis à jour avec succès.","/images/checked.png");
-                e.populateTableViewWithSelectionHandler(e.getGestionnaires(),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
+                e.populateTableViewWithSelectionHandler(e.getPersonnel("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
             }else{
                 sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Gestionnaire.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Gestionnaire. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
             }
@@ -405,7 +405,7 @@ public class ControllerPersonnelEntreprise {
         if(!cin.isEmpty()){
             if(e.modifierPersonnel("Vendeurs",nom,prenom,mail,pwd,cin)){
                 sa.showAlert("Modification réussie","Le compte du Vendeur a été mis à jour avec succès.","/images/checked.png");
-                e.populateTableViewWithSelectionHandler(e.getVendeurs(),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
+                e.populateTableViewWithSelectionHandler(e.getPersonnel("Vendeurs"),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
             }else{
                 sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Vendeur.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Vendeur. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
             }

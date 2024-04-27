@@ -10,6 +10,10 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 public class Entreprise {
     private String nomEntreprise, adresseMail,motdepasse, localisation, numeroDeFax, secteurDactivite, identificationFiscale;
@@ -93,20 +97,140 @@ public class Entreprise {
         calculNbrClient();
         return nbrClients;
     }
-
     public int getNbPersonnel() {
         calculNbrPersonnel();
         return nbPersonnel;
     }
-    public ResultSet getResponsables(){
-        return cn.lire("select * from responsables");
+
+    public int typeInventaire(){
+        if(cn.verificationTables() == 0) return 0 ; // Produit + Service
+        else if(cn.verificationTables() == 1 ) return 1 ; // Produit
+        else if(cn.verificationTables() == 2) return 2 ; // Service
+        return -1 ;
     }
-    public ResultSet getGestionnaires(){
-        return cn.lire("select * from gestionnaires");
+
+    public ArrayList<String> getColonneInventaire(String typeInventaire){
+        try{
+            ResultSet rs = cn.lire("SHOW columns from " +typeInventaire);
+            ArrayList<String> colonnes = new ArrayList<>();
+            while(rs.next()){
+                if(!rs.getString(1).equalsIgnoreCase("idProduit") &&
+                        !rs.getString(1).equalsIgnoreCase("prixUnitaire")
+                        && !rs.getString(1).equalsIgnoreCase("stock")
+                        && !rs.getString(1).equalsIgnoreCase("idService")
+                        && ! rs.getString(1).equalsIgnoreCase("Cout_heure")){
+                    colonnes.add(rs.getString(1));
+                }
+            }
+            return colonnes ;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-    public ResultSet getVendeurs(){
-        return cn.lire("select * from vendeurs");
+
+
+    public boolean ajouterService(int idService, double cout_heure, String libelleService, String typeService, String description){
+        // Create lists to store column names and values
+        List<String> columns = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (!libelleService.equalsIgnoreCase("")) {
+            columns.add("libelleService");
+            values.add("'" + libelleService + "'");
+        }
+        if (!typeService.equalsIgnoreCase("")) {
+            columns.add("typeService");
+            values.add("'" + typeService + "'");
+        }
+        if (!description.equalsIgnoreCase("")) {
+            columns.add("description");
+            values.add("'" + description + "'");
+        }
+        // Check if any non-null columns were provided
+        if (columns.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("INSERT INTO Service (idService, cout_heure");
+        StringBuilder valuesStr = new StringBuilder(" VALUES (" + idService + "," + cout_heure );
+
+        // Append non-null columns and values to the SQL query
+        for (int i = 0; i < columns.size(); i++) {
+            req.append(", ").append(columns.get(i));
+            valuesStr.append(", ").append(values.get(i));
+        }
+
+        // Complete the SQL query
+        req.append(")").append(valuesStr).append(")");
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
     }
+
+    public boolean ajouterProduit(int idProduit, double prixUnitaire, int stock, String libelleProduit, String dateEnregistrement, String description, String categorie) {
+        // Create lists to store column names and values
+        List<String> columns = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (!libelleProduit.equalsIgnoreCase("")) {
+            columns.add("libelleProduit");
+            values.add("'" + libelleProduit + "'");
+        }
+        if (!dateEnregistrement.equalsIgnoreCase("")) {
+            columns.add("dateEnregistrement");
+            values.add("'" + dateEnregistrement + "'");
+        }
+        if (!description.equalsIgnoreCase("")) {
+            columns.add("description");
+            values.add("'" + description + "'");
+        }
+        if (!categorie.equalsIgnoreCase("")) {
+            columns.add("categorie");
+            values.add("'" + categorie + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (columns.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("INSERT INTO produit (idProduit, prixUnitaire, stock");
+        StringBuilder valuesStr = new StringBuilder(" VALUES (" + idProduit + "," + prixUnitaire + "," + stock);
+
+        // Append non-null columns and values to the SQL query
+        for (int i = 0; i < columns.size(); i++) {
+            req.append(", ").append(columns.get(i));
+            valuesStr.append(", ").append(values.get(i));
+        }
+
+        // Complete the SQL query
+        req.append(")").append(valuesStr).append(")");
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
+    public ResultSet afficherProduit(int idProduit){
+        return cn.lire("Select * from produit where idProduit = " + idProduit);
+    }
+    public ResultSet afficherService(int idService){
+        return cn.lire("select * from Service where idService = " + idService);
+    }
+    public boolean supprimerProduit(int idProduit) {
+        return cn.miseAjour("delete from produit where idProduit = "+ idProduit);
+    }
+    public boolean supprimerService(int idService){
+        return cn.miseAjour("delete from service where idService = " +idService);
+    }
+
+    public ResultSet getPersonnel(String typePerso){return cn.lire("select * from "+typePerso);}
+    public ResultSet getInventaire(String typeInventaire) {return cn.lire("select * from "+typeInventaire);}
     public boolean insererPersonnel(String typePerso,String cin, String nom, String prenom, String mail, String pwd){
         String req = "insert into "+typePerso+" values(?,?,?,?,?)";
         return cn.miseAjour(req, cin, nom, prenom, mail, pwd);
@@ -234,6 +358,48 @@ public class Entreprise {
                     prenomTextField.setText(rowData[2].toString()); // Assuming Prenom is in the third column
                     mailTextField.setText(rowData[3].toString()); // Assuming Mail is in the fourth column
                     passwordTextField.setText(rowData[4].toString()); // Assuming Mot de Passe is in the fifth column
+                }
+            });
+
+            // Iterate through the ResultSet and add data to the TableView
+            while (rs.next()) {
+                Object[] rowData = new Object[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    rowData[i] = rs.getObject(i + 1); // Note: ResultSet index is 1-based
+                }
+                tableView.getItems().add(rowData);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void populateTableView(ResultSet rs, TableView<Object[]> tableView, TextField id) {
+        try {
+            // Clear existing items in the TableView
+            tableView.getItems().clear();
+            tableView.setStyle("-fx-border-color: black");
+
+            // Get metadata about the ResultSet
+            ResultSetMetaData rsm = rs.getMetaData();
+            int columnCount = rsm.getColumnCount();
+
+            // Create TableColumn objects for each column in the ResultSet
+            tableView.getColumns().clear(); // Clear existing columns
+            for (int i = 1; i <= columnCount; i++) {
+                final int columnIndex = i;
+                TableColumn<Object[], Object> column = new TableColumn<>(rsm.getColumnName(i));
+                column.setCellValueFactory(cellData -> {
+                    Object[] row = cellData.getValue();
+                    return new SimpleObjectProperty<>(row[columnIndex - 1]); // Note: columnIndex is 1-based
+                });
+                tableView.getColumns().add(column);
+            }
+
+            tableView.setOnMouseClicked(event -> {
+                Object[] rowData = tableView.getSelectionModel().getSelectedItem();
+                if (rowData != null) {
+                    id.setText(rowData[0].toString()); // Assuming CIN is in the first column
                 }
             });
 

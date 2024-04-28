@@ -13,34 +13,59 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1014.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerInventaire">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1025.0" />
-      <Text layoutX="438.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventaire">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1025.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9736841917037964" green="0.7969785332679749" blue="0.46881091594696045" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9736841917037964" green="0.8900645971298218" blue="0.7347709536552429" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text layoutX="430.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventaire">
          <font>
-            <Font name="Times New Roman" size="36.0" />
+            <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Text>
       <TabPane layoutX="-5.0" layoutY="63.0" prefHeight="555.0" prefWidth="1022.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="produitPane" text="Produits">
+         <tabs>
+            <Tab fx:id="produitPane" text="Produits">
                <content>
-                  <AnchorPane prefHeight="552.0" prefWidth="1012.0">
+                  <AnchorPane prefHeight="552.0" prefWidth="1012.0" style="-fx-background-color: white;">
                      <children>
-                        <TableView fx:id="produitTableView" layoutX="367.0" layoutY="100.0" prefHeight="313.0" prefWidth="632.0">
-                          <columns>
-                            <TableColumn prefWidth="90.0" text="Référence" />
-                            <TableColumn prefWidth="90.0" text="Libellé" />
+                        <ImageView fitHeight="651.0" fitWidth="1124.0" layoutX="141.0" layoutY="-20.0">
+                           <image>
+                              <Image url="@../../../../../../../../../../PFE/WhatsApp%20Image%202024-03-01%20à%2023.09.54_9be76a0d.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="produitTableView" layoutX="372.0" layoutY="116.0" prefHeight="313.0" prefWidth="632.0">
+                           <columns>
+                              <TableColumn prefWidth="90.0" text="Référence" />
+                              <TableColumn prefWidth="90.0" text="Libellé" />
                               <TableColumn prefWidth="90.0" text="Prix unitaire" />
                               <TableColumn prefWidth="90.0" text="Catégorie" />
                               <TableColumn prefWidth="90.0" text="Date enregistrement" />
                               <TableColumn prefWidth="90.0" text="Stock" />
                               <TableColumn prefWidth="90.0" text="Description" />
-                          </columns>
+                           </columns>
                         </TableView>
                         <TextField fx:id="idPrAfficher" layoutX="688.0" layoutY="52.0" prefHeight="25.0" prefWidth="158.0" />
                         <Text layoutX="511.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechercher le produit">
@@ -50,7 +75,7 @@
                         </Text>
                         <TextField fx:id="prixUnitaireProduit" layoutX="279.0" layoutY="163.0" prefHeight="25.0" prefWidth="80.0" />
                         <TextField fx:id="libelleTextbox" layoutX="257.0" layoutY="221.0" prefHeight="25.0" prefWidth="101.0" />
-                        <TextField fx:id="stockProduit" layoutX="95.0" layoutY="221.0" prefHeight="25.0" prefWidth="80.0" />
+                        <TextField fx:id="stockProduit" layoutX="97.0" layoutY="222.0" prefHeight="25.0" prefWidth="80.0" />
                         <Label fx:id="libelleText" layoutX="199.0" layoutY="224.0" text="Libelle">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
@@ -92,7 +117,7 @@
                         <TextField fx:id="idProduit" layoutX="97.0" layoutY="163.0" prefHeight="25.0" prefWidth="80.0" />
                         <Button fx:id="afficherProduit" layoutX="870.0" layoutY="49.0" mnemonicParsing="false" onAction="#afficherProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -103,7 +128,7 @@
                         </Button>
                         <Button fx:id="ajouterProduit" layoutX="448.0" layoutY="455.0" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -114,7 +139,7 @@
                         </Button>
                         <Button fx:id="modifierProduit" layoutX="638.0" layoutY="455.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -125,7 +150,7 @@
                         </Button>
                         <Button fx:id="supprimerProduit" layoutX="818.0" layoutY="455.0" mnemonicParsing="false" onAction="#supprimerProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -135,21 +160,6 @@
                            </cursor>
                         </Button>
                         <DatePicker fx:id="dateEnregistrementTextBox" layoutX="161.0" layoutY="283.0" />
-                        <Button layoutX="44.0" layoutY="448.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/en-arriere.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
                         <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiserPr" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
@@ -165,14 +175,32 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Button layoutX="62.0" layoutY="5.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <ImageView fitHeight="12.0" fitWidth="16.0" layoutX="70.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/en-arriere.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab fx:id="servicePane" text="Services">
+            <Tab fx:id="servicePane" text="Services">
                <content>
-                  <AnchorPane prefHeight="525.0" prefWidth="1024.0">
+                  <AnchorPane prefHeight="525.0" prefWidth="1024.0" style="-fx-background-color: white;">
                      <children>
+                        <ImageView fitHeight="651.0" fitWidth="1124.0" layoutX="141.0" layoutY="-20.0">
+                           <image>
+                              <Image url="@../../../../../../../../../../PFE/WhatsApp%20Image%202024-03-01%20à%2023.09.54_9be76a0d.jpg" />
+                           </image>
+                        </ImageView>
                         <TableView fx:id="serviceTableView" layoutX="350.0" layoutY="106.0" prefHeight="313.0" prefWidth="649.0">
                            <columns>
                               <TableColumn prefWidth="130.0" text="Id_service" />
@@ -262,20 +290,13 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="33.0" layoutY="454.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+                        <Button layoutX="62.0" layoutY="5.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                           <graphic>
-                              <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/en-arriere.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
                         </Button>
                         <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiserSer" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
@@ -292,11 +313,21 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <ImageView fitHeight="12.0" fitWidth="16.0" layoutX="70.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/en-arriere.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-        </tabs>
+         </tabs>
       </TabPane>
+      <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="14.0" layoutY="6.0">
+         <image>
+            <Image url="@../../../../../../../../Downloads/check-list.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

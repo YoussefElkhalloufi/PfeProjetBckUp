@@ -165,4 +165,9 @@ public class ControllerDashboardDirecteur {
     void switchToInventaire(MouseEvent event) throws IOException {
         cw.switchWindowPane(event,"/com/example/pfeprojet/inventaire.fxml");
     }
+
+    @FXML
+    void switchToFacturation(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event, "/com/example/pfeprojet/facturation.fxml");
+    }
 }

@@ -171,7 +171,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="facturation" layoutX="662.0" layoutY="196.0" onMouseEntered="#onMouseEnteredFacturation" onMouseExited="#onMouseExitedFacturation" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+      <AnchorPane fx:id="facturation" layoutX="662.0" layoutY="196.0" onMouseClicked="#switchToFacturation" onMouseEntered="#onMouseEnteredFacturation" onMouseExited="#onMouseExitedFacturation" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>

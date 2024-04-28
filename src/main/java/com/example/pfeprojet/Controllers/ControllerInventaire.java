@@ -219,7 +219,6 @@ public class ControllerInventaire {
             String descriptionPr = descriptionTextBox.getText().trim();
             String cat = categorieTextBox.getText().trim();
 
-            //TODO : gestion des erreurs quand luser entre dautre valeur dans les textbox ou il doit entrer des nombres
             if(e.ajouterProduit(idPr,PU,stck,libellePr, dateEnregistrementPr, descriptionPr,cat)){
                 e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
                 sa.showAlert("Ajout avec succes","Le Produit est bien ajouté ! ","/images/checked.png");
@@ -230,6 +229,7 @@ public class ControllerInventaire {
             }
         }
     }
+
     @FXML
     void ajouterService(ActionEvent event) {
         if(!idService.getText().isEmpty() || !coutPheure.getText().isEmpty()){
@@ -305,6 +305,59 @@ public class ControllerInventaire {
             sa.showWarning("Affichage échouée","Veuillez taper un Id de Service avant de procéder.");
         }
     }
+    @FXML
+    void modifierProduit(ActionEvent event) {
+        LocalDate selectedDate = dateEnregistrementTextBox.getValue();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+        if(idProduit.getText().trim().isEmpty() || prixUnitaireProduit.getText().trim().isEmpty() || stockProduit.getText().trim().isEmpty() || libelleTextbox.getText().isEmpty()){
+            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+        }else{
+            int idPr = Integer.parseInt(idProduit.getText().trim());
+            double PU = Double.parseDouble(prixUnitaireProduit.getText().trim());
+            int stck = Integer.parseInt(stockProduit.getText().trim());
+            String libellePr = libelleTextbox.getText();
+            String dateEnregistrementPr = "";
+            if(selectedDate != null){
+                dateEnregistrementPr = selectedDate.format(formatter);
+            }
+            String descriptionPr = descriptionTextBox.getText().trim();
+            String cat = categorieTextBox.getText().trim();
+
+            if(e.modifierProduit(idPr,PU,stck,libellePr, dateEnregistrementPr, descriptionPr,cat)){
+                e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
+                sa.showAlert("Modification avec succes","Le Produit est bien modifié ! ","/images/checked.png");
+                viderProduit();
+            }else{
+                sa.showWarning("Modification Erroné", "Une erreur s'est produite lors de la modification du Produit\nNB : Vous n'avez pas le droit de modifier le ID du produit. \nSi vous souhaitez modifier le id, veuillez créer un nouveau Produit avec le nouveau ID. ");
+                viderProduit();
+            }
+        }
+    }
+
+    @FXML
+    void modifierService(ActionEvent event) {
+        if(!idService.getText().isEmpty() || !coutPheure.getText().isEmpty()){
+            int idSer = Integer.parseInt(idService.getText().trim());
+            double coutParHeure = Double.parseDouble(coutPheure.getText().trim());
+            String lib = libelleServiceTextBox.getText().trim();
+            String typeSer = typeServiceTextBox.getText().trim();
+            String descriptionSer = descriptionServiceTextBox.getText().trim();
+
+            if(e.modifierService(idSer,coutParHeure,lib,typeSer,descriptionSer)){
+                e.populateTableView(e.getInventaire("Service"),serviceTableView, idService);
+                sa.showAlert("Modification avec succes","Le Service est bien modifié ! ","/images/checked.png");
+                viderService();
+            }else{
+                sa.showWarning("Modification Erroné", "Une erreur s'est produite lors de la modification du Service\nNB : Vous n'avez pas le droit de modifier le ID du Service. \nSi vous souhaitez modifier le id, veuillez créer un nouveau service avec le nouveau ID. ");
+                viderService();
+            }
+        }else{
+            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+        }
+    }
+
     public void viderService(){
         idService.setText("");
         coutPheure.setText("");

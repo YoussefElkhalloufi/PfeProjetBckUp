@@ -165,4 +165,55 @@ class EntrepriseTest {
         e.ajouterService(1,230.50,"Testeur","","testeur");
     }
 
+    //TestModifierProduit
+    @Test
+    void testModifierProduit(){
+            Entreprise e = new Entreprise("hennesy_liqour");
+            e.modifierProduit(4,200.90,15,"","2024-08-29","","");
+    }
+
+    //TestModifierService
+    @Test
+    void testModifierService(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        e.modifierService(1,150," ","","testeurModifier");
+    }
+
+
+    //TestGetIdProduits
+    @Test
+    void testGetIdProduits(){
+        Entreprise e = new Entreprise("hennesy_liqour");
+        System.out.println(e.getIdProduits().toString());
+    }
+
+    //TestGetInfosProduits
+    @Test
+    void testGetInfosProduits(){
+        Entreprise e = new Entreprise("maroc_telecom");
+        System.out.println("Colonnes de la table service sont : " +e.getColonneInventaire("service"));
+        if(e.getColonneInventaire("Service").contains("LibelleService")){
+            System.out.println("hennesy_liqour.produit has column libelleService in it");
+        }else{
+            System.out.println("hennesy_liqour.produit hasnt column libelleService in it");
+        }
+    }
+    @Test
+    void testCheckQuantite(){
+        Entreprise e = new Entreprise("dolce");
+        String[] infosProduit = e.getInfosProduit(4);
+        System.out.println("Prix unitaire du produit est : " + infosProduit[1]);
+        if(13>Integer.parseInt(infosProduit[2])){
+            System.out.println("Quantité non disponible, Quantite maximal disponible est : " + infosProduit[2]);
+        }else{
+            System.out.println("quantite disponible");
+        }
+    }
+
+    @Test
+    void testInsererFacture(){
+        Entreprise e = new Entreprise("dolce");
+        e.insererFacture(2025,"12345",4,4);
+    }
+
 }

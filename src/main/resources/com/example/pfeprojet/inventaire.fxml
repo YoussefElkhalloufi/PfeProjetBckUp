@@ -137,7 +137,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="modifierProduit" layoutX="638.0" layoutY="455.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierProduit" layoutX="638.0" layoutY="455.0" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman Bold" size="18.0" />
                            </font>
@@ -268,7 +268,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="modifierService" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierService" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" onAction="#modifierService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>

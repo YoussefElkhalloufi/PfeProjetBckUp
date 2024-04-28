@@ -7,6 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -102,6 +103,102 @@ public class Entreprise {
         return nbPersonnel;
     }
 
+    public ArrayList<String> getCinClients()  {
+        try {
+            ArrayList<String> cinClients = new ArrayList<>();
+            ResultSet rs = cn.lire("Select cinClient from client");
+            while(rs.next()){
+                cinClients.add(rs.getString(1));
+            }
+            return cinClients;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null ;
+        }
+    }
+
+    public ArrayList<Integer> getIdProduits(){
+        try{
+            ArrayList<Integer> produits = new ArrayList<>();
+            ResultSet rs = cn.lire("Select idProduit from produit");
+            while(rs.next()){
+                produits.add(rs.getInt(1));
+            }
+            return produits ;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public ArrayList<Integer> getIdServices(){
+        try{
+            ArrayList<Integer> services = new ArrayList<>();
+            ResultSet rs = cn.lire("Select idService from service");
+            while(rs.next()){
+                services.add(rs.getInt(1));
+            }
+            return services ;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getInfosProduit(int idProduit){
+        try{
+            String[] infosProduits = new String[3];
+            if(getColonneInventaire("Produit").contains("libelleProduit")){
+                ResultSet rs = cn.lire("select libelleProduit, prixUnitaire, stock from produit where idProduit = " + idProduit);
+                while(rs.next()){
+                    infosProduits[0] = rs.getString(1);
+                    infosProduits[1] = String.valueOf(rs.getDouble(2));
+                    infosProduits[2] = String.valueOf(rs.getInt(3));
+                }
+                return infosProduits;
+            }else{
+                ResultSet rs = cn.lire("select prixUnitaire, stock from produit where idProduit = " + idProduit);
+                while(rs.next()){
+                    infosProduits[0] = " ";
+                    infosProduits[1] = String.valueOf(rs.getDouble(1));
+                    infosProduits[2] = String.valueOf(rs.getInt(2));
+                }
+                return infosProduits;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getInfosService(int idService){
+        try{
+            String[] infosProduits = new String[2];
+            if(getColonneInventaire("Service").contains("LibelleService")){
+                ResultSet rs = cn.lire("select libelleService, cout_heure from service where idService = " + idService);
+                while(rs.next()){
+                    infosProduits[0] = rs.getString(1);
+                    infosProduits[1] = rs.getString(2);
+                }
+                return infosProduits;
+            }else{
+                ResultSet rs = cn.lire("select cout_heure from service where idService = " + idService);
+                while(rs.next()){
+                    infosProduits[0] = " ";
+                    infosProduits[1] = rs.getString(1);
+                }
+                return infosProduits;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean insererFacture(int numFacture, String cinClient, int idProduit, int qte){
+//        return cn.miseAjour("SET @p0='"+numFacture+"'; SET @p1= ?; SET @p2='"+idProduit+"'; SET @p3='"+qte+"';" +
+//                                "CALL `inserer_facture`(@p0, @p1, @p2, @p3);", cinClient);
+        return cn.miseAjour("{CALL inserer_facture("+numFacture+",'"+cinClient+"',"+idProduit+","+qte+")}");
+    }
     public int typeInventaire(){
         if(cn.verificationTables() == 0) return 0 ; // Produit + Service
         else if(cn.verificationTables() == 1 ) return 1 ; // Produit
@@ -166,6 +263,77 @@ public class Entreprise {
 
         // Complete the SQL query
         req.append(")").append(valuesStr).append(")");
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
+    public boolean modifierService(int idService, double cout_heure, String libelleService, String typeService, String description) {
+        // Create lists to store column names and values
+        List<String> updates = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (!libelleService.equalsIgnoreCase("")) {
+            updates.add("libelleService = '" + libelleService + "'");
+        }
+        if (!typeService.equalsIgnoreCase("")) {
+            updates.add("typeService = '" + typeService + "'");
+        }
+        if (!description.equalsIgnoreCase("")) {
+            updates.add("description = '" + description + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (updates.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("UPDATE service SET cout_heure = " + cout_heure + ", ");
+        for (int i = 0; i < updates.size(); i++) {
+            req.append(updates.get(i));
+            if (i < updates.size() - 1) {
+                req.append(", ");
+            }
+        }
+        req.append(" WHERE idService = ").append(idService);
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
+    public boolean modifierProduit(int idProduit, double prixUnitaire, int stock, String libelleProduit, String dateEnregistrement, String description, String categorie) {
+        // Create lists to store column names and values
+        List<String> updates = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (!libelleProduit.equalsIgnoreCase("")) {
+            updates.add("libelleProduit = '" + libelleProduit + "'");
+        }
+        if (!dateEnregistrement.equalsIgnoreCase("")) {
+            updates.add("dateEnregistrement = '" + dateEnregistrement + "'");
+        }
+        if (!description.equalsIgnoreCase("")) {
+            updates.add("description = '" + description + "'");
+        }
+        if (!categorie.equalsIgnoreCase("")) {
+            updates.add("categorie = '" + categorie + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (updates.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("UPDATE produit SET prixUnitaire = " + prixUnitaire + ", stock = " +stock+", ");
+        for (int i = 0; i < updates.size(); i++) {
+            req.append(updates.get(i));
+            if (i < updates.size() - 1) {
+                req.append(", ");
+            }
+        }
+        req.append(" WHERE idProduit = ").append(idProduit);
 
         // Execute the query
         return cn.miseAjour(req.toString());

@@ -94,19 +94,19 @@ public class ControllerFacturation {
 
     @FXML
     void ajouterProduitFacture(ActionEvent event) {
-        if(!numFactureTxtBox.getText().trim().isEmpty() || !cmbCinClients.getItems().isEmpty() || !qteTxtBox.getText().trim().isEmpty() || !cmdIdProduits.getItems().isEmpty()){
-            //TODO : quand j'entre "   " dans numero facture il m'affiche pas " veuillez .... " -> else statement
+        if( numFactureTxtBox.getText().isEmpty() || cmbCinClients.getItems().isEmpty() || qteTxtBox.getText().trim().isEmpty() || cmdIdProduits.getItems().isEmpty()){
+            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+        }else{
             int numFc = Integer.parseInt(numFactureTxtBox.getText().trim());
             String cinClt = cmbCinClients.getValue();
             int idPr = cmdIdProduits.getValue();
             int qte = Integer.parseInt(qteTxtBox.getText());
+
             if(e.insererFacture(numFc,cinClt,idPr,qte)){
                 viderProduit();
             }else{
                 System.out.println("erreur");
             }
-        }else{
-            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }
     }
 

@@ -53,7 +53,7 @@
                      <children>
                         <ImageView fitHeight="651.0" fitWidth="1124.0" layoutX="141.0" layoutY="-20.0">
                            <image>
-                              <Image url="@../../../../../../../../../../PFE/background_inventaire.jpg" />
+                              <Image url="@../../../images/background_inventaire.jpg" />
                            </image>
                         </ImageView>
                         <TableView fx:id="produitTableView" layoutX="379.0" layoutY="117.0" prefHeight="313.0" prefWidth="648.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="237.0">
@@ -201,7 +201,7 @@
                      <children>
                         <ImageView fitHeight="651.0" fitWidth="1124.0" layoutX="141.0" layoutY="-20.0">
                            <image>
-                              <Image url="@../../../../../../../../../../PFE/background_inventaire.jpg" />
+                              <Image url="@../../../images/background_inventaire.jpg" />
                            </image>
                         </ImageView>
                         <TableView fx:id="serviceTableView" layoutX="379.0" layoutY="117.0" prefHeight="313.0" prefWidth="649.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="237.0">

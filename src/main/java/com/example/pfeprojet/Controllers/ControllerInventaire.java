@@ -205,7 +205,7 @@ public class ControllerInventaire {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
-        if(idProduit.getText().trim().isEmpty() || prixUnitaireProduit.getText().trim().isEmpty() || stockProduit.getText().trim().isEmpty() || libelleTextbox.getText().trim().isEmpty()){
+        if(idProduit.getText().trim().isEmpty() || prixUnitaireProduit.getText().trim().isEmpty() || stockProduit.getText().trim().isEmpty()){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
             int idPr = Integer.parseInt(idProduit.getText().trim());

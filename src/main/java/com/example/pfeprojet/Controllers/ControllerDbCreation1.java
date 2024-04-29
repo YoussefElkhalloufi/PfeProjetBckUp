@@ -159,7 +159,7 @@ public class ControllerDbCreation1 extends mouseEvents{
         fsList.add("idService INT");
         fsList.add("NombreHeure DECIMAL(10.2)");
         fsList.add("Total_Ht DECIMAL(10,2)");
-        fsList.add(" FOREIGN KEY (numerofacture) REFERENCES facture(numeroFacture)");
+        fsList.add("FOREIGN KEY (numerofacture) REFERENCES facture(numeroFacture)");
         fsList.add("FOREIGN KEY (idService) REFERENCES service(idService)");
         fsList.add("PRIMARY KEY (numerofacture, idService)");
 

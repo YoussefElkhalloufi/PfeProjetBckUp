@@ -44,14 +44,14 @@
       <ComboBox fx:id="cmbCinClients" layoutX="558.0" layoutY="88.0" prefHeight="25.0" prefWidth="100.0" />
       <AnchorPane fx:id="anchoreProduit" layoutX="14.0" layoutY="181.0" prefHeight="109.0" prefWidth="648.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
-            <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="12.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
+            <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="11.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
             <Line endX="-117.99998474121094" endY="85.0" layoutX="142.0" layoutY="12.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
             <Line endX="-117.99998474121094" endY="85.0" layoutX="716.0" layoutY="11.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
             <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="97.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
-            <Line endX="-117.99999237060547" endY="85.0" layoutX="219.0" layoutY="11.0" startX="-117.99999237060547" startY="1.7071075439453125" />
+            <Line endX="-117.99999237060547" endY="85.0" layoutX="219.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
             <Line endX="-118.00003051757812" endY="85.0" layoutX="492.0" layoutY="10.0" startX="-117.99999237060547" startY="1.7071075439453125" />
-            <Line endX="-117.99998474121094" endY="85.0" layoutX="568.0" layoutY="11.0" startX="-117.99999237060547" startY="1.7071075439453125" />
-            <Line endX="-117.99998474121094" endY="85.0" layoutX="631.0" layoutY="11.0" startX="-117.99999237060547" startY="1.7071075439453125" />
+            <Line endX="-117.99998474121094" endY="85.0" layoutX="568.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
+            <Line endX="-117.99998474121094" endY="85.0" layoutX="631.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
             <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="51.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
             <Text layoutX="190.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Désignation">
                <font>
@@ -114,15 +114,15 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorService" layoutX="14.0" layoutY="320.0" prefHeight="109.0" prefWidth="648.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
-            <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="12.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
-            <Line endX="-117.99998474121094" endY="85.0" layoutX="142.0" layoutY="12.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
+            <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="11.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
+            <Line endX="-117.99998474121094" endY="85.0" layoutX="142.0" layoutY="12.0" startX="-117.99999237060547" startY="0.70709228515625" />
             <Line endX="-117.99998474121094" endY="85.0" layoutX="716.0" layoutY="11.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
             <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="97.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
-            <Line endX="-117.99999237060547" endY="85.0" layoutX="219.0" layoutY="11.0" startX="-117.99999237060547" startY="1.7071075439453125" />
-            <Line endX="-118.00003051757812" endY="85.0" layoutX="492.0" layoutY="10.0" startX="-117.99999237060547" startY="1.7071075439453125" />
-            <Line endX="-117.99998474121094" endY="85.0" layoutX="619.0" layoutY="11.0" startX="-117.99999237060547" startY="1.7071075439453125" />
+            <Line endX="-117.99999237060547" endY="85.0" layoutX="219.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
+            <Line endX="-118.00003051757812" endY="85.0" layoutX="400.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
+            <Line endX="-117.99998474121094" endY="85.0" layoutX="498.0" layoutY="11.0" startX="-118.0" startY="0.70709228515625" />
             <Line endX="454.16668701171875" endY="-3.0517578125E-5" layoutX="143.0" layoutY="51.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
-            <Text layoutX="190.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Désignation">
+            <Text layoutX="142.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Désignation">
                <font>
                   <Font name="Garamond Bold" size="16.0" />
                </font>
@@ -132,18 +132,18 @@
                   <Font name="Garamond Bold" size="16.0" />
                </font>
             </Text>
-            <Text layoutX="401.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cout/Heure">
+            <Text layoutX="289.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cout/Heure">
                <font>
                   <Font name="Garamond Bold" size="16.0" />
                </font>
             </Text>
-            <Text layoutX="533.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
+            <Text layoutX="537.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
                <font>
                   <Font name="Garamond Bold" size="16.0" />
                </font>
             </Text>
             <ComboBox fx:id="cmdIdServices" layoutX="31.0" layoutY="64.0" onAction="#setServiceInfos" prefHeight="25.0" prefWidth="64.0" />
-            <Text fx:id="cphLbl" layoutX="401.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00 DH">
+            <Text fx:id="cphLbl" layoutX="298.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00 DH">
                <font>
                   <Font size="14.0" />
                </font>
@@ -163,11 +163,17 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Text fx:id="designationServiceLbl" layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation du produit">
+            <Text fx:id="designationServiceLbl" layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation du service">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
+            <Text layoutX="388.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heure">
+               <font>
+                  <Font name="Garamond Bold" size="16.0" />
+               </font>
+            </Text>
+            <Line endX="-117.99998474121094" endY="85.0" layoutX="631.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
          </children>
       </AnchorPane>
    </children>

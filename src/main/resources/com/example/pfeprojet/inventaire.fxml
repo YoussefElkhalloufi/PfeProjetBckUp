@@ -73,42 +73,42 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="prixUnitaireProduit" layoutX="272.0" layoutY="164.0" prefHeight="25.0" prefWidth="100.0" />
-                        <TextField fx:id="libelleTextbox" layoutX="272.0" layoutY="222.0" prefHeight="25.0" prefWidth="101.0" />
+                        <TextField fx:id="prixUnitaireProduit" layoutX="275.0" layoutY="164.0" prefHeight="25.0" prefWidth="100.0" />
+                        <TextField fx:id="libelleTextbox" layoutX="275.0" layoutY="222.0" prefHeight="25.0" prefWidth="101.0" />
                         <TextField fx:id="stockProduit" layoutX="90.0" layoutY="222.0" prefHeight="25.0" prefWidth="80.0" />
-                        <Label fx:id="libelleText" layoutX="213.0" layoutY="222.0" text="Libelle">
+                        <Label fx:id="libelleText" layoutX="217.0" layoutY="222.0" text="Libelle :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="categorieText" layoutX="13.0" layoutY="390.0" text="Catégorie">
+                        <Label fx:id="categorieText" layoutX="13.0" layoutY="390.0" text="Catégorie :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="183.0" layoutY="164.0" text="Prix unitaire">
+                        <Label layoutX="183.0" layoutY="164.0" text="Prix unitaire :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="descriptionTextBox" layoutX="104.0" layoutY="338.0" prefHeight="25.0" prefWidth="247.0" />
-                        <Label fx:id="descriptionText" layoutX="13.0" layoutY="338.0" text="Description">
+                        <TextField fx:id="descriptionTextBox" layoutX="171.0" layoutY="335.0" prefHeight="25.0" prefWidth="192.0" />
+                        <Label fx:id="descriptionText" layoutX="13.0" layoutY="338.0" text="Description :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="categorieTextBox" layoutX="105.0" layoutY="390.0" prefHeight="25.0" prefWidth="246.0" />
-                        <Label layoutX="43.0" layoutY="222.0" text="Stock">
+                        <TextField fx:id="categorieTextBox" layoutX="171.0" layoutY="387.0" prefHeight="25.0" prefWidth="192.0" />
+                        <Label layoutX="15.0" layoutY="222.0" text="Stock :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="dateEnregistrementText" layoutX="13.0" layoutY="286.0" text="Date d'enregistrement">
+                        <Label fx:id="dateEnregistrementText" layoutX="13.0" layoutY="286.0" text="Date d'enregistrement :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="13.0" layoutY="164.0" text="Id produit">
+                        <Label layoutX="13.0" layoutY="164.0" text="Id produit :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
@@ -159,7 +159,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <DatePicker fx:id="dateEnregistrementTextBox" layoutX="161.0" layoutY="286.0" prefHeight="25.0" prefWidth="190.0" />
+                        <DatePicker fx:id="dateEnregistrementTextBox" layoutX="173.0" layoutY="283.0" prefHeight="25.0" prefWidth="190.0" />
                         <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiserPr" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
@@ -188,9 +188,9 @@
                               <Image url="@../../../images/en-arriere.png" />
                            </image>
                         </ImageView>
-                        <Text fill="RED" layoutX="453.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
-                        <Text fill="RED" layoutX="644.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
-                        <Text fill="RED" layoutX="905.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="74.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="260.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="49.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
                      </children>
                   </AnchorPane>
                </content>
@@ -221,30 +221,30 @@
                         </Text>
                         <TextField fx:id="coutPheure" layoutX="161.0" layoutY="217.0" prefHeight="25.0" prefWidth="169.0" />
                         <TextField fx:id="libelleServiceTextBox" layoutX="161.0" layoutY="271.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label fx:id="libelleServiceText" layoutX="103.0" layoutY="271.0" text="Libelle">
+                        <Label fx:id="libelleServiceText" layoutX="101.0" layoutY="271.0" text="Libelle :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="typeServiceText" layoutX="112.0" layoutY="325.0" text="Type ">
+                        <Label fx:id="typeServiceText" layoutX="112.0" layoutY="325.0" text="Type :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="81.0" layoutY="163.0" text="Id_service">
+                        <Label layoutX="80.0" layoutY="163.0" text="Id_service :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
                         <TextField fx:id="idService" layoutX="161.0" layoutY="163.0" prefHeight="25.0" prefWidth="169.0" />
-                        <TextField fx:id="descriptionServiceTextBox" layoutX="159.0" layoutY="379.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label fx:id="descriptionServiceText" layoutX="76.0" layoutY="379.0" text="Description">
+                        <TextField fx:id="descriptionServiceTextBox" layoutX="161.0" layoutY="379.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label fx:id="descriptionServiceText" layoutX="71.0" layoutY="379.0" text="Description :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="typeServiceTextBox" layoutX="159.0" layoutY="325.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label layoutX="55.0" layoutY="217.0" text="Cout par heure">
+                        <TextField fx:id="typeServiceTextBox" layoutX="161.0" layoutY="325.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label layoutX="52.0" layoutY="217.0" text="Cout par heure :">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
@@ -321,8 +321,8 @@
                               <Image url="@../../../images/en-arriere.png" />
                            </image>
                         </ImageView>
-                        <Text fill="RED" layoutX="472.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
-                        <Text fill="RED" layoutX="875.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="143.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="143.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
                      </children>
                   </AnchorPane>
                </content>

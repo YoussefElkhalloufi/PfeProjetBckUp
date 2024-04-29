@@ -20,9 +20,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1014.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerInventaire">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerInventaire">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1025.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1042.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -45,7 +45,7 @@
             <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Text>
-      <TabPane layoutX="-5.0" layoutY="63.0" prefHeight="555.0" prefWidth="1022.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-5.0" layoutY="63.0" prefHeight="555.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="produitPane" text="Produits">
                <content>
@@ -53,18 +53,18 @@
                      <children>
                         <ImageView fitHeight="651.0" fitWidth="1124.0" layoutX="141.0" layoutY="-20.0">
                            <image>
-                              <Image url="@../../../../../../../../../../PFE/WhatsApp%20Image%202024-03-01%20à%2023.09.54_9be76a0d.jpg" />
+                              <Image url="@../../../../../../../../../../PFE/background_inventaire.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="produitTableView" layoutX="372.0" layoutY="116.0" prefHeight="313.0" prefWidth="632.0">
+                        <TableView fx:id="produitTableView" layoutX="379.0" layoutY="117.0" prefHeight="313.0" prefWidth="648.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="237.0">
                            <columns>
-                              <TableColumn prefWidth="90.0" text="Référence" />
-                              <TableColumn prefWidth="90.0" text="Libellé" />
-                              <TableColumn prefWidth="90.0" text="Prix unitaire" />
-                              <TableColumn prefWidth="90.0" text="Catégorie" />
-                              <TableColumn prefWidth="90.0" text="Date enregistrement" />
-                              <TableColumn prefWidth="90.0" text="Stock" />
-                              <TableColumn prefWidth="90.0" text="Description" />
+                              <TableColumn prefWidth="93.0" text="Référence" />
+                              <TableColumn prefWidth="93.0" text="Libellé" />
+                              <TableColumn prefWidth="93.0" text="Prix unitaire" />
+                              <TableColumn prefWidth="93.0" text="Catégorie" />
+                              <TableColumn prefWidth="93.0" text="Date enregistrement" />
+                              <TableColumn prefWidth="93.0" text="Stock" />
+                              <TableColumn prefWidth="93.0" text="Description" />
                            </columns>
                         </TableView>
                         <TextField fx:id="idPrAfficher" layoutX="688.0" layoutY="52.0" prefHeight="25.0" prefWidth="158.0" />
@@ -73,49 +73,49 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="prixUnitaireProduit" layoutX="279.0" layoutY="163.0" prefHeight="25.0" prefWidth="80.0" />
-                        <TextField fx:id="libelleTextbox" layoutX="257.0" layoutY="221.0" prefHeight="25.0" prefWidth="101.0" />
-                        <TextField fx:id="stockProduit" layoutX="97.0" layoutY="222.0" prefHeight="25.0" prefWidth="80.0" />
-                        <Label fx:id="libelleText" layoutX="199.0" layoutY="224.0" text="Libelle">
+                        <TextField fx:id="prixUnitaireProduit" layoutX="272.0" layoutY="164.0" prefHeight="25.0" prefWidth="100.0" />
+                        <TextField fx:id="libelleTextbox" layoutX="272.0" layoutY="222.0" prefHeight="25.0" prefWidth="101.0" />
+                        <TextField fx:id="stockProduit" layoutX="90.0" layoutY="222.0" prefHeight="25.0" prefWidth="80.0" />
+                        <Label fx:id="libelleText" layoutX="213.0" layoutY="222.0" text="Libelle">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="categorieText" layoutX="91.0" layoutY="390.0" text="Catégorie">
+                        <Label fx:id="categorieText" layoutX="13.0" layoutY="390.0" text="Catégorie">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="190.0" layoutY="166.0" text="Prix unitaire">
+                        <Label layoutX="183.0" layoutY="164.0" text="Prix unitaire">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="descriptionTextBox" layoutX="163.0" layoutY="335.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label fx:id="descriptionText" layoutX="80.0" layoutY="339.0" text="Description">
+                        <TextField fx:id="descriptionTextBox" layoutX="104.0" layoutY="338.0" prefHeight="25.0" prefWidth="247.0" />
+                        <Label fx:id="descriptionText" layoutX="13.0" layoutY="338.0" text="Description">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="categorieTextBox" layoutX="163.0" layoutY="387.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label layoutX="50.0" layoutY="224.0" text="Stock">
+                        <TextField fx:id="categorieTextBox" layoutX="105.0" layoutY="390.0" prefHeight="25.0" prefWidth="246.0" />
+                        <Label layoutX="43.0" layoutY="222.0" text="Stock">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="dateEnregistrementText" layoutX="10.0" layoutY="286.0" text="Date d'enregistrement">
+                        <Label fx:id="dateEnregistrementText" layoutX="13.0" layoutY="286.0" text="Date d'enregistrement">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="20.0" layoutY="166.0" text="Id produit">
+                        <Label layoutX="13.0" layoutY="164.0" text="Id produit">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
                         <TextField layoutX="-192.0" layoutY="234.0" prefHeight="25.0" prefWidth="169.0" />
-                        <TextField fx:id="idProduit" layoutX="97.0" layoutY="163.0" prefHeight="25.0" prefWidth="80.0" />
-                        <Button fx:id="afficherProduit" layoutX="870.0" layoutY="49.0" mnemonicParsing="false" onAction="#afficherProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <TextField fx:id="idProduit" layoutX="90.0" layoutY="164.0" prefHeight="25.0" prefWidth="80.0" />
+                        <Button fx:id="afficherProduit" layoutX="870.0" layoutY="52.0" mnemonicParsing="false" onAction="#afficherProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman Bold" size="18.0" />
                            </font>
@@ -126,7 +126,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="ajouterProduit" layoutX="448.0" layoutY="455.0" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+                        <Button fx:id="ajouterProduit" layoutX="470.0" layoutY="454.0" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
                               <Font name="Times New Roman Bold" size="18.0" />
                            </font>
@@ -137,7 +137,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="modifierProduit" layoutX="638.0" layoutY="455.0" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+                        <Button fx:id="modifierProduit" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" onAction="#modifierProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
                               <Font name="Times New Roman Bold" size="18.0" />
                            </font>
@@ -148,7 +148,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="supprimerProduit" layoutX="818.0" layoutY="455.0" mnemonicParsing="false" onAction="#supprimerProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button fx:id="supprimerProduit" layoutX="850.0" layoutY="454.0" mnemonicParsing="false" onAction="#supprimerProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
                               <Font name="Times New Roman Bold" size="18.0" />
                            </font>
@@ -159,7 +159,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <DatePicker fx:id="dateEnregistrementTextBox" layoutX="161.0" layoutY="283.0" />
+                        <DatePicker fx:id="dateEnregistrementTextBox" layoutX="161.0" layoutY="286.0" prefHeight="25.0" prefWidth="190.0" />
                         <Button layoutX="15.0" layoutY="5.0" mnemonicParsing="false" onAction="#actualiserPr" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
@@ -188,6 +188,9 @@
                               <Image url="@../../../images/en-arriere.png" />
                            </image>
                         </ImageView>
+                        <Text fill="RED" layoutX="453.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="644.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="905.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
                      </children>
                   </AnchorPane>
                </content>
@@ -198,10 +201,10 @@
                      <children>
                         <ImageView fitHeight="651.0" fitWidth="1124.0" layoutX="141.0" layoutY="-20.0">
                            <image>
-                              <Image url="@../../../../../../../../../../PFE/WhatsApp%20Image%202024-03-01%20à%2023.09.54_9be76a0d.jpg" />
+                              <Image url="@../../../../../../../../../../PFE/background_inventaire.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="serviceTableView" layoutX="350.0" layoutY="106.0" prefHeight="313.0" prefWidth="649.0">
+                        <TableView fx:id="serviceTableView" layoutX="379.0" layoutY="117.0" prefHeight="313.0" prefWidth="649.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="237.0">
                            <columns>
                               <TableColumn prefWidth="130.0" text="Id_service" />
                               <TableColumn prefWidth="130.0" text="Libellé" />
@@ -216,14 +219,14 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="coutPheure" layoutX="161.0" layoutY="214.0" prefHeight="25.0" prefWidth="169.0" />
-                        <TextField fx:id="libelleServiceTextBox" layoutX="161.0" layoutY="266.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label fx:id="libelleServiceText" layoutX="103.0" layoutY="269.0" text="Libelle">
+                        <TextField fx:id="coutPheure" layoutX="161.0" layoutY="217.0" prefHeight="25.0" prefWidth="169.0" />
+                        <TextField fx:id="libelleServiceTextBox" layoutX="161.0" layoutY="271.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label fx:id="libelleServiceText" layoutX="103.0" layoutY="271.0" text="Libelle">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="typeServiceText" layoutX="112.0" layoutY="321.0" text="Type ">
+                        <Label fx:id="typeServiceText" layoutX="112.0" layoutY="325.0" text="Type ">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
@@ -233,22 +236,22 @@
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="idService" layoutX="161.0" layoutY="160.0" prefHeight="25.0" prefWidth="169.0" />
-                        <TextField fx:id="descriptionServiceTextBox" layoutX="159.0" layoutY="370.0" prefHeight="25.0" prefWidth="169.0" />
-                        <Label fx:id="descriptionServiceText" layoutX="76.0" layoutY="374.0" text="Description">
+                        <TextField fx:id="idService" layoutX="161.0" layoutY="163.0" prefHeight="25.0" prefWidth="169.0" />
+                        <TextField fx:id="descriptionServiceTextBox" layoutX="159.0" layoutY="379.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Label fx:id="descriptionServiceText" layoutX="76.0" layoutY="379.0" text="Description">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="typeServiceTextBox" layoutX="159.0" layoutY="318.0" prefHeight="25.0" prefWidth="169.0" />
+                        <TextField fx:id="typeServiceTextBox" layoutX="159.0" layoutY="325.0" prefHeight="25.0" prefWidth="169.0" />
                         <Label layoutX="55.0" layoutY="217.0" text="Cout par heure">
                            <font>
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Button fx:id="afficherService" layoutX="870.0" layoutY="48.0" mnemonicParsing="false" onAction="#afficherService" prefHeight="33.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherService" layoutX="870.0" layoutY="52.0" mnemonicParsing="false" onAction="#afficherService" prefHeight="33.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -259,7 +262,7 @@
                         </Button>
                         <Button fx:id="ajouterService" layoutX="470.0" layoutY="454.0" mnemonicParsing="false" onAction="#ajouterService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -270,7 +273,7 @@
                         </Button>
                         <Button fx:id="modifierService" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" onAction="#modifierService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -279,9 +282,9 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="supprimerService" layoutX="840.0" layoutY="454.0" mnemonicParsing="false" onAction="#supprimerService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
+                        <Button fx:id="supprimerService" layoutX="850.0" layoutY="454.0" mnemonicParsing="false" onAction="#supprimerService" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Supprimer">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman Bold" size="18.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -318,6 +321,8 @@
                               <Image url="@../../../images/en-arriere.png" />
                            </image>
                         </ImageView>
+                        <Text fill="RED" layoutX="472.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
+                        <Text fill="RED" layoutX="875.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" * " />
                      </children>
                   </AnchorPane>
                </content>

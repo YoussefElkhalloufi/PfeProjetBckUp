@@ -78,8 +78,8 @@
                   <Font name="Garamond Bold" size="16.0" />
                </font>
             </Text>
-            <ComboBox fx:id="cmdIdProduits" layoutX="31.0" layoutY="64.0" onAction="#setProduitInfos" prefHeight="25.0" prefWidth="64.0" />
-            <Text fx:id="puLbl" layoutX="381.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00 DH">
+            <ComboBox fx:id="cmbIdProduits" layoutX="31.0" layoutY="64.0" onAction="#setProduitInfos" prefHeight="25.0" prefWidth="64.0" />
+            <Text fx:id="puLbl" layoutX="381.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -99,12 +99,12 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Text fx:id="designationLbl" layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation du produit">
+            <Text fx:id="designationLbl" layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="totalLbl" layoutX="522.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00 DH">
+            <Text fx:id="totalLbl" layoutX="522.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -142,13 +142,13 @@
                   <Font name="Garamond Bold" size="16.0" />
                </font>
             </Text>
-            <ComboBox fx:id="cmdIdServices" layoutX="31.0" layoutY="64.0" onAction="#setServiceInfos" prefHeight="25.0" prefWidth="64.0" />
-            <Text fx:id="cphLbl" layoutX="298.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00 DH">
+            <ComboBox fx:id="cmbIdServices" layoutX="31.0" layoutY="64.0" onAction="#setServiceInfos" prefHeight="25.0" prefWidth="64.0" />
+            <Text fx:id="cphLbl" layoutX="298.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Button layoutX="606.0" layoutY="48.0" mnemonicParsing="false" onAction="#ajouterProduitFacture" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+            <Button layoutX="606.0" layoutY="48.0" mnemonicParsing="false" onAction="#ajouterServiceFacture" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
@@ -163,7 +163,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Text fx:id="designationServiceLbl" layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designation du service">
+            <Text fx:id="designationServiceLbl" layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -174,7 +174,28 @@
                </font>
             </Text>
             <Line endX="-117.99998474121094" endY="85.0" layoutX="631.0" layoutY="11.0" startX="-117.99999237060547" startY="0.70709228515625" />
+            <Text fx:id="totalServiceLbl" layoutX="522.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nbrHeure" layoutX="419.0" layoutY="62.0" onAction="#setTotal" prefHeight="25.0" prefWidth="51.0" />
          </children>
       </AnchorPane>
+      <Button layoutX="72.0" layoutY="15.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/en-arriere.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

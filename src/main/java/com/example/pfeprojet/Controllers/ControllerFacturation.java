@@ -1,6 +1,7 @@
 package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.Alerts;
+import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 
 public class ControllerFacturation {
@@ -22,7 +25,7 @@ public class ControllerFacturation {
     @FXML
     private ComboBox<String> cmbCinClients;
     @FXML
-    private ComboBox<Integer> cmdIdProduits;
+    private ComboBox<Integer> cmbIdProduits;
     @FXML
     private Text designationLbl;
     @FXML
@@ -39,11 +42,15 @@ public class ControllerFacturation {
     @FXML
     private AnchorPane anchorService;
     @FXML
-    private ComboBox<Integer> cmdIdServices;
+    private ComboBox<Integer> cmbIdServices;
     @FXML
     private Text cphLbl;
     @FXML
     private Text designationServiceLbl;
+    @FXML
+    private TextField nbrHeure;
+    @FXML
+    private Text totalServiceLbl;
 
     Alerts sa = new Alerts();
 
@@ -52,30 +59,32 @@ public class ControllerFacturation {
     public void initialize(){
         cmbCinClients.getItems().addAll(e.getCinClients());
         if(e.typeInventaire() == 0){
-            cmdIdProduits.getItems().addAll(e.getIdProduits());
-            cmdIdServices.getItems().addAll(e.getIdServices());
+            cmbIdProduits.getItems().addAll(e.getIdProduits());
+            cmbIdServices.getItems().addAll(e.getIdServices());
         }else if (e.typeInventaire() == 1){
             anchorService.setVisible(false);
-            cmdIdProduits.getItems().addAll(e.getIdProduits());
+            cmbIdProduits.getItems().addAll(e.getIdProduits());
         }else if (e.typeInventaire() == 2){
             anchoreProduit.setVisible(false);
-            cmdIdServices.getItems().addAll(e.getIdServices());
+            cmbIdServices.getItems().addAll(e.getIdServices());
         }
 
     }
      String[] infosProduit ;
     @FXML
     void setProduitInfos(ActionEvent event) {
-        infosProduit = e.getInfosProduit(cmdIdProduits.getValue());
+        infosProduit = e.getInfosProduit(cmbIdProduits.getValue());
         System.out.println(infosProduit[0]);
         System.out.println(infosProduit[1]);
         designationLbl.setText(infosProduit[0]);
         puLbl.setText(infosProduit[1]);
+        totalLbl.setText("");
+        checkQte(event);
     }
 
     @FXML
     void setServiceInfos(ActionEvent event) {
-        int idSer = cmdIdServices.getValue();
+        int idSer = cmbIdServices.getValue();
         String[] infosService = e.getInfosService(idSer);
         designationServiceLbl.setText(infosService[0]);
         cphLbl.setText(infosService[1]);
@@ -83,37 +92,79 @@ public class ControllerFacturation {
 
     @FXML
     void checkQte(ActionEvent event) {
-        int qte = Integer.parseInt(qteTxtBox.getText());
-        if(qte>Integer.parseInt(infosProduit[2])){
-            sa.showAlert("Quantité non disponible","La quantité choisi est non disponible au stock .","/images/annuler.png");
+        if(qteTxtBox.getText().isEmpty()){
+
         }else{
-            double total = Double.parseDouble(puLbl.getText()) * Integer.parseInt(qteTxtBox.getText());
-            totalLbl.setText(total + " DH");
+            int qte = Integer.parseInt(qteTxtBox.getText());
+            if(qte>Integer.parseInt(infosProduit[2])){
+                sa.showAlert("Quantité non disponible","La quantité choisi est non disponible au stock .","/images/annuler.png");
+            }else{
+                double total = Double.parseDouble(puLbl.getText()) * Integer.parseInt(qteTxtBox.getText());
+                totalLbl.setText(total + " DH");
+            }
         }
     }
 
     @FXML
     void ajouterProduitFacture(ActionEvent event) {
-        if( numFactureTxtBox.getText().isEmpty() || cmbCinClients.getItems().isEmpty() || qteTxtBox.getText().trim().isEmpty() || cmdIdProduits.getItems().isEmpty()){
+        if(numFactureTxtBox.getText().trim().isEmpty() || cmbCinClients.getValue() == null || qteTxtBox.getText().trim().isEmpty() || cmbIdProduits.getValue() == null){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
             int numFc = Integer.parseInt(numFactureTxtBox.getText().trim());
             String cinClt = cmbCinClients.getValue();
-            int idPr = cmdIdProduits.getValue();
+            int idPr = cmbIdProduits.getValue();
             int qte = Integer.parseInt(qteTxtBox.getText());
 
-            if(e.insererFacture(numFc,cinClt,idPr,qte)){
+            if(e.insererFactureProduit(numFc,cinClt,idPr,qte)){
+                sa.showAlert("Ajout avec succes","Produit ajouté avec succes a la facture Numero : " +numFactureTxtBox.getText(),"/images/checked.png");
                 viderProduit();
             }else{
-                System.out.println("erreur");
+                sa.showWarning("Erreur","Produit existe déjà dans la facture");
             }
         }
     }
 
-    private void viderProduit(){
-        designationServiceLbl.setText("");
-        puLbl.setText("");
-        qteTxtBox.setText("");
+    @FXML
+    void ajouterServiceFacture(ActionEvent event) {
+        if(numFactureTxtBox.getText().trim().isEmpty() || cmbCinClients.getValue() == null || nbrHeure.getText().trim().isEmpty() || cmbIdServices.getValue() == null){
+            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+        }else{
+            int numFc = Integer.parseInt(numFactureTxtBox.getText().trim());
+            String cinClt = cmbCinClients.getValue();
+            int idSer = cmbIdServices.getValue() ;
+            int nbrH = Integer.parseInt(nbrHeure.getText());
+
+            if(e.insererFactureService(numFc, cinClt, idSer,nbrH)){
+                sa.showAlert("Ajout avec succes","Service ajouté avec succes a la facture Numero : " +numFactureTxtBox.getText(),"/images/checked.png");
+                viderService();
+            }else{
+                sa.showWarning("Erreur","Service existe déjà dans la facture");
+            }
+        }
+    }
+    @FXML
+    void setTotal(ActionEvent event) {
+        double total = Double.parseDouble(cphLbl.getText()) * Integer.parseInt(nbrHeure.getText());
+        totalServiceLbl.setText(total + " DH");
     }
 
+    private void viderProduit(){
+        designationLbl.setText("");
+        puLbl.setText("");
+        qteTxtBox.setText("");
+        totalLbl.setText("");
+    }
+    private void viderService(){
+        designationServiceLbl.setText("");
+        cphLbl.setText("");
+        nbrHeure.setText("");
+        totalLbl.setText("");
+    }
+
+    @FXML
+    void dashboardDirecteur(ActionEvent event) throws IOException {
+        ChangingWindows cw = new ChangingWindows();
+        cw.switchWindow(event,"DirecteurDashboard.fxml");
+    }
+    //TODO : Affichage et ajout dune facture separés
 }

@@ -7,12 +7,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -194,10 +192,32 @@ public class Entreprise {
         return null;
     }
 
-    public boolean insererFacture(int numFacture, String cinClient, int idProduit, int qte){
-//        return cn.miseAjour("SET @p0='"+numFacture+"'; SET @p1= ?; SET @p2='"+idProduit+"'; SET @p3='"+qte+"';" +
-//                                "CALL `inserer_facture`(@p0, @p1, @p2, @p3);", cinClient);
-        return cn.miseAjour("{CALL inserer_facture("+numFacture+",'"+cinClient+"',"+idProduit+","+qte+")}");
+
+    public boolean insererFactureProduit(int numFacture, String cinClient, int idProduit, int qte){
+       try{
+           ResultSet rs = cn.lire("select * from facture_produit where numeroFacture = "+numFacture+" and idProduit = "+idProduit);
+           if(rs.next()){
+               return false;
+           }else{
+               return cn.miseAjour("{CALL inserer_facture("+numFacture+",'"+cinClient+"',"+idProduit+","+qte+")}");
+           }
+       }catch(SQLException e){
+           e.printStackTrace();
+           return false ;
+       }
+    }
+    public boolean insererFactureService(int numFacture, String cinClient, int idService, int nbrHeure){
+        try{
+            ResultSet rs = cn.lire("select * from facture_service where numerofacture = " +numFacture+" and idService = "+idService);
+            if(rs.next()){
+                return false;
+            }else {
+                return cn.miseAjour("{CALL inserer_facture_service("+numFacture+",'"+cinClient+"',"+idService+","+nbrHeure+")}");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false ;
+        }
     }
     public int typeInventaire(){
         if(cn.verificationTables() == 0) return 0 ; // Produit + Service

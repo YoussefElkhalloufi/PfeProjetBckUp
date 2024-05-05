@@ -270,11 +270,14 @@ public class ControllerDbCreation extends mouseEvents{
         if(libelleService.isSelected()){
             selectedColumns.add("LibelleService VARCHAR(100)");
         }
-        if (typeService.isSelected()) {
+        if(typeService.isSelected()) {
             selectedColumns.add("TypeService VARCHAR(255)");
         }
         if(descriptionService.isSelected()){
             selectedColumns.add("Description VARCHAR(255)");
+        }
+        if(personnel.isSelected()){
+            selectedColumns.add("Personnel VARCHAR(255)");
         }
         // Add other columns as needed
         return selectedColumns;

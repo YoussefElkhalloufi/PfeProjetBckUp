@@ -2,10 +2,6 @@ package com.example.pfeprojet.Entreprise;
 
 import org.junit.jupiter.api.Test;
 
-import javax.xml.crypto.Data;
-
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class EntrepriseTest {
@@ -211,9 +207,23 @@ class EntrepriseTest {
     }
 
     @Test
-    void testInsererFacture(){
-        Entreprise e = new Entreprise("dolce");
-        e.insererFacture(2025,"12345",4,4);
+    void testInsererFactureProduit(){
+        Entreprise e = new Entreprise("WINSTON");
+        if(e.insererFactureProduit(2,"FC59627",2,10)){
+            System.out.println("Facture ajouté");
+        }else{
+            System.out.println("id existe deja dans la facture");
+        }
+    }
+
+    @Test
+    void testInsererFactureProduitService(){
+        Entreprise e = new Entreprise("winston");
+        if(e.insererFactureService(2,"FC59627",1,1)){
+            System.out.println("Facture ajouté");
+        }else{
+            System.out.println("id existe deja dans la facture");
+        }
     }
 
 }

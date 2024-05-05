@@ -153,7 +153,68 @@ public class ControllerDbCreation2 extends mouseEvents{
 
                         cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_mois(mois INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE MONTH(dateFacture) = mois;RETURN somme; END ;");
                         cEntreprise.miseAjour("CREATE FUNCTION somme_total_factures_par_annee(annee INT)RETURNS DECIMAL(10,2)BEGIN DECLARE somme DECIMAL(10,2);SELECT SUM(Total_TTC) INTO somme FROM facture WHERE YEAR(dateFacture) = annee; RETURN somme; END;");
-                        cEntreprise.miseAjour("CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT) BEGIN DECLARE pu_p DECIMAL(10,2); DECLARE THT DECIMAL(10,2); DECLARE TTC DECIMAL(10,2);  SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);END IF;SET THT = pu_p * qt; INSERT INTO facture_produit VALUES (nf, idpr, qt, THT); UPDATE produit SET stock = stock - qt WHERE idProduit = idpr; SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf); UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf; ELSE SELECT 'stock indisponible';END IF; END ;");
+                        if(cEntreprise.verificationTables() == 0){
+                            cEntreprise.miseAjour("CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT) BEGIN DECLARE pu_p DECIMAL(10,2); DECLARE THT DECIMAL(10,2); DECLARE TTC DECIMAL(10,2);  SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);END IF;SET THT = pu_p * qt; INSERT INTO facture_produit VALUES (nf, idpr, qt, THT); UPDATE produit SET stock = stock - qt WHERE idProduit = idpr; SET TTC = COALESCE((SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf), 0) + COALESCE((SELECT SUM(total_HT) FROM facture_service WHERE NumeroFacture = nf), 0); UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf; ELSE SELECT 'stock indisponible';END IF; END ;");
+                            cEntreprise.miseAjour("CREATE PROCEDURE inserer_facture_service(\n" +
+                                    "    IN nf INT, \n" +
+                                    "    IN cin VARCHAR(20), \n" +
+                                    "    IN idSer INT, \n" +
+                                    "    IN nbHeure INT\n" +
+                                    ")\n" +
+                                    "NOT DETERMINISTIC \n" +
+                                    "CONTAINS SQL \n" +
+                                    "SQL SECURITY DEFINER \n" +
+                                    "BEGIN \n" +
+                                    "    DECLARE prixServiceParHeure DECIMAL(10,2); \n" +
+                                    "    DECLARE THT DECIMAL(10,2); \n" +
+                                    "    DECLARE TTC Decimal(10,2); \n" +
+                                    "    \n" +
+                                    "    SET prixServiceParHeure = (SELECT cout_heure FROM service WHERE idservice = idSer); \n" +
+                                    "    \n" +
+                                    "    IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN \n" +
+                                    "        INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin); \n" +
+                                    "    END IF; \n" +
+                                    "    \n" +
+                                    "    SET THT = prixServiceParHeure * nbHeure; \n" +
+                                    "    \n" +
+                                    "    INSERT INTO facture_service VALUES (nf, idSer, nbHeure, THT); \n" +
+                                    "    \n" +
+                                    "    SET TTC = COALESCE((SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf), 0) + COALESCE((SELECT SUM(total_HT) FROM facture_service WHERE NumeroFacture = nf), 0); \n" +
+                                    "    \n" +
+                                    "    UPDATE facture SET total_ttc =  TTC WHERE numeroFacture = nf; \n" +
+                                    "END;\n");
+                        }else if (cEntreprise.verificationTables() == 1){
+                            cEntreprise.miseAjour("CREATE DEFINER=`root`@`localhost` PROCEDURE `inserer_facture`(nf INT, cin VARCHAR(20), idpr INT, qt INT) BEGIN DECLARE pu_p DECIMAL(10,2); DECLARE THT DECIMAL(10,2); DECLARE TTC DECIMAL(10,2);  SET pu_p = (SELECT prixUnitaire FROM produit WHERE idProduit = idpr);IF ((SELECT stock FROM produit WHERE idProduit = idpr) >= qt) THEN IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin);END IF;SET THT = pu_p * qt; INSERT INTO facture_produit VALUES (nf, idpr, qt, THT); UPDATE produit SET stock = stock - qt WHERE idProduit = idpr; SET TTC = (SELECT SUM(total_HT) FROM facture_produit WHERE NumeroFacture = nf) ; UPDATE facture SET total_TTC = TTC WHERE numerofacture = nf; ELSE SELECT 'stock indisponible';END IF; END ;");
+                        }else if (cEntreprise.verificationTables() == 2){
+                            cEntreprise.miseAjour("CREATE PROCEDURE inserer_facture_service(\n" +
+                                    "    IN nf INT, \n" +
+                                    "    IN cin VARCHAR(20), \n" +
+                                    "    IN idSer INT, \n" +
+                                    "    IN nbHeure INT\n" +
+                                    ")\n" +
+                                    "NOT DETERMINISTIC \n" +
+                                    "CONTAINS SQL \n" +
+                                    "SQL SECURITY DEFINER \n" +
+                                    "BEGIN \n" +
+                                    "    DECLARE prixServiceParHeure DECIMAL(10,2); \n" +
+                                    "    DECLARE THT DECIMAL(10,2); \n" +
+                                    "    DECLARE TTC Decimal(10,2); \n" +
+                                    "    \n" +
+                                    "    SET prixServiceParHeure = (SELECT cout_heure FROM service WHERE idservice = idSer); \n" +
+                                    "    \n" +
+                                    "    IF NOT EXISTS(SELECT * FROM facture WHERE NumeroFacture = nf) THEN \n" +
+                                    "        INSERT INTO facture (numerofacture, cinclient) VALUES (nf, cin); \n" +
+                                    "    END IF; \n" +
+                                    "    \n" +
+                                    "    SET THT = prixServiceParHeure * nbHeure; \n" +
+                                    "    \n" +
+                                    "    INSERT INTO facture_service VALUES (nf, idSer, nbHeure, THT); \n" +
+                                    "    \n" +
+                                    "    SET TTC = (SELECT SUM(total_HT) FROM facture_service WHERE NumeroFacture = nf);   \n" +
+                                    "    \n" +
+                                    "    UPDATE facture SET total_ttc =  TTC WHERE numeroFacture = nf; \n" +
+                                    "END;\n");
+                        }
 
                         Entreprise e = new Entreprise(ControllerSignUp.getCmp());
                         e.setInfosEntreprise();
@@ -191,6 +252,14 @@ public class ControllerDbCreation2 extends mouseEvents{
             }
     }
 
+    public void procedureStocke(String tables){
+        if(tables.contains("service")) {
+
+        }
+        if(tables.contains("produit")) {
+
+        }
+    }
 
     public ArrayList<String> getEmpColumns(){
         ArrayList<String> list = new ArrayList<>();

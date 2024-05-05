@@ -24,9 +24,9 @@
                <content>
                   <AnchorPane prefHeight="358.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button fx:id="afficherRespoBtn" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" onAction="#afficherRespo" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherRespoBtn" layoutX="734.0" layoutY="13.0" mnemonicParsing="false" onAction="#afficherRespo" prefHeight="25.0" prefWidth="118.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman" size="12.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -130,17 +130,30 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <TextField fx:id="cinTextRespoRech" layoutX="565.0" layoutY="13.0" onAction="#afficherRespo" style="-fx-background-radius: 5;" />
+                        <Label layoutX="515.0" layoutY="16.0" text="Cin :">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/resposable.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Tab>
           <Tab style="-fx-background-color: #ededed;" text="Gestionnaire">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button fx:id="afficherGestioBtn" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" onAction="#afficherGestio" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherGestioBtn" layoutX="734.0" layoutY="13.0" mnemonicParsing="false" onAction="#afficherGestio" prefHeight="25.0" prefWidth="118.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman" size="12.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -244,17 +257,30 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <TextField fx:id="cinTextGestioRech" layoutX="565.0" layoutY="13.0" onAction="#afficherGestio" style="-fx-background-radius: 5;" />
+                        <Label layoutX="515.0" layoutY="16.0" text="Cin :">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/Gestionnaire.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Tab>
             <Tab style="-fx-background-color: #ededed;" text="Vendeur">
                <content>
                   <AnchorPane prefHeight="413.0" prefWidth="869.0" style="-fx-background-color: #ededed;">
                      <children>
-                        <Button fx:id="afficherVendeurBtn" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" onAction="#afficherVendeur" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherVendeurBtn" layoutX="734.0" layoutY="13.0" mnemonicParsing="false" onAction="#afficherVendeur" prefHeight="25.0" prefWidth="118.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
-                              <Font name="Times New Roman" size="18.0" />
+                              <Font name="Times New Roman" size="12.0" />
                            </font>
                            <effect>
                               <DropShadow />
@@ -358,9 +384,22 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <TextField fx:id="cinTextVendeurRech" layoutX="565.0" layoutY="13.0" onAction="#afficherVendeur" style="-fx-background-radius: 5;" />
+                        <Label layoutX="515.0" layoutY="16.0" text="Cin :">
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/vendeur.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Tab>
         </tabs>
       </TabPane>

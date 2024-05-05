@@ -110,7 +110,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="client" layoutX="358.0" layoutY="82.0" onMouseEntered="#onMouseEnteredClient" onMouseExited="#onMouseExitedClient" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+      <AnchorPane fx:id="client" layoutX="358.0" layoutY="82.0" onMouseClicked="#switchToClient" onMouseEntered="#onMouseEnteredClient" onMouseExited="#onMouseExitedClient" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -205,5 +205,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
+      <ImageView fitHeight="41.0" fitWidth="53.0" layoutX="905.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/directeur.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

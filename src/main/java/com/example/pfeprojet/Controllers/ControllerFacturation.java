@@ -167,4 +167,5 @@ public class ControllerFacturation {
         cw.switchWindow(event,"DirecteurDashboard.fxml");
     }
     //TODO : Affichage et ajout dune facture separés
+    //TODO : si l'entreprise ont tva ou remise dans la facture ; khashum ykunu f facturation
 }

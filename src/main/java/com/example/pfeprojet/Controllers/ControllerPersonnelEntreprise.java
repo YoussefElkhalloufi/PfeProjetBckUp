@@ -34,6 +34,8 @@ public class ControllerPersonnelEntreprise {
     private Button modifierRespoBtn;
     @FXML
     private Button supprimerRespoBtn;
+    @FXML
+    private TextField cinTextRespoRech;
 
 
     @FXML
@@ -56,7 +58,8 @@ public class ControllerPersonnelEntreprise {
     private Button modifierGestioBtn;
     @FXML
     private Button supprimerGestioBtn;
-
+    @FXML
+    private TextField cinTextGestioRech;
 
 
 
@@ -80,7 +83,8 @@ public class ControllerPersonnelEntreprise {
     private Button modifierVendeurBtn;
     @FXML
     private Button supprimerVendeurBtn;
-    
+    @FXML
+    private TextField cinTextVendeurRech;
 
     Alerts sa = new Alerts();
     mouseEvents me = new mouseEvents();
@@ -254,7 +258,6 @@ public class ControllerPersonnelEntreprise {
                 if(e.supprimerPersonnel("Responsables",cin)){
                     sa.showAlert("Suppression réussie","Le compte du responsable a été supprimé avec succès.","/images/checked.png");
                     e.populateTableViewWithSelectionHandler(e.getPersonnel("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
-                    emailSuppression(nomTextRespo.getText().trim(),prenomTextRespo.getText().trim(),mailTextRespo.getText().trim());
                 }else{
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un responsable valide dans le tableau avant de procéder à la suppression.");
                 }
@@ -271,7 +274,6 @@ public class ControllerPersonnelEntreprise {
                 if(e.supprimerPersonnel("Gestionnaires",cin)){
                     sa.showAlert("Suppression réussie","Le compte du Gestionnaire a été supprimé avec succès.","/images/checked.png");
                     e.populateTableViewWithSelectionHandler(e.getPersonnel("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
-                    emailSuppression(nomTextGestio.getText().trim(),prenomTextGestio.getText().trim(), mailTextGestio.getText().trim());
                 }else{
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Gestionnaire valide dans le tableau avant de procéder à la suppression.");
                 }
@@ -289,7 +291,6 @@ public class ControllerPersonnelEntreprise {
                 if(e.supprimerPersonnel("Vendeurs",cin)){
                     sa.showAlert("Suppression réussie","Le compte du Vendeur a été supprimé avec succès.","/images/checked.png");
                     e.populateTableViewWithSelectionHandler(e.getPersonnel("Vendeurs"),vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
-                    emailSuppression(nomTextVendeur.getText().trim(), prenomTextVendeur.getText().trim(), mailTextVendeur.getText().trim());
                 }else{
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Vendeur valide dans le tableau avant de procéder à la suppression.");
                 }
@@ -301,7 +302,7 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void afficherRespo(ActionEvent event) {
-        String cin = cinTextRespo.getText().trim();
+        String cin = cinTextRespoRech.getText().trim();
         if(!cin.isEmpty()){
             ResultSet rs = e.afficherPersonnel("Responsables",cin);
             if(rs != null){
@@ -315,7 +316,7 @@ public class ControllerPersonnelEntreprise {
     }
     @FXML
     void afficherGestio(ActionEvent event) {
-        String cin = cinTextGestio.getText().trim();
+        String cin = cinTextGestioRech.getText().trim();
         if(!cin.isEmpty()){
             ResultSet rs = e.afficherPersonnel("Gestionnaires", cin);
             if(rs != null){
@@ -330,7 +331,7 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     void afficherVendeur(ActionEvent event) {
-        String cin = cinTextVendeur.getText().trim();
+        String cin = cinTextVendeurRech.getText().trim();
         if (!cin.isEmpty()){
             ResultSet rs = e.afficherPersonnel("Vendeurs", cin);
             if(rs!= null){
@@ -397,20 +398,7 @@ public class ControllerPersonnelEntreprise {
             sa.showWarning("Modification échouée","Veuillez sélectionner un Vendeur et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
         }
     }
-    public void emailSuppression(String nom, String prenom, String mail){
-        String objet = "Notification de suppression de compte dans FacturEase";
-        String message = "Cher " +prenom+" "+nom+",\n\n"
-                +"Nous vous informons que votre compte dans l'application FacturEase " +
-                "a été supprimé. Si vous avez des questions ou si vous pensez que cela" +
-                " est une erreur, veuillez contacter votre directeur immédiatement pour" +
-                " obtenir de l'aide.\n\n"
-                +"Nous vous remercions de votre compréhension.\n\n"
-                +"Cordialement,\n"+
-                "[L'équipe FacturEase]";
-        if(EmailSender.check()){
-            EmailSender.sendEmail(mail,objet,message);
-        }
-    }
+
     public void sendMail(String personnel, String nom, String prenom, String mailPersonnel, String pwdPersonnel){
             if(sa.showConfirmationAlert("Confirmation","Souhaitez-vous envoyer un e-mail au personnel contenant leurs informations d'authentification ?\nSi vous utilisez une adresse e-mail Gmail valide, vous pourrez contacter le personnel de l'entreprise directement depuis l'application.")){
                 if(EmailSender.check()){

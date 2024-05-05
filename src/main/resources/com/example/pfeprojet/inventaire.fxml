@@ -13,33 +13,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerInventaire">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1042.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.9736841917037964" green="0.7969785332679749" blue="0.46881091594696045" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9736841917037964" green="0.8900645971298218" blue="0.7347709536552429" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="94.0" layoutX="-3.0" layoutY="-31.0" stroke="BLACK" strokeType="INSIDE" width="1042.0" />
       <Text layoutX="430.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventaire">
          <font>
             <Font name="Times New Roman Bold" size="36.0" />
@@ -115,7 +95,7 @@
                         </Label>
                         <TextField layoutX="-192.0" layoutY="234.0" prefHeight="25.0" prefWidth="169.0" />
                         <TextField fx:id="idProduit" layoutX="90.0" layoutY="164.0" prefHeight="25.0" prefWidth="80.0" />
-                        <Button fx:id="afficherProduit" layoutX="870.0" layoutY="52.0" mnemonicParsing="false" onAction="#afficherProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
+                        <Button fx:id="afficherProduit" layoutX="867.0" layoutY="49.0" mnemonicParsing="false" onAction="#afficherProduit" prefHeight="32.0" prefWidth="130.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Afficher">
                            <font>
                               <Font name="Times New Roman Bold" size="18.0" />
                            </font>

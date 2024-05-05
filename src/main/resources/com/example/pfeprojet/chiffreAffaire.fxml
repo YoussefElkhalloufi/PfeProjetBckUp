@@ -117,7 +117,7 @@
          </yAxis>
       </LineChart>
       <PieChart fx:id="pieChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0" />
-      <ComboBox fx:id="aCmbMois" layoutX="233.0" layoutY="108.0" prefHeight="25.0" prefWidth="100.0">
+      <ComboBox fx:id="aCmbMois" layoutX="233.0" layoutY="108.0" onAction="#filtrerMois" prefHeight="25.0" prefWidth="100.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Janvier" />

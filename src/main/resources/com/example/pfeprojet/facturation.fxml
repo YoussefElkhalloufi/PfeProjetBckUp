@@ -109,7 +109,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="qteTxtBox" layoutX="455.0" layoutY="62.0" onAction="#checkQte" prefHeight="25.0" prefWidth="51.0" />
+            <TextField fx:id="qteTxtBox" layoutX="455.0" layoutY="62.0" onAction="#checkQte" onKeyTyped="#onKeyQte" prefHeight="25.0" prefWidth="51.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorService" layoutX="14.0" layoutY="320.0" prefHeight="109.0" prefWidth="648.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
@@ -179,7 +179,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="nbrHeure" layoutX="419.0" layoutY="62.0" onAction="#setTotal" prefHeight="25.0" prefWidth="51.0" />
+            <TextField fx:id="nbrHeure" layoutX="419.0" layoutY="62.0" onAction="#setTotalServiceFacture" onKeyTyped="#onKeyNbrHeure" prefHeight="25.0" prefWidth="51.0" />
          </children>
       </AnchorPane>
       <Button layoutX="72.0" layoutY="15.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">

@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -141,7 +140,8 @@ public class ControllerInventaire {
     private void applyButtonStyleOnMouseExited(Button button){
         button.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");
     }
-        public boolean containsColonne(ArrayList<String> colonnes, String colonne){
+
+    public static boolean containsColonne(ArrayList<String> colonnes, String colonne){
         for(String s : colonnes){
             if(s.equalsIgnoreCase(colonne)){
                 return true;
@@ -152,7 +152,7 @@ public class ControllerInventaire {
 
     public void checkColonnesProduit(){
 
-        ArrayList<String> colonnesProduit = e.getColonneInventaire("produit");
+        ArrayList<String> colonnesProduit = e.getColonnesTable("produit");
         if(!containsColonne(colonnesProduit, "libelleProduit")) {
             libelleText.setVisible(false);
             libelleTextbox.setVisible(false);
@@ -172,7 +172,7 @@ public class ControllerInventaire {
     }
 
     public void checkColonnesService(){
-        ArrayList<String> colonnesService = e.getColonneInventaire("service");
+        ArrayList<String> colonnesService = e.getColonnesTable("service");
         if(!containsColonne(colonnesService, "libelleService")){
             libelleServiceText.setVisible(false);
             libelleServiceTextBox.setVisible(false);

@@ -3,7 +3,9 @@ package com.example.pfeprojet.Controllers;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Directeur;
 import com.example.pfeprojet.Entreprise.Entreprise;
+import com.example.pfeprojet.HelloApplication;
 import javafx.animation.ScaleTransition;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+
 
 
 public class ControllerDashboardDirecteur {
@@ -173,4 +177,10 @@ public class ControllerDashboardDirecteur {
     void switchToClient(MouseEvent event) throws IOException {
         cw.switchWindowPane(event,"/com/example/pfeprojet/clientsEntreprise.fxml");
     }
+    @FXML
+    void restartApplication(ActionEvent event) {
+        HelloApplication.restartApplication();
+    }
 }
+
+//TODO : fix the deconnexion button !!!!

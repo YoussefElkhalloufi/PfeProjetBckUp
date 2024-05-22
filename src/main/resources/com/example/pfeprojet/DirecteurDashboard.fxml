@@ -48,7 +48,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="deconnexionBtn" alignment="CENTER_RIGHT" layoutX="812.0" layoutY="447.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Déconnexion">
+      <Button fx:id="deconnexionBtn" alignment="CENTER_RIGHT" layoutX="812.0" layoutY="447.0" mnemonicParsing="false" onAction="#restartApplication" prefHeight="33.0" prefWidth="128.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Déconnexion">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>

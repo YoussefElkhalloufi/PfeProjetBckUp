@@ -187,8 +187,8 @@ class EntrepriseTest {
     @Test
     void testGetInfosProduits(){
         Entreprise e = new Entreprise("maroc_telecom");
-        System.out.println("Colonnes de la table service sont : " +e.getColonneInventaire("service"));
-        if(e.getColonneInventaire("Service").contains("LibelleService")){
+        System.out.println("Colonnes de la table service sont : " +e.getColonnesTable("service"));
+        if(e.getColonnesTable("Service").contains("LibelleService")){
             System.out.println("hennesy_liqour.produit has column libelleService in it");
         }else{
             System.out.println("hennesy_liqour.produit hasnt column libelleService in it");
@@ -226,4 +226,10 @@ class EntrepriseTest {
         }
     }
 
+
+    @Test
+    void testGetColonnesClient(){
+            Entreprise e = new Entreprise("iam_maroc_telecom");
+            System.out.println(e.getColonnesTable("client"));
+    }
 }

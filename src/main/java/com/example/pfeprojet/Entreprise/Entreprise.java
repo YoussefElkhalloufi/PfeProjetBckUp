@@ -145,7 +145,7 @@ public class Entreprise {
     public String[] getInfosProduit(int idProduit){
         try{
             String[] infosProduits = new String[3];
-            if(getColonneInventaire("Produit").contains("libelleProduit")){
+            if(getColonnesTable("Produit").contains("libelleProduit")){
                 ResultSet rs = cn.lire("select libelleProduit, prixUnitaire, stock from produit where idProduit = " + idProduit);
                 while(rs.next()){
                     infosProduits[0] = rs.getString(1);
@@ -171,7 +171,7 @@ public class Entreprise {
     public String[] getInfosService(int idService){
         try{
             String[] infosProduits = new String[2];
-            if(getColonneInventaire("Service").contains("LibelleService")){
+            if(getColonnesTable("Service").contains("LibelleService")){
                 ResultSet rs = cn.lire("select libelleService, cout_heure from service where idService = " + idService);
                 while(rs.next()){
                     infosProduits[0] = rs.getString(1);
@@ -226,9 +226,9 @@ public class Entreprise {
         return -1 ;
     }
 
-    public ArrayList<String> getColonneInventaire(String typeInventaire){
+    public ArrayList<String> getColonnesTable(String table){
         try{
-            ResultSet rs = cn.lire("SHOW columns from " +typeInventaire);
+            ResultSet rs = cn.lire("SHOW columns from " +table);
             ArrayList<String> colonnes = new ArrayList<>();
             while(rs.next()){
                 if(!rs.getString(1).equalsIgnoreCase("idProduit") &&
@@ -404,6 +404,63 @@ public class Entreprise {
         // Execute the query
         return cn.miseAjour(req.toString());
     }
+
+
+    public boolean ajouterClient(String cinClient, String nomClient, String prenomClient, String telephoneClient, String adresseClient, String dateNaissanceClient, String emailClient) {
+        // Create lists to store column names and values
+        List<String> columns = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+
+        // Add non-null columns and values to the lists
+        if (nomClient != null && !nomClient.equalsIgnoreCase("")) {
+            columns.add("nomClient");
+            values.add("'" + nomClient + "'");
+        }
+        if (prenomClient != null && !prenomClient.equalsIgnoreCase("")) {
+            columns.add("prenomClient");
+            values.add("'" + prenomClient + "'");
+        }
+        if (telephoneClient != null && !telephoneClient.equalsIgnoreCase("")) {
+            columns.add("telephoneClient");
+            values.add("'" + telephoneClient + "'");
+        }
+        if (adresseClient != null && !adresseClient.equalsIgnoreCase("")) {
+            columns.add("adresseClient");
+            values.add("'" + adresseClient + "'");
+        }
+        if (dateNaissanceClient != null && !dateNaissanceClient.equalsIgnoreCase("")) {
+            columns.add("dateNaissanceClient");
+            values.add("'" + dateNaissanceClient + "'");
+        }
+        if (emailClient != null && !emailClient.equalsIgnoreCase("")) {
+            columns.add("emailClient");
+            values.add("'" + emailClient + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (columns.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("INSERT INTO client (cinClient");
+        StringBuilder valuesStr = new StringBuilder(" VALUES ('" + cinClient + "'");
+
+        // Append non-null columns and values to the SQL query
+        for (int i = 0; i < columns.size(); i++) {
+            req.append(", ").append(columns.get(i));
+            valuesStr.append(", ").append(values.get(i));
+        }
+
+        // Complete the SQL query
+        req.append(")").append(valuesStr).append(")");
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
+
+
     public ResultSet afficherProduit(int idProduit){
         return cn.lire("Select * from produit where idProduit = " + idProduit);
     }
@@ -416,8 +473,12 @@ public class Entreprise {
     public boolean supprimerService(int idService){
         return cn.miseAjour("delete from service where idService = " +idService);
     }
+    public boolean supprimerClient(String cinClt){
+        return cn.miseAjour("delete from client where cinClient = ?", cinClt);
+    }
 
-    public ResultSet getPersonnel(String typePerso){return cn.lire("select * from "+typePerso);}
+
+    public ResultSet getPersonnes(String typePerso){return cn.lire("select * from "+typePerso);}
     public ResultSet getInventaire(String typeInventaire) {return cn.lire("select * from "+typeInventaire);}
     public boolean insererPersonnel(String typePerso,String cin, String nom, String prenom, String mail, String pwd){
         String req = "insert into "+typePerso+" values(?,?,?,?,?)";

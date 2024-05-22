@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -107,7 +108,7 @@ public class ControllerFacturation {
 
     @FXML
     void ajouterProduitFacture(ActionEvent event) {
-        if(numFactureTxtBox.getText().trim().isEmpty() || cmbCinClients.getValue() == null || qteTxtBox.getText().trim().isEmpty() || cmbIdProduits.getValue() == null){
+        if(numFactureTxtBox.getText().trim().isEmpty() || cmbCinClients.getValue() == null || qteTxtBox.getText().trim().isEmpty() || cmbIdProduits.getValue() == null || totalLbl.getText().trim().isEmpty()){
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }else{
             int numFc = Integer.parseInt(numFactureTxtBox.getText().trim());
@@ -122,6 +123,15 @@ public class ControllerFacturation {
                 sa.showWarning("Erreur","Produit existe déjà dans la facture");
             }
         }
+    }
+
+    @FXML
+    void onKeyQte(KeyEvent event) {
+        checkQte(new ActionEvent());
+    }
+    @FXML
+    void onKeyNbrHeure(KeyEvent event) {
+        setTotalServiceFacture(new ActionEvent());
     }
 
     @FXML
@@ -143,7 +153,7 @@ public class ControllerFacturation {
         }
     }
     @FXML
-    void setTotal(ActionEvent event) {
+    void setTotalServiceFacture(ActionEvent event) {
         double total = Double.parseDouble(cphLbl.getText()) * Integer.parseInt(nbrHeure.getText());
         totalServiceLbl.setText(total + " DH");
     }

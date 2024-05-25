@@ -178,9 +178,8 @@ public class ControllerDashboardDirecteur {
         cw.switchWindowPane(event,"/com/example/pfeprojet/clientsEntreprise.fxml");
     }
     @FXML
-    void restartApplication(ActionEvent event) {
-        HelloApplication.restartApplication();
+    void restartApplication(ActionEvent event) throws IOException {
+        //TODO : fix the deconnexion button !!!!
     }
 }
 
-//TODO : fix the deconnexion button !!!!

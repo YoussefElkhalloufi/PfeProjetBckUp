@@ -2,6 +2,8 @@ package com.example.pfeprojet.Entreprise;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EntrepriseTest {
@@ -226,10 +228,52 @@ class EntrepriseTest {
         }
     }
 
-
+    //TESTCOLONNESCLIENT
     @Test
     void testGetColonnesClient(){
             Entreprise e = new Entreprise("iam_maroc_telecom");
             System.out.println(e.getColonnesTable("client"));
+    }
+
+
+    //TestCheckTvaRemise
+    @Test
+    void test_NON_Remise_Tva() throws SQLException {
+        Entreprise e = new Entreprise("iam_maroc_telecom");
+        assertEquals(-1, e.checkTva_Remise());
+    }
+
+    @Test
+    void test_Check_Remise() throws SQLException {
+        Entreprise e = new Entreprise("winston");
+        assertEquals(0, e.checkTva_Remise());
+    }
+
+    @Test
+    void testCheck_Remise_Tva() throws SQLException {
+        Entreprise e = new Entreprise("winston");
+        assertEquals(2, e.checkTva_Remise());
+    }
+
+
+    @Test
+    void test_Check_Tva() throws SQLException {
+        Entreprise e = new Entreprise("winston");
+        assertEquals(1, e.checkTva_Remise());
+    }
+
+
+
+    //testAjouterFacture
+    @Test
+    void test_Ajouter_Facture_non_Tva_no_Remise() throws SQLException {
+        Entreprise e = new Entreprise("iam_maroc_telecom");
+        e.ajouterFacture(0,0,1, e.CalculTotalTTC(4000,0,0));
+        }
+
+    @Test
+    void test_Ajouter_Facture_non_Tva_yes_Remise() throws SQLException {
+        Entreprise e = new Entreprise("winston");
+        e.ajouterFacture(50,20,1, e.CalculTotalTTC(e.getTotalFacture(1),50,20));
     }
 }

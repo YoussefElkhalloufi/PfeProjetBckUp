@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static com.example.pfeprojet.Controllers.ControllerPersonnelEntreprise.viderTextFields;
+
 public class ControllerInventaire {
 
     @FXML
@@ -89,9 +91,12 @@ public class ControllerInventaire {
 
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
+    ArrayList<javafx.scene.control.TextField> textFieldsProduit = new ArrayList<>();
+    ArrayList<javafx.scene.control.TextField> textFieldsService = new ArrayList<>();
+
     public void initialize(){
 
-        //System.out.println(e.getColonneProduit().toString());
+
         if (e.typeInventaire() == 0){
             e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
             e.populateTableView(e.getInventaire("Service"), serviceTableView,idService);
@@ -99,18 +104,39 @@ public class ControllerInventaire {
             checkColonnesService();
             buttonsStyleProduit();
             buttonsStyleService();
+            setTextFieldsProduit();
+            setTextFieldsService();
         }else if(e.typeInventaire() == 1){
             servicePane.setDisable(true);
             e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
             checkColonnesProduit();
             buttonsStyleProduit();
+            setTextFieldsProduit();
         }else if (e.typeInventaire() == 2){
             servicePane.getTabPane().getSelectionModel().select(servicePane);
             e.populateTableView(e.getInventaire("Service"),serviceTableView, idProduit);
             checkColonnesService();
             produitPane.setDisable(true);
             buttonsStyleService();
+            setTextFieldsService();
         }
+    }
+
+    private void setTextFieldsProduit(){
+        textFieldsProduit.add(idProduit);
+        textFieldsProduit.add(prixUnitaireProduit);
+        textFieldsProduit.add(stockProduit);
+        textFieldsProduit.add(libelleTextbox);
+        textFieldsProduit.add(descriptionTextBox);
+        textFieldsProduit.add(categorieTextBox);
+    }
+
+    private void setTextFieldsService(){
+        textFieldsService.add(idService);
+        textFieldsService.add(coutPheure);
+        textFieldsService.add(libelleServiceTextBox);
+        textFieldsService.add(descriptionServiceTextBox);
+        textFieldsService.add(typeServiceTextBox);
     }
     private void buttonsStyleService() {
         afficherService.setOnMouseEntered(event -> applyButtonStyleOnMouseEntered(afficherService));
@@ -191,12 +217,12 @@ public class ControllerInventaire {
     @FXML
     void actualiserPr(ActionEvent event) {
         initialize();
-        viderProduit();
+        viderTextFields(textFieldsProduit);
     }
     @FXML
     void actualiserSer(ActionEvent event) {
         initialize();
-        viderProduit();
+        viderTextFields(textFieldsService);
     }
 
     @FXML
@@ -222,10 +248,10 @@ public class ControllerInventaire {
             if(e.ajouterProduit(idPr,PU,stck,libellePr, dateEnregistrementPr, descriptionPr,cat)){
                 e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
                 sa.showAlert("Ajout avec succes","Le Produit est bien ajouté ! ","/images/checked.png");
-                viderProduit();
+                viderTextFields(textFieldsProduit);
             }else{
                 sa.showAlert("Ajout Erroné", "Le Produit existe deja ! ", "/images/annuler.png");
-                viderProduit();
+                viderTextFields(textFieldsProduit);
             }
         }
     }
@@ -242,10 +268,10 @@ public class ControllerInventaire {
             if(e.ajouterService(idSer,coutParHeure,lib,typeSer,descriptionSer)){
                 e.populateTableView(e.getInventaire("Service"),serviceTableView, idService);
                 sa.showAlert("Ajout avec succes","Le Service est bien ajouté ! ","/images/checked.png");
-                viderService();
+                viderTextFields(textFieldsService);
             }else{
                 sa.showAlert("Ajout Erroné", "Le service existe deja ! ", "/images/annuler.png");
-                viderService();
+                viderTextFields(textFieldsService);
             }
         }else{
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
@@ -259,7 +285,7 @@ public class ControllerInventaire {
                 if(e.supprimerProduit(idPr)){
                     e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
                     sa.showAlert("Suppression réussie","Le produit a été supprimé avec succès.","/images/checked.png");
-                    viderProduit();
+                    viderTextFields(textFieldsProduit);
                 }else{
                     sa.showAlert("Suppression échouée","Le ID de produit saisi n'existe pas. Veuillez sélectionner un produit valide dans le tableau avant de procéder à la suppression.", "/images/annuler.png");
                 }
@@ -276,7 +302,7 @@ public class ControllerInventaire {
                 if(e.supprimerService(idSer)){
                     e.populateTableView(e.getInventaire("Service"),serviceTableView, idService);
                     sa.showAlert("Suppression réussie","Le service a été supprimé avec succès.","/images/checked.png");
-                    viderService();
+                    viderTextFields(textFieldsService);
                 }else{
                     sa.showAlert("Suppression échouée","Le ID de service saisi n'existe pas. Veuillez sélectionner un service valide dans le tableau avant de procéder à la suppression.", "/images/annuler.png");
                 }
@@ -328,10 +354,10 @@ public class ControllerInventaire {
             if(e.modifierProduit(idPr,PU,stck,libellePr, dateEnregistrementPr, descriptionPr,cat)){
                 e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
                 sa.showAlert("Modification avec succes","Le Produit est bien modifié ! ","/images/checked.png");
-                viderProduit();
+                viderTextFields(textFieldsProduit);
             }else{
                 sa.showWarning("Modification Erroné", "Une erreur s'est produite lors de la modification du Produit\nNB : Vous n'avez pas le droit de modifier le ID du produit. \nSi vous souhaitez modifier le id, veuillez créer un nouveau Produit avec le nouveau ID. ");
-                viderProduit();
+                viderTextFields(textFieldsProduit);
             }
         }
     }
@@ -348,34 +374,14 @@ public class ControllerInventaire {
             if(e.modifierService(idSer,coutParHeure,lib,typeSer,descriptionSer)){
                 e.populateTableView(e.getInventaire("Service"),serviceTableView, idService);
                 sa.showAlert("Modification avec succes","Le Service est bien modifié ! ","/images/checked.png");
-                viderService();
+                viderTextFields(textFieldsService);
             }else{
                 sa.showWarning("Modification Erroné", "Une erreur s'est produite lors de la modification du Service\nNB : Vous n'avez pas le droit de modifier le ID du Service. \nSi vous souhaitez modifier le id, veuillez créer un nouveau service avec le nouveau ID. ");
-                viderService();
+                viderTextFields(textFieldsService);
             }
         }else{
             sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
         }
-    }
-
-    public void viderService(){
-        idService.setText("");
-        coutPheure.setText("");
-        libelleServiceTextBox.setText("");
-        typeServiceTextBox.setText("");
-        descriptionServiceTextBox.setText("");
-        idSerAfficher.setText("");
-    }
-
-    public void viderProduit(){
-        idProduit.setText("");
-        prixUnitaireProduit.setText("");
-        stockProduit.setText("");
-        libelleTextbox.setText("");
-        descriptionTextBox.setText("");
-        categorieTextBox.setText("");
-        dateEnregistrementTextBox.setValue(null);
-        idPrAfficher.setText("");
     }
 
     @FXML

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerFacturation">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerFacturation">
    <children>
       <Line endX="557.0" endY="-3.814697265625E-6" layoutX="118.0" layoutY="59.0" startX="-117.99999237060547" startY="-1.1444091796875E-5" />
       <Line endX="-100.00001525878906" endY="43.49998474121094" layoutX="163.0" layoutY="15.0" startX="-100.0000228881836" startY="-14.00000286102295" />
@@ -196,6 +196,44 @@
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <AnchorPane fx:id="anchorPaneTva" layoutX="466.0" layoutY="441.0" prefHeight="43.0" prefWidth="141.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TVA :">
+               <font>
+                  <Font name="Garamond Bold" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tvaTextbox" layoutX="58.0" layoutY="9.0" onAction="#checkQte" onKeyTyped="#onKeyQte" prefHeight="25.0" prefWidth="51.0" />
+            <Text layoutX="116.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%">
+               <font>
+                  <Font name="Garamond Bold" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPaneRemise" layoutX="269.0" layoutY="441.0" prefHeight="43.0" prefWidth="161.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+         <children>
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remise :">
+               <font>
+                  <Font name="Garamond Bold" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="remiseTextbox" layoutX="79.0" layoutY="9.0" onAction="#checkQte" onKeyTyped="#onKeyQte" prefHeight="25.0" prefWidth="51.0" />
+            <Text layoutX="137.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%">
+               <font>
+                  <Font name="Garamond Bold" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Button layoutX="470.0" layoutY="513.0" mnemonicParsing="false" onAction="#ajouterFacture" prefHeight="32.0" prefWidth="141.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Ajouter">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>

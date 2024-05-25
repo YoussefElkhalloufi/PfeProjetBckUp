@@ -460,6 +460,50 @@ public class Entreprise {
         return cn.miseAjour(req.toString());
     }
 
+    public boolean modifierClient(String cinClient, String nomClient, String prenomClient, String telephoneClient, String adresseClient, String dateNaissanceClient, String emailClient) {
+        // Create a list to store column updates
+        List<String> updates = new ArrayList<>();
+
+        // Add non-null columns and values to the list
+        if (nomClient != null && !nomClient.equalsIgnoreCase("")) {
+            updates.add("nomClient = '" + nomClient + "'");
+        }
+        if (prenomClient != null && !prenomClient.equalsIgnoreCase("")) {
+            updates.add("prenomClient = '" + prenomClient + "'");
+        }
+        if (telephoneClient != null && !telephoneClient.equalsIgnoreCase("")) {
+            updates.add("telephoneClient = '" + telephoneClient + "'");
+        }
+        if (adresseClient != null && !adresseClient.equalsIgnoreCase("")) {
+            updates.add("adresseClient = '" + adresseClient + "'");
+        }
+        if (dateNaissanceClient != null && !dateNaissanceClient.equalsIgnoreCase("")) {
+            updates.add("dateNaissanceClient = '" + dateNaissanceClient + "'");
+        }
+        if (emailClient != null && !emailClient.equalsIgnoreCase("")) {
+            updates.add("emailClient = '" + emailClient + "'");
+        }
+
+        // Check if any non-null columns were provided
+        if (updates.isEmpty()) {
+            // If no non-null columns were provided, return false without executing the query
+            return false;
+        }
+
+        // Construct the SQL query
+        StringBuilder req = new StringBuilder("UPDATE client SET ");
+        for (int i = 0; i < updates.size(); i++) {
+            req.append(updates.get(i));
+            if (i < updates.size() - 1) {
+                req.append(", ");
+            }
+        }
+        req.append(" WHERE cinClient = '").append(cinClient).append("'");
+
+        // Execute the query
+        return cn.miseAjour(req.toString());
+    }
+
 
     public ResultSet afficherProduit(int idProduit){
         return cn.lire("Select * from produit where idProduit = " + idProduit);
@@ -494,8 +538,11 @@ public class Entreprise {
         return cn.miseAjour(req, nom, prenom, mail, pwd, cin);
     }
     public ResultSet afficherPersonnel(String typePerso, String cin ){
-        String req = "select * from " + typePerso +" where cin = ?";
-        return cn.lire(req, cin);
+        String req = "select * from " + typePerso +" where cin like '%"+cin+"%'";
+        return cn.lire(req);
+    }
+    public ResultSet afficherClient(String cin){
+        return cn.lire("select * from client where cinClient like '%"+cin+"%'");
     }
     public void calculChiffreAffaire(){
         try{
@@ -507,6 +554,18 @@ public class Entreprise {
             e.printStackTrace();
         }
     }
+    public double getTotalFacture(int numeroFac){
+        try{
+            ResultSet rs = cn.lire("select total_ttc from facture where numeroFacture = " +numeroFac);
+            if(rs.next()){
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
     public double getChiffreAffaireMois(int mois){
         try{
@@ -557,10 +616,47 @@ public class Entreprise {
         }
     }
 
+    public int checkTva_Remise() throws SQLException {
+        ResultSet rs = cn.lire("SHOW COLUMNS from FACTURE");
+        ArrayList<String> cols = new ArrayList<>();
+        while(rs.next()){
+            if(rs.getString(1).equalsIgnoreCase("TauxDeRemise")){
+                cols.add("TauxDeRemise");
+            }else if(rs.getString(1).equalsIgnoreCase("TauxDeTva")){
+                cols.add("TauxDeTva");
+            }
+        }
+
+
+        if(cols.contains("TauxDeTva") && cols.contains("TauxDeRemise")){
+            return 2;
+        }else if(cols.contains("TauxDeTva")){
+            return 1;
+        }else if(cols.contains("TauxDeRemise")){
+            return 0;
+        }
+        return -1;
+    }
+
+    public void ajouterFacture(int remise, int tva, int numFacture, double ttc) throws SQLException {
+        String req = "" ;
+        if(checkTva_Remise() == 2){
+            req = "update facture set dateFacture = NOW(), tauxderemise = " +remise+
+                    ", tauxdetva = " +tva +", total_ttc = " +ttc +" where numeroFacture = " +numFacture ;
+        }else if (checkTva_Remise() == 1){
+            req = "update facture set dateFacture = NOW(), tauxdetva = " +tva +
+                ", total_ttc = "+ttc+" where numeroFacture = " +numFacture ;
+        }else if (checkTva_Remise() == 0){
+            req = "update facture set dateFacture = NOW(), tauxderemise = " +remise+
+                    ", total_ttc = "+ttc+" where numeroFacture = " +numFacture ;
+        }else {
+            req = "update facture set dateFacture = NOW()";
+        }
+        cn.miseAjour(req);
+    }
     public double CalculTotalTTC(double totalHT, double remise, double tva){
         double totalTTC = 0;
         if(totalHT <= 0 || remise <0 || tva < 0){
-            System.out.println("Erreur");
             return totalTTC;
         }else {
             if(remise == 0 && tva == 0){

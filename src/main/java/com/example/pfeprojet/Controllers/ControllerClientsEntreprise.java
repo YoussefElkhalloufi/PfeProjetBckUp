@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static com.example.pfeprojet.Controllers.ControllerPersonnelEntreprise.viderTextFields;
+
 public class ControllerClientsEntreprise {
     @FXML
     private TableView<Object[]> clientTableview;
@@ -62,10 +64,21 @@ public class ControllerClientsEntreprise {
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
     Alerts sa = new Alerts();
 
-    //TODO : finish MODIFIER
+    ArrayList<javafx.scene.control.TextField> textFields = new ArrayList<>();
+
     public void initialize(){
         e.populateTableView(e.getPersonnes("client"),clientTableview,cinTextbox);
         checkColonnesClient();
+        setTextFields();
+    }
+    private void setTextFields(){
+        textFields.add(cinTextbox);
+        textFields.add(cinTextboxRech);
+        textFields.add(nomTextbox);
+        textFields.add(prenomTextbox);
+        textFields.add(telTextbox);
+        textFields.add(adresseTextbox);
+        textFields.add(emailTextbox);
     }
     @FXML
     void actualiser(ActionEvent event) {
@@ -101,8 +114,13 @@ public class ControllerClientsEntreprise {
     }
     @FXML
     void afficherClient(ActionEvent event) {
-
+        if(!cinTextboxRech.getText().isEmpty()){
+            e.populateTableView(e.afficherClient(cinTextboxRech.getText().trim()), clientTableview,cinTextbox);
+        }else{
+            sa.showWarning("Affichage échouée","Veuillez taper un cin avant de procéder.");
+        }
     }
+
 
     @FXML
     void ajouterClient(ActionEvent event) {
@@ -126,15 +144,44 @@ public class ControllerClientsEntreprise {
             if(e.ajouterClient(cin, nom, prenom,tel, adresse, dateNaiss, email)){
                 e.populateTableView(e.getPersonnes("client"),clientTableview, cinTextbox);
                 sa.showAlert("Ajout avec succes","Le Client est bien ajouté !","/images/checked.png");
+                viderTextFields(textFields);
+                dateNaissDatePicker.setValue(null);
             }else{
                 sa.showAlert("Ajout Erroné", "Le Client existe deja !", "/images/annuler.png");
+                viderTextFields(textFields);
+                dateNaissDatePicker.setValue(null);
             }
         }
     }
 
     @FXML
     void modifierClient(ActionEvent event) {
+        LocalDate selectedDate = dateNaissDatePicker.getValue();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+        if(cinTextbox.getText().trim().isEmpty()){
+            sa.showWarning("Attention", "Certains champs obligatoires sont vides. Assurez-vous de remplir toutes les informations nécessaires.");
+        }else{
+            String cin = cinTextbox.getText().trim();
+            String nom = nomTextbox.getText().trim();
+            String prenom = prenomTextbox.getText().trim();
+            String tel = telTextbox.getText().trim();
+            String adresse = adresseTextbox.getText().trim();
+            String dateNaiss = "";
+            if(selectedDate != null){
+                dateNaiss = selectedDate.format(formatter);
+            }
+            String email = emailTextbox.getText().trim();
+
+            if(e.modifierClient(cin, nom, prenom,tel, adresse, dateNaiss, email)){
+                e.populateTableView(e.getPersonnes("client"),clientTableview, cinTextbox);
+                sa.showAlert("Modification avec succes","Le client est bien modifié ! ","/images/checked.png");
+                viderTextFields(textFields);
+            }else{
+                sa.showWarning("Modification Erroné", "Une erreur s'est produite lors de la modification du Client\nNB : Vous n'avez pas le droit de modifier le cin du client. \nSi vous souhaitez modifier le cin, veuillez créer un nouveau client avec le nouveau cin. ");
+                viderTextFields(textFields);
+            }
+        }
     }
     @FXML
     void supprimerClient(ActionEvent event) {

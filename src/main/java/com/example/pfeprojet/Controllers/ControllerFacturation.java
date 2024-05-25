@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class ControllerFacturation {
@@ -53,11 +54,22 @@ public class ControllerFacturation {
     @FXML
     private Text totalServiceLbl;
 
+
+    @FXML
+    private AnchorPane anchorPaneRemise;
+    @FXML
+    private AnchorPane anchorPaneTva;
+    @FXML
+    private TextField tvaTextbox;
+    @FXML
+    private TextField remiseTextbox;
+
+
     Alerts sa = new Alerts();
 
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
-    public void initialize(){
+    public void initialize() throws SQLException {
         cmbCinClients.getItems().addAll(e.getCinClients());
         if(e.typeInventaire() == 0){
             cmbIdProduits.getItems().addAll(e.getIdProduits());
@@ -70,6 +82,22 @@ public class ControllerFacturation {
             cmbIdServices.getItems().addAll(e.getIdServices());
         }
 
+        check_Remise_Tva();
+    }
+
+    int checkTvaRemise = 2 ;
+    private void check_Remise_Tva() throws SQLException {
+        if(e.checkTva_Remise() == -1){
+            anchorPaneTva.setVisible(false);
+            anchorPaneRemise.setVisible(false);
+            checkTvaRemise = 2 ;
+        }else if(e.checkTva_Remise() == 0){
+            anchorPaneTva.setVisible(false);
+            checkTvaRemise = 0 ;
+        }else if (e.checkTva_Remise() == 1){
+            anchorPaneRemise.setVisible(false);
+            checkTvaRemise = 1 ;
+        }
     }
      String[] infosProduit ;
     @FXML
@@ -152,9 +180,28 @@ public class ControllerFacturation {
             }
         }
     }
+
+    @FXML
+    void ajouterFacture(ActionEvent event) throws SQLException {
+        int remise = 0 ;
+        int tva = 0 ;
+        if(!tvaTextbox.getText().trim().isEmpty()) tva = Integer.parseInt(tvaTextbox.getText());
+        if(!remiseTextbox.getText().trim().isEmpty()) remise = Integer.parseInt(remiseTextbox.getText());
+
+        if(numFactureTxtBox.getText().trim().isEmpty()){
+            System.out.println("vous devez remplir le numero facture");
+            sa.showWarning("Attention", "Assurez-vous de remplir le numero de la facture.");
+        }else {
+            int numFac = Integer.parseInt(numFactureTxtBox.getText()) ;
+            e.ajouterFacture(remise,tva,numFac,e.CalculTotalTTC(e.getTotalFacture(numFac), remise, tva));
+            sa.showAlert("Ajout avec succes","Facture numero :  " +numFactureTxtBox.getText()+" ajouté avec succes.","/images/checked.png");
+        }
+
+    }
+
     @FXML
     void setTotalServiceFacture(ActionEvent event) {
-        double total = Double.parseDouble(cphLbl.getText()) * Integer.parseInt(nbrHeure.getText());
+        double total = Double.parseDouble(cphLbl.getText()) * Double.parseDouble(nbrHeure.getText());
         totalServiceLbl.setText(total + " DH");
     }
 
@@ -177,5 +224,5 @@ public class ControllerFacturation {
         cw.switchWindow(event,"DirecteurDashboard.fxml");
     }
     //TODO : Affichage et ajout dune facture separés
-    //TODO : si l'entreprise ont tva ou remise dans la facture ; khashum ykunu f facturation
+    
 }

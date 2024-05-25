@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class ControllerPersonnelEntreprise {
 
@@ -91,30 +92,44 @@ public class ControllerPersonnelEntreprise {
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
 
+    ArrayList<javafx.scene.control.TextField> textFields = new ArrayList<>();
+
     public void initialize(){
         e.populateTableViewWithSelectionHandler(e.getPersonnes("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
         e.populateTableViewWithSelectionHandler(e.getPersonnes("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
         e.populateTableViewWithSelectionHandler(e.getPersonnes("Vendeurs"), vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
         buttonsStyle();
+        setTextFields();
+    }
+
+    private void setTextFields(){
+        textFields.add(nomTextGestio);
+        textFields.add(prenomTextGestio);
+        textFields.add(mailTextGestio);
+        textFields.add(pwdTextGestio);
+        textFields.add(cinTextGestio);
+
+        textFields.add(nomTextRespo);
+        textFields.add(prenomTextRespo);
+        textFields.add(mailTextRespo);
+        textFields.add(cinTextRespo);
+        textFields.add(pwdTextRespo);
+
+        textFields.add(nomTextVendeur);
+        textFields.add(prenomTextVendeur);
+        textFields.add(mailTextVendeur);
+        textFields.add(pwdTextVendeur);
+        textFields.add(cinTextVendeur);
+
+
+        textFields.add(cinTextRespoRech);
+        textFields.add(cinTextVendeurRech);
+        textFields.add(cinTextGestioRech);
     }
     @FXML
     void actualiser(ActionEvent event) {
         initialize();
-        cinTextRespo.setText("");
-        cinTextGestio.setText("");
-        cinTextVendeur.setText("");
-        nomTextRespo.setText("");
-        nomTextGestio.setText("");
-        nomTextVendeur.setText("");
-        prenomTextRespo.setText("");
-        prenomTextGestio.setText("");
-        prenomTextVendeur.setText("");
-        mailTextRespo.setText("");
-        mailTextGestio.setText("");
-        mailTextVendeur.setText("");
-        pwdTextRespo.setText("");
-        pwdTextGestio.setText("");
-        pwdTextVendeur.setText("");
+        viderTextFields(textFields);
     }
     private void buttonsStyle(){
         afficherRespoBtn.setOnMouseEntered(event -> applyButtonStyleOnMouseEntered(afficherRespoBtn));
@@ -182,6 +197,7 @@ public class ControllerPersonnelEntreprise {
                     }
                 }
             }
+            viderTextFields(textFields);
         }
     }
 
@@ -215,6 +231,7 @@ public class ControllerPersonnelEntreprise {
                     }
                 }
             }
+            viderTextFields(textFields);
         }
     }
 
@@ -248,6 +265,7 @@ public class ControllerPersonnelEntreprise {
                     }
                 }
             }
+            viderTextFields(textFields);
         }
     }
     @FXML
@@ -262,6 +280,7 @@ public class ControllerPersonnelEntreprise {
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un responsable valide dans le tableau avant de procéder à la suppression.");
                 }
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Suppression échouée","Veuillez sélectionner un responsable avant de procéder.");
         }
@@ -278,6 +297,7 @@ public class ControllerPersonnelEntreprise {
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Gestionnaire valide dans le tableau avant de procéder à la suppression.");
                 }
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Suppression échouée","Veuillez sélectionner un Gestionnaire avant de procéder.");
         }
@@ -295,6 +315,7 @@ public class ControllerPersonnelEntreprise {
                     sa.showWarning("Suppression échouée","Le CIN saisi n'existe pas. Veuillez sélectionner un Vendeur valide dans le tableau avant de procéder à la suppression.");
                 }
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Suppression échouée","Veuillez sélectionner un Vendeur avant de procéder.");
         }
@@ -310,6 +331,7 @@ public class ControllerPersonnelEntreprise {
             }else{
                 sa.showWarning("Affichage échouée","Aucun Responsables avec ce CIN ");
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Affichage échouée","Veuillez taper un cin avant de procéder.");
         }
@@ -324,6 +346,7 @@ public class ControllerPersonnelEntreprise {
             }else{
                 sa.showWarning("Affichage échouée","Aucun Gestionnaires avec ce CIN ");
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Affichage échouée","Veuillez taper un cin avant de procéder.");
         }
@@ -339,6 +362,7 @@ public class ControllerPersonnelEntreprise {
             }else{
                 sa.showWarning("Affichage échouée","Aucun Vendeur avec ce CIN ");
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Affichage échouée","Veuillez taper un cin avant de procéder.");
         }
@@ -357,6 +381,7 @@ public class ControllerPersonnelEntreprise {
                 }else{
                     sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Responsable.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Responsable. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
                 }
+                viderTextFields(textFields);
             }else{
                 sa.showWarning("Modification échouée","Veuillez sélectionner un responsable et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
             }
@@ -375,6 +400,7 @@ public class ControllerPersonnelEntreprise {
             }else{
                 sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Gestionnaire.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Gestionnaire. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Modification échouée","Veuillez sélectionner un gestionnaire et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
         }
@@ -394,6 +420,7 @@ public class ControllerPersonnelEntreprise {
             }else{
                 sa.showWarning("Modification échouée","Une erreur s'est produite lors de la modification du compte du Vendeur.\nNB : Vous n'avez pas le droit de modifier le CIN du compte du Vendeur. \nSi vous souhaitez modifier le CIN, veuillez créer un nouveau compte avec le nouveau CIN.");
             }
+            viderTextFields(textFields);
         }else{
             sa.showWarning("Modification échouée","Veuillez sélectionner un Vendeur et modifier ses informations ( SAUF LE CIN ) avant de procéder.");
         }
@@ -432,5 +459,12 @@ public class ControllerPersonnelEntreprise {
     void dashboardDirecteur(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
         cw.switchWindow(event,"DirecteurDashboard.fxml");
+    }
+
+
+    public static void viderTextFields(ArrayList<TextField> textfields){
+        for(javafx.scene.control.TextField textField : textfields){
+            textField.setText("");
+        }
     }
 }

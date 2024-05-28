@@ -29,7 +29,7 @@ public class ControllerRoleSpecification extends mouseEvents{
     private Button btnVendeur;
 
 
-
+    ChangingWindows cw = new ChangingWindows();
     @FXML
     private AnchorPane anchorPane;
 
@@ -49,14 +49,26 @@ public class ControllerRoleSpecification extends mouseEvents{
 
     public void directeurLogin(ActionEvent event) throws IOException {
         if(!cmp.equalsIgnoreCase("")){
-            ChangingWindows cw = new ChangingWindows();
             cw.switchWindow(event, "DirecteurLogin.fxml");
         }else{
             System.out.println("cmp is null");
         }
     }
 
+    @FXML
+    void responsableLogin(ActionEvent event) throws IOException {
+        cw.switchWindow(event, "ResponsableLogin.fxml");
+    }
 
+    @FXML
+    void gestionnaireLogin(ActionEvent event) throws IOException {
+        cw.switchWindow(event, "GestionnaireLogin.fxml");
+    }
+
+    @FXML
+    void vendeurLogin(ActionEvent event) throws IOException {
+        cw.switchWindow(event, "VendeurLogin.fxml");
+    }
 
     public void onMouseEntered(){
         btnDirecteur.setStyle("-fx-background-color: #2C9690 ; -fx-background-radius: 20");

@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 public class ControllerSignUp extends mouseEvents{
 
-
+//TODO : edit the table infosEntrerpises bach tmchi m3a la facture, ajouter ( ville, raison sociale
 
     @FXML
     private Button ExitButton;

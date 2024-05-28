@@ -105,12 +105,4 @@ public class ControllerLoginDirecteur extends mouseEvents{
         LoginButton.setStyle("-fx-background-color: white; -fx-background-radius: 5em;");
         restoreButtonSizeMS(LoginButton);
     }
-
-
-
-
-
-
-
-
 }

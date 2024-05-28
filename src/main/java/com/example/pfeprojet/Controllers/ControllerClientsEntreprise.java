@@ -1,14 +1,11 @@
 package com.example.pfeprojet.Controllers;
+
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDate;

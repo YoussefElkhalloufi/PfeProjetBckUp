@@ -11,147 +11,147 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerChiffreAffaire">
-      <Line endX="962.0" endY="-1.1444091796875E-5" layoutX="108.0" layoutY="49.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
-      <Line endX="-100.0000228881836" endY="45.0" layoutX="162.0" layoutY="4.0" startX="-100.00001525878906" startY="-3.000005006790161" />
-      <Text fill="WHITE" layoutX="32.0" layoutY="34.0" stroke="BLACK" strokeType="OUTSIDE" text="E">
-         <font>
-            <Font name="Javanese Text" size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="452.0" layoutY="28.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiffre d'Affaire">
-         <font>
-            <Font name="Javanese Text" size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="15.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" text="F">
-         <font>
-            <Font name="Javanese Text" size="45.0" />
-         </font>
-      </Text>
-      <Line endX="962.0" endY="-7.62939453125E-6" layoutX="108.0" layoutY="90.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
-      <Line endX="-99.99996948242188" endY="388.29290771484375" layoutX="635.0" layoutY="49.0" startX="-100.0" />
-      <Text layoutX="62.0" layoutY="75.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiffre d'Affaire par mois" wrappingWidth="217.5">
-         <font>
-            <Font name="Javanese Text" size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="570.0" layoutY="73.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiffre d'Affaire par année">
-         <font>
-            <Font name="Javanese Text" size="20.0" />
-         </font>
-      </Text>
-      <BarChart fx:id="barChartMois" layoutX="13.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
-      <ComboBox fx:id="speciDiagMois" layoutX="357.0" layoutY="58.0" onAction="#diagChangeMois" prefHeight="25.0" prefWidth="166.0" style="-fx-background-radius: 20;" value="Diagramme en bâtons">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Diagramme en bâtons" />
-               <String fx:value="Graphique en ligne" />
-               <String fx:value="Diagramme circulaire" />
-            </FXCollections>
-         </items>
-      </ComboBox>
-      <ComboBox fx:id="speciDiagAnnee" layoutX="890.0" layoutY="58.0" onAction="#diagChangeAnnee" prefWidth="166.0" style="-fx-background-radius: 20;" value="Diagramme en bâtons">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Diagramme en bâtons" />
-               <String fx:value="Graphique en ligne" />
-               <String fx:value="Diagramme circulaire" />
-            </FXCollections>
-         </items>
-      </ComboBox>
-      <ComboBox fx:id="deCmbMois" layoutX="81.0" layoutY="108.0" prefHeight="25.0" prefWidth="100.0">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Janvier" />
-               <String fx:value="Février" />
-               <String fx:value="Mars" />
-               <String fx:value="Avril" />
-               <String fx:value="Mai" />
-               <String fx:value="Juin" />
-               <String fx:value="Juillet" />
-               <String fx:value="Aout" />
-               <String fx:value="Septembre" />
-               <String fx:value="Octobre" />
-               <String fx:value="Novembre" />
-               <String fx:value="Decembre" />
-            </FXCollections>
-         </items>
-      </ComboBox>
-      <BarChart fx:id="barChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
-         <xAxis>
-            <CategoryAxis side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </BarChart>
-      <LineChart fx:id="lineChartMois" layoutX="13.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-      <PieChart fx:id="pieChartMois" layoutX="13.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0" />
-      <LineChart fx:id="lineChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
-         <xAxis>
-            <CategoryAxis side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </LineChart>
-      <PieChart fx:id="pieChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0" />
-      <ComboBox fx:id="aCmbMois" layoutX="233.0" layoutY="108.0" onAction="#filtrerMois" prefHeight="25.0" prefWidth="100.0">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Janvier" />
-               <String fx:value="Février" />
-               <String fx:value="Mars" />
-               <String fx:value="Avril" />
-               <String fx:value="Mai" />
-               <String fx:value="Juin" />
-               <String fx:value="Juillet" />
-               <String fx:value="Aout" />
-               <String fx:value="Septembre" />
-               <String fx:value="Octobre" />
-               <String fx:value="Novembre" />
-               <String fx:value="Decembre" />
-            </FXCollections>
-         </items>
-      </ComboBox>
-      <Text layoutX="55.0" layoutY="126.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="De">
-         <font>
-            <Font name="Javanese Text" size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="215.0" layoutY="126.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="À">
-         <font>
-            <Font name="Javanese Text" size="15.0" />
-         </font>
-      </Text>
-      <Button layoutX="452.0" layoutY="108.0" mnemonicParsing="false" onAction="#filtrerMois" text="Filtrer" />
-      <Button layoutX="14.0" layoutY="55.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
-         <font>
-            <Font name="Times New Roman" size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/en-arriere.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+   <Line endX="962.0" endY="-1.1444091796875E-5" layoutX="108.0" layoutY="49.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
+   <Line endX="-100.0000228881836" endY="45.0" layoutX="162.0" layoutY="4.0" startX="-100.00001525878906" startY="-3.000005006790161" />
+   <Text fill="WHITE" layoutX="32.0" layoutY="34.0" stroke="BLACK" strokeType="OUTSIDE" text="E">
+      <font>
+         <Font name="Javanese Text" size="24.0" />
+      </font>
+   </Text>
+   <Text layoutX="452.0" layoutY="28.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiffre d'Affaire">
+      <font>
+         <Font name="Javanese Text" size="24.0" />
+      </font>
+   </Text>
+   <Text layoutX="15.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" text="F">
+      <font>
+         <Font name="Javanese Text" size="45.0" />
+      </font>
+   </Text>
+   <Line endX="962.0" endY="-7.62939453125E-6" layoutX="108.0" layoutY="90.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
+   <Line endX="-99.99996948242188" endY="388.29290771484375" layoutX="635.0" layoutY="49.0" startX="-100.0" />
+   <Text layoutX="62.0" layoutY="75.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiffre d'Affaire par mois" wrappingWidth="217.5">
+      <font>
+         <Font name="Javanese Text" size="20.0" />
+      </font>
+   </Text>
+   <Text layoutX="570.0" layoutY="73.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiffre d'Affaire par année">
+      <font>
+         <Font name="Javanese Text" size="20.0" />
+      </font>
+   </Text>
+   <BarChart fx:id="barChartMois" layoutX="13.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
+      <xAxis>
+         <CategoryAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis side="LEFT" />
+      </yAxis>
+   </BarChart>
+   <ComboBox fx:id="speciDiagMois" layoutX="357.0" layoutY="58.0" onAction="#diagChangeMois" prefHeight="25.0" prefWidth="166.0" style="-fx-background-radius: 20;" value="Diagramme en bâtons">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Diagramme en bâtons" />
+            <String fx:value="Graphique en ligne" />
+            <String fx:value="Diagramme circulaire" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+   <ComboBox fx:id="speciDiagAnnee" layoutX="890.0" layoutY="58.0" onAction="#diagChangeAnnee" prefWidth="166.0" style="-fx-background-radius: 20;" value="Diagramme en bâtons">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Diagramme en bâtons" />
+            <String fx:value="Graphique en ligne" />
+            <String fx:value="Diagramme circulaire" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+   <ComboBox fx:id="deCmbMois" layoutX="81.0" layoutY="108.0" prefHeight="25.0" prefWidth="100.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Janvier" />
+            <String fx:value="Février" />
+            <String fx:value="Mars" />
+            <String fx:value="Avril" />
+            <String fx:value="Mai" />
+            <String fx:value="Juin" />
+            <String fx:value="Juillet" />
+            <String fx:value="Aout" />
+            <String fx:value="Septembre" />
+            <String fx:value="Octobre" />
+            <String fx:value="Novembre" />
+            <String fx:value="Decembre" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+   <BarChart fx:id="barChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
+      <xAxis>
+         <CategoryAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis side="LEFT" />
+      </yAxis>
+   </BarChart>
+   <LineChart fx:id="lineChartMois" layoutX="13.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
+      <xAxis>
+         <CategoryAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis side="LEFT" />
+      </yAxis>
+   </LineChart>
+   <PieChart fx:id="pieChartMois" layoutX="13.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0" />
+   <LineChart fx:id="lineChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0">
+      <xAxis>
+         <CategoryAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis side="LEFT" />
+      </yAxis>
+   </LineChart>
+   <PieChart fx:id="pieChartAnnee" layoutX="543.0" layoutY="162.0" prefHeight="255.0" prefWidth="510.0" />
+   <ComboBox fx:id="aCmbMois" layoutX="233.0" layoutY="108.0" onAction="#filtrerMois" prefHeight="25.0" prefWidth="100.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Janvier" />
+            <String fx:value="Février" />
+            <String fx:value="Mars" />
+            <String fx:value="Avril" />
+            <String fx:value="Mai" />
+            <String fx:value="Juin" />
+            <String fx:value="Juillet" />
+            <String fx:value="Aout" />
+            <String fx:value="Septembre" />
+            <String fx:value="Octobre" />
+            <String fx:value="Novembre" />
+            <String fx:value="Decembre" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+   <Text layoutX="55.0" layoutY="126.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="De">
+      <font>
+         <Font name="Javanese Text" size="15.0" />
+      </font>
+   </Text>
+   <Text layoutX="215.0" layoutY="126.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="À">
+      <font>
+         <Font name="Javanese Text" size="15.0" />
+      </font>
+   </Text>
+   <Button layoutX="452.0" layoutY="108.0" mnemonicParsing="false" onAction="#filtrerMois" text="Filtrer" />
+   <Button layoutX="14.0" layoutY="55.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+      <font>
+         <Font name="Times New Roman" size="18.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <graphic>
+         <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/en-arriere.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Button>
 </AnchorPane>

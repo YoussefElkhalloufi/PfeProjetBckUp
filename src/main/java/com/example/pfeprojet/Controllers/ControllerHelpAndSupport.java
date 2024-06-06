@@ -23,6 +23,14 @@ public class ControllerHelpAndSupport extends mouseEvents{
 
     public void directeurDashboard(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
-        cw.switchWindow(event, "DirecteurDashboard.fxml");
+        if(ControllerDashboardResponsable.respo != null){
+            cw.switchWindow(event, "DashboardResponsable.fxml");
+        }else if(ControllerDashboardDirecteur.dr != null){
+            cw.switchWindow(event, "DashboardDirecteur.fxml");
+        }else if(ControllerDashboardGestionnaire.gestio != null){
+            cw.switchWindow(event, "DashboardGestionnaire.fxml");
+        }else{
+            cw.switchWindow(event, "DashboardVendeur.fxml");
+        }
     }
 }

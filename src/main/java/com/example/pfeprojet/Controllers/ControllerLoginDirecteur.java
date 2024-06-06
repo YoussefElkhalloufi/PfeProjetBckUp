@@ -65,7 +65,7 @@ public class ControllerLoginDirecteur extends mouseEvents{
             if(inputEmail.equalsIgnoreCase(directeurEmail)){
                 if(PassworManager.verifyPassword(inputPwd, directeurPwd)){
                     ChangingWindows cw = new ChangingWindows();
-                    cw.switchWindow(event,"DirecteurDashboard.fxml");
+                    cw.switchWindow(event,"DashboardDirecteur.fxml");
                 }else{
                     a.showAlert("Mot de passe erroné","Le mot de passe que vous avez saisi est incorrect. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
                 }
@@ -90,7 +90,6 @@ public class ControllerLoginDirecteur extends mouseEvents{
         }catch(SQLException e){
             e.printStackTrace();
         }
-
     }
 
 

@@ -1,13 +1,12 @@
 package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.ChangingWindows;
-import com.example.pfeprojet.Entreprise.Directeur;
 import com.example.pfeprojet.Entreprise.Entreprise;
+import com.example.pfeprojet.Entreprise.Responsable;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -15,10 +14,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-
-
-public class ControllerDashboardDirecteur {
-
+public class ControllerDashboardResponsable {
     private ChangingWindows cw = new ChangingWindows();
     private static final double ENLARGE_FACTOR = 1.05;
 
@@ -40,15 +36,20 @@ public class ControllerDashboardDirecteur {
     @FXML
     private AnchorPane client;
     @FXML
-    private AnchorPane entreprise;
-    @FXML
-    private AnchorPane facturation;
-    @FXML
-    private AnchorPane inventaire;
-    @FXML
     private AnchorPane chiffreAffaireAnchorpane;
+
+    public static Responsable respo = ControllerLoginResponsable.getResponsable();
+
+    private static final Entreprise e = ControllerFstWindow.getEntreprise();
+    public static Entreprise getEntreprise(){
+        return e;
+    }
+
     @FXML
-    private Button aideBtn;
+    void helpAndSupport(ActionEvent event) throws IOException {
+        cw.switchWindow(event, "helpAndSupport.fxml");
+    }
+
     public void onMouseExitedMessagerie(){
         messagerieAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
         restoreButtonSize(messagerieAnchor);
@@ -81,30 +82,6 @@ public class ControllerDashboardDirecteur {
         personnel.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
         enlargeButton(personnel);
     }
-    public void onMouseExitedInventaire(){
-        inventaire.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(inventaire);
-    }
-    public void onMouseEnteredInventaire(){
-        inventaire.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(inventaire);
-    }
-    public void onMouseExitedFacturation(){
-        facturation.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(facturation);
-    }
-    public void onMouseEnteredFacturation(){
-        facturation.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(facturation);
-    }
-    public void onMouseExitedEntreprise(){
-        entreprise.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(entreprise);
-    }
-    public void onMouseEnteredEntreprise(){
-        entreprise.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(entreprise);
-    }
 
     public void enlargeButton(AnchorPane anchor) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(120), anchor);
@@ -120,19 +97,21 @@ public class ControllerDashboardDirecteur {
         scaleTransition.play();
     }
 
-    private static final Entreprise e = ControllerFstWindow.getEntreprise();
-    public static Entreprise getEntreprise(){
-        return e;
+    @FXML
+    void switchToClient(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event,"/com/example/pfeprojet/clientsEntreprise.fxml");
     }
-    public static Directeur dr = ControllerLoginDirecteur.getDr();
+    @FXML
+    void switchToCA(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event,"/com/example/pfeprojet/chiffreAffaire.fxml");
+    }
+
     public void initialize(){
-        label.setText("Directeur '" +dr.getNom() +"' de l'entreprise  '" +e.getNomEntreprise()+"'");
-
-
+        label.setText("Responsable '" +respo.getNom() +"' de l'entreprise '" +e.getNomEntreprise()+"'");
         if(e.getChiffreAffaireTotal() != null){
             chiffreAffaire.setText(e.getChiffreAffaireTotal() +" DH");
         }else{
-            chiffreAffaire.setText("0");
+            chiffreAffaire.setText("000 000 DH");
         }
 
         nbrClt.setText(String.valueOf(e.getNbrClients()));
@@ -145,41 +124,8 @@ public class ControllerDashboardDirecteur {
         });
     }
 
-
-    public void helpAndSupport(ActionEvent event) throws IOException {
-        cw.switchWindow(event, "helpAndSupport.fxml");
-    }
-
-
-
-    @FXML
-    void switchToCA(MouseEvent event) throws IOException {
-        cw.switchWindowPane(event,"/com/example/pfeprojet/chiffreAffaire.fxml");
-    }
-
     @FXML
     void switchToPersonnel(MouseEvent event) throws IOException {
         cw.switchWindowPane(event,"/com/example/pfeprojet/personnel.fxml");
     }
-    @FXML
-    void switchToInventaire(MouseEvent event) throws IOException {
-        cw.switchWindowPane(event,"/com/example/pfeprojet/inventaire.fxml");
-    }
-    @FXML
-    void switchToFacturation(MouseEvent event) throws IOException {
-        cw.switchWindowPane(event, "/com/example/pfeprojet/facturation.fxml");
-    }
-    @FXML
-    void switchToClient(MouseEvent event) throws IOException {
-        cw.switchWindowPane(event,"/com/example/pfeprojet/clientsEntreprise.fxml");
-    }
-    @FXML
-    void switchToProfil(MouseEvent event) throws IOException {
-        cw.switchWindowPane(event, "profilEntreprise.fxml");
-    }
-    @FXML
-    void restartApplication(ActionEvent event) throws IOException {
-        //TODO : fix the deconnexion button !!!!
-    }
 }
-

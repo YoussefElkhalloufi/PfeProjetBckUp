@@ -387,7 +387,11 @@ public class ControllerInventaire {
     @FXML
     void dashboardDirecteur(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
-        cw.switchWindow(event,"DirecteurDashboard.fxml");
+        if(ControllerDashboardDirecteur.dr == null){
+            cw.switchWindow(event, "DashboardGestionnaire.fxml");
+        }else{
+            cw.switchWindow(event,"DashboardDirecteur.fxml");
+        }
     }
 
 

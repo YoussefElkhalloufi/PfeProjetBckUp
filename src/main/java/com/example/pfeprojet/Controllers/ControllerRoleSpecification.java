@@ -49,7 +49,7 @@ public class ControllerRoleSpecification extends mouseEvents{
 
     public void directeurLogin(ActionEvent event) throws IOException {
         if(!cmp.equalsIgnoreCase("")){
-            cw.switchWindow(event, "DirecteurLogin.fxml");
+            cw.switchWindow(event, "LoginDirecteur.fxml");
         }else{
             System.out.println("cmp is null");
         }
@@ -57,17 +57,17 @@ public class ControllerRoleSpecification extends mouseEvents{
 
     @FXML
     void responsableLogin(ActionEvent event) throws IOException {
-        cw.switchWindow(event, "ResponsableLogin.fxml");
+        cw.switchWindow(event, "LoginResponsable.fxml");
     }
 
     @FXML
     void gestionnaireLogin(ActionEvent event) throws IOException {
-        cw.switchWindow(event, "GestionnaireLogin.fxml");
+        cw.switchWindow(event, "LoginGestionnaire.fxml");
     }
 
     @FXML
     void vendeurLogin(ActionEvent event) throws IOException {
-        cw.switchWindow(event, "VendeurLogin.fxml");
+        cw.switchWindow(event, "LoginVendeur.fxml");
     }
 
     public void onMouseEntered(){

@@ -19,6 +19,9 @@ import javafx.scene.control.Tooltip;
 import java.io.IOException;
 
 
+// TODO over all : FINISH
+        //TODO : --> FACTURATION
+        //TODO : --> PROFIL ENTREPRISE
 public class ControllerChiffreAffaire {
     @FXML
     private ComboBox<String> speciDiagAnnee;
@@ -46,10 +49,17 @@ public class ControllerChiffreAffaire {
 
 
 
-    private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
+    private Entreprise e ;
     //private Entreprise e1 = new Entreprise("hennesy_liquor_store");
 
+    void setEntreprise(){
+        e  = ControllerDashboardDirecteur.getEntreprise() ;
+        if (e == null) {
+            e = ControllerDashboardResponsable.getEntreprise();
+        }
+    }
     public void initialize(){
+        setEntreprise();
         String[] mois = {"Janvier","Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"};
         double[] chiffreAffaireMois = {e.getChiffreAffaireMois(1),e.getChiffreAffaireMois(2),e.getChiffreAffaireMois(3),e.getChiffreAffaireMois(4),e.getChiffreAffaireMois(5),e.getChiffreAffaireMois(6),e.getChiffreAffaireMois(7),e.getChiffreAffaireMois(8),e.getChiffreAffaireMois(9),e.getChiffreAffaireMois(10),e.getChiffreAffaireMois(11),e.getChiffreAffaireMois(12)};
 
@@ -227,6 +237,10 @@ public class ControllerChiffreAffaire {
     @FXML
     void dashboardDirecteur(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
-        cw.switchWindow(event,"DirecteurDashboard.fxml");
+        if(ControllerDashboardDirecteur.dr == null){
+            cw.switchWindow(event, "DashboardResponsable.fxml");
+        }else{
+            cw.switchWindow(event,"DashboardDirecteur.fxml");
+        }
     }
 }

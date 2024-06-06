@@ -19,7 +19,6 @@ import java.sql.SQLException;
 
 public class ControllerSignUp extends mouseEvents{
 
-//TODO : edit the table infosEntrerpises bach tmchi m3a la facture, ajouter ( ville, raison sociale
 
     @FXML
     private Button ExitButton;
@@ -31,28 +30,22 @@ public class ControllerSignUp extends mouseEvents{
     public static String getCmp(){return cmp;}
     @FXML
     private TextField activityTextField;
-
     @FXML
     private TextField companyNameTextField;
-
     @FXML
     private TextField emailTextField;
-
     @FXML
     private TextField faxnumberTextfield;
-
     @FXML
     private TextField locationTextField;
-
     @FXML
     private PasswordField pwdConfirmationTextField;
-
     @FXML
     private PasswordField pwdTextField;
-
     @FXML
     private TextField taxIdTextField;
-
+    @FXML
+    private TextField villeTextField;
 
     public static String pwdEntreprise ;
 
@@ -88,6 +81,7 @@ public class ControllerSignUp extends mouseEvents{
         String faxNumber = faxnumberTextfield.getText();
         String activity = activityTextField.getText();
         String taxId = taxIdTextField.getText();
+        String ville = villeTextField.getText();
 
         Alerts sa = new Alerts();
         if (mail.isEmpty() || pwd.isEmpty() || companyName.isEmpty() || location.isEmpty() || faxNumber.isEmpty() || activity.isEmpty() || taxId.isEmpty()) {
@@ -106,10 +100,10 @@ public class ControllerSignUp extends mouseEvents{
                     sa.showWarning("Attention", "Le nom de l'entreprise fournit existe déjà dans notre application.");
                     rs1.close();
                 }else{
-                    String insertQuery = "INSERT INTO `infosEntreprises`(`nomEntreprise`, `AdresseMail`, `MotdePasse`, `Localisation`, `NumeroDeFax`, `SecteurDactivite`, `IdentificationFiscale`)" +
-                            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    String insertQuery = "INSERT INTO `infosEntreprises`(`nomEntreprise`, `AdresseMail`, `MotdePasse`, `Localisation`, `NumeroDeFax`, `SecteurDactivite`, `Ville`, `IdentificationFiscale`)" +
+                            " VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
-                    if (c.miseAjour(insertQuery, cmp, mail, hashpwd, location, faxNumber, activity, taxId) && c.createDatabase(cmp)) {
+                    if (c.miseAjour(insertQuery, cmp, mail, hashpwd, location, faxNumber, activity, ville, taxId) && c.createDatabase(cmp)) {
                         sa.showAlert("Creation avec succes", "Succès ! Votre entreprise a maintenant un compte actif, et une Base de données sous le nom : '" + cmp.trim() + "'", "/images/checked.png");
                         ChangingWindows ch = new ChangingWindows();
                         ch.switchWindow(event, "DbCreation.fxml");

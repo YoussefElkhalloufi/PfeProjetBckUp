@@ -2,6 +2,7 @@ package com.example.pfeprojet.Entreprise;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -276,4 +277,77 @@ class EntrepriseTest {
         Entreprise e = new Entreprise("winston");
         e.ajouterFacture(50,20,1, e.CalculTotalTTC(e.getTotalFacture(1),50,20));
     }
+
+
+    //TestProduitParFacture
+        @Test
+        void test_ProduitsParFacture() {
+            Entreprise e = new Entreprise("winston");
+
+            System.out.println("Produit\tPU\tQté\tTotal_HT");
+            try{
+                ResultSet rs = e.getProduitsParFacture(1);
+                while(rs.next()){
+                    System.out.println(rs.getString(1) + "\t" + rs.getDouble(2) + "\t" + rs.getInt(3)+ "\t" + rs.getDouble(4));
+                }
+                rs.close();
+            }catch(Exception ex){
+                System.out.println("doesnt Exist");
+            }
+
+        }
+
+    //TestServiceParFacture
+        @Test
+        void test_ServicesParFacture() throws SQLException {
+            Entreprise e = new Entreprise("iam_maroc_telecom");
+            ResultSet rs = e.getServicesParFacture(2);
+            System.out.println("Service\tCout\tNb_Heure\tTotal_ht");
+            while(rs.next()){
+                System.out.println(rs.getString(1) + "\t" + rs.getDouble(2) + "\t" + rs.getInt(3)+ "\t" + rs.getDouble(4));
+            }
+            rs.close();
+        }
+
+    //TestStandard
+        @Test
+        void tes_Standard_Facture() throws SQLException {
+            Entreprise e = new Entreprise("iam_maroc_telecom");
+            if(e.typeInventaire() == 0){
+                //Produit + service
+                System.out.println("---------------------------Produits----------------------- ");
+                System.out.println("Produit\tPU\tQté\tTotal_HT");
+                    ResultSet rs = e.getProduitsParFacture(1);
+                    while(rs.next()){
+                        System.out.println(rs.getString(1) + "\t" + rs.getDouble(2) + "\t" + rs.getInt(3)+ "\t" + rs.getDouble(4));
+                    }
+                System.out.println("----------------------------------------------------------");
+                System.out.println("---------------------------Services----------------------- ");
+                ResultSet rs1 = e.getServicesParFacture(2);
+                System.out.println("Service\tCout\tNb_Heure\tTotal_ht");
+                while(rs1.next()){
+                    System.out.println(rs1.getString(1) + "\t" + rs1.getDouble(2) + "\t" + rs1.getInt(3)+ "\t" + rs1.getDouble(4));
+                }
+                System.out.println("----------------------------------------------------------");
+
+            }else if (e.typeInventaire() == 1){
+                //PRoduit
+                System.out.println("---------------------------Produits----------------------- ");
+                System.out.println("Produit\tPU\tQté\tTotal_HT");
+                ResultSet rs = e.getProduitsParFacture(1);
+                while(rs.next()){
+                    System.out.println(rs.getString(1) + "\t" + rs.getDouble(2) + "\t" + rs.getInt(3)+ "\t" + rs.getDouble(4));
+                }
+                System.out.println("-------------------------------------");
+            }else if( e.typeInventaire() == 2){
+                //Service
+                System.out.println("---------------------------Services----------------kok------- ");
+                ResultSet rs = e.getServicesParFacture(1);
+                System.out.println("Service\tCout\tNb_Heure\tTotal_ht");
+                while(rs.next()){
+                    System.out.println(rs.getString(1) + "\t" + rs.getDouble(2) + "\t" + rs.getInt(3)+ "\t" + rs.getDouble(4));
+                }
+                System.out.println("----------------------------------------------------------");
+            }
+        }
 }

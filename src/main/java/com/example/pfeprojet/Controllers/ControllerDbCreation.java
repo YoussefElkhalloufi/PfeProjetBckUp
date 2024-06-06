@@ -155,7 +155,6 @@ public class ControllerDbCreation extends mouseEvents{
 
         boolean confirmed = sa.showConfirmationAlert("Confirmation", "Êtes-vous sûr de vouloir quitter l'application et supprimer votre base de données '"+dbName+"' ?");
         if (confirmed) {
-            System.out.println("User clicked 'Yes'");
             Connexion c = new Connexion("jdbc:mysql://localhost:3306/" +dbName+ "?user=root");
             Connexion c1 = new Connexion("jdbc:mysql://localhost:3306/Entreprises?user=root");
             if(c.dropDatabase(dbName) && c1.miseAjour("Delete from infosEntreprises where nomEntreprise = ?", dbName)){
@@ -164,9 +163,6 @@ public class ControllerDbCreation extends mouseEvents{
             }else{
                 sa.showAlert("Échec","Échec de la suppression de votre base de donnée '"+dbName+"'.","/images/checkFailed.png");
             }
-        } else {
-            // User clicked "Cancel", cancel the operation
-            System.out.println("User clicked 'No'");
         }
     }
     public boolean createTable(String dbName, String tableName, ArrayList<String> columns) {

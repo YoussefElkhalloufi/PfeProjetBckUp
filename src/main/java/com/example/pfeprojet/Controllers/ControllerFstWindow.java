@@ -24,8 +24,6 @@ import java.util.regex.Pattern;
 public class ControllerFstWindow extends mouseEvents{
 
 
-   //TODO : communication en adresse mail
-
    private static final double ENLARGE_FACTOR = 1.1;
 
    private int i = 3;

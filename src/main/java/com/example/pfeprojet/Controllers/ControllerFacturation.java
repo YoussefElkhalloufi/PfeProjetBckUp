@@ -70,6 +70,9 @@ public class ControllerFacturation {
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
     public void initialize() throws SQLException {
+        if(e == null){
+            e = ControllerDashboardVendeur.getEntreprise();
+        }
         cmbCinClients.getItems().addAll(e.getCinClients());
         if(e.typeInventaire() == 0){
             cmbIdProduits.getItems().addAll(e.getIdProduits());
@@ -221,7 +224,11 @@ public class ControllerFacturation {
     @FXML
     void dashboardDirecteur(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
-        cw.switchWindow(event,"DirecteurDashboard.fxml");
+        if(ControllerDashboardDirecteur.dr == null){
+            cw.switchWindow(event,"DashboardVendeur.fxml");
+        }else{
+            cw.switchWindow(event,"DashboardDirecteur.fxml");
+        }
     }
     //TODO : Affichage et ajout dune facture separés
     

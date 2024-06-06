@@ -64,6 +64,9 @@ public class ControllerClientsEntreprise {
     ArrayList<javafx.scene.control.TextField> textFields = new ArrayList<>();
 
     public void initialize(){
+        if(e == null) e = ControllerDashboardResponsable.getEntreprise();
+        if(e == null) e = ControllerDashboardVendeur.getEntreprise();
+
         e.populateTableView(e.getPersonnes("client"),clientTableview,cinTextbox);
         checkColonnesClient();
         setTextFields();
@@ -198,7 +201,14 @@ public class ControllerClientsEntreprise {
     @FXML
     void dashboardDirecteur(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
-        cw.switchWindow(event,"DirecteurDashboard.fxml");
+        if(ControllerDashboardDirecteur.dr == null && ControllerDashboardResponsable.respo == null){
+            cw.switchWindow(event,"DashboardVendeur.fxml");
+        }else if(ControllerDashboardDirecteur.dr == null && ControllerDashboardResponsable.respo != null){
+            cw.switchWindow(event,"DashboardResponsable.fxml");
+        }else{
+            cw.switchWindow(event,"DashboardDirecteur.fxml");
+        }
+
     }
 
 

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane fx:id="anchorPaneVendeur" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerLoginVendeur">
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="anchorPaneGestio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerLoginGestionnaire">
    <children>
       <Line endX="691.0" layoutX="101.0" layoutY="55.0" startX="-100.0" />
       <AnchorPane layoutX="432.0" layoutY="102.0" prefHeight="235.0" prefWidth="314.0" style="-fx-background-color: DFDFDF; -fx-background-radius: 30;">
@@ -22,19 +20,19 @@
                   <Font name="Times New Roman Bold" size="35.0" />
                </font>
             </Text>
-            <Text layoutX="10.0" layoutY="97.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afin d'accéder à l'application et profiter de ses fonctionnalités, veuillez saisir les informations fournies par le directeur/gestionnaire et envoyées par email." textAlignment="CENTER" wrappingWidth="293.3333435058594">
+            <Text layoutX="10.0" layoutY="97.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afin d'accéder à l'application et profiter de ses fonctionnalités, veuillez saisir les informations fournies par le directeur/responsable et envoyées par email." textAlignment="CENTER" wrappingWidth="293.3333435058594">
                <font>
                   <Font name="Bell MT" size="18.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <Text layoutX="95.0" layoutY="121.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Compte Vendeur">
+      <Text layoutX="55.0" layoutY="121.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Compte Gestionnaire">
          <font>
             <Font name="Times New Roman Bold" size="35.0" />
          </font>
       </Text>
-      <Button fx:id="LoginButton" layoutX="143.0" layoutY="301.0" mnemonicParsing="false" onAction="#loginVendeur" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Se connecter">
+      <Button fx:id="LoginButton" layoutX="143.0" layoutY="301.0" mnemonicParsing="false" onAction="#loginGestio" prefHeight="33.0" prefWidth="143.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Se connecter">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
@@ -45,8 +43,8 @@
             <DropShadow />
          </effect>
       </Button>
-      <TextField fx:id="mailVendeur" layoutX="83.0" layoutY="157.0" prefHeight="34.0" prefWidth="287.0" promptText="Email" style="-fx-background-radius: 5em;" />
-      <PasswordField fx:id="pwdVendeur" layoutX="83.0" layoutY="220.0" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
+      <TextField fx:id="mailGestio" layoutX="83.0" layoutY="157.0" onAction="#loginGestio" prefHeight="34.0" prefWidth="287.0" promptText="Email" style="-fx-background-radius: 5em;" />
+      <PasswordField fx:id="pwdGestio" layoutX="83.0" layoutY="220.0" onAction="#loginGestio" prefHeight="34.0" prefWidth="287.0" promptText="Mot de passe" style="-fx-background-radius: 5em;" />
       <Text fx:id="label" layoutX="341.0" layoutY="37.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Entreprise">
          <font>
             <Font name="Javanese Text" size="24.0" />
@@ -65,7 +63,7 @@
       </Text>
       <ImageView fx:id="picResponsable" fitHeight="54.0" fitWidth="49.0" layoutX="736.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/vendeur.png" />
+            <Image url="@../../../images/Gestionnaire.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

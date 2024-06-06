@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pfeprojet.Controllers.ControllerProfilEntreprise">
+   <children>
+      <Line endX="495.0" endY="-3.814697265625E-6" layoutX="108.0" layoutY="49.0" startX="-106.99999237060547" startY="-3.814697265625E-6" />
+      <Line endX="-100.0000228881836" endY="45.0" layoutX="162.0" layoutY="4.0" startX="-100.00001525878906" startY="-3.000005006790161" />
+      <Text fill="WHITE" layoutX="32.0" layoutY="34.0" stroke="BLACK" strokeType="OUTSIDE" text="E">
+         <font>
+            <Font name="Javanese Text" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="196.0" layoutY="28.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil de l'entreprise">
+         <font>
+            <Font name="Javanese Text" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="15.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" text="F">
+         <font>
+            <Font name="Javanese Text" size="45.0" />
+         </font>
+      </Text>
+      <Line endX="-99.0" endY="339.0833435058594" layoutX="99.0" layoutY="85.0" startX="504.0" startY="339.0833435058594" />
+      <Button layoutX="14.0" layoutY="55.0" mnemonicParsing="false" onAction="#dashboardDirecteur" prefHeight="27.0" prefWidth="28.0" style="-fx-background-radius: 5em; -fx-background-color: white;">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="12.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/en-arriere.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text layoutX="103.0" layoutY="102.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse E-mail :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="136.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Localisation :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="170.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="204.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de fax :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="238.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Secteur d'activité :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="272.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Identification fiscale :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="306.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="340.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation du mot de passe :">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="15.0" layoutY="455.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="NB : Vous ne pouvez pas changer le nom de l'entreprise, si c'est le cas veuillez contacter le support :">
+         <font>
+            <Font name="Javanese Text" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="490.0" layoutY="455.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="factureasepfe@gmail.com">
+         <font>
+            <Font name="Javanese Text" size="9.0" />
+         </font>
+      </Text>
+      <TextField fx:id="emailTextField" layoutX="321.0" layoutY="87.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="nomEntreprise@exemple.exmp" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="localisationTextField" layoutX="321.0" layoutY="121.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Localisation" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="villeTextField" layoutX="321.0" layoutY="155.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Ville" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="numeroFaxTextField" layoutX="321.0" layoutY="189.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Numero de fax" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="secteurDacTextField" layoutX="321.0" layoutY="223.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Secteur d'activité" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="idFiscaleTextField" layoutX="321.0" layoutY="257.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Identificatioon fiscale" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="pwdTextField" layoutX="321.0" layoutY="291.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Mot de passe" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <TextField fx:id="confiPwdTextField" layoutX="321.0" layoutY="325.0" opacity="0.6" prefHeight="20.0" prefWidth="180.0" promptText="Confirmation du mot de passe" style="-fx-background-color: white; -fx-background-radius: 0.6em;" />
+      <Button fx:id="updateBtn" layoutX="238.0" layoutY="376.0" mnemonicParsing="false" onAction="#update" onMouseEntered="#onMouseEntered2" onMouseExited="#onMouseExited2" prefHeight="25.0" prefWidth="131.0" style="-fx-background-radius: 5em; -fx-background-color: white;" text="Modifier">
+         <font>
+            <Font name="Algerian" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

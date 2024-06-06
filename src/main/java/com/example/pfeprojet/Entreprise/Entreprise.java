@@ -206,6 +206,11 @@ public class Entreprise {
            return false ;
        }
     }
+
+    public ResultSet getProduitsParFacture(int numFacture){
+        return cn.lire("select p.libelleProduit, p.prixUnitaire, fp.Quantité, fp.Total_HT from  facture f, facture_produit fp, produit p " +
+                "where f.NumeroFacture = fp.NumeroFacture and fp.IDProduit = p.idProduit and f.numeroFacture = " +numFacture) ;
+    }
     public boolean insererFactureService(int numFacture, String cinClient, int idService, int nbrHeure){
         try{
             ResultSet rs = cn.lire("select * from facture_service where numerofacture = " +numFacture+" and idService = "+idService);
@@ -219,6 +224,12 @@ public class Entreprise {
             return false ;
         }
     }
+
+    public ResultSet getServicesParFacture(int numFacture){
+        return cn.lire("select s.LibelleService, s.Cout_heure, fs.NombreHeure, fs.Total_Ht from facture f, facture_service fs, service s " +
+                "where f.NumeroFacture = fs.NumeroFacture and fs.idService = s.idService and f.numeroFacture = " +numFacture);
+    }
+
     public int typeInventaire(){
         if(cn.verificationTables() == 0) return 0 ; // Produit + Service
         else if(cn.verificationTables() == 1 ) return 1 ; // Produit

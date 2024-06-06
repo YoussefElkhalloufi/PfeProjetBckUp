@@ -6,6 +6,7 @@ import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -17,6 +18,8 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     private TableView<Object[]> responsableTableView;
+    @FXML
+    private Tab paneRespo;
     @FXML
     private TextField cinTextRespo;
     @FXML
@@ -42,6 +45,8 @@ public class ControllerPersonnelEntreprise {
     @FXML
     private TableView<Object[]> gestionnaireTableView;
     @FXML
+    private Tab paneGestio;
+    @FXML
     private TextField cinTextGestio;
     @FXML
     private TextField nomTextGestio;
@@ -66,6 +71,8 @@ public class ControllerPersonnelEntreprise {
 
     @FXML
     private TableView<Object[]> vendeurTableView;
+    @FXML
+    private Tab paneVendeur;
     @FXML
     private TextField cinTextVendeur;
     @FXML
@@ -95,6 +102,14 @@ public class ControllerPersonnelEntreprise {
     ArrayList<javafx.scene.control.TextField> textFields = new ArrayList<>();
 
     public void initialize(){
+        if(ControllerDashboardDirecteur.dr == null && ControllerDashboardResponsable.respo == null){
+            paneRespo.setDisable(true);
+            paneGestio.setDisable(true);
+            paneGestio.getTabPane().getSelectionModel().select(paneVendeur);
+        }else if (ControllerDashboardDirecteur.dr == null && ControllerDashboardResponsable.respo != null){
+            paneRespo.setDisable(true);
+            paneGestio.getTabPane().getSelectionModel().select(paneGestio);
+        }
         e.populateTableViewWithSelectionHandler(e.getPersonnes("Responsables"),responsableTableView, cinTextRespo, nomTextRespo, prenomTextRespo, mailTextRespo, pwdTextRespo);
         e.populateTableViewWithSelectionHandler(e.getPersonnes("Gestionnaires"),gestionnaireTableView, cinTextGestio, nomTextGestio, prenomTextGestio, mailTextGestio, pwdTextGestio);
         e.populateTableViewWithSelectionHandler(e.getPersonnes("Vendeurs"), vendeurTableView, cinTextVendeur, nomTextVendeur, prenomTextVendeur, mailTextVendeur, pwdTextVendeur);
@@ -458,7 +473,13 @@ public class ControllerPersonnelEntreprise {
     @FXML
     void dashboardDirecteur(ActionEvent event) throws IOException {
         ChangingWindows cw = new ChangingWindows();
-        cw.switchWindow(event,"DirecteurDashboard.fxml");
+        if(ControllerDashboardDirecteur.dr == null && ControllerDashboardResponsable.respo != null) {
+            cw.switchWindow(event, "DashboardResponsable.fxml");
+        }else if(ControllerDashboardDirecteur.dr == null && ControllerDashboardResponsable.respo == null){
+            cw.switchWindow(event, "DashboardGestionnaire.fxml");
+        }else {
+            cw.switchWindow(event,"DashboardDirecteur.fxml");
+        }
     }
 
 

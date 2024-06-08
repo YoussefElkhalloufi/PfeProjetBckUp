@@ -82,7 +82,9 @@ public class ControllerClientsEntreprise {
     }
     @FXML
     void actualiser(ActionEvent event) {
-        initialize();
+        //initialize();
+        e.populateTableView(e.getPersonnes("client"),clientTableview,cinTextbox);
+
     }
 
     private void checkColonnesClient(){

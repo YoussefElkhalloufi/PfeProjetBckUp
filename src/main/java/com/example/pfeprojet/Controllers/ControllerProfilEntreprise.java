@@ -1,6 +1,7 @@
 package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.ChangingWindows;
+import com.example.pfeprojet.Entreprise.Entreprise;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,8 +12,7 @@ import java.io.IOException;
 
 public class ControllerProfilEntreprise {
 
-    @FXML
-    private TextField confiPwdTextField;
+
 
     @FXML
     private TextField emailTextField;
@@ -39,6 +39,7 @@ public class ControllerProfilEntreprise {
     private TextField villeTextField;
 
     mouseEvents me = new mouseEvents();
+    Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
     @FXML
     void dashboardDirecteur(ActionEvent event) throws IOException {
@@ -54,6 +55,16 @@ public class ControllerProfilEntreprise {
     @FXML
     void onMouseExited2(MouseEvent event) {
         me.onMouseExited2(event, updateBtn);
+    }
+    public void initialize(){
+        e.setInfosEntreprise();
+        emailTextField.setText(e.getAdresseMail());
+        localisationTextField.setText(e.getLocalisation());
+        villeTextField.setText(e.getVille());
+        numeroFaxTextField.setText(e.getNumeroDeFax());
+        secteurDacTextField.setText(e.getSecteurDactivite());
+        idFiscaleTextField.setText(e.getIdentificationFiscale());
+        pwdTextField.setText(e.getMotdepasse());
     }
 
     @FXML

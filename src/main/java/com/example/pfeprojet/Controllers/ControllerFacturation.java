@@ -2,7 +2,7 @@ package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.Alerts;
 import com.example.pfeprojet.ChangingWindows;
-import com.example.pfeprojet.Entreprise.Entreprise;
+import com.example.pfeprojet.Entreprise.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -11,8 +11,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class ControllerFacturation {
@@ -230,6 +234,111 @@ public class ControllerFacturation {
             cw.switchWindow(event,"DashboardDirecteur.fxml");
         }
     }
-    //TODO : Affichage et ajout dune facture separés
+
+
+    @FXML
+    void Afficher(ActionEvent event) throws SQLException, FileNotFoundException {
+
+        if(numFactureTxtBox.getText().isEmpty()){
+            sa.showWarning("Erreur","Veuillez préciser le numéro de la facture.");
+        }else{
+            if(!e.getInfosFacture(Integer.parseInt(numFactureTxtBox.getText())).next()){
+                sa.showWarning("Erreur","Cette facture n'existe pas, veuillez la créer avant de l'afficher.");
+            }else{
+                ArrayList<Produit> produits = new ArrayList<>();
+                ArrayList<Service> services = new ArrayList<>();
+
+                String cinClient = e.getCinClientFacture(Integer.parseInt(numFactureTxtBox.getText()));
+                Client c = new Client(cinClient);
+
+                ResultSet rsNomClient = e.getNomClient(cinClient);
+                ResultSet rsPrenomClient = e.getPrenomClient(cinClient);
+                ResultSet rsTelClient = e.getTelephoneClient(cinClient);
+                ResultSet rsAdresseClient = e.getAdresseClient(cinClient);
+                ResultSet rsEmailClient = e.getEmailClient(cinClient);
+
+                if(rsNomClient != null){
+                    rsNomClient.next();
+                    c.setNom(rsNomClient.getString("nomClient"));
+                }else{
+                    c.setNom("");
+                }
+
+                if(rsPrenomClient != null ){
+                    rsPrenomClient.next();
+                    c.setPrenom(rsPrenomClient.getString("prenomClient"));
+                }else{
+                    c.setPrenom("");
+                }
+
+                if(rsTelClient != null){
+                    rsTelClient.next();
+                    c.setTelephone(rsTelClient.getString("telephoneClient"));
+                }else{
+                    c.setTelephone("");
+                }
+
+                if(rsAdresseClient != null){
+                    rsAdresseClient.next();
+                    c.setAdresse(rsAdresseClient.getString("adresseClient"));
+                }else{
+                    c.setAdresse("");
+                }
+
+                if(rsEmailClient != null){
+                    rsEmailClient.next();
+                    c.setMail(rsEmailClient.getString("EmailClient"));
+                }else{
+                    c.setMail("");
+                }
+
+
+                int numFacture = Integer.parseInt(numFactureTxtBox.getText());
+
+                if (e.typeInventaire() == 1) {
+                    ResultSet rs = e.getProduitsParFacture(numFacture);
+                    while(rs.next()){
+                        Produit p = new Produit(rs.getString(1),rs.getInt(3),rs.getDouble(2));
+                        produits.add(p);
+                    }
+                }else if (e.typeInventaire() == 2 ){
+                    ResultSet rs1 = e.getServicesParFacture(numFacture);
+                    while(rs1.next()){
+                        Service s = new Service(rs1.getString(1),rs1.getInt(3),rs1.getDouble(2));
+                        services.add(s);
+                    }
+                }else {
+                    ResultSet rs1 = e.getServicesParFacture(numFacture);
+                    while(rs1.next()){
+                        Service s = new Service(rs1.getString(1),rs1.getInt(3),rs1.getDouble(2));
+                        services.add(s);
+                    }
+                    ResultSet rs = e.getProduitsParFacture(numFacture);
+                    while(rs.next()){
+                        Produit p = new Produit(rs.getString(1),rs.getInt(3),rs.getDouble(2));
+                        produits.add(p);
+                    }
+                }
+
+
+                double totalHtProduits = 0 ;
+                for(Produit p : produits){
+                    totalHtProduits += p.getTotal();
+                }
+
+                double totalHTServices = 0 ;
+                for(Service s : services){
+                    totalHTServices += s.getTotal();
+                }
+
+
+                String emplacement = "FactureNum" +numFacture +"_" + LocalDate.now()+".pdf";
+                double totalHt = totalHtProduits + totalHTServices;
+                Facturation.genererFacture(emplacement, e, numFacture, c, produits, services,
+                        totalHtProduits, totalHTServices, totalHt);
+            }
+
+        }
+    }
     
 }

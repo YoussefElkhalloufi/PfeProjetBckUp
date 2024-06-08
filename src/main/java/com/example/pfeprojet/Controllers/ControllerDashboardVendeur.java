@@ -2,7 +2,10 @@ package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Entreprise;
+import com.example.pfeprojet.Entreprise.Gestionnaire;
+import com.example.pfeprojet.Entreprise.Vendeur;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -51,8 +54,21 @@ public class ControllerDashboardVendeur {
     void helpAndSupport(ActionEvent event) throws IOException {
         cw.switchWindow(event, "helpAndSupport.fxml");
     }
+    public static Vendeur vendeur = ControllerLoginVendeur.getVendeur();
 
-    //TODO : initiliaze ( vendeur "xxx" ........ )
+
+    public void initialize(){
+        label.setText("Vendeur '" +vendeur .getNom() +"' de l'entreprise '" +e.getNomEntreprise()+"'");
+
+
+        nbrClt.setText(String.valueOf(e.getNbrClients()));
+
+
+        Platform.runLater(() -> {
+            double centerX = (anchorPane.getWidth() - label.getLayoutBounds().getWidth()) / 2;
+            AnchorPane.setLeftAnchor(label, centerX);
+        });
+    }
     @FXML
     void onMouseEnteredClient(MouseEvent event) {
         client.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");

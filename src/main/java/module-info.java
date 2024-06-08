@@ -14,6 +14,8 @@ module com.example.pfeprojet {
     requires mysql.connector.j;
     requires java.mail;
     requires java.desktop;
+    requires kernel;
+    requires layout;
 
 
     opens com.example.pfeprojet to javafx.fxml;

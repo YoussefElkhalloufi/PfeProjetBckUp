@@ -19,8 +19,6 @@ import javafx.scene.control.Tooltip;
 import java.io.IOException;
 
 
-// TODO over all : FINISH
-        //TODO : --> FACTURATION
         //TODO : --> PROFIL ENTREPRISE
 public class ControllerChiffreAffaire {
     @FXML
@@ -50,7 +48,6 @@ public class ControllerChiffreAffaire {
 
 
     private Entreprise e ;
-    //private Entreprise e1 = new Entreprise("hennesy_liquor_store");
 
     void setEntreprise(){
         e  = ControllerDashboardDirecteur.getEntreprise() ;

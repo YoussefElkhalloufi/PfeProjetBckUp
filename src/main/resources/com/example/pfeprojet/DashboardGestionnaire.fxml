@@ -117,7 +117,7 @@
                   <Font name="Javanese Text" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="nbPersonnel1" layoutX="18.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="28">
+            <Text fx:id="nbPersonnel" layoutX="18.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="28">
                <font>
                   <Font name="Javanese Text" size="16.0" />
                </font>

@@ -82,10 +82,13 @@ public class Connexion {
                 ps.setString(i + 1, params[i]);
             }
             rs = ps.executeQuery();
+            if (rs!=null){
+                return rs;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rs;
+        return null;
     }
 
     public int verificationTables(){

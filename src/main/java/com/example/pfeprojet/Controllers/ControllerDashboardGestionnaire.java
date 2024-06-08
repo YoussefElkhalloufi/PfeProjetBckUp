@@ -1,9 +1,10 @@
 package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.ChangingWindows;
+import com.example.pfeprojet.Entreprise.Entreprise;
 import com.example.pfeprojet.Entreprise.Gestionnaire;
-import com.example.pfeprojet.Entreprise.Responsable;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,9 +13,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+
+//TODO : changement de mot de passe pour le personnel ( +direceteur )
+
+
 import java.io.IOException;
 
-//TODO : code this
 public class ControllerDashboardGestionnaire {
 
     @FXML
@@ -46,8 +50,19 @@ public class ControllerDashboardGestionnaire {
 
     public static Gestionnaire gestio = ControllerLoginGestionnaire.getGestionnaire();
 
-    //TODO : initiliaze ( Gestionnaire "xxx" ........ )
 
+    private static final Entreprise e = ControllerFstWindow.getEntreprise();
+
+    public void initialize(){
+        label.setText("Gestionnaire '" +gestio.getNom() +"' de l'entreprise '" +e.getNomEntreprise()+"'");
+
+        nbPersonnel.setText(String.valueOf(e.getNbPersonnel()));
+
+        Platform.runLater(() -> {
+            double centerX = (anchorPane.getWidth() - label.getLayoutBounds().getWidth()) / 2;
+            AnchorPane.setLeftAnchor(label, centerX);
+        });
+    }
     @FXML
     void helpAndSupport(ActionEvent event) throws IOException {
         cw.switchWindow(event, "helpAndSupport.fxml");

@@ -1,12 +1,14 @@
 package com.example.pfeprojet.Entreprise;
 
 import com.example.pfeprojet.Connexion;
+import com.example.pfeprojet.Controllers.ControllerInventaire;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -15,7 +17,7 @@ import java.util.List;
 
 
 public class Entreprise {
-    private String nomEntreprise, adresseMail,motdepasse, localisation, numeroDeFax, secteurDactivite, identificationFiscale;
+    private String nomEntreprise, adresseMail,motdepasse, localisation, numeroDeFax, secteurDactivite, identificationFiscale, ville;
     private BigDecimal chiffreAffaireTotal = null  ;
     private int nbrClients = 0, nbPersonnel = 0;
     private Connexion cn, cn1;
@@ -35,6 +37,7 @@ public class Entreprise {
     public String getAdresseMail() {
         return adresseMail;
     }
+    public String getVille(){return ville;}
 
     public String getMotdepasse() {return motdepasse;}
 
@@ -68,7 +71,7 @@ public class Entreprise {
 
     public void setInfosEntreprise(){
         try{
-            ResultSet rs = cn1.lire("Select nomEntreprise, AdresseMail, motdepasse, Localisation, NumeroDeFax, secteurDactivite, identificationFiscale from infosEntreprises where nomEntreprise = '" +nomEntreprise+"'");
+            ResultSet rs = cn1.lire("Select nomEntreprise, AdresseMail, motdepasse, Localisation, NumeroDeFax, secteurDactivite, identificationFiscale, ville from infosEntreprises where nomEntreprise = '" +nomEntreprise+"'");
             if(rs.next()){
                 nomEntreprise = rs.getString(1);
                 adresseMail = rs.getString(2);
@@ -77,6 +80,7 @@ public class Entreprise {
                 numeroDeFax = rs.getString(5);
                 secteurDactivite = rs.getString(6);
                 identificationFiscale = rs.getString(7);
+                ville = rs.getString(8);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -115,6 +119,49 @@ public class Entreprise {
         }
     }
 
+    public ResultSet getNomClient(String cinClient){
+        ArrayList<String> clnClient = getColonnesTable("client");
+        if(ControllerInventaire.containsColonne(clnClient, "nomClient")){
+            return cn.lire("select nomClient from client where cinClient = ?", cinClient);
+        }
+        return null;
+    }
+    public ResultSet getPrenomClient(String cinClient){
+        ArrayList<String> clnClient = getColonnesTable("client");
+        if(ControllerInventaire.containsColonne(clnClient, "prenomClient")){
+            return cn.lire("select prenomClient from client where cinClient = ?", cinClient);
+        }
+        return null;
+    }
+    public ResultSet getTelephoneClient(String cinClient){
+        ArrayList<String> clnClient = getColonnesTable("client");
+        if(ControllerInventaire.containsColonne(clnClient, "telephoneClient")){
+            return cn.lire("select telephoneClient from client where cinClient = ?", cinClient);
+        }
+        return null;
+    }
+    public ResultSet getAdresseClient(String cinClient){
+        ArrayList<String> clnClient = getColonnesTable("client");
+        if(ControllerInventaire.containsColonne(clnClient, "adresseClient")){
+            return cn.lire("select adresseClient from client where cinClient = ?", cinClient);
+        }
+        return null;
+    }
+    public ResultSet getEmailClient(String cinClient){
+        ArrayList<String> clnClient = getColonnesTable("client");
+        if(ControllerInventaire.containsColonne(clnClient, "emailClient")){
+            return cn.lire("select emailClient from client where cinClient = ?", cinClient);
+        }
+        return null;
+    }
+
+    public String getCinClientFacture(int numFacture) throws SQLException {
+        ResultSet rs = cn.lire("select cinClient from facture where numeroFacture = " + numFacture);
+        if(rs.next()){
+            return rs.getString(1);
+        }
+        return null;
+    }
     public ArrayList<Integer> getIdProduits(){
         try{
             ArrayList<Integer> produits = new ArrayList<>();
@@ -228,6 +275,10 @@ public class Entreprise {
     public ResultSet getServicesParFacture(int numFacture){
         return cn.lire("select s.LibelleService, s.Cout_heure, fs.NombreHeure, fs.Total_Ht from facture f, facture_service fs, service s " +
                 "where f.NumeroFacture = fs.NumeroFacture and fs.idService = s.idService and f.numeroFacture = " +numFacture);
+    }
+
+    public ResultSet getInfosFacture(int numFacture){
+        return cn.lire("select * from facture where numerofacture = " +numFacture);
     }
 
     public int typeInventaire(){

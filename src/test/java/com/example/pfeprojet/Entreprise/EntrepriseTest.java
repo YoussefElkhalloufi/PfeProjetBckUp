@@ -246,13 +246,13 @@ class EntrepriseTest {
 
     @Test
     void test_Check_Remise() throws SQLException {
-        Entreprise e = new Entreprise("winston");
+        Entreprise e = new Entreprise("azerty");
         assertEquals(0, e.checkTva_Remise());
     }
 
     @Test
     void testCheck_Remise_Tva() throws SQLException {
-        Entreprise e = new Entreprise("winston");
+        Entreprise e = new Entreprise("azerty");
         assertEquals(2, e.checkTva_Remise());
     }
 
@@ -311,7 +311,7 @@ class EntrepriseTest {
 
     //TestStandard
         @Test
-        void tes_Standard_Facture() throws SQLException {
+        void test_Standard_Facture() throws SQLException {
             Entreprise e = new Entreprise("iam_maroc_telecom");
             if(e.typeInventaire() == 0){
                 //Produit + service
@@ -341,7 +341,7 @@ class EntrepriseTest {
                 System.out.println("-------------------------------------");
             }else if( e.typeInventaire() == 2){
                 //Service
-                System.out.println("---------------------------Services----------------kok------- ");
+                System.out.println("---------------------------Services----------------------- ");
                 ResultSet rs = e.getServicesParFacture(1);
                 System.out.println("Service\tCout\tNb_Heure\tTotal_ht");
                 while(rs.next()){

@@ -49,61 +49,58 @@ public class ControllerDashboardDirecteur {
     private AnchorPane chiffreAffaireAnchorpane;
     @FXML
     private Button aideBtn;
+
+    private void onMouseEntered(AnchorPane anchor){
+        anchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
+        enlargeButton(anchor);
+    }
+
+    private void onMouseExited(AnchorPane anchor){
+        anchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
+        restoreButtonSize(anchor);
+    }
+
     public void onMouseExitedMessagerie(){
-        messagerieAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(messagerieAnchor);
+        onMouseExited(messagerieAnchor);
     }
     public void onMouseEnteredMessagerie(){
-        messagerieAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(messagerieAnchor);
+        onMouseEntered(messagerieAnchor);
     }
     public void onMouseExitedChiffreAffaire(){
-        chiffreAffaireAnchorpane.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(chiffreAffaireAnchorpane);
+        onMouseExited(chiffreAffaireAnchorpane);
     }
     public void onMouseEnteredChiffreAffaire(){
-        chiffreAffaireAnchorpane.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(chiffreAffaireAnchorpane);
+        onMouseEntered(chiffreAffaireAnchorpane);
     }
     public void onMouseExitedClient(){
-        client.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(client);
+        onMouseExited(client);
     }
     public void onMouseEnteredClient(){
-        client.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(client);
+        onMouseEntered(client);
     }
     public void onMouseExitedPersonnel(){
-        personnel.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(personnel);
+        onMouseExited(personnel);
     }
     public void onMouseEnteredPersonnel(){
-        personnel.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(personnel);
+        onMouseEntered(personnel);
     }
     public void onMouseExitedInventaire(){
-        inventaire.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(inventaire);
+       onMouseExited(inventaire);
     }
     public void onMouseEnteredInventaire(){
-        inventaire.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(inventaire);
+        onMouseEntered(inventaire);
     }
     public void onMouseExitedFacturation(){
-        facturation.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(facturation);
+        onMouseExited(facturation);
     }
     public void onMouseEnteredFacturation(){
-        facturation.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(facturation);
+        onMouseEntered(facturation);
     }
     public void onMouseExitedEntreprise(){
-        entreprise.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(entreprise);
+        onMouseExited(entreprise);
     }
     public void onMouseEnteredEntreprise(){
-        entreprise.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(entreprise);
+        onMouseEntered(entreprise);
     }
 
     public void enlargeButton(AnchorPane anchor) {

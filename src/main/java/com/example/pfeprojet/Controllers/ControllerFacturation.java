@@ -134,6 +134,7 @@ public class ControllerFacturation {
             int qte = Integer.parseInt(qteTxtBox.getText());
             if(qte>Integer.parseInt(infosProduit[2])){
                 sa.showAlert("Quantité non disponible","La quantité choisi est non disponible au stock .","/images/annuler.png");
+                qteTxtBox.setText("");
             }else{
                 double total = Double.parseDouble(puLbl.getText()) * Integer.parseInt(qteTxtBox.getText());
                 totalLbl.setText(total + " DH");

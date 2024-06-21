@@ -14,8 +14,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
-//TODO : changement de mot de passe pour le personnel ( +direceteur )
-
 
 import java.io.IOException;
 
@@ -37,7 +35,7 @@ public class ControllerDashboardGestionnaire {
     private Text label;
 
     @FXML
-    private AnchorPane messagerieAnchor;
+    private AnchorPane parametresAnchor;
 
     @FXML
     private Text nbPersonnel;
@@ -52,6 +50,11 @@ public class ControllerDashboardGestionnaire {
 
 
     private static final Entreprise e = ControllerFstWindow.getEntreprise();
+    public static Entreprise getEntreprise(){
+        return e;
+    }
+
+
 
     public void initialize(){
         label.setText("Gestionnaire '" +gestio.getNom() +"' de l'entreprise '" +e.getNomEntreprise()+"'");
@@ -76,8 +79,8 @@ public class ControllerDashboardGestionnaire {
 
     @FXML
     void onMouseEnteredMessagerie(MouseEvent event) {
-        messagerieAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(messagerieAnchor);
+        parametresAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
+        enlargeButton(parametresAnchor);
     }
 
     @FXML
@@ -94,8 +97,8 @@ public class ControllerDashboardGestionnaire {
 
     @FXML
     void onMouseExitedMessagerie(MouseEvent event) {
-        messagerieAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(messagerieAnchor);
+        parametresAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
+        restoreButtonSize(parametresAnchor);
     }
 
     @FXML
@@ -132,4 +135,8 @@ public class ControllerDashboardGestionnaire {
         cw.switchWindowPane(event,"/com/example/pfeprojet/personnel.fxml");
     }
 
+    @FXML
+    void switchToParametres(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event, "profilGestionnaire.fxml");
+    }
 }

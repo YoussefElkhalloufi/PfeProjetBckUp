@@ -2,7 +2,6 @@ package com.example.pfeprojet.Controllers;
 
 import com.example.pfeprojet.ChangingWindows;
 import com.example.pfeprojet.Entreprise.Entreprise;
-import com.example.pfeprojet.Entreprise.Gestionnaire;
 import com.example.pfeprojet.Entreprise.Vendeur;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -39,7 +38,7 @@ public class ControllerDashboardVendeur {
     private Text label;
 
     @FXML
-    private AnchorPane messagerieAnchor;
+    private AnchorPane parametresAnchor;
 
     @FXML
     private Text nbrClt;
@@ -49,12 +48,13 @@ public class ControllerDashboardVendeur {
     public static Entreprise getEntreprise(){
         return e;
     }
+    public static Vendeur vendeur = ControllerLoginVendeur.getVendeur();
 
     @FXML
     void helpAndSupport(ActionEvent event) throws IOException {
         cw.switchWindow(event, "helpAndSupport.fxml");
     }
-    public static Vendeur vendeur = ControllerLoginVendeur.getVendeur();
+
 
 
     public void initialize(){
@@ -83,8 +83,8 @@ public class ControllerDashboardVendeur {
 
     @FXML
     void onMouseEnteredMessagerie(MouseEvent event) {
-        messagerieAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(messagerieAnchor);
+        parametresAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
+        enlargeButton(parametresAnchor);
     }
 
     @FXML
@@ -101,8 +101,8 @@ public class ControllerDashboardVendeur {
 
     @FXML
     void onMouseExitedMessagerie(MouseEvent event) {
-        messagerieAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(messagerieAnchor);
+        parametresAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
+        restoreButtonSize(parametresAnchor);
     }
 
     public void enlargeButton(AnchorPane anchor) {
@@ -134,4 +134,8 @@ public class ControllerDashboardVendeur {
         cw.switchWindowPane(event, "/com/example/pfeprojet/facturation.fxml");
     }
 
+    @FXML
+    void switchToParametres(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event, "profilVendeur.fxml");
+    }
 }

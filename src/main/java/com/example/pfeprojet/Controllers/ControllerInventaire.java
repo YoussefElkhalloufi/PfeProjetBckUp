@@ -114,7 +114,7 @@ public class ControllerInventaire {
             setTextFieldsProduit();
         }else if (e.typeInventaire() == 2){
             servicePane.getTabPane().getSelectionModel().select(servicePane);
-            e.populateTableView(e.getInventaire("Service"),serviceTableView, idProduit);
+            e.populateTableView(e.getInventaire("Service"),serviceTableView, idService);
             checkColonnesService();
             produitPane.setDisable(true);
             buttonsStyleService();
@@ -281,7 +281,7 @@ public class ControllerInventaire {
     void supprimerProduit(ActionEvent event) {
         if(!idProduit.getText().isEmpty()){
             int idPr = Integer.parseInt(idProduit.getText());
-            if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du responsable ?")) {
+            if(sa.showConfirmationAlert("Confirmation de la suppression","Êtes-vous sûr de vouloir procéder à la suppression du produit ?")) {
                 if(e.supprimerProduit(idPr)){
                     e.populateTableView(e.getInventaire("Produit"),produitTableView, idProduit);
                     sa.showAlert("Suppression réussie","Le produit a été supprimé avec succès.","/images/checked.png");

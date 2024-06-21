@@ -41,7 +41,7 @@ public class ControllerLoginGestionnaire extends ControllerLoginResponsable{
         }else{
             getGestio();
             if(gestio == null) {
-                System.out.println("Aucun gestionnaire avec ce mail");
+                a.showAlert("Email erroné","L'e-mail que vous avez saisi n'existe pas. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
             }else {
                 String inputMail = mailGestio.getText().trim();
                 String inputPwd = pwdGestio.getText().trim();

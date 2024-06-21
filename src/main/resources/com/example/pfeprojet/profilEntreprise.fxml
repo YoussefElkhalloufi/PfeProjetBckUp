@@ -46,17 +46,17 @@
             </ImageView>
          </graphic>
       </Button>
-      <Text layoutX="103.0" layoutY="102.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse E-mail :">
+      <Text layoutX="103.0" layoutY="102.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse E-mail * :">
          <font>
             <Font name="Javanese Text" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="103.0" layoutY="136.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Localisation :">
+      <Text layoutX="103.0" layoutY="136.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Localisation * :">
          <font>
             <Font name="Javanese Text" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="103.0" layoutY="170.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville">
+      <Text layoutX="103.0" layoutY="170.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville * :">
          <font>
             <Font name="Javanese Text" size="15.0" />
          </font>
@@ -76,12 +76,12 @@
             <Font name="Javanese Text" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="103.0" layoutY="306.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :">
+      <Text layoutX="103.0" layoutY="306.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe * :">
          <font>
             <Font name="Javanese Text" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="103.0" layoutY="340.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation du mot de passe :">
+      <Text layoutX="103.0" layoutY="340.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation du mot de passe * :">
          <font>
             <Font name="Javanese Text" size="15.0" />
          </font>

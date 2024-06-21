@@ -40,7 +40,7 @@ public class ControllerLoginVendeur extends ControllerLoginResponsable{
         }else{
             getVend();
             if(vendeur == null){
-                System.out.println("Aucun vendeur avec ce mail");
+                a.showAlert("Email erroné","L'e-mail que vous avez saisi n'existe pas. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
             }else{
                 String inputMail = mailVendeur.getText();
                 String inputPwd = pwdVendeur.getText();

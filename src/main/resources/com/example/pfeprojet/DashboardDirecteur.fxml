@@ -66,23 +66,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="messagerieAnchor" layoutX="662.0" layoutY="310.0" onMouseEntered="#onMouseEnteredMessagerie" onMouseExited="#onMouseExitedMessagerie" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
-         <children>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="16.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Directeur/messagerie.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="16.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Messagerie">
-               <font>
-                  <Font name="Javanese Text" size="18.0" />
-               </font>
-            </Text>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </AnchorPane>
       <AnchorPane fx:id="chiffreAffaireAnchorpane" layoutX="23.0" layoutY="82.0" onMouseClicked="#switchToCA" onMouseEntered="#onMouseEnteredChiffreAffaire" onMouseExited="#onMouseExitedChiffreAffaire" prefHeight="329.0" prefWidth="315.0" style="-fx-background-radius: 25; -fx-background-color: ededed;">
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="20.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
@@ -188,7 +171,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="inventaire" layoutX="358.0" layoutY="310.0" onMouseClicked="#switchToInventaire" onMouseEntered="#onMouseEnteredInventaire" onMouseExited="#onMouseExitedInventaire" prefHeight="102.0" prefWidth="270.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+      <AnchorPane fx:id="inventaire" layoutX="358.0" layoutY="310.0" onMouseClicked="#switchToInventaire" onMouseEntered="#onMouseEnteredInventaire" onMouseExited="#onMouseExitedInventaire" prefHeight="102.0" prefWidth="574.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>

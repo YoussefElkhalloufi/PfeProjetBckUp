@@ -653,6 +653,16 @@ public class Entreprise {
         return 0;
     }
 
+    public boolean updateEntreprise(String nomEntreprise, String mail, String localisation, String ville, String numFax, String secActivite, String idFiscale, String pwd){
+        String query = "update infosentreprises set adresseMail = ?, motdepasse = ?, numerodefax = ?, localisation = ?, secteurdactivite = ?, identificationfiscale = ?, ville = ? where nomentreprise = ?";
+        return cn1.miseAjour(query,mail, pwd, numFax, localisation, secActivite, idFiscale, ville, nomEntreprise) ;
+    }
+
+    public boolean updatePersonnel(String typePerso, String nom, String prenom,  String mail, String pwd){
+        String query = "update "+typePerso+" set adresseMail = ?, motdepasse = ? where nom = ? and prenom = ?";
+        return cn.miseAjour(query, mail, pwd, nom, prenom);
+    }
+
     public void calculNbrClient(){
         try{
             ResultSet rs = cn.lire("Select count(*) from client");

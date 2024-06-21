@@ -66,14 +66,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="messagerieAnchor" layoutX="359.0" layoutY="309.0" onMouseEntered="#onMouseEnteredMessagerie" onMouseExited="#onMouseExitedMessagerie" prefHeight="102.0" prefWidth="571.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
+      <AnchorPane fx:id="parametresAnchor" layoutX="359.0" layoutY="309.0" onMouseClicked="#switchToParametres" onMouseEntered="#onMouseEnteredMessagerie" onMouseExited="#onMouseExitedMessagerie" prefHeight="102.0" prefWidth="571.0" style="-fx-background-color: ededed; -fx-background-radius: 25;">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="16.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/Directeur/messagerie.png" />
+                  <Image url="@../../../images/parametres.png" />
                </image>
             </ImageView>
-            <Text layoutX="16.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Messagerie">
+            <Text layoutX="16.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Paramètres du compte">
                <font>
                   <Font name="Javanese Text" size="18.0" />
                </font>

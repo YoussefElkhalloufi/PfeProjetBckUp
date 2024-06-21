@@ -33,8 +33,7 @@ public class ControllerDashboardDirecteur {
     @FXML
     private Text nbPersonnel;
 
-    @FXML
-    private AnchorPane messagerieAnchor;
+
     @FXML
     private AnchorPane personnel;
     @FXML
@@ -60,12 +59,6 @@ public class ControllerDashboardDirecteur {
         restoreButtonSize(anchor);
     }
 
-    public void onMouseExitedMessagerie(){
-        onMouseExited(messagerieAnchor);
-    }
-    public void onMouseEnteredMessagerie(){
-        onMouseEntered(messagerieAnchor);
-    }
     public void onMouseExitedChiffreAffaire(){
         onMouseExited(chiffreAffaireAnchorpane);
     }
@@ -177,6 +170,7 @@ public class ControllerDashboardDirecteur {
     @FXML
     void restartApplication(ActionEvent event) throws IOException {
         //TODO : fix the deconnexion button !!!!
+        //TODO : MESSAGERIE
     }
 }
 

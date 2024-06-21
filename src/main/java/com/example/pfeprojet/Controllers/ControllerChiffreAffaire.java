@@ -19,7 +19,6 @@ import javafx.scene.control.Tooltip;
 import java.io.IOException;
 
 
-        //TODO : --> PROFIL ENTREPRISE
 public class ControllerChiffreAffaire {
     @FXML
     private ComboBox<String> speciDiagAnnee;

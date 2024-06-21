@@ -59,7 +59,7 @@ public class ControllerLoginResponsable {
         }else{
             getRespo();
             if(respo == null){
-                System.out.println("Aucun responsable avec ce mail");
+                a.showAlert("Email erroné","L'e-mail que vous avez saisi n'existe pas. Veuillez vérifier votre saisie et réessayer.","/images/annuler.png");
             }else{
                 String inputMail = mailRespo.getText().trim();
                 String inputPwd = pwdRespo.getText().trim();

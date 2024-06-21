@@ -78,14 +78,14 @@ public class Facturation {
         String emplacement = "FactureNum" +numFacture +"_" + LocalDate.now()+".pdf";
         double totalHt = totalHtProduits + totalHTServices;
         genererFacture(emplacement, e,
-                numFacture, c, produits, services,  totalHtProduits, totalHTServices, totalHt);
+                numFacture, c, produits, services,  totalHtProduits, totalHTServices, totalHt, "Abde9a");
     }
 
 
 
     public static void genererFacture(String emplacement,Entreprise entreprise , int numFact, Client client,
                                       ArrayList<Produit> produits, ArrayList<Service> services, double totalHtProduits,
-                                      double totalHtServices, double totalHt) throws FileNotFoundException, SQLException {
+                                      double totalHtServices, double totalHt, String vendeur) throws FileNotFoundException, SQLException {
         // Create "Factures" directory if it doesn't exist
         File facturesDir = new File("Factures");
         if (!facturesDir.exists()) {
@@ -313,7 +313,7 @@ public class Facturation {
 
         document.add(spaces);
         // Footer: Seller Name and Signature Space
-        Paragraph footer = new Paragraph("Le vendeur :").setTextAlignment(TextAlignment.RIGHT).setFontSize(12);
+        Paragraph footer = new Paragraph(vendeur).setTextAlignment(TextAlignment.RIGHT).setFontSize(12);
         document.add(footer);
 
         document.close();

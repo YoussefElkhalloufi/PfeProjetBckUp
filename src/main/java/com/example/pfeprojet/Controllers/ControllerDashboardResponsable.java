@@ -30,7 +30,7 @@ public class ControllerDashboardResponsable {
     private Text nbPersonnel;
 
     @FXML
-    private AnchorPane messagerieAnchor;
+    private AnchorPane parametresAnchor;
     @FXML
     private AnchorPane personnel;
     @FXML
@@ -39,6 +39,7 @@ public class ControllerDashboardResponsable {
     private AnchorPane chiffreAffaireAnchorpane;
 
     public static Responsable respo = ControllerLoginResponsable.getResponsable();
+
 
     private static final Entreprise e = ControllerFstWindow.getEntreprise();
     public static Entreprise getEntreprise(){
@@ -51,12 +52,12 @@ public class ControllerDashboardResponsable {
     }
 
     public void onMouseExitedMessagerie(){
-        messagerieAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
-        restoreButtonSize(messagerieAnchor);
+        parametresAnchor.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
+        restoreButtonSize(parametresAnchor);
     }
     public void onMouseEnteredMessagerie(){
-        messagerieAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
-        enlargeButton(messagerieAnchor);
+        parametresAnchor.setStyle("-fx-background-color : #D4D4D4; -fx-background-radius: 25;");
+        enlargeButton(parametresAnchor);
     }
     public void onMouseExitedChiffreAffaire(){
         chiffreAffaireAnchorpane.setStyle("-fx-background-color : #EDEDED; -fx-background-radius: 25;");
@@ -127,5 +128,10 @@ public class ControllerDashboardResponsable {
     @FXML
     void switchToPersonnel(MouseEvent event) throws IOException {
         cw.switchWindowPane(event,"/com/example/pfeprojet/personnel.fxml");
+    }
+
+    @FXML
+    void switchToParametres(MouseEvent event) throws IOException {
+        cw.switchWindowPane(event, "profilResponsable.fxml");
     }
 }

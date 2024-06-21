@@ -73,6 +73,9 @@ public class ControllerFacturation {
 
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
+    private Directeur directeur = ControllerDashboardDirecteur.dr ;
+    private Vendeur vendeur = ControllerDashboardVendeur.vendeur ;
+
     public void initialize() throws SQLException {
         if(e == null){
             e = ControllerDashboardVendeur.getEntreprise();
@@ -243,6 +246,10 @@ public class ControllerFacturation {
         if(numFactureTxtBox.getText().isEmpty()){
             sa.showWarning("Erreur","Veuillez préciser le numéro de la facture.");
         }else{
+            if(!numFactureTxtBox.getText().matches("[1-9][0-9]*")){
+                sa.showWarning("Attention","Le numero de la facture est non valide, réessayer");
+                return ;
+            }
             if(!e.getInfosFacture(Integer.parseInt(numFactureTxtBox.getText())).next()){
                 sa.showWarning("Erreur","Cette facture n'existe pas, veuillez la créer avant de l'afficher.");
             }else{
@@ -335,8 +342,13 @@ public class ControllerFacturation {
 
                 String emplacement = "FactureNum" +numFacture +"_" + LocalDate.now()+".pdf";
                 double totalHt = totalHtProduits + totalHTServices;
-                Facturation.genererFacture(emplacement, e, numFacture, c, produits, services,
-                        totalHtProduits, totalHTServices, totalHt);
+                if(directeur == null){
+                    Facturation.genererFacture(emplacement, e, numFacture, c, produits, services,
+                            totalHtProduits, totalHTServices, totalHt, "Vendeur " +vendeur.getPrenom() +" " +vendeur.getNom());
+                }else{
+                    Facturation.genererFacture(emplacement, e, numFacture, c, produits, services,
+                            totalHtProduits, totalHTServices, totalHt, "Directeur " +directeur.getPrenom() +" " +directeur.getNom());
+                }
             }
 
         }

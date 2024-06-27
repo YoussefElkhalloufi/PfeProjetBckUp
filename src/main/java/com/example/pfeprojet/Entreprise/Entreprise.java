@@ -422,11 +422,11 @@ public class Entreprise {
     }
 
     public boolean ajouterProduit(int idProduit, double prixUnitaire, int stock, String libelleProduit, String dateEnregistrement, String description, String categorie) {
-        // Create lists to store column names and values
+
         List<String> columns = new ArrayList<>();
         List<String> values = new ArrayList<>();
 
-        // Add non-null columns and values to the lists
+
         if (!libelleProduit.equalsIgnoreCase("")) {
             columns.add("libelleProduit");
             values.add("'" + libelleProduit + "'");
@@ -450,20 +450,19 @@ public class Entreprise {
             return false;
         }
 
-        // Construct the SQL query
         StringBuilder req = new StringBuilder("INSERT INTO produit (idProduit, prixUnitaire, stock");
         StringBuilder valuesStr = new StringBuilder(" VALUES (" + idProduit + "," + prixUnitaire + "," + stock);
 
-        // Append non-null columns and values to the SQL query
+
         for (int i = 0; i < columns.size(); i++) {
             req.append(", ").append(columns.get(i));
             valuesStr.append(", ").append(values.get(i));
         }
 
-        // Complete the SQL query
+
         req.append(")").append(valuesStr).append(")");
 
-        // Execute the query
+
         return cn.miseAjour(req.toString());
     }
 

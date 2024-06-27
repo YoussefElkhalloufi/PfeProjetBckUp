@@ -95,7 +95,6 @@ public class ControllerPersonnelEntreprise {
     private TextField cinTextVendeurRech;
 
     Alerts sa = new Alerts();
-    mouseEvents me = new mouseEvents();
     private Entreprise e = ControllerDashboardDirecteur.getEntreprise();
 
 

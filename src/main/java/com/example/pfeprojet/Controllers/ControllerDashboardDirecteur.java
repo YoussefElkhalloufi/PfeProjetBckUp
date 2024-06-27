@@ -171,6 +171,7 @@ public class ControllerDashboardDirecteur {
     void restartApplication(ActionEvent event) throws IOException {
         //TODO : fix the deconnexion button !!!!
         //TODO : MESSAGERIE
+
     }
 }
 
